@@ -227,9 +227,6 @@ const climateData = {
     warningArea:
       "해당 없음",
 
-    waterlineImage:
-      null,
-
     chartValue:
       "+0 cm",
 
@@ -264,9 +261,6 @@ const climateData = {
 
     warningArea:
       "반포 한강공원 저지대 일대",
-
-    waterlineImage:
-      "./2050_waterline.png",
 
     chartValue:
       "+11.5 cm",
@@ -303,9 +297,6 @@ const climateData = {
     warningArea:
       "반포 한강공원, 한강 산책로",
 
-    waterlineImage:
-      "./2075_waterline.png",
-
     chartValue:
       "+32.2 cm",
 
@@ -340,9 +331,6 @@ const climateData = {
 
     warningArea:
       "반포 한강공원, 한강변 전역",
-
-    waterlineImage:
-      "./2100_waterline.png",
 
     chartValue:
       "+96.1 cm",
@@ -408,12 +396,6 @@ const floodImpact =
 const warningArea =
   document.getElementById(
     "warning-area"
-  );
-
-
-const waterlineImage =
-  document.getElementById(
-    "waterline-image"
   );
 
 
@@ -527,20 +509,6 @@ function changeYear(key) {
     "aria-label",
     `${data.title} 기후 정보`
   );
-
-
-
-  /* 침수 PNG 변경 */
-
-  if (
-    data.waterlineImage
-  ) {
-
-    waterlineImage.src =
-      data.waterlineImage;
-
-  }
-
 
 
   /* =====================================================
