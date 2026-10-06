@@ -1,4 +1,4 @@
-:root {
+\:root {
   color-scheme: dark;
 
   font-family:
@@ -52,6 +52,7 @@ button {
   height: 100%;
 
   display: grid;
+
   place-items: center;
 
   overflow: hidden;
@@ -82,6 +83,7 @@ button {
 .background-layer,
 .gui-layer {
   position: absolute;
+
   inset: 0;
 }
 
@@ -102,19 +104,15 @@ button {
 }
 
 
-body[data-year="current"] .background-layer {
-  background-image:
-    url("./hanriver-bg.png");
-}
-
-
 
 /* =========================================================
    카메라
+   모든 연도에서 유지
 ========================================================= */
 
 .camera-feed {
   position: absolute;
+
   inset: 0;
 
   width: 100%;
@@ -148,7 +146,8 @@ body[data-year="current"] .background-layer {
   height: 52px;
 
   padding:
-    0 24px;
+    0
+    24px;
 
   border-radius: 26px;
 
@@ -162,6 +161,7 @@ body[data-year="current"] .background-layer {
   color: #ffffff;
 
   font-size: 17px;
+
   font-weight: 600;
 
   cursor: pointer;
@@ -179,7 +179,8 @@ body[data-year="current"] .background-layer {
 }
 
 
-body:not([data-year="current"]) .camera-start-button {
+body:not([data-year="current"])
+.camera-start-button {
   display: none;
 }
 
@@ -252,7 +253,9 @@ body:not([data-year="current"]) .camera-start-button {
   height: 46px;
 
   flex:
-    0 0 122px;
+    0
+    0
+    122px;
 
   display: flex;
 
@@ -271,6 +274,7 @@ body:not([data-year="current"]) .camera-start-button {
   cursor: pointer;
 
   font-size: 20px;
+
   font-weight: 500;
 
   letter-spacing: -.5px;
@@ -278,7 +282,9 @@ body:not([data-year="current"]) .camera-start-button {
   line-height: 1;
 
   white-space: nowrap;
+
   word-break: keep-all;
+
   overflow-wrap: normal;
 }
 
@@ -340,6 +346,7 @@ body:not([data-year="current"]) .camera-start-button {
   cursor: pointer;
 
   font-size: 20px;
+
   font-weight: 600;
 
   letter-spacing: -.65px;
@@ -374,7 +381,8 @@ body:not([data-year="current"]) .camera-start-button {
 }
 
 
-.menu[aria-expanded="true"] .chevron {
+.menu[aria-expanded="true"]
+.chevron {
   transform:
     rotate(180deg);
 }
@@ -484,7 +492,9 @@ body:not([data-year="current"]) .camera-start-button {
   height: 30px;
 
   flex:
-    0 0 30px;
+    0
+    0
+    30px;
 
   display: block;
 
@@ -497,7 +507,9 @@ body:not([data-year="current"]) .camera-start-button {
   height: 40px;
 
   flex:
-    0 0 40px;
+    0
+    0
+    40px;
 
   display: block;
 
@@ -507,7 +519,7 @@ body:not([data-year="current"]) .camera-start-button {
 
 
 /* =========================================================
-   지도 카드
+   위치 / 지도 카드
 ========================================================= */
 
 .map-card {
@@ -552,19 +564,54 @@ body:not([data-year="current"]) .camera-start-button {
   height: 72px;
 
   padding:
-    0 23px;
+    10px
+    23px;
 
   display: flex;
 
-  align-items: center;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 3px;
 }
 
 
 .map-location-name {
+  max-width: 100%;
+
   font-size: 17px;
+
   font-weight: 600;
 
   letter-spacing: -.35px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+.map-location-status {
+  max-width: 100%;
+
+  color:
+    rgba(235, 244, 250, .68);
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  line-height: 1.25;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
 
@@ -633,14 +680,25 @@ body:not([data-year="current"]) .camera-start-button {
 .card-header h1 {
   margin: 0;
 
+  min-width: 0;
+
   font-size: 17px;
+
   font-weight: 500;
 
   letter-spacing: -.5px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
 
 .scenario {
+  flex-shrink: 0;
+
   padding:
     5px
     14px;
@@ -683,7 +741,8 @@ body:not([data-year="current"]) .camera-start-button {
 }
 
 
-.sea-level #sea-level-value {
+.sea-level
+#sea-level-value {
   font-size: inherit;
 }
 
@@ -713,6 +772,7 @@ body:not([data-year="current"]) .camera-start-button {
     rgba(224, 238, 255, .62);
 
   font-size: 17px;
+
   font-weight: 500;
 }
 
@@ -767,6 +827,7 @@ body:not([data-year="current"]) .camera-start-button {
     22px;
 
   font-size: 17px;
+
   font-weight: 500;
 }
 
@@ -814,7 +875,8 @@ body:not([data-year="current"]) .camera-start-button {
 }
 
 
-body[data-year="current"] .chart-selected-point {
+body[data-year="current"]
+.chart-selected-point {
   display: none;
 }
 
@@ -826,7 +888,8 @@ body[data-year="current"] .chart-selected-point {
 }
 
 
-body[data-year="current"] .chart-risk-area {
+body[data-year="current"]
+.chart-risk-area {
   opacity: 0;
 }
 
@@ -836,7 +899,8 @@ body[data-year="current"] .chart-risk-area {
 }
 
 
-body[data-year="current"] .chart-value-label {
+body[data-year="current"]
+.chart-value-label {
   opacity: 0;
 }
 
@@ -853,6 +917,7 @@ body[data-year="current"] .chart-value-label {
   font-family: inherit;
 
   font-size: 12px;
+
   font-weight: 600;
 }
 
@@ -908,6 +973,7 @@ body[data-year="current"] .chart-value-label {
   stroke-width: 2.1;
 
   stroke-linecap: round;
+
   stroke-linejoin: round;
 }
 
@@ -924,6 +990,7 @@ body[data-year="current"] .chart-value-label {
 
   line-height: 1.25;
 }
+
 
 
 /* =========================================================
@@ -950,7 +1017,11 @@ body[data-year="current"] .chart-value-label {
 }
 
 
-body[data-year="2050"] .scene::after {
+
+/* 2050 */
+
+body[data-year="2050"]
+.scene::after {
   opacity: .025;
 
   box-shadow:
@@ -962,7 +1033,11 @@ body[data-year="2050"] .scene::after {
 }
 
 
-body[data-year="2075"] .scene::after {
+
+/* 2075 */
+
+body[data-year="2075"]
+.scene::after {
   opacity: 1;
 
   box-shadow:
@@ -983,7 +1058,11 @@ body[data-year="2075"] .scene::after {
 }
 
 
-body[data-year="2100"] .scene::after {
+
+/* 2100 */
+
+body[data-year="2100"]
+.scene::after {
   opacity: 1;
 
   box-shadow:
