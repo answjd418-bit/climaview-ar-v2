@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
 
@@ -16,7 +15,7 @@
 
   <title>ClimaView AR</title>
 
-  <!-- Leaflet CSS -->
+  <!-- Leaflet -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -27,7 +26,6 @@
     href="style.css"
   >
 
-  <!-- Leaflet JS -->
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   ></script>
@@ -38,12 +36,11 @@
   ></script>
 </head>
 
-
 <body data-year="current">
 
   <main
     class="viewport"
-    aria-label="한강 기후 시뮬레이션"
+    aria-label="ClimaView 기후위기 AR 시뮬레이션"
   >
 
     <div
@@ -51,11 +48,7 @@
       id="scene"
     >
 
-
-      <!-- =================================================
-           카메라
-      ================================================== -->
-
+      <!-- 카메라 -->
       <div class="background-layer">
 
         <video
@@ -79,18 +72,11 @@
       </button>
 
 
-
-      <!-- =================================================
-           GUI
-      ================================================== -->
-
+      <!-- GUI -->
       <div class="gui-layer">
 
 
-        <!-- =========================
-             상단 연도 타임라인
-        ========================== -->
-
+        <!-- 상단 연도 -->
         <nav
           class="timeline glass"
           aria-label="시뮬레이션 연도"
@@ -108,7 +94,7 @@
           <button
             class="year"
             type="button"
-            data-year="2050"
+            data-year="2030"
             aria-pressed="false"
           >
             2030년
@@ -117,7 +103,7 @@
           <button
             class="year"
             type="button"
-            data-year="2075"
+            data-year="2050"
             aria-pressed="false"
           >
             2050년
@@ -126,7 +112,7 @@
           <button
             class="year"
             type="button"
-            data-year="2100"
+            data-year="2090"
             aria-pressed="false"
           >
             2090년
@@ -135,19 +121,13 @@
         </nav>
 
 
-
-        <!-- =========================
-             왼쪽 패널
-        ========================== -->
-
+        <!-- 왼쪽 메뉴 -->
         <aside
           class="left-panel"
           aria-label="기후 시뮬레이션 메뉴"
         >
 
-
           <!-- 기후 시뮬레이션 -->
-
           <div class="menu-group">
 
             <button
@@ -156,7 +136,6 @@
               aria-expanded="false"
               aria-controls="climate-menu"
             >
-
               <span>
                 기후 시뮬레이션
               </span>
@@ -165,7 +144,6 @@
                 class="chevron"
                 aria-hidden="true"
               ></span>
-
             </button>
 
 
@@ -179,92 +157,77 @@
 
 
               <button
-                class="submenu-item"
+                class="submenu-item climate-option active"
                 type="button"
+                data-risk="heatwave"
               >
-
                 <img
                   class="climate-menu-icon"
                   src="./heatwave.svg"
                   alt=""
-                  width="30"
-                  height="30"
                 >
 
                 <span>폭염</span>
-
               </button>
 
 
               <button
-                class="submenu-item active"
+                class="submenu-item climate-option"
                 type="button"
+                data-risk="flood"
               >
-
                 <img
                   class="climate-menu-icon"
                   src="./sealevel.svg"
                   alt=""
-                  width="30"
-                  height="30"
                 >
 
-                <span>해수면 상승</span>
-
+                <span>침수</span>
               </button>
 
 
               <button
-                class="submenu-item"
+                class="submenu-item climate-option"
                 type="button"
+                data-risk="tropical"
               >
-
                 <img
                   class="climate-menu-icon"
                   src="./tropical.svg"
                   alt=""
-                  width="30"
-                  height="30"
                 >
 
                 <span>열대야</span>
-
               </button>
 
 
               <button
-                class="submenu-item"
+                class="submenu-item climate-option"
                 type="button"
+                data-risk="wildfire"
               >
-
                 <img
                   class="climate-menu-icon"
                   src="./forest%20fires.svg"
                   alt=""
-                  width="30"
-                  height="30"
                 >
 
                 <span>산불</span>
-
               </button>
 
 
               <button
-                class="submenu-item"
+                class="submenu-item climate-option"
                 type="button"
+                data-risk="air"
               >
-
                 <img
                   class="climate-menu-icon"
                   src="./air%20quality.svg"
                   alt=""
-                  width="30"
-                  height="30"
                 >
 
                 <span>대기질</span>
-
               </button>
 
             </div>
@@ -272,9 +235,7 @@
           </div>
 
 
-
           <!-- 대응 요소 -->
-
           <div class="menu-group">
 
             <button
@@ -309,17 +270,13 @@
                 class="submenu-item"
                 type="button"
               >
-
                 <img
                   class="response-menu-icon"
                   src="./tree.svg"
                   alt=""
-                  width="40"
-                  height="40"
                 >
 
                 <span>가로수</span>
-
               </button>
 
 
@@ -327,17 +284,13 @@
                 class="submenu-item"
                 type="button"
               >
-
                 <img
                   class="response-menu-icon"
                   src="./shade.svg"
                   alt=""
-                  width="40"
-                  height="40"
                 >
 
                 <span>그늘막</span>
-
               </button>
 
 
@@ -345,17 +298,13 @@
                 class="submenu-item"
                 type="button"
               >
-
                 <img
                   class="response-menu-icon"
                   src="./pavement.svg"
                   alt=""
-                  width="40"
-                  height="40"
                 >
 
                 <span>투수포장</span>
-
               </button>
 
             </div>
@@ -363,11 +312,7 @@
           </div>
 
 
-
-          <!-- =========================
-               실시간 위치 지도
-          ========================== -->
-
+          <!-- 현재 위치 지도 -->
           <section
             class="map-card glass"
             id="map-card"
@@ -390,7 +335,6 @@
                 위치 확인 중
               </span>
 
-
               <span
                 class="map-location-status"
                 id="map-location-status"
@@ -406,11 +350,7 @@
         </aside>
 
 
-
-        <!-- =========================
-             오른쪽 정보 카드
-        ========================== -->
-
+        <!-- 오른쪽 정보 카드 -->
         <section
           class="info-card glass"
           id="info-card"
@@ -419,49 +359,60 @@
           <header class="card-header">
 
             <h1 id="info-title">
-              2026년 반포의 한강
+              현재 위치의 기후위험
             </h1>
 
             <span class="scenario">
-              SSPS - 8.5
+              SSP5 - 8.5
             </span>
 
           </header>
 
 
-          <p class="sea-level">
+          <!-- 대표 위험 -->
+          <div class="risk-summary">
 
-            <span id="sea-level-value">
-              +0
-            </span>
+            <p
+              class="risk-name"
+              id="risk-name"
+            >
+              폭염
+            </p>
 
-            <span class="sea-unit">
-              cm
-            </span>
+            <div class="risk-value-row">
 
+              <span
+                class="risk-value"
+                id="risk-value"
+              >
+                31.2
+              </span>
+
+              <span
+                class="risk-unit"
+                id="risk-unit"
+              >
+                °C
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <p
+            class="risk-caption"
+            id="risk-caption"
+          >
+            현재 위치의 예상 최고 체감온도
           </p>
 
 
-          <p class="sea-caption">
-
-            2000년 대비 평균 해수면 상승
-
-            <span class="info-icon">
-              i
-            </span>
-
-          </p>
-
-
-
-          <!-- =========================
-               그래프
-          ========================== -->
-
+          <!-- 그래프 -->
           <div class="chart-section">
 
             <h2>
-              한강 수위 변화 추이 (cm)
+              지역 기후위험 변화 추이
             </h2>
 
 
@@ -469,7 +420,7 @@
               class="chart"
               viewBox="0 0 336 168"
               role="img"
-              aria-label="한강 수위 변화 추이"
+              aria-label="지역 기후위험 변화 추이"
             >
 
               <defs>
@@ -485,13 +436,19 @@
                   <stop
                     offset="0"
                     stop-color="#4ca8ce"
-                    stop-opacity=".40"
+                    stop-opacity=".30"
+                  />
+
+                  <stop
+                    offset=".62"
+                    stop-color="#62c7ed"
+                    stop-opacity=".72"
                   />
 
                   <stop
                     offset="1"
-                    stop-color="#62c7ed"
-                    stop-opacity=".95"
+                    stop-color="#ef7769"
+                    stop-opacity=".90"
                   />
 
                 </linearGradient>
@@ -529,21 +486,30 @@
               </defs>
 
 
-              <g class="axis-label">
+              <!-- Y축 단계 -->
+              <g class="axis-label risk-axis-label">
 
-                <text x="0" y="28">120</text>
+                <text x="0" y="28">
+                  매우 높음
+                </text>
 
-                <text x="0" y="60">80</text>
+                <text x="0" y="60">
+                  높음
+                </text>
 
-                <text x="0" y="92">40</text>
+                <text x="0" y="92">
+                  보통
+                </text>
 
-                <text x="0" y="124">0</text>
+                <text x="0" y="124">
+                  낮음
+                </text>
 
               </g>
 
 
               <path
-                d="M39 14v108h265"
+                d="M70 14v108h234"
                 fill="none"
                 stroke="rgba(255,255,255,.72)"
                 stroke-width="1"
@@ -551,15 +517,16 @@
 
 
               <path
+                id="chart-area"
                 class="chart-area"
                 d="
-                  M39 116
-                  L102 104
-                  L183 86
-                  L265 63
-                  L304 51
+                  M70 112
+                  L130 102
+                  L205 82
+                  L275 48
+                  L304 40
                   L304 122
-                  L39 122
+                  L70 122
                   Z
                 "
                 fill="url(#chart-fill)"
@@ -567,15 +534,16 @@
 
 
               <path
+                id="chart-risk-area"
                 class="chart-risk-area"
                 d="
-                  M39 116
-                  L102 104
-                  L183 86
-                  L265 63
-                  L304 51
+                  M70 112
+                  L130 102
+                  L205 82
+                  L275 48
+                  L304 40
                   L304 122
-                  L39 122
+                  L70 122
                   Z
                 "
                 fill="url(#risk-gradient)"
@@ -585,26 +553,30 @@
               <g class="chart-anchor-points">
 
                 <circle
-                  cx="39"
-                  cy="116"
+                  id="chart-point-current"
+                  cx="70"
+                  cy="112"
                   r="5"
                 />
 
                 <circle
-                  cx="102"
-                  cy="104"
+                  id="chart-point-2030"
+                  cx="130"
+                  cy="102"
                   r="5"
                 />
 
                 <circle
-                  cx="183"
-                  cy="86"
+                  id="chart-point-2050"
+                  cx="205"
+                  cy="82"
                   r="5"
                 />
 
                 <circle
-                  cx="265"
-                  cy="63"
+                  id="chart-point-2090"
+                  cx="275"
+                  cy="48"
                   r="5"
                 />
 
@@ -614,8 +586,8 @@
               <circle
                 id="chart-selected-point"
                 class="chart-selected-point"
-                cx="102"
-                cy="104"
+                cx="70"
+                cy="112"
                 r="6"
               />
 
@@ -626,9 +598,9 @@
               >
 
                 <rect
-                  x="-34"
+                  x="-28"
                   y="-29"
-                  width="68"
+                  width="56"
                   height="26"
                   rx="13"
                 />
@@ -639,7 +611,7 @@
                   y="-11"
                   text-anchor="middle"
                 >
-                  +11.5 cm
+                  보통
                 </text>
 
               </g>
@@ -650,20 +622,20 @@
                 text-anchor="middle"
               >
 
-                <text x="39" y="151">
+                <text x="70" y="151">
                   현재
                 </text>
 
-                <text x="102" y="151">
-                  2030년대
+                <text x="130" y="151">
+                  2030
                 </text>
 
-                <text x="183" y="151">
-                  2050년대
+                <text x="205" y="151">
+                  2050
                 </text>
 
-                <text x="265" y="151">
-                  2090년대
+                <text x="275" y="151">
+                  2090
                 </text>
 
               </g>
@@ -673,13 +645,8 @@
           </div>
 
 
-
-          <!-- =========================
-               하단 정보
-          ========================== -->
-
+          <!-- 하단 정보 -->
           <dl class="metrics">
-
 
             <div class="metric">
 
@@ -687,19 +654,17 @@
                 viewBox="0 0 36 38"
                 aria-hidden="true"
               >
-
                 <path
                   d="M6 23V8a4 4 0 0 1 8 0v15a7 7 0 1 1-8 0Zm4-5v10m9-19q3 5 6 0 3 5 6 0m-13 10q3 5 6 0 3 5 7 0M17 5v9"
                 />
-
               </svg>
 
-              <dt>
-                평균 수온
+              <dt id="metric-one-label">
+                체감온도
               </dt>
 
-              <dd id="water-temperature">
-                11.7°C
+              <dd id="metric-one-value">
+                31.2°C
               </dd>
 
             </div>
@@ -711,19 +676,17 @@
                 viewBox="0 0 36 38"
                 aria-hidden="true"
               >
-
                 <path
                   d="M17 3s-7 9-7 14a7 7 0 0 0 14 0c0-5-7-14-7-14ZM5 28q5-4 10 0t11 0M5 33q5-4 10 0t11 0"
                 />
-
               </svg>
 
-              <dt>
-                침수 영향
+              <dt id="metric-two-label">
+                추가 위험
               </dt>
 
-              <dd id="flood-impact">
-                없음
+              <dd id="metric-two-value">
+                열대야
               </dd>
 
             </div>
@@ -735,19 +698,17 @@
                 viewBox="0 0 36 38"
                 aria-hidden="true"
               >
-
                 <path
                   d="m5 23 9-17q2-4 4 0l10 17M16 12v6m0 4v.2M5 29q5-4 10 0t11 0M5 34q5-4 10 0t11 0"
                 />
-
               </svg>
 
               <dt>
-                주의 지역
+                주의 환경
               </dt>
 
               <dd id="warning-area">
-                해당 없음
+                그늘이 적은 보행 공간
               </dd>
 
             </div>
@@ -763,5 +724,4 @@
   </main>
 
 </body>
-
 </html>

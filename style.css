@@ -11,7 +11,6 @@
     sans-serif;
 
   color: #ffffff;
-
   background: #162733;
 }
 
@@ -43,7 +42,6 @@ button {
 }
 
 
-
 /* =========================================================
    전체 화면
 ========================================================= */
@@ -53,7 +51,6 @@ button {
   height: 100%;
 
   display: grid;
-
   place-items: center;
 
   overflow: hidden;
@@ -84,14 +81,12 @@ button {
 .background-layer,
 .gui-layer {
   position: absolute;
-
   inset: 0;
 }
 
 
-
 /* =========================================================
-   배경 / 카메라
+   카메라
 ========================================================= */
 
 .background-layer {
@@ -105,7 +100,6 @@ button {
 
 .camera-feed {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -118,9 +112,6 @@ button {
   background: #000000;
 
   opacity: 1;
-
-  transition:
-    opacity .35s ease;
 }
 
 
@@ -132,15 +123,12 @@ button {
   left: 50%;
   bottom: 70px;
 
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
   min-width: 170px;
   height: 52px;
 
-  padding:
-    0
-    24px;
+  padding: 0 24px;
 
   border-radius: 26px;
 
@@ -154,23 +142,18 @@ button {
   color: #ffffff;
 
   font-size: 17px;
-
   font-weight: 600;
 
   cursor: pointer;
 
-  -webkit-backdrop-filter:
-    blur(22px);
-
-  backdrop-filter:
-    blur(22px);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 
 .camera-start-button[hidden] {
   display: none;
 }
-
 
 
 /* =========================================================
@@ -190,18 +173,14 @@ button {
     0 10px 30px
     rgba(10, 24, 40, .08);
 
-  -webkit-backdrop-filter:
-    blur(22px);
-
-  backdrop-filter:
-    blur(22px);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 
 .gui-layer {
   z-index: 3;
 }
-
 
 
 /* =========================================================
@@ -220,7 +199,6 @@ button {
   padding: 8px 12px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -236,16 +214,11 @@ button {
 .year {
   width: 122px;
   min-width: 122px;
-
   height: 46px;
 
-  flex:
-    0
-    0
-    122px;
+  flex: 0 0 122px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -261,7 +234,6 @@ button {
   cursor: pointer;
 
   font-size: 20px;
-
   font-weight: 500;
 
   letter-spacing: -.5px;
@@ -269,8 +241,6 @@ button {
   line-height: 1;
 
   white-space: nowrap;
-
-  word-break: keep-all;
 }
 
 
@@ -288,9 +258,8 @@ button {
 }
 
 
-
 /* =========================================================
-   왼쪽 패널
+   왼쪽
 ========================================================= */
 
 .left-panel {
@@ -315,7 +284,6 @@ button {
   padding: 0 28px;
 
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
@@ -331,7 +299,6 @@ button {
   cursor: pointer;
 
   font-size: 20px;
-
   font-weight: 600;
 
   letter-spacing: -.65px;
@@ -366,12 +333,9 @@ button {
 }
 
 
-.menu[aria-expanded="true"]
-.chevron {
-  transform:
-    rotate(180deg);
+.menu[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
 }
-
 
 
 /* =========================================================
@@ -435,13 +399,11 @@ button {
 
 .submenu-item {
   width: 100%;
-
   min-height: 64px;
 
   padding: 0 14px;
 
   display: flex;
-
   align-items: center;
 
   gap: 16px;
@@ -476,10 +438,7 @@ button {
   width: 30px;
   height: 30px;
 
-  flex:
-    0
-    0
-    30px;
+  flex: 0 0 30px;
 
   display: block;
 
@@ -491,10 +450,7 @@ button {
   width: 40px;
   height: 40px;
 
-  flex:
-    0
-    0
-    40px;
+  flex: 0 0 40px;
 
   display: block;
 
@@ -502,9 +458,8 @@ button {
 }
 
 
-
 /* =========================================================
-   실시간 지도 카드
+   GPS 지도
 ========================================================= */
 
 .map-card {
@@ -544,11 +499,6 @@ button {
 }
 
 
-/*
-   기존 map.png와 비슷한
-   차분한 녹색/회색 톤
-*/
-
 .location-map .leaflet-tile-pane {
   filter:
     brightness(.68)
@@ -572,9 +522,7 @@ button {
 .location-map .leaflet-control-attribution {
   margin: 0 !important;
 
-  padding:
-    2px
-    4px;
+  padding: 2px 4px;
 
   background:
     rgba(18, 28, 28, .68);
@@ -592,16 +540,6 @@ button {
 .leaflet-control-attribution a {
   color:
     rgba(255, 255, 255, .90);
-}
-
-
-.location-map .leaflet-bottom {
-  bottom: 0;
-}
-
-
-.location-map .leaflet-right {
-  right: 0;
 }
 
 
@@ -638,15 +576,12 @@ button {
   color: #ffffff;
 
   font-size: 16px;
-
   font-weight: 650;
 
   letter-spacing: -.35px;
 
   white-space: nowrap;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
 }
 
@@ -658,22 +593,18 @@ button {
     rgba(235, 244, 250, .68);
 
   font-size: 10px;
-
   font-weight: 500;
 
   line-height: 1.25;
 
   white-space: nowrap;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
 }
 
 
-
 /* =========================================================
-   오른쪽 정보 카드
+   오른쪽 기후위험 카드
 ========================================================= */
 
 .info-card {
@@ -705,11 +636,8 @@ button {
     1px solid
     rgba(255, 255, 255, .15);
 
-  -webkit-backdrop-filter:
-    blur(24px);
-
-  backdrop-filter:
-    blur(24px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 
   box-shadow:
     inset
@@ -739,15 +667,12 @@ button {
   min-width: 0;
 
   font-size: 17px;
-
   font-weight: 500;
 
   letter-spacing: -.5px;
 
   white-space: nowrap;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
 }
 
@@ -772,23 +697,46 @@ button {
 }
 
 
-
 /* =========================================================
-   해수면 값
+   대표 위험
 ========================================================= */
 
-.sea-level {
-  margin:
-    10px
-    0
-    5px;
+.risk-summary {
+  margin-top: 10px;
+}
 
+
+.risk-name {
+  margin:
+    8px
+    0
+    0;
+
+  color:
+    rgba(240, 247, 255, .74);
+
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+.risk-value-row {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 6px;
+
+  margin-top: 2px;
+}
+
+
+.risk-value {
   font-family:
     Arial,
     sans-serif;
 
-  font-size: 68px;
-
+  font-size: 62px;
   font-weight: 700;
 
   line-height: 1.05;
@@ -797,24 +745,17 @@ button {
 }
 
 
-.sea-level
-#sea-level-value {
-  font-size: inherit;
+.risk-unit {
+  font-size: 31px;
+  font-weight: 700;
+
+  letter-spacing: -1px;
 }
 
 
-.sea-unit {
-  margin-left: 5px;
-
-  font-size: 38px !important;
-
-  letter-spacing: -2px;
-}
-
-
-.sea-caption {
+.risk-caption {
   margin:
-    7px
+    8px
     0
     25px;
 
@@ -822,39 +763,12 @@ button {
 
   align-items: center;
 
-  gap: 7px;
-
   color:
     rgba(224, 238, 255, .62);
 
-  font-size: 17px;
-
+  font-size: 16px;
   font-weight: 500;
 }
-
-
-.info-icon {
-  width: 19px;
-  height: 19px;
-
-  display: inline-grid;
-
-  place-items: center;
-
-  border-radius: 50%;
-
-  background:
-    rgba(225, 239, 255, .62);
-
-  color: #7894aa;
-
-  font:
-    bold
-    14px
-    Georgia,
-    serif;
-}
-
 
 
 /* =========================================================
@@ -883,7 +797,6 @@ button {
     22px;
 
   font-size: 17px;
-
   font-weight: 500;
 }
 
@@ -903,7 +816,15 @@ button {
 
   font-family: inherit;
 
-  font-size: 16px;
+  font-size: 15px;
+}
+
+
+.risk-axis-label {
+  font-size: 11px;
+
+  fill:
+    rgba(255, 255, 255, .90);
 }
 
 
@@ -931,33 +852,14 @@ button {
 }
 
 
-body[data-year="current"]
-.chart-selected-point {
-  display: none;
-}
-
-
 .chart-risk-area {
   opacity: 1;
-
   pointer-events: none;
 }
 
 
-body[data-year="current"]
-.chart-risk-area {
-  opacity: 0;
-}
-
-
 .chart-value-label {
   opacity: 1;
-}
-
-
-body[data-year="current"]
-.chart-value-label {
-  opacity: 0;
 }
 
 
@@ -972,15 +874,13 @@ body[data-year="current"]
 
   font-family: inherit;
 
-  font-size: 12px;
-
+  font-size: 11px;
   font-weight: 600;
 }
 
 
-
 /* =========================================================
-   카드 하단 정보
+   카드 하단
 ========================================================= */
 
 .metrics {
@@ -1004,7 +904,7 @@ body[data-year="current"]
     1px solid
     rgba(255, 255, 255, .14);
 
-  font-size: 17px;
+  font-size: 16px;
 }
 
 
@@ -1029,7 +929,6 @@ body[data-year="current"]
   stroke-width: 2.1;
 
   stroke-linecap: round;
-
   stroke-linejoin: round;
 }
 
@@ -1048,9 +947,8 @@ body[data-year="current"]
 }
 
 
-
 /* =========================================================
-   위험 효과
+   연도별 위험 효과
 ========================================================= */
 
 .scene::after {
@@ -1073,11 +971,9 @@ body[data-year="current"]
 }
 
 
-/* 2050 */
-
-body[data-year="2050"]
+body[data-year="2030"]
 .scene::after {
-  opacity: .025;
+  opacity: .18;
 
   box-shadow:
     inset
@@ -1088,9 +984,7 @@ body[data-year="2050"]
 }
 
 
-/* 2075 */
-
-body[data-year="2075"]
+body[data-year="2050"]
 .scene::after {
   opacity: 1;
 
@@ -1098,23 +992,21 @@ body[data-year="2075"]
     inset
     0
     0
-    100px
-    rgba(255, 92, 70, .13);
+    95px
+    rgba(255, 92, 70, .12);
 
   background:
     radial-gradient(
       ellipse at center,
       rgba(255, 80, 55, 0) 58%,
       rgba(255, 88, 60, .02) 72%,
-      rgba(255, 75, 55, .08) 86%,
-      rgba(255, 66, 50, .20) 100%
+      rgba(255, 75, 55, .07) 86%,
+      rgba(255, 66, 50, .18) 100%
     );
 }
 
 
-/* 2100 */
-
-body[data-year="2100"]
+body[data-year="2090"]
 .scene::after {
   opacity: 1;
 
