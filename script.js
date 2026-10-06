@@ -198,16 +198,12 @@ cameraStartButton.addEventListener(
 );
 
 
-
 startCamera();
 
 
 
 /* =========================================================
-   기본 기후 데이터
-   반포 한강공원을 기준으로 한 프로토타입 데이터
-
-   다른 장소의 미래 값은 위치별 보정계수를 적용해 계산한다.
+   기준 기후 데이터
 ========================================================= */
 
 const baseClimateData = {
@@ -345,19 +341,10 @@ const baseClimateData = {
 
 
 /* =========================================================
-   위치별 프로토타입 데이터
+   위치별 시뮬레이션 프로필
 
-   lat / lon:
-   GPS 위치 판별을 위한 대표 중심좌표
-
-   seaFactor:
-   반포 기준 해수면 상승값에 적용하는 위치별 보정계수
-
-   tempOffset:
-   평균 수온에 적용하는 위치별 보정값
-
-   미래 수치는 실제 관측값이 아닌
-   프로토타입용 시나리오 기반 추정값이다.
+   미래 수치는 프로토타입용
+   시나리오 기반 추정값
 ========================================================= */
 
 const locationProfiles = {
@@ -642,7 +629,7 @@ const locationProfiles = {
 
 
 /* =========================================================
-   현재 상태
+   상태
 ========================================================= */
 
 let currentYear =
@@ -659,6 +646,30 @@ let locationWatchId =
 
 let lastLocationDistance =
   null;
+
+
+/*
+   역지오코딩 호출 제한용
+*/
+
+let lastGeocodeLatitude =
+  null;
+
+
+let lastGeocodeLongitude =
+  null;
+
+
+let lastGeocodeTime =
+  0;
+
+
+/*
+   동일 좌표 부근 주소 캐시
+*/
+
+const geocodeCache =
+  new Map();
 
 
 
@@ -752,6 +763,164 @@ const mapLocationStatus =
 
 
 /* =========================================================
+   Leaflet 지도
+========================================================= */
+
+let locationMap =
+  null;
+
+
+let currentLocationMarker =
+  null;
+
+
+let accuracyCircle =
+  null;
+
+
+
+function initializeLocationMap() {
+
+  if (
+    locationMap ||
+    !window.L
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+   * 최초에는 반포 위치를 임시 중심점으로 사용.
+   * GPS가 잡히면 즉시 실제 위치로 이동한다.
+   */
+
+  locationMap =
+    L.map(
+      "location-map",
+      {
+
+        zoomControl:
+          false,
+
+        attributionControl:
+          true,
+
+        dragging:
+          true,
+
+        scrollWheelZoom:
+          false,
+
+        doubleClickZoom:
+          true,
+
+        boxZoom:
+          false,
+
+        keyboard:
+          false,
+
+        tap:
+          true
+
+      }
+    )
+    .setView(
+      [
+        37.5107,
+        126.9959
+      ],
+      15
+    );
+
+
+  L.tileLayer(
+
+    "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+    {
+
+      minZoom:
+        3,
+
+      maxZoom:
+        19,
+
+      attribution:
+        "&copy; OpenStreetMap contributors"
+
+    }
+
+  ).addTo(
+    locationMap
+  );
+
+
+  currentLocationMarker =
+    L.circleMarker(
+
+      [
+        37.5107,
+        126.9959
+      ],
+
+      {
+
+        radius:
+          7,
+
+        color:
+          "#ffffff",
+
+        weight:
+          3,
+
+        opacity:
+          1,
+
+        fillColor:
+          "#a9d8e7",
+
+        fillOpacity:
+          1,
+
+        className:
+          "current-location-marker"
+
+      }
+
+    )
+    .addTo(
+      locationMap
+    );
+
+
+  /*
+   * 지도 카드 크기 계산 보정
+   */
+
+  setTimeout(
+    () => {
+
+      if (
+        locationMap
+      ) {
+
+        locationMap.invalidateSize();
+
+      }
+
+    },
+    100
+  );
+
+}
+
+
+
+/* =========================================================
    숫자 유틸
 ========================================================= */
 
@@ -770,10 +939,8 @@ function roundToOne(
 
 
 /* =========================================================
-   두 GPS 좌표 사이 거리 계산
-   Haversine formula
-
-   반환 단위: km
+   좌표 거리 계산
+   반환 단위 km
 ========================================================= */
 
 function calculateDistance(
@@ -789,7 +956,11 @@ function calculateDistance(
 
   const toRadians =
     (degrees) =>
-      degrees * Math.PI / 180;
+      degrees
+      *
+      Math.PI
+      /
+      180;
 
 
   const deltaLat =
@@ -844,7 +1015,9 @@ function calculateDistance(
 
 
   return (
-    earthRadius * c
+    earthRadius
+    *
+    c
   );
 
 }
@@ -852,7 +1025,7 @@ function calculateDistance(
 
 
 /* =========================================================
-   가장 가까운 지원 장소 찾기
+   가장 가까운 지원 한강공원
 ========================================================= */
 
 function findNearestLocation(
@@ -875,10 +1048,13 @@ function findNearestLocation(
 
       const distance =
         calculateDistance(
+
           latitude,
           longitude,
+
           location.lat,
           location.lon
+
         );
 
 
@@ -915,7 +1091,7 @@ function findNearestLocation(
 
 
 /* =========================================================
-   현재 위치 + 연도 기준 데이터 생성
+   기후 데이터 계산
 ========================================================= */
 
 function getClimateData(
@@ -924,11 +1100,15 @@ function getClimateData(
 ) {
 
   const base =
-    baseClimateData[yearKey];
+    baseClimateData[
+      yearKey
+    ];
 
 
   const location =
-    locationProfiles[locationKey];
+    locationProfiles[
+      locationKey
+    ];
 
 
   if (
@@ -959,18 +1139,10 @@ function getClimateData(
     );
 
 
-  const chartValue =
-    seaLevel;
-
-
-  let title =
-    `${base.yearLabel} ${location.shortName}의 한강`;
-
-
   return {
 
     title:
-      title,
+      `${base.yearLabel} ${location.shortName}의 한강`,
 
     seaLevel:
       seaLevel,
@@ -982,13 +1154,17 @@ function getClimateData(
       base.temperatureRise,
 
     floodImpact:
-      location.impacts[yearKey],
+      location.impacts[
+        yearKey
+      ],
 
     warningArea:
-      location.warnings[yearKey],
+      location.warnings[
+        yearKey
+      ],
 
     chartValue:
-      chartValue,
+      seaLevel,
 
     selectedX:
       base.selectedX,
@@ -1009,7 +1185,446 @@ function getClimateData(
 
 
 /* =========================================================
-   위치 카드 갱신
+   지도 위치 이동
+========================================================= */
+
+function updateMapPosition(
+  latitude,
+  longitude,
+  accuracy
+) {
+
+  if (
+    !locationMap ||
+    !currentLocationMarker
+  ) {
+
+    return;
+
+  }
+
+
+  const coordinates =
+    [
+      latitude,
+      longitude
+    ];
+
+
+  locationMap.setView(
+
+    coordinates,
+
+    16,
+
+    {
+
+      animate:
+        true,
+
+      duration:
+        0.6
+
+    }
+
+  );
+
+
+  currentLocationMarker.setLatLng(
+    coordinates
+  );
+
+
+  /*
+   * GPS 정확도 영역
+   */
+
+  if (
+    accuracyCircle
+  ) {
+
+    accuracyCircle.setLatLng(
+      coordinates
+    );
+
+
+    accuracyCircle.setRadius(
+      accuracy
+    );
+
+  }
+
+  else {
+
+    accuracyCircle =
+      L.circle(
+
+        coordinates,
+
+        {
+
+          radius:
+            accuracy,
+
+          color:
+            "#ffffff",
+
+          weight:
+            1,
+
+          opacity:
+            .4,
+
+          fillColor:
+            "#a9d8e7",
+
+          fillOpacity:
+            .10,
+
+          interactive:
+            false
+
+        }
+
+      )
+      .addTo(
+        locationMap
+      );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   역지오코딩 주소 가공
+========================================================= */
+
+function buildReadableAddress(
+  data
+) {
+
+  const address =
+    data.address || {};
+
+
+  /*
+   * 한국 주소에서 자주 나오는 항목을
+   * 우선순위대로 조합
+   */
+
+  const region =
+    address.state
+    ||
+    address.city
+    ||
+    address.province
+    ||
+    "";
+
+
+  const district =
+    address.city_district
+    ||
+    address.borough
+    ||
+    address.county
+    ||
+    "";
+
+
+  const neighbourhood =
+    address.suburb
+    ||
+    address.quarter
+    ||
+    address.neighbourhood
+    ||
+    address.town
+    ||
+    address.village
+    ||
+    "";
+
+
+  const road =
+    address.road
+    ||
+    address.pedestrian
+    ||
+    address.path
+    ||
+    "";
+
+
+  const pieces =
+    [
+      region,
+      district,
+      neighbourhood,
+      road
+    ]
+    .filter(
+      (value, index, array) =>
+        value
+        &&
+        array.indexOf(value)
+          === index
+    );
+
+
+  if (
+    pieces.length > 0
+  ) {
+
+    return pieces
+      .slice(
+        0,
+        3
+      )
+      .join(
+        " "
+      );
+
+  }
+
+
+  if (
+    data.display_name
+  ) {
+
+    return data.display_name
+      .split(",")
+      .slice(0, 3)
+      .join(",")
+      .trim();
+
+  }
+
+
+  return "현재 위치";
+
+}
+
+
+
+/* =========================================================
+   역지오코딩
+   OpenStreetMap Nominatim
+
+   GPS가 조금 흔들릴 때마다
+   요청하지 않도록 캐시 + 거리 제한 적용
+========================================================= */
+
+async function reverseGeocode(
+  latitude,
+  longitude
+) {
+
+  /*
+   * 소수 셋째 자리 기준 캐시
+   * 대략 100m 전후 범위
+   */
+
+  const cacheKey =
+    `${latitude.toFixed(3)},${longitude.toFixed(3)}`;
+
+
+  if (
+    geocodeCache.has(
+      cacheKey
+    )
+  ) {
+
+    return geocodeCache.get(
+      cacheKey
+    );
+
+  }
+
+
+  try {
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse"
+      +
+      "?format=jsonv2"
+      +
+      `&lat=${encodeURIComponent(latitude)}`
+      +
+      `&lon=${encodeURIComponent(longitude)}`
+      +
+      "&zoom=18"
+      +
+      "&addressdetails=1"
+      +
+      "&accept-language=ko";
+
+
+    const response =
+      await fetch(
+        url,
+        {
+
+          headers: {
+
+            Accept:
+              "application/json"
+
+          }
+
+        }
+      );
+
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        `Reverse geocoding error: ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const readableAddress =
+      buildReadableAddress(
+        data
+      );
+
+
+    geocodeCache.set(
+      cacheKey,
+      readableAddress
+    );
+
+
+    return readableAddress;
+
+  }
+
+
+  catch (error) {
+
+    console.warn(
+      "주소 조회 실패:",
+      error
+    );
+
+
+    return null;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   역지오코딩이 필요한지 판단
+========================================================= */
+
+async function updateReverseGeocode(
+  latitude,
+  longitude
+) {
+
+  const now =
+    Date.now();
+
+
+  /*
+   * 마지막 조회 후 5초가 지나지 않았다면
+   * 새 요청하지 않음
+   */
+
+  if (
+    now
+    -
+    lastGeocodeTime
+    <
+    5000
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+   * 이전 위치가 있으면
+   * 약 100m 이상 이동했을 때만 다시 조회
+   */
+
+  if (
+    lastGeocodeLatitude !== null &&
+    lastGeocodeLongitude !== null
+  ) {
+
+    const movedDistance =
+      calculateDistance(
+
+        lastGeocodeLatitude,
+        lastGeocodeLongitude,
+
+        latitude,
+        longitude
+
+      );
+
+
+    if (
+      movedDistance <
+      0.10
+    ) {
+
+      return;
+
+    }
+
+  }
+
+
+  lastGeocodeTime =
+    now;
+
+
+  lastGeocodeLatitude =
+    latitude;
+
+
+  lastGeocodeLongitude =
+    longitude;
+
+
+  const address =
+    await reverseGeocode(
+      latitude,
+      longitude
+    );
+
+
+  if (
+    address
+  ) {
+
+    mapLocationStatus.textContent =
+      address;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   지도 카드
 ========================================================= */
 
 function updateLocationCard(
@@ -1023,10 +1638,19 @@ function updateLocationCard(
     ];
 
 
-  if (!location) {
+  if (
+    !location
+  ) {
+
     return;
+
   }
 
+
+  /*
+   * 큰 글씨:
+   * 가장 가까운 지원 한강공원
+   */
 
   mapLocationName.textContent =
     location.name;
@@ -1038,42 +1662,16 @@ function updateLocationCard(
   );
 
 
+  /*
+   * 주소가 들어오기 전 임시 상태
+   */
+
   if (
     typeof distance !== "number"
   ) {
 
     mapLocationStatus.textContent =
-      "기본 위치 기준";
-
-    return;
-
-  }
-
-
-  if (
-    distance < 0.15
-  ) {
-
-    mapLocationStatus.textContent =
-      "현재 위치와 일치";
-
-  }
-
-  else if (
-    distance < 1
-  ) {
-
-    mapLocationStatus.textContent =
-      `약 ${Math.round(
-        distance * 1000
-      )}m 거리`;
-
-  }
-
-  else {
-
-    mapLocationStatus.textContent =
-      `가장 가까운 지점 · ${distance.toFixed(1)}km`;
+      "GPS 위치 확인 중...";
 
   }
 
@@ -1082,7 +1680,7 @@ function updateLocationCard(
 
 
 /* =========================================================
-   오른쪽 정보 카드 갱신
+   오른쪽 정보 갱신
 ========================================================= */
 
 function updateClimateInterface() {
@@ -1094,8 +1692,12 @@ function updateClimateInterface() {
     );
 
 
-  if (!data) {
+  if (
+    !data
+  ) {
+
     return;
+
   }
 
 
@@ -1140,8 +1742,6 @@ function updateClimateInterface() {
   );
 
 
-  /* 현재 화면 */
-
   if (
     currentYear === "current"
   ) {
@@ -1158,8 +1758,6 @@ function updateClimateInterface() {
 
   }
 
-
-  /* 미래 연도 그래프 */
 
   selectedPoint.style.display =
     "block";
@@ -1187,10 +1785,7 @@ function updateClimateInterface() {
 
   chartValueLabel.setAttribute(
     "transform",
-    `translate(
-      ${data.selectedX}
-      ${data.selectedY - 8}
-    )`
+    `translate(${data.selectedX} ${data.selectedY - 8})`
   );
 
 
@@ -1218,7 +1813,9 @@ function changeYear(
 ) {
 
   if (
-    !baseClimateData[key]
+    !baseClimateData[
+      key
+    ]
   ) {
 
     return;
@@ -1247,7 +1844,8 @@ function changeYear(
     (button) => {
 
       const selected =
-        button.dataset.year ===
+        button.dataset.year
+        ===
         key;
 
 
@@ -1259,7 +1857,9 @@ function changeYear(
 
       button.setAttribute(
         "aria-pressed",
-        String(selected)
+        String(
+          selected
+        )
       );
 
     }
@@ -1296,7 +1896,7 @@ yearButtons.forEach(
 
 
 /* =========================================================
-   실시간 위치 추적 성공
+   GPS 성공
 ========================================================= */
 
 function handleLocationSuccess(
@@ -1311,6 +1911,28 @@ function handleLocationSuccess(
     position.coords.longitude;
 
 
+  const accuracy =
+    Math.max(
+      position.coords.accuracy || 20,
+      5
+    );
+
+
+  /*
+   * 실제 지도 위치 변경
+   */
+
+  updateMapPosition(
+    latitude,
+    longitude,
+    accuracy
+  );
+
+
+  /*
+   * 가장 가까운 지원 한강공원 판별
+   */
+
   const nearest =
     findNearestLocation(
       latitude,
@@ -1319,7 +1941,8 @@ function handleLocationSuccess(
 
 
   const locationChanged =
-    nearest.key !==
+    nearest.key
+    !==
     currentLocationKey;
 
 
@@ -1337,6 +1960,21 @@ function handleLocationSuccess(
   );
 
 
+  /*
+   * 실제 주소 조회
+   */
+
+  updateReverseGeocode(
+    latitude,
+    longitude
+  );
+
+
+  /*
+   * 장소가 바뀌거나
+   * 위치가 갱신되면 기후정보 갱신
+   */
+
   if (
     locationChanged
   ) {
@@ -1351,11 +1989,6 @@ function handleLocationSuccess(
   }
 
 
-  /*
-   * 위치가 갱신될 때마다
-   * 현재 선택한 연도의 정보도 다시 계산한다.
-   */
-
   updateClimateInterface();
 
 }
@@ -1363,7 +1996,7 @@ function handleLocationSuccess(
 
 
 /* =========================================================
-   실시간 위치 추적 실패
+   GPS 오류
 ========================================================= */
 
 function handleLocationError(
@@ -1395,7 +2028,7 @@ function handleLocationError(
   ) {
 
     mapLocationStatus.textContent =
-      "위치 권한 필요 · 반포 기준";
+      "위치 권한 필요";
 
   }
 
@@ -1404,7 +2037,7 @@ function handleLocationError(
   ) {
 
     mapLocationStatus.textContent =
-      "위치 확인 불가 · 반포 기준";
+      "현재 위치를 확인할 수 없음";
 
   }
 
@@ -1413,14 +2046,14 @@ function handleLocationError(
   ) {
 
     mapLocationStatus.textContent =
-      "GPS 응답 지연 · 반포 기준";
+      "GPS 응답 지연";
 
   }
 
   else {
 
     mapLocationStatus.textContent =
-      "반포 기준";
+      "위치 정보 없음";
 
   }
 
@@ -1432,10 +2065,13 @@ function handleLocationError(
 
 
 /* =========================================================
-   실시간 위치 추적 시작
+   GPS 추적 시작
 ========================================================= */
 
 function startLocationTracking() {
+
+  initializeLocationMap();
+
 
   if (
     !navigator.geolocation
@@ -1451,7 +2087,7 @@ function startLocationTracking() {
 
 
     mapLocationStatus.textContent =
-      "위치 기능 미지원 · 반포 기준";
+      "위치 기능 미지원";
 
 
     updateClimateInterface();
@@ -1483,7 +2119,7 @@ function startLocationTracking() {
           true,
 
         maximumAge:
-          10000,
+          5000,
 
         timeout:
           15000
@@ -1497,7 +2133,7 @@ function startLocationTracking() {
 
 
 /* =========================================================
-   페이지 종료 시 위치 추적 정리
+   페이지 종료 시 GPS 추적 종료
 ========================================================= */
 
 window.addEventListener(
@@ -1546,8 +2182,12 @@ function closeMenu(
     );
 
 
-  if (!panel) {
+  if (
+    !panel
+  ) {
+
     return;
+
   }
 
 
@@ -1581,7 +2221,9 @@ menuButtons.forEach(
         const shouldOpen =
           button.getAttribute(
             "aria-expanded"
-          ) !== "true";
+          )
+          !==
+          "true";
 
 
         menuButtons.forEach(
@@ -1606,8 +2248,12 @@ menuButtons.forEach(
           );
 
 
-        if (!panel) {
+        if (
+          !panel
+        ) {
+
           return;
+
         }
 
 
@@ -1636,12 +2282,15 @@ menuButtons.forEach(
 
 
 /* =========================================================
-   초기 화면
+   초기 실행
 ========================================================= */
 
 changeYear(
   "current"
 );
+
+
+initializeLocationMap();
 
 
 updateLocationCard(
