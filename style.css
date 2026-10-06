@@ -259,7 +259,7 @@ button {
 
 
 /* =========================================================
-   왼쪽
+   왼쪽 패널
 ========================================================= */
 
 .left-panel {
@@ -515,6 +515,7 @@ button {
 
 .location-map .leaflet-control-container {
   position: relative;
+
   z-index: 10;
 }
 
@@ -536,8 +537,7 @@ button {
 }
 
 
-.location-map
-.leaflet-control-attribution a {
+.location-map .leaflet-control-attribution a {
   color:
     rgba(255, 255, 255, .90);
 }
@@ -854,6 +854,7 @@ button {
 
 .chart-risk-area {
   opacity: 1;
+
   pointer-events: none;
 }
 
@@ -880,7 +881,7 @@ button {
 
 
 /* =========================================================
-   카드 하단
+   카드 하단 정보
 ========================================================= */
 
 .metrics {
@@ -918,18 +919,30 @@ button {
 }
 
 
-.metric svg {
+/*
+  PNG 아이콘
+  기존 .metric svg 대신 사용
+*/
+
+.metric-icon {
   width: 36px;
   height: 38px;
 
-  fill: none;
+  display: block;
 
-  stroke: #ffffff;
+  object-fit: contain;
 
-  stroke-width: 2.1;
+  object-position: center;
 
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  flex-shrink: 0;
+
+  opacity: .96;
+
+  filter:
+    drop-shadow(
+      0 1px 1px
+      rgba(0, 0, 0, .08)
+    );
 }
 
 
@@ -971,8 +984,7 @@ button {
 }
 
 
-body[data-year="2030"]
-.scene::after {
+body[data-year="2030"] .scene::after {
   opacity: .18;
 
   box-shadow:
@@ -984,8 +996,7 @@ body[data-year="2030"]
 }
 
 
-body[data-year="2050"]
-.scene::after {
+body[data-year="2050"] .scene::after {
   opacity: 1;
 
   box-shadow:
@@ -1006,8 +1017,7 @@ body[data-year="2050"]
 }
 
 
-body[data-year="2090"]
-.scene::after {
+body[data-year="2090"] .scene::after {
   opacity: 1;
 
   box-shadow:

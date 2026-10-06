@@ -1,5 +1,7 @@
 <!doctype html>
+
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
 
@@ -35,6 +37,7 @@
     defer
   ></script>
 </head>
+
 
 <body data-year="current">
 
@@ -127,6 +130,7 @@
           aria-label="기후 시뮬레이션 메뉴"
         >
 
+
           <!-- 기후 시뮬레이션 -->
           <div class="menu-group">
 
@@ -136,6 +140,7 @@
               aria-expanded="false"
               aria-controls="climate-menu"
             >
+
               <span>
                 기후 시뮬레이션
               </span>
@@ -144,6 +149,7 @@
                 class="chevron"
                 aria-hidden="true"
               ></span>
+
             </button>
 
 
@@ -156,11 +162,13 @@
               <div class="submenu-divider"></div>
 
 
+              <!-- 폭염 -->
               <button
                 class="submenu-item climate-option active"
                 type="button"
                 data-risk="heatwave"
               >
+
                 <img
                   class="climate-menu-icon"
                   src="./heatwave.svg"
@@ -168,14 +176,17 @@
                 >
 
                 <span>폭염</span>
+
               </button>
 
 
+              <!-- 침수 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="flood"
               >
+
                 <img
                   class="climate-menu-icon"
                   src="./sealevel.svg"
@@ -183,14 +194,17 @@
                 >
 
                 <span>침수</span>
+
               </button>
 
 
+              <!-- 열대야 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="tropical"
               >
+
                 <img
                   class="climate-menu-icon"
                   src="./tropical.svg"
@@ -198,14 +212,17 @@
                 >
 
                 <span>열대야</span>
+
               </button>
 
 
+              <!-- 산불 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="wildfire"
               >
+
                 <img
                   class="climate-menu-icon"
                   src="./forest%20fires.svg"
@@ -213,14 +230,17 @@
                 >
 
                 <span>산불</span>
+
               </button>
 
 
+              <!-- 대기질 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="air"
               >
+
                 <img
                   class="climate-menu-icon"
                   src="./air%20quality.svg"
@@ -228,6 +248,7 @@
                 >
 
                 <span>대기질</span>
+
               </button>
 
             </div>
@@ -266,10 +287,12 @@
               <div class="submenu-divider"></div>
 
 
+              <!-- 가로수 -->
               <button
                 class="submenu-item"
                 type="button"
               >
+
                 <img
                   class="response-menu-icon"
                   src="./tree.svg"
@@ -277,13 +300,16 @@
                 >
 
                 <span>가로수</span>
+
               </button>
 
 
+              <!-- 그늘막 -->
               <button
                 class="submenu-item"
                 type="button"
               >
+
                 <img
                   class="response-menu-icon"
                   src="./shade.svg"
@@ -291,13 +317,16 @@
                 >
 
                 <span>그늘막</span>
+
               </button>
 
 
+              <!-- 투수포장 -->
               <button
                 class="submenu-item"
                 type="button"
               >
+
                 <img
                   class="response-menu-icon"
                   src="./pavement.svg"
@@ -305,6 +334,7 @@
                 >
 
                 <span>투수포장</span>
+
               </button>
 
             </div>
@@ -508,6 +538,7 @@
               </g>
 
 
+              <!-- 축 -->
               <path
                 d="M70 14v108h234"
                 fill="none"
@@ -516,6 +547,7 @@
               />
 
 
+              <!-- 기본 그래프 영역 -->
               <path
                 id="chart-area"
                 class="chart-area"
@@ -533,6 +565,7 @@
               />
 
 
+              <!-- 선택 시점 위험 강조 영역 -->
               <path
                 id="chart-risk-area"
                 class="chart-risk-area"
@@ -550,6 +583,7 @@
               />
 
 
+              <!-- 각 연도 포인트 -->
               <g class="chart-anchor-points">
 
                 <circle
@@ -583,6 +617,7 @@
               </g>
 
 
+              <!-- 현재 선택 포인트 -->
               <circle
                 id="chart-selected-point"
                 class="chart-selected-point"
@@ -592,6 +627,7 @@
               />
 
 
+              <!-- 현재 선택 위험 단계 라벨 -->
               <g
                 class="chart-value-label"
                 id="chart-value-label"
@@ -617,6 +653,7 @@
               </g>
 
 
+              <!-- X축 -->
               <g
                 class="axis-label"
                 text-anchor="middle"
@@ -648,16 +685,17 @@
           <!-- 하단 정보 -->
           <dl class="metrics">
 
+
+            <!-- 1번째 정보 -->
             <div class="metric">
 
-              <svg
-                viewBox="0 0 36 38"
+              <img
+                id="metric-one-icon"
+                class="metric-icon"
+                src="./icon_feels_temp.png"
+                alt=""
                 aria-hidden="true"
               >
-                <path
-                  d="M6 23V8a4 4 0 0 1 8 0v15a7 7 0 1 1-8 0Zm4-5v10m9-19q3 5 6 0 3 5 6 0m-13 10q3 5 6 0 3 5 7 0M17 5v9"
-                />
-              </svg>
 
               <dt id="metric-one-label">
                 체감온도
@@ -670,16 +708,16 @@
             </div>
 
 
+            <!-- 2번째 정보 -->
             <div class="metric">
 
-              <svg
-                viewBox="0 0 36 38"
+              <img
+                id="metric-two-icon"
+                class="metric-icon"
+                src="./icon_tropical_night.png"
+                alt=""
                 aria-hidden="true"
               >
-                <path
-                  d="M17 3s-7 9-7 14a7 7 0 0 0 14 0c0-5-7-14-7-14ZM5 28q5-4 10 0t11 0M5 33q5-4 10 0t11 0"
-                />
-              </svg>
 
               <dt id="metric-two-label">
                 추가 위험
@@ -692,16 +730,16 @@
             </div>
 
 
+            <!-- 3번째 정보 -->
             <div class="metric">
 
-              <svg
-                viewBox="0 0 36 38"
+              <img
+                id="warning-area-icon"
+                class="metric-icon"
+                src="./icon_warning_area.png"
+                alt=""
                 aria-hidden="true"
               >
-                <path
-                  d="m5 23 9-17q2-4 4 0l10 17M16 12v6m0 4v.2M5 29q5-4 10 0t11 0M5 34q5-4 10 0t11 0"
-                />
-              </svg>
 
               <dt>
                 주의 환경
@@ -724,4 +762,5 @@
   </main>
 
 </body>
+
 </html>
