@@ -244,7 +244,7 @@ const baseClimateData = {
   2050: {
 
     yearLabel:
-      "2050년",
+      "2030년",
 
     seaLevel:
       11.5,
@@ -276,7 +276,7 @@ const baseClimateData = {
   2075: {
 
     yearLabel:
-      "2075년",
+      "2050년",
 
     seaLevel:
       32.2,
@@ -308,7 +308,7 @@ const baseClimateData = {
   2100: {
 
     yearLabel:
-      "2100년",
+      "2090년",
 
     seaLevel:
       96.1,
@@ -629,7 +629,7 @@ const locationProfiles = {
 
 
 /* =========================================================
-   상태
+   현재 상태
 ========================================================= */
 
 let currentYear =
@@ -648,9 +648,10 @@ let lastLocationDistance =
   null;
 
 
-/*
-   역지오코딩 호출 제한용
-*/
+
+/* =========================================================
+   역지오코딩 상태
+========================================================= */
 
 let lastGeocodeLatitude =
   null;
@@ -663,10 +664,6 @@ let lastGeocodeLongitude =
 let lastGeocodeTime =
   0;
 
-
-/*
-   동일 좌표 부근 주소 캐시
-*/
 
 const geocodeCache =
   new Map();
@@ -791,11 +788,6 @@ function initializeLocationMap() {
   }
 
 
-  /*
-   * 최초에는 반포 위치를 임시 중심점으로 사용.
-   * GPS가 잡히면 즉시 실제 위치로 이동한다.
-   */
-
   locationMap =
     L.map(
       "location-map",
@@ -897,10 +889,6 @@ function initializeLocationMap() {
     );
 
 
-  /*
-   * 지도 카드 크기 계산 보정
-   */
-
   setTimeout(
     () => {
 
@@ -939,8 +927,8 @@ function roundToOne(
 
 
 /* =========================================================
-   좌표 거리 계산
-   반환 단위 km
+   거리 계산
+   단위 km
 ========================================================= */
 
 function calculateDistance(
@@ -1026,6 +1014,7 @@ function calculateDistance(
 
 /* =========================================================
    가장 가까운 지원 한강공원
+   기후 데이터 계산용
 ========================================================= */
 
 function findNearestLocation(
@@ -1235,10 +1224,6 @@ function updateMapPosition(
   );
 
 
-  /*
-   * GPS 정확도 영역
-   */
-
   if (
     accuracyCircle
   ) {
@@ -1298,7 +1283,7 @@ function updateMapPosition(
 
 
 /* =========================================================
-   역지오코딩 주소 가공
+   주소 가공
 ========================================================= */
 
 function buildReadableAddress(
@@ -1308,11 +1293,6 @@ function buildReadableAddress(
   const address =
     data.address || {};
 
-
-  /*
-   * 한국 주소에서 자주 나오는 항목을
-   * 우선순위대로 조합
-   */
 
   const region =
     address.state
@@ -1410,11 +1390,68 @@ function buildReadableAddress(
 
 
 /* =========================================================
+   실제 장소명 선택
+========================================================= */
+
+function getPlaceName(
+  data
+) {
+
+  const address =
+    data.address || {};
+
+
+  const namedetails =
+    data.namedetails || {};
+
+
+  /*
+   * 실제 POI / 공원 / 시설명 우선
+   */
+
+  const placeName =
+    namedetails["name:ko"]
+    ||
+    namedetails.name
+    ||
+    address.park
+    ||
+    address.leisure
+    ||
+    address.amenity
+    ||
+    address.attraction
+    ||
+    address.building
+    ||
+    address.neighbourhood
+    ||
+    address.quarter
+    ||
+    address.suburb
+    ||
+    address.road
+    ||
+    address.village
+    ||
+    address.town
+    ||
+    address.city_district
+    ||
+    address.city
+    ||
+    "현재 위치";
+
+
+  return placeName;
+
+}
+
+
+
+/* =========================================================
    역지오코딩
    OpenStreetMap Nominatim
-
-   GPS가 조금 흔들릴 때마다
-   요청하지 않도록 캐시 + 거리 제한 적용
 ========================================================= */
 
 async function reverseGeocode(
@@ -1423,8 +1460,7 @@ async function reverseGeocode(
 ) {
 
   /*
-   * 소수 셋째 자리 기준 캐시
-   * 대략 100m 전후 범위
+   * 약 100m 단위로 캐시
    */
 
   const cacheKey =
@@ -1458,6 +1494,8 @@ async function reverseGeocode(
       "&zoom=18"
       +
       "&addressdetails=1"
+      +
+      "&namedetails=1"
       +
       "&accept-language=ko";
 
@@ -1493,19 +1531,28 @@ async function reverseGeocode(
       await response.json();
 
 
-    const readableAddress =
-      buildReadableAddress(
-        data
-      );
+    const result = {
+
+      placeName:
+        getPlaceName(
+          data
+        ),
+
+      address:
+        buildReadableAddress(
+          data
+        )
+
+    };
 
 
     geocodeCache.set(
       cacheKey,
-      readableAddress
+      result
     );
 
 
-    return readableAddress;
+    return result;
 
   }
 
@@ -1527,7 +1574,9 @@ async function reverseGeocode(
 
 
 /* =========================================================
-   역지오코딩이 필요한지 판단
+   주소 / 장소명 업데이트
+
+   너무 자주 호출하지 않도록 제한
 ========================================================= */
 
 async function updateReverseGeocode(
@@ -1540,8 +1589,7 @@ async function updateReverseGeocode(
 
 
   /*
-   * 마지막 조회 후 5초가 지나지 않았다면
-   * 새 요청하지 않음
+   * 5초 이내 반복 요청 방지
    */
 
   if (
@@ -1558,8 +1606,8 @@ async function updateReverseGeocode(
 
 
   /*
-   * 이전 위치가 있으면
-   * 약 100m 이상 이동했을 때만 다시 조회
+   * 이전 역지오코딩 지점에서
+   * 약 100m 이상 이동했을 때만 갱신
    */
 
   if (
@@ -1603,7 +1651,15 @@ async function updateReverseGeocode(
     longitude;
 
 
-  const address =
+  /*
+   * 실제 주소 검색 중
+   */
+
+  mapLocationStatus.textContent =
+    "현재 위치 확인 중...";
+
+
+  const locationResult =
     await reverseGeocode(
       latitude,
       longitude
@@ -1611,36 +1667,12 @@ async function updateReverseGeocode(
 
 
   if (
-    address
+    !locationResult
   ) {
 
     mapLocationStatus.textContent =
-      address;
+      "GPS 위치 사용 중";
 
-  }
-
-}
-
-
-
-/* =========================================================
-   지도 카드
-========================================================= */
-
-function updateLocationCard(
-  locationKey,
-  distance
-) {
-
-  const location =
-    locationProfiles[
-      locationKey
-    ];
-
-
-  if (
-    !location
-  ) {
 
     return;
 
@@ -1648,39 +1680,70 @@ function updateLocationCard(
 
 
   /*
-   * 큰 글씨:
-   * 가장 가까운 지원 한강공원
+   * 큰 텍스트:
+   * 실제 GPS 기반 장소명
    */
 
   mapLocationName.textContent =
-    location.name;
+    locationResult.placeName;
+
+
+  /*
+   * 작은 텍스트:
+   * 실제 GPS 기반 주소
+   */
+
+  mapLocationStatus.textContent =
+    locationResult.address;
 
 
   mapCard.setAttribute(
     "aria-label",
-    `현재 위치 기준 ${location.name}`
+    `${locationResult.placeName} 현재 위치`
   );
-
-
-  /*
-   * 주소가 들어오기 전 임시 상태
-   */
-
-  if (
-    typeof distance !== "number"
-  ) {
-
-    mapLocationStatus.textContent =
-      "GPS 위치 확인 중...";
-
-  }
 
 }
 
 
 
 /* =========================================================
-   오른쪽 정보 갱신
+   위치 카드 초기 상태
+
+   중요:
+   등록된 한강공원 이름으로
+   큰 텍스트를 덮어쓰지 않는다.
+========================================================= */
+
+function updateLocationCard(
+  locationKey,
+  distance
+) {
+
+  if (
+    lastGeocodeLatitude === null
+  ) {
+
+    mapLocationName.textContent =
+      "위치 확인 중";
+
+
+    mapLocationStatus.textContent =
+      "GPS 연결 중...";
+
+  }
+
+
+  mapCard.setAttribute(
+    "aria-label",
+    "GPS 기반 현재 위치"
+  );
+
+}
+
+
+
+/* =========================================================
+   오른쪽 기후 정보 갱신
 ========================================================= */
 
 function updateClimateInterface() {
@@ -1742,6 +1805,10 @@ function updateClimateInterface() {
   );
 
 
+  /*
+   * 현재
+   */
+
   if (
     currentYear === "current"
   ) {
@@ -1758,6 +1825,10 @@ function updateClimateInterface() {
 
   }
 
+
+  /*
+   * 미래 연도
+   */
 
   selectedPoint.style.display =
     "block";
@@ -1919,7 +1990,7 @@ function handleLocationSuccess(
 
 
   /*
-   * 실제 지도 위치 변경
+   * 실제 지도 이동
    */
 
   updateMapPosition(
@@ -1930,7 +2001,8 @@ function handleLocationSuccess(
 
 
   /*
-   * 가장 가까운 지원 한강공원 판별
+   * 기후 데이터 계산용으로
+   * 가장 가까운 한강공원 선택
    */
 
   const nearest =
@@ -1954,6 +2026,11 @@ function handleLocationSuccess(
     nearest.distance;
 
 
+  /*
+   * 여기서는 큰 텍스트를
+   * 한강공원 이름으로 덮어쓰지 않는다.
+   */
+
   updateLocationCard(
     currentLocationKey,
     lastLocationDistance
@@ -1961,7 +2038,7 @@ function handleLocationSuccess(
 
 
   /*
-   * 실제 주소 조회
+   * 실제 GPS 장소명 / 주소 업데이트
    */
 
   updateReverseGeocode(
@@ -1971,8 +2048,7 @@ function handleLocationSuccess(
 
 
   /*
-   * 장소가 바뀌거나
-   * 위치가 갱신되면 기후정보 갱신
+   * 기후정보 갱신
    */
 
   if (
@@ -1980,7 +2056,7 @@ function handleLocationSuccess(
   ) {
 
     console.log(
-      "ClimaView 위치 변경:",
+      "ClimaView 기후 데이터 기준 위치 변경:",
       locationProfiles[
         currentLocationKey
       ].name
@@ -2017,18 +2093,16 @@ function handleLocationError(
     null;
 
 
-  updateLocationCard(
-    currentLocationKey,
-    null
-  );
-
-
   if (
     error.code === 1
   ) {
 
-    mapLocationStatus.textContent =
+    mapLocationName.textContent =
       "위치 권한 필요";
+
+
+    mapLocationStatus.textContent =
+      "브라우저 위치 권한을 허용해주세요";
 
   }
 
@@ -2036,8 +2110,12 @@ function handleLocationError(
     error.code === 2
   ) {
 
+    mapLocationName.textContent =
+      "위치 확인 불가";
+
+
     mapLocationStatus.textContent =
-      "현재 위치를 확인할 수 없음";
+      "현재 GPS 위치를 확인할 수 없습니다";
 
   }
 
@@ -2045,12 +2123,20 @@ function handleLocationError(
     error.code === 3
   ) {
 
+    mapLocationName.textContent =
+      "위치 확인 지연";
+
+
     mapLocationStatus.textContent =
-      "GPS 응답 지연";
+      "GPS 응답을 기다리는 중입니다";
 
   }
 
   else {
+
+    mapLocationName.textContent =
+      "현재 위치";
+
 
     mapLocationStatus.textContent =
       "위치 정보 없음";
@@ -2083,11 +2169,11 @@ function startLocationTracking() {
 
 
     mapLocationName.textContent =
-      "반포 한강공원";
+      "위치 기능 미지원";
 
 
     mapLocationStatus.textContent =
-      "위치 기능 미지원";
+      "GPS를 사용할 수 없습니다";
 
 
     updateClimateInterface();
