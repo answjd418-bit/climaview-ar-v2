@@ -945,26 +945,22 @@ function levelText(level) {
    폭염 그래프 위험 색
 ========================================================= */
 
-function setHeatwaveDangerGradient(
-  yearKey
-) {
+function setHeatwaveDangerGradient(yearKey) {
 
   /*
-    현재 / 2030
-    주황색 중심
+   * 그래프 색상만 변경
+   *
+   * 현재 / 2030
+   * 기존 주황 계열 유지
+   *
+   * 2050
+   * 선택 지점 주변부터 붉은색이 강하게 나타남
+   *
+   * 2090
+   * 미래 영역 전체가 강한 붉은색으로 표현됨
+   */
 
-    2050
-    선택 지점 중심 붉은 영역 등장
-
-    2090
-    오른쪽 미래 영역 전체가 강한 붉은색
-  */
-
-
-  if (
-    yearKey ===
-    "current"
-  ) {
+  if (yearKey === "current") {
 
     heatwaveDangerStops[0].setAttribute(
       "offset",
@@ -1012,10 +1008,7 @@ function setHeatwaveDangerGradient(
   }
 
 
-  else if (
-    yearKey ===
-    "2030"
-  ) {
+  else if (yearKey === "2030") {
 
     heatwaveDangerStops[0].setAttribute(
       "offset",
@@ -1063,20 +1056,17 @@ function setHeatwaveDangerGradient(
   }
 
 
-  else if (
-    yearKey ===
-    "2050"
-  ) {
+  else if (yearKey === "2050") {
 
     /*
-      목표 시안처럼
-      선택된 중후반 지점을 중심으로
-      붉은 색이 넓게 번짐
-    */
+     * 2050
+     * 선택된 2050 지점 주변부터
+     * 붉은 위험 영역이 나타나도록 변경
+     */
 
     heatwaveDangerStops[0].setAttribute(
       "offset",
-      "34%"
+      "40%"
     );
 
     heatwaveDangerStops[0].setAttribute(
@@ -1087,23 +1077,23 @@ function setHeatwaveDangerGradient(
 
     heatwaveDangerStops[1].setAttribute(
       "offset",
-      "48%"
+      "52%"
     );
 
     heatwaveDangerStops[1].setAttribute(
       "stop-opacity",
-      ".34"
+      ".18"
     );
 
 
     heatwaveDangerStops[2].setAttribute(
       "offset",
-      "62%"
+      "64%"
     );
 
     heatwaveDangerStops[2].setAttribute(
       "stop-opacity",
-      ".94"
+      ".82"
     );
 
 
@@ -1120,19 +1110,17 @@ function setHeatwaveDangerGradient(
   }
 
 
-  else if (
-    yearKey ===
-    "2090"
-  ) {
+  else if (yearKey === "2090") {
 
     /*
-      마지막 시안처럼
-      오른쪽으로 갈수록 강한 빨강
-    */
+     * 2090
+     * 오른쪽 미래 영역으로 갈수록
+     * 강한 붉은색이 나타나도록 변경
+     */
 
     heatwaveDangerStops[0].setAttribute(
       "offset",
-      "34%"
+      "36%"
     );
 
     heatwaveDangerStops[0].setAttribute(
@@ -1143,23 +1131,23 @@ function setHeatwaveDangerGradient(
 
     heatwaveDangerStops[1].setAttribute(
       "offset",
-      "54%"
+      "52%"
     );
 
     heatwaveDangerStops[1].setAttribute(
       "stop-opacity",
-      ".30"
+      ".35"
     );
 
 
     heatwaveDangerStops[2].setAttribute(
       "offset",
-      "72%"
+      "68%"
     );
 
     heatwaveDangerStops[2].setAttribute(
       "stop-opacity",
-      ".82"
+      ".85"
     );
 
 
@@ -1176,7 +1164,6 @@ function setHeatwaveDangerGradient(
   }
 
 }
-
 
 /* =========================================================
    폭염 그래프
