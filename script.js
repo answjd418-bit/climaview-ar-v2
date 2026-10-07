@@ -237,17 +237,8 @@ const warningIcon =
 
 function fitScene() {
 
-  /*
-    기존에는 Math.min을 사용해서
-    전체 디자인이 화면 안에 모두 들어오도록 했지만,
-
-    이제는 Math.max를 사용해서
-    어떤 화면 비율에서도 빈 공간 없이
-    화면 전체를 채우도록 한다.
-  */
-
   const scale =
-    Math.max(
+    Math.min(
       window.innerWidth / 1366,
       window.innerHeight / 1024
     );
