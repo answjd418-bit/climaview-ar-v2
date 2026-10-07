@@ -54,7 +54,7 @@ const warningArea =
   document.getElementById("warning-area");
 
 
-/* 새 PNG 아이콘 */
+/* 새 SVG 아이콘 */
 
 const metricOneIcon =
   document.getElementById("metric-one-icon");
@@ -100,65 +100,75 @@ const mapLocationStatus =
 
 
 /* =========================================================
-   카드 하단 PNG 아이콘 파일
+   카드 하단 SVG 아이콘 파일
 ========================================================= */
 
 const metricIcons = {
 
   /* 폭염 */
   heatwave: {
+
     metricOne:
-      "./icon_feels_temp.png",
+      "./icon_feels_temp.svg",
 
     metricTwo:
-      "./icon_tropical_night.png"
+      "./icon_tropical_night.svg"
+
   },
 
 
   /* 열대야 */
   tropical: {
+
     metricOne:
-      "./icon_night_temp.png",
+      "./icon_night_temp.svg",
 
     metricTwo:
-      "./icon_sleep.png"
+      "./icon_sleep.svg"
+
   },
 
 
   /* 침수 */
   flood: {
+
     metricOne:
-      "./icon_flood.png",
+      "./icon_flood.svg",
 
     metricTwo:
-      "./icon_heavy_rain.png"
+      "./icon_heavy_rain.svg"
+
   },
 
 
   /* 산불 */
   wildfire: {
+
     metricOne:
-      "./icon_dryness.png",
+      "./icon_dryness.svg",
 
     metricTwo:
-      "./icon_dry_wind.png"
+      "./icon_dry_wind.svg"
+
   },
 
 
   /* 대기질 */
   air: {
+
     metricOne:
-      "./icon_pm25.png",
+      "./icon_pm25.svg",
 
     metricTwo:
-      "./icon_ozone.png"
+      "./icon_ozone.svg"
+
   }
 
 };
 
 
 const warningIcon =
-  "./icon_warning_area.png";
+  "./icon_warning_area.svg";
 
 
 /* =========================================================
@@ -363,27 +373,34 @@ const yearProfiles = {
   current: {
     label:
       "현재",
+
     factor:
       0
   },
 
+
   2030: {
     label:
       "2030년",
+
     factor:
       1
   },
 
+
   2050: {
     label:
       "2050년",
+
     factor:
       2
   },
 
+
   2090: {
     label:
       "2090년",
+
     factor:
       3
   }
@@ -1443,7 +1460,7 @@ function updateChart() {
 
 
 /* =========================================================
-   PNG 아이콘 업데이트
+   SVG 아이콘 업데이트
 ========================================================= */
 
 function updateMetricIcons() {
@@ -1665,7 +1682,7 @@ function updateClimateInterface() {
     data.warning;
 
 
-  /* PNG 아이콘 교체 */
+  /* SVG 아이콘 교체 */
 
   updateMetricIcons();
 
@@ -1783,9 +1800,8 @@ climateOptions.forEach(
       () => {
 
         /*
-          사용자가 직접 선택한 이후에는
-          GPS 환경에 따라 자동으로 다른 위험으로
-          바뀌지 않게 함
+          사용자가 직접 위험 종류를 선택하면
+          GPS 환경에 따른 자동선택을 중단한다.
         */
 
         autoRiskMode =
@@ -2490,8 +2506,7 @@ async function updateReverseGeocode(
 
 
   /*
-    Nominatim을 너무 자주 호출하지 않도록
-    최소 5초 간격
+    Nominatim 요청 최소 5초 간격
   */
 
   if (
@@ -2506,8 +2521,7 @@ async function updateReverseGeocode(
 
 
   /*
-    약 100m 이상 이동했을 때만
-    위치명을 다시 검색
+    약 100m 이상 이동 시 장소 재검색
   */
 
   if (
@@ -2600,8 +2614,8 @@ async function updateReverseGeocode(
 
 
   /*
-    아직 사용자가 위험 종류를 직접 선택하지 않았다면
-    위치 환경에 따라 기본 위험을 자동 선택
+    사용자가 직접 위험을 선택하기 전에는
+    현재 장소 환경에 따라 대표 위험 자동 선택
   */
 
   if (
@@ -2628,11 +2642,6 @@ async function updateReverseGeocode(
 
   }
 
-
-  /*
-    장소명과 위험도,
-    카드 아이콘을 함께 갱신
-  */
 
   updateClimateInterface();
 
