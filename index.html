@@ -54,7 +54,7 @@
     >
 
       <!-- =================================================
-           카메라 배경
+           카메라
       ================================================== -->
       <div class="background-layer">
 
@@ -138,7 +138,6 @@
           aria-label="기후 시뮬레이션 메뉴"
         >
 
-
           <!-- 기후 시뮬레이션 -->
           <div class="menu-group">
 
@@ -149,9 +148,7 @@
               aria-controls="climate-menu"
             >
 
-              <span>
-                기후 시뮬레이션
-              </span>
+              <span>기후 시뮬레이션</span>
 
               <span
                 class="chevron"
@@ -170,7 +167,6 @@
               <div class="submenu-divider"></div>
 
 
-              <!-- 폭염 -->
               <button
                 class="submenu-item climate-option active"
                 type="button"
@@ -188,7 +184,6 @@
               </button>
 
 
-              <!-- 침수 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
@@ -206,7 +201,6 @@
               </button>
 
 
-              <!-- 열대야 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
@@ -224,7 +218,6 @@
               </button>
 
 
-              <!-- 산불 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
@@ -242,7 +235,6 @@
               </button>
 
 
-              <!-- 대기질 -->
               <button
                 class="submenu-item climate-option"
                 type="button"
@@ -274,9 +266,7 @@
               aria-controls="response-menu"
             >
 
-              <span>
-                대응 요소 배치
-              </span>
+              <span>대응 요소 배치</span>
 
               <span
                 class="chevron"
@@ -373,7 +363,6 @@
               <span
                 class="map-location-status"
                 id="map-location-status"
-                aria-live="polite"
               >
                 GPS 연결 중...
               </span>
@@ -406,14 +395,13 @@
           </header>
 
 
-          <!-- 대표 위험 -->
           <div class="risk-summary">
 
             <p
               class="risk-name"
               id="risk-name"
             >
-              폭염
+              폭염 · 보통
             </p>
 
 
@@ -446,8 +434,11 @@
           </p>
 
 
-          <!-- 그래프 -->
-          <div class="chart-section">
+          <!-- 일반 위험 그래프 -->
+          <div
+            class="chart-section"
+            id="general-chart-section"
+          >
 
             <h2>
               지역 기후위험 변화 추이
@@ -457,8 +448,6 @@
             <svg
               class="chart"
               viewBox="0 0 336 168"
-              role="img"
-              aria-label="지역 기후위험 변화 추이"
             >
 
               <defs>
@@ -508,7 +497,7 @@
                   />
 
                   <stop
-                    offset=".50"
+                    offset=".5"
                     stop-color="#ef6d5f"
                     stop-opacity=".82"
                   />
@@ -524,29 +513,16 @@
               </defs>
 
 
-              <!-- Y축 -->
               <g class="axis-label risk-axis-label">
 
-                <text x="0" y="28">
-                  매우 높음
-                </text>
-
-                <text x="0" y="60">
-                  높음
-                </text>
-
-                <text x="0" y="92">
-                  보통
-                </text>
-
-                <text x="0" y="124">
-                  낮음
-                </text>
+                <text x="0" y="28">매우 높음</text>
+                <text x="0" y="60">높음</text>
+                <text x="0" y="92">보통</text>
+                <text x="0" y="124">낮음</text>
 
               </g>
 
 
-              <!-- 축 -->
               <path
                 d="M70 14v108h234"
                 fill="none"
@@ -555,10 +531,8 @@
               />
 
 
-              <!-- 그래프 면 -->
               <path
                 id="chart-area"
-                class="chart-area"
                 d="
                   M70 112
                   L130 102
@@ -573,10 +547,8 @@
               />
 
 
-              <!-- 위험 강조 -->
               <path
                 id="chart-risk-area"
-                class="chart-risk-area"
                 d="
                   M70 112
                   L130 102
@@ -591,7 +563,6 @@
               />
 
 
-              <!-- 연도 포인트 -->
               <g class="chart-anchor-points">
 
                 <circle
@@ -625,7 +596,6 @@
               </g>
 
 
-              <!-- 선택 포인트 -->
               <circle
                 id="chart-selected-point"
                 class="chart-selected-point"
@@ -635,7 +605,6 @@
               />
 
 
-              <!-- 위험 라벨 -->
               <g
                 class="chart-value-label"
                 id="chart-value-label"
@@ -661,27 +630,15 @@
               </g>
 
 
-              <!-- X축 -->
               <g
                 class="axis-label"
                 text-anchor="middle"
               >
 
-                <text x="70" y="151">
-                  현재
-                </text>
-
-                <text x="130" y="151">
-                  2030
-                </text>
-
-                <text x="205" y="151">
-                  2050
-                </text>
-
-                <text x="275" y="151">
-                  2090
-                </text>
+                <text x="70" y="151">현재</text>
+                <text x="130" y="151">2030</text>
+                <text x="205" y="151">2050</text>
+                <text x="275" y="151">2090</text>
 
               </g>
 
@@ -690,11 +647,80 @@
           </div>
 
 
-          <!-- =================================================
-               하단 정보
-          ================================================== -->
-          <dl class="metrics">
+          <!-- 침수 전용 -->
+          <div
+            class="flood-card-section"
+            id="flood-card-section"
+            hidden
+          >
 
+            <h2 class="flood-section-title">
+              현재 지역의 기후 위험 변화
+            </h2>
+
+
+            <div class="flood-metric-grid">
+
+              <div
+                class="flood-metric-tile flood-impact-tile"
+                id="flood-impact-tile"
+              >
+
+                <span class="flood-metric-label">
+                  침수 영향
+                </span>
+
+                <strong
+                  id="flood-impact-value"
+                  class="flood-metric-value"
+                >
+                  없음
+                </strong>
+
+              </div>
+
+
+              <div class="flood-metric-tile">
+
+                <span class="flood-metric-label">
+                  평균 수온
+                </span>
+
+                <strong
+                  id="flood-water-temp"
+                  class="flood-metric-value"
+                >
+                  11.7°C
+                </strong>
+
+              </div>
+
+
+              <div class="flood-warning-tile">
+
+                <span class="flood-metric-label">
+                  주의 지역
+                </span>
+
+                <strong
+                  id="flood-warning-area"
+                  class="flood-metric-value"
+                >
+                  해당 없음
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- 일반 카드 하단 -->
+          <dl
+            class="metrics"
+            id="general-metrics"
+          >
 
             <div class="metric">
 
@@ -703,7 +729,6 @@
                 class="metric-icon"
                 src="./icon_feels_temp.svg"
                 alt=""
-                aria-hidden="true"
               >
 
               <dt id="metric-one-label">
@@ -724,7 +749,6 @@
                 class="metric-icon"
                 src="./icon_tropical_night.svg"
                 alt=""
-                aria-hidden="true"
               >
 
               <dt id="metric-two-label">
@@ -745,7 +769,6 @@
                 class="metric-icon"
                 src="./icon_warning_area.svg"
                 alt=""
-                aria-hidden="true"
               >
 
               <dt>
@@ -765,9 +788,7 @@
       </div>
 
 
-      <!-- =================================================
-           위험 경고 팝업
-      ================================================== -->
+      <!-- 위험 경고 팝업 -->
       <div
         id="danger-alert"
         class="danger-alert"
@@ -785,19 +806,14 @@
             alt=""
           >
 
-
-          <h2>
-            ATTENTION!
-          </h2>
+          <h2>ATTENTION!</h2>
 
 
           <p
             id="danger-alert-message"
             class="danger-alert-message"
           >
-            2090년, 위험 단계가 크게 상승합니다.<br>
-            이후 화면에서는 현재 공간 위에 예상 기후위험과<br>
-            위험 정보가 강조되어 표시됩니다.
+            2090년, 위험 단계가 크게 상승합니다.
           </p>
 
 
