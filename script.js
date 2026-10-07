@@ -151,7 +151,7 @@ const mapLocationStatus =
   );
 
 
-/* 경고 팝업 */
+/* 위험 팝업 */
 
 const dangerAlert =
   document.getElementById(
@@ -232,13 +232,22 @@ const warningIcon =
 
 
 /* =========================================================
-   화면 비율
+   화면 Fill / Cover
 ========================================================= */
 
 function fitScene() {
 
+  /*
+    기존에는 Math.min을 사용해서
+    전체 디자인이 화면 안에 모두 들어오도록 했지만,
+
+    이제는 Math.max를 사용해서
+    어떤 화면 비율에서도 빈 공간 없이
+    화면 전체를 채우도록 한다.
+  */
+
   const scale =
-    Math.min(
+    Math.max(
       window.innerWidth / 1366,
       window.innerHeight / 1024
     );
@@ -258,6 +267,19 @@ fitScene();
 window.addEventListener(
   "resize",
   fitScene
+);
+
+
+window.addEventListener(
+  "orientationchange",
+  () => {
+
+    setTimeout(
+      fitScene,
+      120
+    );
+
+  }
 );
 
 
@@ -393,7 +415,7 @@ let locationWatchId =
 
 
 /*
-  팝업을 이미 본 연도
+  이미 경고 팝업을 본 연도
 */
 
 const shownDangerAlerts =
@@ -1040,7 +1062,7 @@ function selectAutomaticRisk(
 
 
 /* =========================================================
-   기후 데이터
+   기후 데이터 생성
 ========================================================= */
 
 function getClimateData(
@@ -1232,12 +1254,6 @@ function levelToY(level) {
 
 function updateChart() {
 
-  const profile =
-    climateRiskProfiles[
-      selectedRisk
-    ];
-
-
   const points =
     chartYears.map(
       yearKey => {
@@ -1315,10 +1331,14 @@ function updateChart() {
         );
 
 
-      node.setAttribute(
-        "cy",
-        point.y
-      );
+      if (node) {
+
+        node.setAttribute(
+          "cy",
+          point.y
+        );
+
+      }
 
     }
   );
@@ -1330,6 +1350,12 @@ function updateChart() {
         point.year ===
         currentYear
     );
+
+
+  if (!selected) {
+
+    return;
+  }
 
 
   selectedPoint.setAttribute(
@@ -1377,7 +1403,7 @@ function updateChart() {
 
 
 /* =========================================================
-   아이콘 업데이트
+   아이콘
 ========================================================= */
 
 function updateMetricIcons() {
@@ -1409,7 +1435,7 @@ function updateMetricIcons() {
 
 
 /* =========================================================
-   정보 카드 업데이트
+   정보 카드
 ========================================================= */
 
 function updateClimateInterface() {
@@ -1551,7 +1577,7 @@ function updateClimateInterface() {
 
 
 /* =========================================================
-   위험 팝업
+   위험 경고 팝업
 ========================================================= */
 
 function showDangerAlert(
@@ -1670,20 +1696,11 @@ function changeYear(key) {
     );
 
 
-  /*
-    위험 수준 4 이상
-  */
-
   if (
     climateData &&
     climateData.level >=
     DANGER_LEVEL
   ) {
-
-    /*
-      아직 해당 연도 경고를 보지 않았다면
-      팝업부터 표시
-    */
 
     if (
       !shownDangerAlerts.has(
@@ -1710,11 +1727,6 @@ function changeYear(key) {
 
     else {
 
-      /*
-        이미 팝업을 본 연도라면
-        즉시 위험 모드
-      */
-
       document.body.classList.add(
         "danger-mode"
       );
@@ -1725,11 +1737,6 @@ function changeYear(key) {
 
   else {
 
-    /*
-      위험도가 낮아지면
-      danger mode 해제
-    */
-
     document.body.classList.remove(
       "danger-mode"
     );
@@ -1737,6 +1744,12 @@ function changeYear(key) {
 
     dangerAlert.classList.remove(
       "show"
+    );
+
+
+    dangerAlert.setAttribute(
+      "aria-hidden",
+      "true"
     );
 
   }
@@ -1797,11 +1810,6 @@ climateOptions.forEach(
         );
 
 
-        /*
-          위험 종류를 바꿀 때도
-          현재 연도 위험도를 다시 판단
-        */
-
         updateClimateInterface();
 
 
@@ -1813,6 +1821,7 @@ climateOptions.forEach(
 
 
         if (
+          climateData &&
           climateData.level >=
           DANGER_LEVEL
         ) {
@@ -1839,7 +1848,7 @@ climateOptions.forEach(
 
 
 /* =========================================================
-   Leaflet 지도
+   Leaflet
 ========================================================= */
 
 let locationMap =
@@ -1908,7 +1917,8 @@ function initializeLocationMap() {
 
     }
 
-  ).addTo(
+  )
+  .addTo(
     locationMap
   );
 
@@ -1945,6 +1955,16 @@ function initializeLocationMap() {
       locationMap
     );
 
+
+  setTimeout(
+    () => {
+
+      locationMap.invalidateSize();
+
+    },
+    120
+  );
+
 }
 
 
@@ -1957,6 +1977,15 @@ function updateMapPosition(
   longitude,
   accuracy
 ) {
+
+  if (
+    !locationMap ||
+    !currentLocationMarker
+  ) {
+
+    return;
+  }
+
 
   const coordinates =
     [
@@ -2281,6 +2310,7 @@ function handleLocationError(
 ) {
 
   console.warn(
+    "위치 확인 실패:",
     error
   );
 
@@ -2304,8 +2334,24 @@ function startLocationTracking() {
     !navigator.geolocation
   ) {
 
+    mapLocationName.textContent =
+      "위치 기능 미지원";
+
+
+    mapLocationStatus.textContent =
+      "GPS를 사용할 수 없습니다";
+
+
     return;
   }
+
+
+  mapLocationName.textContent =
+    "위치 확인 중";
+
+
+  mapLocationStatus.textContent =
+    "GPS 연결 중...";
 
 
   locationWatchId =
@@ -2353,6 +2399,12 @@ function closeMenu(
         "aria-controls"
       )
     );
+
+
+  if (!panel) {
+
+    return;
+  }
 
 
   button.setAttribute(
@@ -2407,6 +2459,12 @@ menuButtons.forEach(
               "aria-controls"
             )
           );
+
+
+        if (!panel) {
+
+          return;
+        }
 
 
         button.setAttribute(
