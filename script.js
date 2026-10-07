@@ -76,7 +76,25 @@ const heatwaveDangerArea =
   document.getElementById(
     "heatwave-danger-area"
   );
+  const heatwaveBaseStops = [
 
+    document.getElementById(
+      "heatwave-base-stop-1"
+    ),
+  
+    document.getElementById(
+      "heatwave-base-stop-2"
+    ),
+  
+    document.getElementById(
+      "heatwave-base-stop-3"
+    ),
+  
+    document.getElementById(
+      "heatwave-base-stop-4"
+    )
+  
+  ];
 const heatwaveDangerStops = [
 
   document.getElementById(
@@ -947,126 +965,212 @@ function levelText(level) {
 
 function setHeatwaveDangerGradient(yearKey) {
 
-  /*
-   * 그래프 색상만 변경
-   *
-   * 현재 / 2030
-   * 기존 주황 계열 유지
-   *
-   * 2050
-   * 선택 지점 주변부터 붉은색이 강하게 나타남
-   *
-   * 2090
-   * 미래 영역 전체가 강한 붉은색으로 표현됨
-   */
+  /* =====================================================
+     현재
+     선택점이 있는 왼쪽부터 황토색.
+     오른쪽으로 갈수록 청록색.
+
+     목표:
+     황토 → 베이지 → 청록
+  ===================================================== */
 
   if (yearKey === "current") {
 
-    heatwaveDangerStops[0].setAttribute(
+    heatwaveBaseStops[0].setAttribute(
       "offset",
       "0%"
     );
 
-    heatwaveDangerStops[0].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[0].setAttribute(
+      "stop-color",
+      "#D89A43"
     );
 
 
-    heatwaveDangerStops[1].setAttribute(
+    heatwaveBaseStops[1].setAttribute(
       "offset",
-      "10%"
+      "25%"
     );
 
-    heatwaveDangerStops[1].setAttribute(
-      "stop-opacity",
-      ".08"
+    heatwaveBaseStops[1].setAttribute(
+      "stop-color",
+      "#C7AA69"
     );
 
 
-    heatwaveDangerStops[2].setAttribute(
+    heatwaveBaseStops[2].setAttribute(
       "offset",
-      "26%"
+      "55%"
     );
 
-    heatwaveDangerStops[2].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[2].setAttribute(
+      "stop-color",
+      "#8AAFB5"
     );
 
 
-    heatwaveDangerStops[3].setAttribute(
+    heatwaveBaseStops[3].setAttribute(
       "offset",
       "100%"
     );
 
-    heatwaveDangerStops[3].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[3].setAttribute(
+      "stop-color",
+      "#58A7C3"
+    );
+
+
+    heatwaveDangerStops.forEach(
+      stop => {
+
+        stop.setAttribute(
+          "stop-opacity",
+          "0"
+        );
+
+      }
     );
 
   }
 
+
+  /* =====================================================
+     2030
+     황토색 영역이 두 번째 선택점 쪽으로 이동.
+
+     목표:
+     앞쪽도 황토계열 유지
+     → 선택점 부근이 가장 황토색
+     → 뒤쪽은 청록색
+  ===================================================== */
 
   else if (yearKey === "2030") {
 
-    heatwaveDangerStops[0].setAttribute(
+    heatwaveBaseStops[0].setAttribute(
       "offset",
-      "8%"
+      "0%"
     );
 
-    heatwaveDangerStops[0].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[0].setAttribute(
+      "stop-color",
+      "#B99D65"
     );
 
 
-    heatwaveDangerStops[1].setAttribute(
+    heatwaveBaseStops[1].setAttribute(
       "offset",
-      "28%"
+      "30%"
     );
 
-    heatwaveDangerStops[1].setAttribute(
-      "stop-opacity",
-      ".20"
+    heatwaveBaseStops[1].setAttribute(
+      "stop-color",
+      "#D79742"
     );
 
 
-    heatwaveDangerStops[2].setAttribute(
+    heatwaveBaseStops[2].setAttribute(
       "offset",
-      "42%"
+      "57%"
     );
 
-    heatwaveDangerStops[2].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[2].setAttribute(
+      "stop-color",
+      "#91AFAF"
     );
 
 
-    heatwaveDangerStops[3].setAttribute(
+    heatwaveBaseStops[3].setAttribute(
       "offset",
       "100%"
     );
 
-    heatwaveDangerStops[3].setAttribute(
-      "stop-opacity",
-      "0"
+    heatwaveBaseStops[3].setAttribute(
+      "stop-color",
+      "#58A7C3"
+    );
+
+
+    heatwaveDangerStops.forEach(
+      stop => {
+
+        stop.setAttribute(
+          "stop-opacity",
+          "0"
+        );
+
+      }
     );
 
   }
 
+
+  /* =====================================================
+     2050
+     ★ 황토색 완전히 제거
+
+     선택된 2050 지점 주변만 붉게.
+     왼쪽과 오른쪽은 회청색.
+
+     목표:
+     회청색 → 빨강 → 청록
+  ===================================================== */
 
   else if (yearKey === "2050") {
 
-    /*
-     * 2050
-     * 선택된 2050 지점 주변부터
-     * 붉은 위험 영역이 나타나도록 변경
-     */
+    heatwaveBaseStops[0].setAttribute(
+      "offset",
+      "0%"
+    );
+
+    heatwaveBaseStops[0].setAttribute(
+      "stop-color",
+      "#739EAD"
+    );
+
+
+    heatwaveBaseStops[1].setAttribute(
+      "offset",
+      "38%"
+    );
+
+    heatwaveBaseStops[1].setAttribute(
+      "stop-color",
+      "#8D9EA4"
+    );
+
+
+    heatwaveBaseStops[2].setAttribute(
+      "offset",
+      "70%"
+    );
+
+    heatwaveBaseStops[2].setAttribute(
+      "stop-color",
+      "#829FAA"
+    );
+
+
+    heatwaveBaseStops[3].setAttribute(
+      "offset",
+      "100%"
+    );
+
+    heatwaveBaseStops[3].setAttribute(
+      "stop-color",
+      "#58A7C3"
+    );
+
+
+    /* 2050 선택점 중심 빨간 영역 */
 
     heatwaveDangerStops[0].setAttribute(
       "offset",
-      "40%"
+      "35%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-color",
+      "#E85345"
     );
 
     heatwaveDangerStops[0].setAttribute(
@@ -1077,29 +1181,44 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops[1].setAttribute(
       "offset",
-      "52%"
+      "50%"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
+      "stop-color",
+      "#F0694B"
     );
 
     heatwaveDangerStops[1].setAttribute(
       "stop-opacity",
-      ".18"
+      ".42"
     );
 
 
     heatwaveDangerStops[2].setAttribute(
       "offset",
-      "64%"
+      "58%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-color",
+      "#E7443E"
     );
 
     heatwaveDangerStops[2].setAttribute(
       "stop-opacity",
-      ".82"
+      ".95"
     );
 
 
     heatwaveDangerStops[3].setAttribute(
       "offset",
-      "82%"
+      "76%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-color",
+      "#E7443E"
     );
 
     heatwaveDangerStops[3].setAttribute(
@@ -1110,19 +1229,76 @@ function setHeatwaveDangerGradient(yearKey) {
   }
 
 
+  /* =====================================================
+     2090
+     ★ 황토색 완전히 제거
+
+     앞쪽은 회청색.
+     선택된 2090 지점으로 갈수록
+     붉은색이 계속 강해짐.
+
+     목표:
+     회청색 → 회보라 → 빨강 → 진한 빨강
+  ===================================================== */
+
   else if (yearKey === "2090") {
 
-    /*
-     * 2090
-     * 오른쪽 미래 영역으로 갈수록
-     * 강한 붉은색이 나타나도록 변경
-     */
+    heatwaveBaseStops[0].setAttribute(
+      "offset",
+      "0%"
+    );
 
-    heatwaveDangerStops[0].setAttribute(
+    heatwaveBaseStops[0].setAttribute(
+      "stop-color",
+      "#739EAD"
+    );
+
+
+    heatwaveBaseStops[1].setAttribute(
       "offset",
       "36%"
     );
 
+    heatwaveBaseStops[1].setAttribute(
+      "stop-color",
+      "#89989E"
+    );
+
+
+    heatwaveBaseStops[2].setAttribute(
+      "offset",
+      "68%"
+    );
+
+    heatwaveBaseStops[2].setAttribute(
+      "stop-color",
+      "#8B7A82"
+    );
+
+
+    heatwaveBaseStops[3].setAttribute(
+      "offset",
+      "100%"
+    );
+
+    heatwaveBaseStops[3].setAttribute(
+      "stop-color",
+      "#98565A"
+    );
+
+
+    /* 오른쪽으로 갈수록 강해지는 빨강 */
+
+    heatwaveDangerStops[0].setAttribute(
+      "offset",
+      "30%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-color",
+      "#E85449"
+    );
+
     heatwaveDangerStops[0].setAttribute(
       "stop-opacity",
       "0"
@@ -1135,25 +1311,40 @@ function setHeatwaveDangerGradient(yearKey) {
     );
 
     heatwaveDangerStops[1].setAttribute(
+      "stop-color",
+      "#EF604D"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
       "stop-opacity",
-      ".35"
+      ".28"
     );
 
 
     heatwaveDangerStops[2].setAttribute(
       "offset",
-      "68%"
+      "73%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-color",
+      "#EA443E"
     );
 
     heatwaveDangerStops[2].setAttribute(
       "stop-opacity",
-      ".85"
+      ".80"
     );
 
 
     heatwaveDangerStops[3].setAttribute(
       "offset",
       "100%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-color",
+      "#D93439"
     );
 
     heatwaveDangerStops[3].setAttribute(
