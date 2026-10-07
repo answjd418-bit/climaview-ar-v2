@@ -2,7 +2,7 @@
 
 
 /* =========================================================
-   기본 DOM
+   DOM
 ========================================================= */
 
 const scene =
@@ -12,156 +12,216 @@ const cameraFeed =
   document.getElementById("camera-feed");
 
 const cameraStartButton =
-  document.getElementById("camera-start-button");
+  document.getElementById(
+    "camera-start-button"
+  );
 
 const yearButtons =
-  document.querySelectorAll(".year[data-year]");
+  document.querySelectorAll(
+    ".year[data-year]"
+  );
 
 const climateOptions =
-  document.querySelectorAll(".climate-option");
+  document.querySelectorAll(
+    ".climate-option"
+  );
+
 
 const infoCard =
-  document.getElementById("info-card");
+  document.getElementById(
+    "info-card"
+  );
 
 const infoTitle =
-  document.getElementById("info-title");
+  document.getElementById(
+    "info-title"
+  );
 
 const riskName =
-  document.getElementById("risk-name");
+  document.getElementById(
+    "risk-name"
+  );
 
 const riskValue =
-  document.getElementById("risk-value");
+  document.getElementById(
+    "risk-value"
+  );
 
 const riskUnit =
-  document.getElementById("risk-unit");
+  document.getElementById(
+    "risk-unit"
+  );
 
 const riskCaption =
-  document.getElementById("risk-caption");
+  document.getElementById(
+    "risk-caption"
+  );
+
 
 const metricOneLabel =
-  document.getElementById("metric-one-label");
+  document.getElementById(
+    "metric-one-label"
+  );
 
 const metricOneValue =
-  document.getElementById("metric-one-value");
+  document.getElementById(
+    "metric-one-value"
+  );
 
 const metricTwoLabel =
-  document.getElementById("metric-two-label");
+  document.getElementById(
+    "metric-two-label"
+  );
 
 const metricTwoValue =
-  document.getElementById("metric-two-value");
+  document.getElementById(
+    "metric-two-value"
+  );
 
 const warningArea =
-  document.getElementById("warning-area");
+  document.getElementById(
+    "warning-area"
+  );
 
-
-/* 새 SVG 아이콘 */
 
 const metricOneIcon =
-  document.getElementById("metric-one-icon");
+  document.getElementById(
+    "metric-one-icon"
+  );
 
 const metricTwoIcon =
-  document.getElementById("metric-two-icon");
+  document.getElementById(
+    "metric-two-icon"
+  );
 
 const warningAreaIcon =
-  document.getElementById("warning-area-icon");
+  document.getElementById(
+    "warning-area-icon"
+  );
 
 
 /* 그래프 */
 
 const selectedPoint =
-  document.getElementById("chart-selected-point");
+  document.getElementById(
+    "chart-selected-point"
+  );
 
 const chartValueLabel =
-  document.getElementById("chart-value-label");
+  document.getElementById(
+    "chart-value-label"
+  );
 
 const chartValueText =
-  document.getElementById("chart-value-text");
+  document.getElementById(
+    "chart-value-text"
+  );
 
 const riskGradient =
-  document.getElementById("risk-gradient");
+  document.getElementById(
+    "risk-gradient"
+  );
 
 const chartArea =
-  document.getElementById("chart-area");
+  document.getElementById(
+    "chart-area"
+  );
 
 const chartRiskArea =
-  document.getElementById("chart-risk-area");
+  document.getElementById(
+    "chart-risk-area"
+  );
 
 
 /* 지도 */
 
 const mapCard =
-  document.getElementById("map-card");
+  document.getElementById(
+    "map-card"
+  );
 
 const mapLocationName =
-  document.getElementById("map-location-name");
+  document.getElementById(
+    "map-location-name"
+  );
 
 const mapLocationStatus =
-  document.getElementById("map-location-status");
+  document.getElementById(
+    "map-location-status"
+  );
+
+
+/* 경고 팝업 */
+
+const dangerAlert =
+  document.getElementById(
+    "danger-alert"
+  );
+
+const dangerAlertMessage =
+  document.getElementById(
+    "danger-alert-message"
+  );
+
+const dangerAlertConfirm =
+  document.getElementById(
+    "danger-alert-confirm"
+  );
+
+const dangerAlertButtonText =
+  document.getElementById(
+    "danger-alert-button-text"
+  );
 
 
 /* =========================================================
-   카드 하단 SVG 아이콘 파일
+   SVG 아이콘
 ========================================================= */
 
 const metricIcons = {
 
-  /* 폭염 */
   heatwave: {
-
     metricOne:
       "./icon_feels_temp.svg",
 
     metricTwo:
       "./icon_tropical_night.svg"
-
   },
 
 
-  /* 열대야 */
   tropical: {
-
     metricOne:
       "./icon_night_temp.svg",
 
     metricTwo:
       "./icon_sleep.svg"
-
   },
 
 
-  /* 침수 */
   flood: {
-
     metricOne:
       "./icon_flood.svg",
 
     metricTwo:
       "./icon_heavy_rain.svg"
-
   },
 
 
-  /* 산불 */
   wildfire: {
-
     metricOne:
       "./icon_dryness.svg",
 
     metricTwo:
       "./icon_dry_wind.svg"
-
   },
 
 
-  /* 대기질 */
   air: {
-
     metricOne:
       "./icon_pm25.svg",
 
     metricTwo:
       "./icon_ozone.svg"
-
   }
 
 };
@@ -188,28 +248,6 @@ function fitScene() {
     "--scene-scale",
     scale
   );
-
-
-  scene.style.position =
-    "absolute";
-
-
-  scene.style.left =
-    `${
-      (
-        window.innerWidth
-        - 1366
-      ) / 2
-    }px`;
-
-
-  scene.style.top =
-    `${
-      (
-        window.innerHeight
-        - 1024
-      ) / 2
-    }px`;
 
 }
 
@@ -240,10 +278,6 @@ async function startCamera() {
     !navigator.mediaDevices ||
     !navigator.mediaDevices.getUserMedia
   ) {
-
-    console.warn(
-      "카메라 접근을 사용할 수 없습니다."
-    );
 
     cameraStartButton.hidden =
       true;
@@ -310,7 +344,7 @@ async function startCamera() {
   catch (error) {
 
     console.warn(
-      "카메라 자동 시작 실패:",
+      "카메라 시작 실패:",
       error
     );
 
@@ -354,55 +388,50 @@ let currentAddress =
 let currentEnvironment =
   "urban";
 
-let currentLatitude =
-  null;
-
-let currentLongitude =
-  null;
-
 let locationWatchId =
   null;
 
 
+/*
+  팝업을 이미 본 연도
+*/
+
+const shownDangerAlerts =
+  new Set();
+
+
+/*
+  위험 경고 기준
+*/
+
+const DANGER_LEVEL =
+  4;
+
+
 /* =========================================================
-   연도 설정
+   연도
 ========================================================= */
 
 const yearProfiles = {
 
   current: {
     label:
-      "현재",
-
-    factor:
-      0
+      "현재"
   },
-
 
   2030: {
     label:
-      "2030년",
-
-    factor:
-      1
+      "2030년"
   },
-
 
   2050: {
     label:
-      "2050년",
-
-    factor:
-      2
+      "2050년"
   },
-
 
   2090: {
     label:
-      "2090년",
-
-    factor:
-      3
+      "2090년"
   }
 
 };
@@ -410,15 +439,10 @@ const yearProfiles = {
 
 /* =========================================================
    기후 위험 데이터
-   MVP / 시나리오 기반 추정값
 ========================================================= */
 
 const climateRiskProfiles = {
 
-
-  /* ---------------------------------------------------------
-     폭염
-  --------------------------------------------------------- */
 
   heatwave: {
 
@@ -491,10 +515,6 @@ const climateRiskProfiles = {
   },
 
 
-  /* ---------------------------------------------------------
-     열대야
-  --------------------------------------------------------- */
-
   tropical: {
 
     name:
@@ -565,10 +585,6 @@ const climateRiskProfiles = {
 
   },
 
-
-  /* ---------------------------------------------------------
-     침수
-  --------------------------------------------------------- */
 
   flood: {
 
@@ -641,10 +657,6 @@ const climateRiskProfiles = {
   },
 
 
-  /* ---------------------------------------------------------
-     산불
-  --------------------------------------------------------- */
-
   wildfire: {
 
     name:
@@ -715,10 +727,6 @@ const climateRiskProfiles = {
 
   },
 
-
-  /* ---------------------------------------------------------
-     대기질
-  --------------------------------------------------------- */
 
   air: {
 
@@ -794,7 +802,7 @@ const climateRiskProfiles = {
 
 
 /* =========================================================
-   위험 등급
+   위험 단계
 ========================================================= */
 
 function levelText(level) {
@@ -829,7 +837,7 @@ function levelText(level) {
 
 
 /* =========================================================
-   환경별 수치 보정
+   환경 보정
 ========================================================= */
 
 function environmentOffset(
@@ -838,7 +846,6 @@ function environmentOffset(
 ) {
 
   const table = {
-
 
     heatwave: {
 
@@ -936,7 +943,7 @@ function environmentOffset(
 
 
 /* =========================================================
-   현재 장소 환경 판단
+   환경 탐지
 ========================================================= */
 
 function detectEnvironment(data) {
@@ -945,36 +952,26 @@ function detectEnvironment(data) {
     data?.address || {};
 
 
-  const category =
-    String(
-      data?.category || ""
-    ).toLowerCase();
-
-
-  const type =
-    String(
-      data?.type || ""
-    ).toLowerCase();
-
-
   const source =
     (
       JSON.stringify(address)
       +
-      category
+      String(
+        data?.category || ""
+      )
       +
-      type
-    ).toLowerCase();
+      String(
+        data?.type || ""
+      )
+    )
+    .toLowerCase();
 
-
-  /* 강 / 바다 / 수변 */
 
   if (
     source.includes("river") ||
     source.includes("water") ||
     source.includes("stream") ||
     source.includes("canal") ||
-    source.includes("beach") ||
     source.includes("하천") ||
     source.includes("강") ||
     source.includes("호수")
@@ -984,13 +981,10 @@ function detectEnvironment(data) {
   }
 
 
-  /* 산 / 산림 */
-
   if (
     source.includes("forest") ||
-    source.includes("wood") ||
     source.includes("mountain") ||
-    source.includes("peak") ||
+    source.includes("wood") ||
     source.includes("산림") ||
     source.includes("산")
   ) {
@@ -999,12 +993,9 @@ function detectEnvironment(data) {
   }
 
 
-  /* 공원 */
-
   if (
     source.includes("park") ||
     source.includes("garden") ||
-    source.includes("leisure") ||
     source.includes("공원")
   ) {
 
@@ -1018,10 +1009,12 @@ function detectEnvironment(data) {
 
 
 /* =========================================================
-   위치 환경 기반 대표 위험 자동 선택
+   환경 기반 자동 위험
 ========================================================= */
 
-function selectAutomaticRisk(environment) {
+function selectAutomaticRisk(
+  environment
+) {
 
   if (
     environment ===
@@ -1047,7 +1040,7 @@ function selectAutomaticRisk(environment) {
 
 
 /* =========================================================
-   기후 데이터 생성
+   기후 데이터
 ========================================================= */
 
 function getClimateData(
@@ -1090,9 +1083,7 @@ function getClimateData(
         1,
         Math.min(
           4,
-          Math.round(
-            value
-          )
+          Math.round(value)
         )
       );
 
@@ -1153,8 +1144,6 @@ function getClimateData(
 
   return {
 
-    riskKey,
-
     name:
       profile.name,
 
@@ -1190,7 +1179,7 @@ function getClimateData(
 
 
 /* =========================================================
-   그래프 좌표
+   그래프
 ========================================================= */
 
 const chartYears = [
@@ -1220,7 +1209,7 @@ const chartX = {
 
 function levelToY(level) {
 
-  const map = {
+  const values = {
 
     1:
       112,
@@ -1237,17 +1226,9 @@ function levelToY(level) {
   };
 
 
-  return (
-    map[level]
-    || 112
-  );
-
+  return values[level];
 }
 
-
-/* =========================================================
-   그래프 업데이트
-========================================================= */
 
 function updateChart() {
 
@@ -1257,51 +1238,14 @@ function updateChart() {
     ];
 
 
-  if (!profile) {
-
-    return;
-  }
-
-
   const points =
     chartYears.map(
       yearKey => {
 
-        let level =
-          profile.levels[
+        const data =
+          getClimateData(
+            selectedRisk,
             yearKey
-          ];
-
-
-        if (
-          currentEnvironment ===
-          "river" &&
-          selectedRisk ===
-          "flood"
-        ) {
-
-          level += 1;
-        }
-
-
-        if (
-          currentEnvironment ===
-          "forest" &&
-          selectedRisk ===
-          "wildfire"
-        ) {
-
-          level += 1;
-        }
-
-
-        level =
-          Math.max(
-            1,
-            Math.min(
-              4,
-              level
-            )
           );
 
 
@@ -1317,10 +1261,11 @@ function updateChart() {
 
           y:
             levelToY(
-              level
+              data.level
             ),
 
-          level
+          level:
+            data.level
 
         };
 
@@ -1337,7 +1282,7 @@ function updateChart() {
     points;
 
 
-  const areaPath =
+  const path =
     `
       M${p0.x} ${p0.y}
       L${p1.x} ${p1.y}
@@ -1351,54 +1296,32 @@ function updateChart() {
 
   chartArea.setAttribute(
     "d",
-    areaPath
+    path
   );
 
 
   chartRiskArea.setAttribute(
     "d",
-    areaPath
+    path
   );
 
 
-  document
-    .getElementById(
-      "chart-point-current"
-    )
-    .setAttribute(
-      "cy",
-      p0.y
-    );
+  points.forEach(
+    point => {
+
+      const node =
+        document.getElementById(
+          `chart-point-${point.year}`
+        );
 
 
-  document
-    .getElementById(
-      "chart-point-2030"
-    )
-    .setAttribute(
-      "cy",
-      p1.y
-    );
+      node.setAttribute(
+        "cy",
+        point.y
+      );
 
-
-  document
-    .getElementById(
-      "chart-point-2050"
-    )
-    .setAttribute(
-      "cy",
-      p2.y
-    );
-
-
-  document
-    .getElementById(
-      "chart-point-2090"
-    )
-    .setAttribute(
-      "cy",
-      p3.y
-    );
+    }
+  );
 
 
   const selected =
@@ -1407,12 +1330,6 @@ function updateChart() {
         point.year ===
         currentYear
     );
-
-
-  if (!selected) {
-
-    return;
-  }
 
 
   selectedPoint.setAttribute(
@@ -1460,57 +1377,39 @@ function updateChart() {
 
 
 /* =========================================================
-   SVG 아이콘 업데이트
+   아이콘 업데이트
 ========================================================= */
 
 function updateMetricIcons() {
 
-  const iconProfile =
+  const icons =
     metricIcons[
       selectedRisk
     ];
 
 
-  if (!iconProfile) {
+  if (!icons) {
 
     return;
   }
 
 
-  if (
-    metricOneIcon
-  ) {
-
-    metricOneIcon.src =
-      iconProfile.metricOne;
-
-  }
+  metricOneIcon.src =
+    icons.metricOne;
 
 
-  if (
-    metricTwoIcon
-  ) {
-
-    metricTwoIcon.src =
-      iconProfile.metricTwo;
-
-  }
+  metricTwoIcon.src =
+    icons.metricTwo;
 
 
-  if (
-    warningAreaIcon
-  ) {
-
-    warningAreaIcon.src =
-      warningIcon;
-
-  }
+  warningAreaIcon.src =
+    warningIcon;
 
 }
 
 
 /* =========================================================
-   오른쪽 카드 업데이트
+   정보 카드 업데이트
 ========================================================= */
 
 function updateClimateInterface() {
@@ -1534,29 +1433,13 @@ function updateClimateInterface() {
     ].label;
 
 
-  /* 카드 제목 */
-
   infoTitle.textContent =
-    `${
-      yearLabel
-    } ${
-      currentPlaceName
-    }의 기후위험`;
+    `${yearLabel} ${currentPlaceName}의 기후위험`;
 
-
-  /* 대표 위험 */
 
   riskName.textContent =
-    `${
-      data.name
-    } · ${
-      levelText(
-        data.level
-      )
-    }`;
+    `${data.name} · ${levelText(data.level)}`;
 
-
-  /* 대표 수치 */
 
   if (
     selectedRisk ===
@@ -1598,8 +1481,6 @@ function updateClimateInterface() {
     data.caption;
 
 
-  /* 첫 번째 하단 항목 */
-
   metricOneLabel.textContent =
     data.metricOneLabel;
 
@@ -1610,13 +1491,7 @@ function updateClimateInterface() {
   ) {
 
     metricOneValue.textContent =
-      `${
-        Number(
-          data.value
-        ).toFixed(
-          1
-        )
-      }°C`;
+      `${Number(data.value).toFixed(1)}°C`;
 
   }
 
@@ -1626,21 +1501,7 @@ function updateClimateInterface() {
   ) {
 
     metricOneValue.textContent =
-      `${
-        data.value
-      } ㎍/㎥`;
-
-  }
-
-  else if (
-    selectedRisk ===
-    "flood"
-  ) {
-
-    metricOneValue.textContent =
-      levelText(
-        data.level
-      );
+      `${data.value} ㎍/㎥`;
 
   }
 
@@ -1650,9 +1511,7 @@ function updateClimateInterface() {
   ) {
 
     metricOneValue.textContent =
-      `${
-        data.value
-      }일`;
+      `${data.value}일`;
 
   }
 
@@ -1666,8 +1525,6 @@ function updateClimateInterface() {
   }
 
 
-  /* 두 번째 하단 항목 */
-
   metricTwoLabel.textContent =
     data.metricTwoLabel;
 
@@ -1676,32 +1533,86 @@ function updateClimateInterface() {
     data.metricTwoValue;
 
 
-  /* 세 번째 하단 항목 */
-
   warningArea.textContent =
     data.warning;
 
 
-  /* SVG 아이콘 교체 */
-
   updateMetricIcons();
-
-
-  /* 접근성 */
-
-  infoCard.setAttribute(
-    "aria-label",
-    `${
-      currentPlaceName
-    } ${
-      data.name
-    } 기후위험`
-  );
-
 
   updateChart();
 
+
+  document.body.dataset.riskLevel =
+    String(
+      data.level
+    );
+
 }
+
+
+/* =========================================================
+   위험 팝업
+========================================================= */
+
+function showDangerAlert(
+  yearKey,
+  climateData
+) {
+
+  const yearLabel =
+    yearProfiles[
+      yearKey
+    ].label;
+
+
+  dangerAlertMessage.innerHTML =
+    `${yearLabel}, 위험 단계가 크게 상승합니다.<br>
+    이후 화면에서는 현재 공간 위에 예상 ${climateData.name}<br>
+    위험과 위험 정보가 강조되어 표시됩니다.`;
+
+
+  dangerAlertButtonText.textContent =
+    `${yearLabel} 시뮬레이션 보기`;
+
+
+  dangerAlert.classList.add(
+    "show"
+  );
+
+
+  dangerAlert.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+}
+
+
+/* =========================================================
+   팝업 확인
+========================================================= */
+
+dangerAlertConfirm.addEventListener(
+  "click",
+  () => {
+
+    dangerAlert.classList.remove(
+      "show"
+    );
+
+
+    dangerAlert.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    document.body.classList.add(
+      "danger-mode"
+    );
+
+  }
+);
 
 
 /* =========================================================
@@ -1711,9 +1622,7 @@ function updateClimateInterface() {
 function changeYear(key) {
 
   if (
-    !yearProfiles[
-      key
-    ]
+    !yearProfiles[key]
   ) {
 
     return;
@@ -1744,24 +1653,93 @@ function changeYear(key) {
 
       button.setAttribute(
         "aria-pressed",
-        String(
-          selected
-        )
+        String(selected)
       );
 
     }
   );
 
 
+  updateClimateInterface();
+
+
+  const climateData =
+    getClimateData(
+      selectedRisk,
+      currentYear
+    );
+
+
+  /*
+    위험 수준 4 이상
+  */
+
   if (
-    !cameraStarted
+    climateData &&
+    climateData.level >=
+    DANGER_LEVEL
   ) {
 
-    startCamera();
+    /*
+      아직 해당 연도 경고를 보지 않았다면
+      팝업부터 표시
+    */
+
+    if (
+      !shownDangerAlerts.has(
+        key
+      )
+    ) {
+
+      document.body.classList.remove(
+        "danger-mode"
+      );
+
+
+      showDangerAlert(
+        key,
+        climateData
+      );
+
+
+      shownDangerAlerts.add(
+        key
+      );
+
+    }
+
+    else {
+
+      /*
+        이미 팝업을 본 연도라면
+        즉시 위험 모드
+      */
+
+      document.body.classList.add(
+        "danger-mode"
+      );
+
+    }
+
   }
 
+  else {
 
-  updateClimateInterface();
+    /*
+      위험도가 낮아지면
+      danger mode 해제
+    */
+
+    document.body.classList.remove(
+      "danger-mode"
+    );
+
+
+    dangerAlert.classList.remove(
+      "show"
+    );
+
+  }
 
 }
 
@@ -1789,7 +1767,7 @@ yearButtons.forEach(
 
 
 /* =========================================================
-   기후 메뉴 선택
+   위험 종류 선택
 ========================================================= */
 
 climateOptions.forEach(
@@ -1798,11 +1776,6 @@ climateOptions.forEach(
     button.addEventListener(
       "click",
       () => {
-
-        /*
-          사용자가 직접 위험 종류를 선택하면
-          GPS 환경에 따른 자동선택을 중단한다.
-        */
 
         autoRiskMode =
           false;
@@ -1824,7 +1797,39 @@ climateOptions.forEach(
         );
 
 
+        /*
+          위험 종류를 바꿀 때도
+          현재 연도 위험도를 다시 판단
+        */
+
         updateClimateInterface();
+
+
+        const climateData =
+          getClimateData(
+            selectedRisk,
+            currentYear
+          );
+
+
+        if (
+          climateData.level >=
+          DANGER_LEVEL
+        ) {
+
+          document.body.classList.add(
+            "danger-mode"
+          );
+
+        }
+
+        else {
+
+          document.body.classList.remove(
+            "danger-mode"
+          );
+
+        }
 
       }
     );
@@ -1876,15 +1881,6 @@ function initializeLocationMap() {
           false,
 
         doubleClickZoom:
-          true,
-
-        boxZoom:
-          false,
-
-        keyboard:
-          false,
-
-        tap:
           true
 
       }
@@ -1903,9 +1899,6 @@ function initializeLocationMap() {
     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 
     {
-
-      minZoom:
-        3,
 
       maxZoom:
         19,
@@ -1939,17 +1932,11 @@ function initializeLocationMap() {
         weight:
           3,
 
-        opacity:
-          1,
-
         fillColor:
           "#a9d8e7",
 
         fillOpacity:
-          1,
-
-        className:
-          "current-location-marker"
+          1
 
       }
 
@@ -1958,21 +1945,11 @@ function initializeLocationMap() {
       locationMap
     );
 
-
-  setTimeout(
-    () => {
-
-      locationMap.invalidateSize();
-
-    },
-    100
-  );
-
 }
 
 
 /* =========================================================
-   지도 위치 갱신
+   지도 위치
 ========================================================= */
 
 function updateMapPosition(
@@ -1980,15 +1957,6 @@ function updateMapPosition(
   longitude,
   accuracy
 ) {
-
-  if (
-    !locationMap ||
-    !currentLocationMarker
-  ) {
-
-    return;
-  }
-
 
   const coordinates =
     [
@@ -1999,16 +1967,7 @@ function updateMapPosition(
 
   locationMap.setView(
     coordinates,
-    16,
-    {
-
-      animate:
-        true,
-
-      duration:
-        0.6
-
-    }
+    16
   );
 
 
@@ -2049,16 +2008,13 @@ function updateMapPosition(
             1,
 
           opacity:
-            0.4,
+            .4,
 
           fillColor:
             "#a9d8e7",
 
           fillOpacity:
-            0.10,
-
-          interactive:
-            false
+            .1
 
         }
       )
@@ -2072,202 +2028,72 @@ function updateMapPosition(
 
 
 /* =========================================================
-   역지오코딩 캐시
+   역지오코딩
 ========================================================= */
-
-const geocodeCache =
-  new Map();
-
-
-let lastGeocodeLatitude =
-  null;
-
-let lastGeocodeLongitude =
-  null;
 
 let lastGeocodeTime =
   0;
 
 
-/* =========================================================
-   두 좌표 사이 거리
-========================================================= */
-
-function calculateDistance(
-  lat1,
-  lon1,
-  lat2,
-  lon2
+async function reverseGeocode(
+  latitude,
+  longitude
 ) {
 
-  const earthRadius =
-    6371;
+  try {
+
+    const url =
+      "https://nominatim.openstreetmap.org/reverse"
+      +
+      "?format=jsonv2"
+      +
+      `&lat=${latitude}`
+      +
+      `&lon=${longitude}`
+      +
+      "&zoom=18"
+      +
+      "&addressdetails=1"
+      +
+      "&namedetails=1"
+      +
+      "&accept-language=ko";
 
 
-  const toRadians =
-    degrees =>
-      degrees *
-      Math.PI /
-      180;
-
-
-  const deltaLat =
-    toRadians(
-      lat2 - lat1
-    );
-
-
-  const deltaLon =
-    toRadians(
-      lon2 - lon1
-    );
-
-
-  const latitude1 =
-    toRadians(
-      lat1
-    );
-
-
-  const latitude2 =
-    toRadians(
-      lat2
-    );
-
-
-  const a =
-    Math.sin(
-      deltaLat / 2
-    ) ** 2
-    +
-    Math.cos(
-      latitude1
-    )
-    *
-    Math.cos(
-      latitude2
-    )
-    *
-    Math.sin(
-      deltaLon / 2
-    ) ** 2;
-
-
-  const c =
-    2
-    *
-    Math.atan2(
-      Math.sqrt(a),
-      Math.sqrt(1 - a)
-    );
-
-
-  return (
-    earthRadius *
-    c
-  );
-
-}
-
-
-/* =========================================================
-   주소 문자열 생성
-========================================================= */
-
-function buildReadableAddress(data) {
-
-  const address =
-    data.address || {};
-
-
-  const region =
-    address.state
-    ||
-    address.city
-    ||
-    address.province
-    ||
-    "";
-
-
-  const district =
-    address.city_district
-    ||
-    address.borough
-    ||
-    address.county
-    ||
-    "";
-
-
-  const neighbourhood =
-    address.suburb
-    ||
-    address.quarter
-    ||
-    address.neighbourhood
-    ||
-    address.town
-    ||
-    address.village
-    ||
-    "";
-
-
-  const road =
-    address.road
-    ||
-    address.pedestrian
-    ||
-    address.path
-    ||
-    "";
-
-
-  const pieces =
-    [
-      region,
-      district,
-      neighbourhood,
-      road
-    ]
-    .filter(
-      (
-        value,
-        index,
-        array
-      ) =>
-        value
-        &&
-        array.indexOf(
-          value
-        ) === index
-    );
-
-
-  if (
-    pieces.length > 0
-  ) {
-
-    return pieces
-      .slice(
-        0,
-        3
-      )
-      .join(
-        " "
+    const response =
+      await fetch(
+        url
       );
+
+
+    if (
+      !response.ok
+    ) {
+
+      return null;
+    }
+
+
+    return await response.json();
 
   }
 
+  catch (error) {
 
-  return "현재 위치";
+    console.warn(
+      error
+    );
+
+
+    return null;
+
+  }
 
 }
 
 
 /* =========================================================
-   장소명 선택
+   장소명
 ========================================================= */
 
 function getPlaceName(data) {
@@ -2282,9 +2108,7 @@ function getPlaceName(data) {
 
   return (
 
-    namedetails[
-      "name:ko"
-    ]
+    namedetails["name:ko"]
 
     ||
 
@@ -2296,15 +2120,7 @@ function getPlaceName(data) {
 
     ||
 
-    address.leisure
-
-    ||
-
     address.amenity
-
-    ||
-
-    address.attraction
 
     ||
 
@@ -2316,27 +2132,7 @@ function getPlaceName(data) {
 
     ||
 
-    address.quarter
-
-    ||
-
-    address.suburb
-
-    ||
-
     address.road
-
-    ||
-
-    address.village
-
-    ||
-
-    address.town
-
-    ||
-
-    address.city_district
 
     ||
 
@@ -2352,148 +2148,7 @@ function getPlaceName(data) {
 
 
 /* =========================================================
-   Nominatim 역지오코딩
-========================================================= */
-
-async function reverseGeocode(
-  latitude,
-  longitude
-) {
-
-  const cacheKey =
-    `${
-      latitude.toFixed(
-        3
-      )
-    },${
-      longitude.toFixed(
-        3
-      )
-    }`;
-
-
-  if (
-    geocodeCache.has(
-      cacheKey
-    )
-  ) {
-
-    return geocodeCache.get(
-      cacheKey
-    );
-
-  }
-
-
-  try {
-
-    const url =
-      "https://nominatim.openstreetmap.org/reverse"
-      +
-      "?format=jsonv2"
-      +
-      `&lat=${
-        encodeURIComponent(
-          latitude
-        )
-      }`
-      +
-      `&lon=${
-        encodeURIComponent(
-          longitude
-        )
-      }`
-      +
-      "&zoom=18"
-      +
-      "&addressdetails=1"
-      +
-      "&namedetails=1"
-      +
-      "&accept-language=ko";
-
-
-    const response =
-      await fetch(
-        url,
-        {
-
-          headers: {
-            Accept:
-              "application/json"
-          }
-
-        }
-      );
-
-
-    if (
-      !response.ok
-    ) {
-
-      throw new Error(
-        `Reverse geocoding error: ${
-          response.status
-        }`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    const result = {
-
-      placeName:
-        getPlaceName(
-          data
-        ),
-
-      address:
-        buildReadableAddress(
-          data
-        ),
-
-      environment:
-        detectEnvironment(
-          data
-        ),
-
-      raw:
-        data
-
-    };
-
-
-    geocodeCache.set(
-      cacheKey,
-      result
-    );
-
-
-    return result;
-
-  }
-
-  catch (error) {
-
-    console.warn(
-      "주소 조회 실패:",
-      error
-    );
-
-
-    return null;
-
-  }
-
-}
-
-
-/* =========================================================
-   장소명 / 기후위험 업데이트
+   위치 업데이트
 ========================================================= */
 
 async function updateReverseGeocode(
@@ -2505,14 +2160,9 @@ async function updateReverseGeocode(
     Date.now();
 
 
-  /*
-    Nominatim 요청 최소 5초 간격
-  */
-
   if (
     now -
-    lastGeocodeTime
-    <
+    lastGeocodeTime <
     5000
   ) {
 
@@ -2520,103 +2170,42 @@ async function updateReverseGeocode(
   }
 
 
-  /*
-    약 100m 이상 이동 시 장소 재검색
-  */
-
-  if (
-    lastGeocodeLatitude !== null &&
-    lastGeocodeLongitude !== null
-  ) {
-
-    const movedDistance =
-      calculateDistance(
-        lastGeocodeLatitude,
-        lastGeocodeLongitude,
-        latitude,
-        longitude
-      );
-
-
-    if (
-      movedDistance <
-      0.10
-    ) {
-
-      return;
-    }
-
-  }
-
-
   lastGeocodeTime =
     now;
 
 
-  lastGeocodeLatitude =
-    latitude;
-
-
-  lastGeocodeLongitude =
-    longitude;
-
-
-  mapLocationStatus.textContent =
-    "현재 위치 확인 중...";
-
-
-  const result =
+  const data =
     await reverseGeocode(
       latitude,
       longitude
     );
 
 
-  if (
-    !result
-  ) {
-
-    mapLocationStatus.textContent =
-      "GPS 위치 사용 중";
+  if (!data) {
 
     return;
   }
 
 
   currentPlaceName =
-    result.placeName;
-
-
-  currentAddress =
-    result.address;
+    getPlaceName(
+      data
+    );
 
 
   currentEnvironment =
-    result.environment;
+    detectEnvironment(
+      data
+    );
 
-
-  /* 지도 카드 */
 
   mapLocationName.textContent =
     currentPlaceName;
 
 
   mapLocationStatus.textContent =
-    currentAddress;
+    data.display_name || "";
 
-
-  mapCard.setAttribute(
-    "aria-label",
-    `${
-      currentPlaceName
-    } 현재 위치`
-  );
-
-
-  /*
-    사용자가 직접 위험을 선택하기 전에는
-    현재 장소 환경에 따라 대표 위험 자동 선택
-  */
 
   if (
     autoRiskMode
@@ -2649,7 +2238,7 @@ async function updateReverseGeocode(
 
 
 /* =========================================================
-   GPS 성공
+   GPS
 ========================================================= */
 
 function handleLocationSuccess(
@@ -2667,18 +2256,9 @@ function handleLocationSuccess(
   const accuracy =
     Math.max(
       position.coords.accuracy
-      ||
-      20,
+      || 20,
       5
     );
-
-
-  currentLatitude =
-    latitude;
-
-
-  currentLongitude =
-    longitude;
 
 
   updateMapPosition(
@@ -2696,79 +2276,24 @@ function handleLocationSuccess(
 }
 
 
-/* =========================================================
-   GPS 오류
-========================================================= */
-
 function handleLocationError(
   error
 ) {
 
   console.warn(
-    "ClimaView 위치 확인 실패:",
     error
   );
 
 
-  if (
-    error.code === 1
-  ) {
-
-    mapLocationName.textContent =
-      "위치 권한 필요";
+  mapLocationName.textContent =
+    "현재 위치";
 
 
-    mapLocationStatus.textContent =
-      "브라우저 위치 권한을 허용해주세요";
-
-  }
-
-  else if (
-    error.code === 2
-  ) {
-
-    mapLocationName.textContent =
-      "위치 확인 불가";
-
-
-    mapLocationStatus.textContent =
-      "현재 GPS 위치를 확인할 수 없습니다";
-
-  }
-
-  else if (
-    error.code === 3
-  ) {
-
-    mapLocationName.textContent =
-      "위치 확인 지연";
-
-
-    mapLocationStatus.textContent =
-      "GPS 응답을 기다리는 중입니다";
-
-  }
-
-  else {
-
-    mapLocationName.textContent =
-      "현재 위치";
-
-
-    mapLocationStatus.textContent =
-      "위치 정보 없음";
-
-  }
-
-
-  updateClimateInterface();
+  mapLocationStatus.textContent =
+    "위치 정보를 확인할 수 없습니다";
 
 }
 
-
-/* =========================================================
-   GPS 실시간 추적
-========================================================= */
 
 function startLocationTracking() {
 
@@ -2779,24 +2304,8 @@ function startLocationTracking() {
     !navigator.geolocation
   ) {
 
-    mapLocationName.textContent =
-      "위치 기능 미지원";
-
-
-    mapLocationStatus.textContent =
-      "GPS를 사용할 수 없습니다";
-
-
     return;
   }
-
-
-  mapLocationName.textContent =
-    "위치 확인 중";
-
-
-  mapLocationStatus.textContent =
-    "GPS 연결 중...";
 
 
   locationWatchId =
@@ -2825,7 +2334,7 @@ function startLocationTracking() {
 
 
 /* =========================================================
-   드롭다운 메뉴
+   드롭다운
 ========================================================= */
 
 const menuButtons =
@@ -2844,12 +2353,6 @@ function closeMenu(
         "aria-controls"
       )
     );
-
-
-  if (!panel) {
-
-    return;
-  }
 
 
   button.setAttribute(
@@ -2881,7 +2384,8 @@ menuButtons.forEach(
         const shouldOpen =
           button.getAttribute(
             "aria-expanded"
-          ) !== "true";
+          ) !==
+          "true";
 
 
         menuButtons.forEach(
@@ -2903,14 +2407,6 @@ menuButtons.forEach(
               "aria-controls"
             )
           );
-
-
-        if (
-          !panel
-        ) {
-
-          return;
-        }
 
 
         button.setAttribute(
@@ -2937,7 +2433,7 @@ menuButtons.forEach(
 
 
 /* =========================================================
-   페이지 종료 시 GPS 추적 정리
+   종료
 ========================================================= */
 
 window.addEventListener(
