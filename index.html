@@ -16,7 +16,6 @@
 
   <title>ClimaView AR</title>
 
-  <!-- Leaflet -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -53,9 +52,7 @@
       id="scene"
     >
 
-      <!-- =================================================
-           카메라
-      ================================================== -->
+      <!-- 카메라 -->
       <div class="background-layer">
 
         <video
@@ -79,9 +76,7 @@
       </button>
 
 
-      <!-- =================================================
-           GUI
-      ================================================== -->
+      <!-- GUI -->
       <div class="gui-layer">
 
 
@@ -130,15 +125,12 @@
         </nav>
 
 
-        <!-- =================================================
-             왼쪽 패널
-        ================================================== -->
+        <!-- 왼쪽 패널 -->
         <aside
           class="left-panel"
           aria-label="기후 시뮬레이션 메뉴"
         >
 
-          <!-- 기후 시뮬레이션 -->
           <div class="menu-group">
 
             <button
@@ -374,9 +366,7 @@
         </aside>
 
 
-        <!-- =================================================
-             오른쪽 정보 카드
-        ================================================== -->
+        <!-- 오른쪽 정보 카드 -->
         <section
           class="info-card glass"
           id="info-card"
@@ -395,6 +385,7 @@
           </header>
 
 
+          <!-- 대표 수치 -->
           <div class="risk-summary">
 
             <p
@@ -411,7 +402,7 @@
                 class="risk-value"
                 id="risk-value"
               >
-                31.2
+                32.5
               </span>
 
               <span
@@ -430,14 +421,355 @@
             class="risk-caption"
             id="risk-caption"
           >
-            현재 위치의 예상 최고 체감온도
+            현재 위치의 예상 최고 온도
           </p>
 
 
-          <!-- 일반 위험 그래프 -->
+          <!-- =================================================
+               폭염 전용 카드
+          ================================================== -->
+          <div
+            class="heatwave-card-section"
+            id="heatwave-card-section"
+          >
+
+            <h2 class="heatwave-section-title">
+              현재 지역의 기후 위험 변화
+            </h2>
+
+
+            <svg
+              class="heatwave-chart"
+              viewBox="0 0 336 165"
+              role="img"
+              aria-label="폭염 기온 변화 추이"
+            >
+
+              <defs>
+
+                <linearGradient
+                  id="heatwave-fill"
+                  x1="0"
+                  y1="0"
+                  x2="1"
+                  y2="0"
+                >
+
+                  <stop
+                    offset="0"
+                    stop-color="#f3a742"
+                    stop-opacity=".88"
+                  />
+
+                  <stop
+                    offset=".55"
+                    stop-color="#71b7cb"
+                    stop-opacity=".72"
+                  />
+
+                  <stop
+                    offset="1"
+                    stop-color="#58a8c7"
+                    stop-opacity=".85"
+                  />
+
+                </linearGradient>
+
+
+                <radialGradient
+                  id="heatwave-highlight"
+                >
+
+                  <stop
+                    offset="0"
+                    stop-color="#ffba61"
+                    stop-opacity=".95"
+                  />
+
+                  <stop
+                    offset=".45"
+                    stop-color="#e67c2d"
+                    stop-opacity=".75"
+                  />
+
+                  <stop
+                    offset="1"
+                    stop-color="#e67c2d"
+                    stop-opacity="0"
+                  />
+
+                </radialGradient>
+
+              </defs>
+
+
+              <!-- Y축 -->
+              <g class="heatwave-axis-label">
+
+                <text x="0" y="25">
+                  40
+                </text>
+
+                <text x="0" y="58">
+                  35
+                </text>
+
+                <text x="0" y="91">
+                  30
+                </text>
+
+                <text x="0" y="124">
+                  25
+                </text>
+
+              </g>
+
+
+              <path
+                d="M42 12v112h266"
+                fill="none"
+                stroke="rgba(255,255,255,.75)"
+                stroke-width="1"
+              />
+
+
+              <!-- 면 그래프 -->
+              <path
+                id="heatwave-chart-area"
+                d="
+                  M42 82
+                  L105 72
+                  L188 48
+                  L270 35
+                  L308 20
+                  L308 124
+                  L42 124
+                  Z
+                "
+                fill="url(#heatwave-fill)"
+              />
+
+
+              <!-- 포인트 -->
+              <g class="heatwave-points">
+
+                <circle
+                  id="heatwave-point-current"
+                  cx="42"
+                  cy="82"
+                  r="5"
+                />
+
+                <circle
+                  id="heatwave-point-2030"
+                  cx="105"
+                  cy="72"
+                  r="5"
+                />
+
+                <circle
+                  id="heatwave-point-2050"
+                  cx="188"
+                  cy="48"
+                  r="5"
+                />
+
+                <circle
+                  id="heatwave-point-2090"
+                  cx="270"
+                  cy="35"
+                  r="5"
+                />
+
+              </g>
+
+
+              <!-- 선택 포인트 외곽 Glow -->
+              <circle
+                id="heatwave-selected-glow"
+                class="heatwave-selected-glow"
+                cx="42"
+                cy="82"
+                r="14"
+              />
+
+
+              <!-- 선택 포인트 -->
+              <circle
+                id="heatwave-selected-point"
+                class="heatwave-selected-point"
+                cx="42"
+                cy="82"
+                r="8"
+              />
+
+
+              <!-- X축 -->
+              <g
+                class="heatwave-x-label"
+                text-anchor="middle"
+              >
+
+                <text x="42" y="150">
+                  현재
+                </text>
+
+                <text x="105" y="150">
+                  2030
+                </text>
+
+                <text x="188" y="150">
+                  2050
+                </text>
+
+                <text x="270" y="150">
+                  2090
+                </text>
+
+              </g>
+
+            </svg>
+
+
+            <!-- 하단 정보 -->
+            <div class="heatwave-metric-grid">
+
+              <!-- 폭염 영향 -->
+              <div
+                class="heatwave-metric-tile heatwave-impact-tile"
+                id="heatwave-impact-tile"
+              >
+
+                <span class="heatwave-metric-label">
+                  폭염 영향
+                </span>
+
+                <strong
+                  class="heatwave-metric-value"
+                  id="heatwave-impact-value"
+                >
+                  보통
+                </strong>
+
+              </div>
+
+
+              <!-- 체감온도 -->
+              <div class="heatwave-metric-tile">
+
+                <span class="heatwave-metric-label">
+                  체감온도
+                </span>
+
+                <strong
+                  class="heatwave-metric-value"
+                  id="heatwave-feels-temp"
+                >
+                  32.5°C
+                </strong>
+
+              </div>
+
+
+              <!-- 추가 위험 -->
+              <div class="heatwave-extra-tile">
+
+                <span class="heatwave-metric-label">
+                  추가 위험
+                </span>
+
+                <strong
+                  class="heatwave-metric-value"
+                  id="heatwave-extra-risk"
+                >
+                  온열질환, 열대야
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               침수 전용 카드
+          ================================================== -->
+          <div
+            class="flood-card-section"
+            id="flood-card-section"
+            hidden
+          >
+
+            <h2 class="flood-section-title">
+              현재 지역의 기후 위험 변화
+            </h2>
+
+
+            <div class="flood-metric-grid">
+
+              <div
+                class="flood-metric-tile flood-impact-tile"
+                id="flood-impact-tile"
+              >
+
+                <span class="flood-metric-label">
+                  침수 영향
+                </span>
+
+                <strong
+                  id="flood-impact-value"
+                  class="flood-metric-value"
+                >
+                  없음
+                </strong>
+
+              </div>
+
+
+              <div class="flood-metric-tile">
+
+                <span class="flood-metric-label">
+                  평균 수온
+                </span>
+
+                <strong
+                  id="flood-water-temp"
+                  class="flood-metric-value"
+                >
+                  11.7°C
+                </strong>
+
+              </div>
+
+
+              <div class="flood-warning-tile">
+
+                <span class="flood-metric-label">
+                  주의 지역
+                </span>
+
+                <strong
+                  id="flood-warning-area"
+                  class="flood-metric-value"
+                >
+                  해당 없음
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               다른 위험용 기존 그래프
+          ================================================== -->
           <div
             class="chart-section"
             id="general-chart-section"
+            hidden
           >
 
             <h2>
@@ -480,45 +812,26 @@
 
                 </linearGradient>
 
-
-                <linearGradient
-                  id="risk-gradient"
-                  gradientUnits="userSpaceOnUse"
-                  x1="50"
-                  y1="0"
-                  x2="150"
-                  y2="0"
-                >
-
-                  <stop
-                    offset="0"
-                    stop-color="#ef6d5f"
-                    stop-opacity="0"
-                  />
-
-                  <stop
-                    offset=".5"
-                    stop-color="#ef6d5f"
-                    stop-opacity=".82"
-                  />
-
-                  <stop
-                    offset="1"
-                    stop-color="#ef6d5f"
-                    stop-opacity="0"
-                  />
-
-                </linearGradient>
-
               </defs>
 
 
               <g class="axis-label risk-axis-label">
 
-                <text x="0" y="28">매우 높음</text>
-                <text x="0" y="60">높음</text>
-                <text x="0" y="92">보통</text>
-                <text x="0" y="124">낮음</text>
+                <text x="0" y="28">
+                  매우 높음
+                </text>
+
+                <text x="0" y="60">
+                  높음
+                </text>
+
+                <text x="0" y="92">
+                  보통
+                </text>
+
+                <text x="0" y="124">
+                  낮음
+                </text>
 
               </g>
 
@@ -533,33 +846,13 @@
 
               <path
                 id="chart-area"
-                d="
-                  M70 112
-                  L130 102
-                  L205 82
-                  L275 48
-                  L304 40
-                  L304 122
-                  L70 122
-                  Z
-                "
                 fill="url(#chart-fill)"
               />
 
 
               <path
                 id="chart-risk-area"
-                d="
-                  M70 112
-                  L130 102
-                  L205 82
-                  L275 48
-                  L304 40
-                  L304 122
-                  L70 122
-                  Z
-                "
-                fill="url(#risk-gradient)"
+                fill="none"
               />
 
 
@@ -635,10 +928,21 @@
                 text-anchor="middle"
               >
 
-                <text x="70" y="151">현재</text>
-                <text x="130" y="151">2030</text>
-                <text x="205" y="151">2050</text>
-                <text x="275" y="151">2090</text>
+                <text x="70" y="151">
+                  현재
+                </text>
+
+                <text x="130" y="151">
+                  2030
+                </text>
+
+                <text x="205" y="151">
+                  2050
+                </text>
+
+                <text x="275" y="151">
+                  2090
+                </text>
 
               </g>
 
@@ -647,79 +951,11 @@
           </div>
 
 
-          <!-- 침수 전용 -->
-          <div
-            class="flood-card-section"
-            id="flood-card-section"
-            hidden
-          >
-
-            <h2 class="flood-section-title">
-              현재 지역의 기후 위험 변화
-            </h2>
-
-
-            <div class="flood-metric-grid">
-
-              <div
-                class="flood-metric-tile flood-impact-tile"
-                id="flood-impact-tile"
-              >
-
-                <span class="flood-metric-label">
-                  침수 영향
-                </span>
-
-                <strong
-                  id="flood-impact-value"
-                  class="flood-metric-value"
-                >
-                  없음
-                </strong>
-
-              </div>
-
-
-              <div class="flood-metric-tile">
-
-                <span class="flood-metric-label">
-                  평균 수온
-                </span>
-
-                <strong
-                  id="flood-water-temp"
-                  class="flood-metric-value"
-                >
-                  11.7°C
-                </strong>
-
-              </div>
-
-
-              <div class="flood-warning-tile">
-
-                <span class="flood-metric-label">
-                  주의 지역
-                </span>
-
-                <strong
-                  id="flood-warning-area"
-                  class="flood-metric-value"
-                >
-                  해당 없음
-                </strong>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- 일반 카드 하단 -->
+          <!-- 다른 위험용 하단 -->
           <dl
             class="metrics"
             id="general-metrics"
+            hidden
           >
 
             <div class="metric">
@@ -727,16 +963,16 @@
               <img
                 id="metric-one-icon"
                 class="metric-icon"
-                src="./icon_feels_temp.svg"
+                src="./icon_night_temp.svg"
                 alt=""
               >
 
               <dt id="metric-one-label">
-                체감온도
+                야간 체감
               </dt>
 
               <dd id="metric-one-value">
-                31.2°C
+                16일
               </dd>
 
             </div>
@@ -747,7 +983,7 @@
               <img
                 id="metric-two-icon"
                 class="metric-icon"
-                src="./icon_tropical_night.svg"
+                src="./icon_sleep.svg"
                 alt=""
               >
 
@@ -756,7 +992,7 @@
               </dt>
 
               <dd id="metric-two-value">
-                열대야
+                수면환경 악화
               </dd>
 
             </div>
@@ -776,7 +1012,7 @@
               </dt>
 
               <dd id="warning-area">
-                그늘이 적은 보행 공간
+                고밀도 주거지
               </dd>
 
             </div>
@@ -806,7 +1042,9 @@
             alt=""
           >
 
-          <h2>ATTENTION!</h2>
+          <h2>
+            ATTENTION!
+          </h2>
 
 
           <p

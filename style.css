@@ -40,8 +40,7 @@ button {
 
 
 /* =========================================================
-   전체 화면
-   ★ 화면 정중앙 고정
+   화면
 ========================================================= */
 
 .viewport {
@@ -58,11 +57,6 @@ button {
   background: #162733;
 }
 
-
-/*
-  기존처럼 grid/place-items 방식에 의존하지 않고
-  화면의 정확한 50% 지점에 scene 중심을 맞춘다.
-*/
 
 .scene {
   position: absolute;
@@ -286,7 +280,7 @@ button {
 
 
 /* =========================================================
-   왼쪽 패널
+   왼쪽
 ========================================================= */
 
 .left-panel {
@@ -368,7 +362,7 @@ button {
 
 
 /* =========================================================
-   드롭다운
+   메뉴
 ========================================================= */
 
 .submenu {
@@ -598,12 +592,11 @@ button {
   top: 190px;
 
   width: 386px;
-  height: 660px;
 
   padding:
     24px
     20px
-    0
+    20px
     29px;
 
   border-radius: 25px;
@@ -611,14 +604,13 @@ button {
   background:
     linear-gradient(
       145deg,
-      rgba(73, 109, 144, .46),
-      rgba(137, 139, 140, .43) 48%,
-      rgba(63, 73, 80, .50)
+      rgba(40, 45, 49, .91),
+      rgba(48, 50, 51, .88)
     );
 
   border:
     1px solid
-    rgba(255, 255, 255, .15);
+    rgba(255, 255, 255, .13);
 
   backdrop-filter:
     blur(24px);
@@ -630,32 +622,6 @@ button {
     height .35s ease,
     background .35s ease,
     border-color .35s ease;
-}
-
-
-/* =========================================================
-   침수 전용 카드
-========================================================= */
-
-.info-card.flood-layout {
-  height: 415px;
-
-  padding:
-    23px
-    20px
-    20px
-    29px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(38, 42, 46, .88),
-      rgba(47, 50, 52, .84)
-    );
-
-  border:
-    1px solid
-    rgba(255, 255, 255, .13);
 }
 
 
@@ -706,7 +672,7 @@ button {
 
 
 /* =========================================================
-   대표 위험
+   대표 수치
 ========================================================= */
 
 .risk-summary {
@@ -716,20 +682,15 @@ button {
 
 .risk-name {
   margin:
-    8px
+    7px
     0
     0;
 
   color:
-    rgba(240, 247, 255, .74);
+    rgba(240, 247, 255, .72);
 
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
-}
-
-
-.info-card.flood-layout .risk-name {
-  display: none;
 }
 
 
@@ -738,14 +699,9 @@ button {
 
   align-items: baseline;
 
-  gap: 6px;
+  gap: 4px;
 
-  margin-top: 2px;
-}
-
-
-.info-card.flood-layout .risk-value-row {
-  margin-top: 14px;
+  margin-top: 5px;
 }
 
 
@@ -753,87 +709,75 @@ button {
   font-size: 62px;
   font-weight: 700;
 
-  line-height: 1.05;
+  line-height: 1;
 
   letter-spacing: -3px;
 }
 
 
-.info-card.flood-layout .risk-value {
-  font-size: 64px;
-
-  letter-spacing: -2px;
-}
-
-
 .risk-unit {
-  font-size: 31px;
+  font-size: 30px;
   font-weight: 700;
-}
-
-
-.info-card.flood-layout .risk-unit {
-  font-size: 32px;
 }
 
 
 .risk-caption {
   margin:
-    8px
-    0
-    25px;
-
-  color:
-    rgba(224, 238, 255, .62);
-
-  font-size: 16px;
-}
-
-
-.info-card.flood-layout .risk-caption {
-  margin:
-    8px
+    10px
     0
     24px;
 
   color:
-    rgba(226, 226, 226, .58);
+    rgba(225, 229, 232, .60);
+
+  font-size: 15px;
 }
 
 
 /* =========================================================
-   일반 그래프
+   폭염 전용
 ========================================================= */
 
-.chart-section {
-  height: 244px;
+.info-card.heatwave-layout {
+  height: 578px;
 
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42, 45, 48, .93),
+      rgba(48, 48, 48, .91)
+    );
+}
+
+
+.heatwave-card-section {
   padding-top: 24px;
 
   border-top:
     1px solid
-    rgba(255, 255, 255, .29);
-
-  border-bottom:
-    1px solid
-    rgba(255, 255, 255, .29);
+    rgba(255, 255, 255, .30);
 }
 
 
-.chart-section h2 {
+.heatwave-card-section[hidden] {
+  display: none;
+}
+
+
+.heatwave-section-title {
   margin:
     0
     0
-    22px;
+    14px;
 
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 
-.chart {
+.heatwave-chart {
   width: 336px;
-  height: 164px;
+  height: 165px;
 
   display: block;
 
@@ -841,7 +785,7 @@ button {
 }
 
 
-.axis-label {
+.heatwave-axis-label {
   fill: #ffffff;
 
   font-family: inherit;
@@ -850,112 +794,238 @@ button {
 }
 
 
-.risk-axis-label {
-  font-size: 11px;
-}
-
-
-.chart-anchor-points circle {
-  fill: #6eb8d4;
-
-  stroke: #438da9;
-
-  stroke-width: 2;
-}
-
-
-.chart-selected-point {
-  fill: #ee7562;
-
-  stroke: #ffb2a8;
-
-  stroke-width: 2;
-}
-
-
-.chart-value-label rect {
-  fill:
-    rgba(201, 91, 75, .90);
-}
-
-
-.chart-value-label text {
+.heatwave-x-label {
   fill: #ffffff;
 
-  font-size: 11px;
-  font-weight: 600;
+  font-family: inherit;
+
+  font-size: 14px;
 }
 
 
-/* =========================================================
-   일반 카드 하단
-========================================================= */
+.heatwave-points circle {
+  fill: #69b5d1;
 
-.metrics {
-  margin: 0;
+  stroke: rgba(255,255,255,.65);
+
+  stroke-width: 1.5;
 }
 
 
-.metric {
-  height: 72px;
+.heatwave-selected-glow {
+  fill:
+    rgba(230, 131, 44, .22);
 
+  stroke:
+    rgba(255, 188, 105, .20);
+
+  stroke-width: 5px;
+
+  filter:
+    drop-shadow(
+      0
+      0
+      8px
+      rgba(224, 129, 39, .95)
+    );
+}
+
+
+.heatwave-selected-point {
+  fill: #dc8b38;
+
+  stroke: #ffffff;
+
+  stroke-width: 1.5;
+}
+
+
+/* 2030 = 보통 */
+.info-card.heatwave-level-2 .risk-value,
+.info-card.heatwave-level-2 .risk-unit {
+  text-shadow:
+    0
+    0
+    7px
+    rgba(231, 160, 69, .90),
+
+    0
+    0
+    18px
+    rgba(231, 160, 69, .42);
+}
+
+
+/* 2050 = 높음 */
+.info-card.heatwave-level-3 .risk-value,
+.info-card.heatwave-level-3 .risk-unit {
+  text-shadow:
+    0
+    0
+    7px
+    rgba(233, 92, 52, .95),
+
+    0
+    0
+    18px
+    rgba(233, 92, 52, .50);
+}
+
+
+/* 2090 = 매우 높음 */
+.info-card.heatwave-level-4 .risk-value,
+.info-card.heatwave-level-4 .risk-unit {
+  text-shadow:
+    0
+    0
+    8px
+    rgba(255, 43, 38, 1),
+
+    0
+    0
+    20px
+    rgba(255, 43, 38, .70);
+}
+
+
+/* 하단 타일 */
+
+.heatwave-metric-grid {
   display: grid;
 
   grid-template-columns:
-    47px
-    95px
+    1fr
     1fr;
 
+  gap:
+    10px
+    8px;
+
+  margin-top: 4px;
+}
+
+
+.heatwave-metric-tile,
+.heatwave-extra-tile {
+  min-height: 60px;
+
+  padding:
+    0
+    14px;
+
+  display: flex;
+
   align-items: center;
+  justify-content: center;
 
-  border-bottom:
+  gap: 10px;
+
+  border-radius: 12px;
+
+  border:
     1px solid
-    rgba(255, 255, 255, .14);
+    rgba(255,255,255,.14);
 
-  font-size: 16px;
+  background:
+    rgba(113, 113, 113, .26);
 }
 
 
-.metric:first-child {
-  height: 76px;
+.heatwave-extra-tile {
+  grid-column:
+    1 / -1;
+
+  justify-content: flex-start;
+
+  padding-left: 38px;
 }
 
 
-.metric:last-child {
-  border: 0;
+.heatwave-metric-label {
+  color:
+    rgba(255,255,255,.62);
+
+  font-size: 13px;
+
+  white-space: nowrap;
 }
 
 
-.metric-icon {
-  width: 36px;
-  height: 38px;
+.heatwave-metric-value {
+  color: #ffffff;
 
-  object-fit: contain;
+  font-size: 17px;
+  font-weight: 650;
+
+  white-space: nowrap;
 }
 
 
-.metric dt {
-  font-weight: 500;
+/* 보통 */
+
+.heatwave-impact-tile.level-2 {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(194, 128, 53, .96),
+      rgba(169, 105, 37, .92)
+    );
+
+  border-color:
+    rgba(255, 203, 126, .18);
 }
 
 
-.metric dd {
-  margin: 0;
+/* 높음 */
 
-  font-weight: 600;
+.heatwave-impact-tile.level-3 {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(202, 111, 48, .97),
+      rgba(194, 63, 50, .93)
+    );
+
+  border-color:
+    rgba(255, 160, 100, .20);
+}
+
+
+/* 매우 높음 */
+
+.heatwave-impact-tile.level-4 {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(197, 56, 52, .98),
+      rgba(169, 40, 40, .94)
+    );
+
+  border-color:
+    rgba(255, 105, 100, .24);
 }
 
 
 /* =========================================================
-   침수 전용 정보
+   침수 전용
 ========================================================= */
+
+.info-card.flood-layout {
+  height: 415px;
+}
+
+
+.info-card.flood-layout .risk-name {
+  display: none;
+}
+
 
 .flood-card-section {
   padding-top: 23px;
 
   border-top:
     1px solid
-    rgba(255, 255, 255, .30);
+    rgba(255,255,255,.30);
 }
 
 
@@ -1007,10 +1077,10 @@ button {
 
   border:
     1px solid
-    rgba(255, 255, 255, .13);
+    rgba(255,255,255,.13);
 
   background:
-    rgba(113, 113, 113, .25);
+    rgba(113,113,113,.25);
 }
 
 
@@ -1020,35 +1090,27 @@ button {
 
   justify-content: flex-start;
 
-  min-height: 60px;
-
   padding-left: 38px;
 }
 
 
 .flood-metric-label {
   color:
-    rgba(255, 255, 255, .62);
+    rgba(255,255,255,.62);
 
   font-size: 13px;
-
-  white-space: nowrap;
 }
 
 
 .flood-metric-value {
-  color: #ffffff;
-
   font-size: 17px;
   font-weight: 650;
-
-  white-space: nowrap;
 }
 
 
 .flood-impact-tile.level-1 {
   background:
-    rgba(118, 118, 118, .27);
+    rgba(118,118,118,.27);
 }
 
 
@@ -1057,12 +1119,9 @@ button {
   background:
     linear-gradient(
       120deg,
-      rgba(194, 132, 61, .92),
-      rgba(163, 105, 42, .88)
+      rgba(194,132,61,.92),
+      rgba(163,105,42,.88)
     );
-
-  border-color:
-    rgba(255, 205, 132, .22);
 }
 
 
@@ -1070,46 +1129,155 @@ button {
   background:
     linear-gradient(
       120deg,
-      rgba(198, 57, 55, .96),
-      rgba(165, 42, 40, .92)
+      rgba(198,57,55,.96),
+      rgba(165,42,40,.92)
     );
-
-  border-color:
-    rgba(255, 107, 100, .28);
 }
 
 
-/* 침수 수치 Glow */
+/* =========================================================
+   기존 일반 그래프
+========================================================= */
 
-.info-card.flood-layout.flood-level-2 .risk-value,
-.info-card.flood-layout.flood-level-2 .risk-unit,
-.info-card.flood-layout.flood-level-3 .risk-value,
-.info-card.flood-layout.flood-level-3 .risk-unit {
-  text-shadow:
-    0
-    0
-    7px
-    rgba(204, 139, 66, .80),
+.chart-section {
+  height: 244px;
 
-    0
-    0
-    17px
-    rgba(204, 139, 66, .32);
+  padding-top: 24px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.29);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.29);
 }
 
 
-.info-card.flood-layout.flood-level-4 .risk-value,
-.info-card.flood-layout.flood-level-4 .risk-unit {
-  text-shadow:
-    0
-    0
-    7px
-    rgba(234, 63, 56, .90),
+.chart-section[hidden] {
+  display: none;
+}
 
+
+.chart-section h2 {
+  margin:
     0
     0
-    18px
-    rgba(234, 63, 56, .52);
+    22px;
+
+  font-size: 17px;
+  font-weight: 500;
+}
+
+
+.chart {
+  width: 336px;
+  height: 164px;
+}
+
+
+.axis-label {
+  fill: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 15px;
+}
+
+
+.risk-axis-label {
+  font-size: 11px;
+}
+
+
+.chart-anchor-points circle {
+  fill: #6eb8d4;
+
+  stroke: #438da9;
+
+  stroke-width: 2;
+}
+
+
+.chart-selected-point {
+  fill: #ee7562;
+
+  stroke: #ffb2a8;
+
+  stroke-width: 2;
+}
+
+
+.chart-value-label rect {
+  fill:
+    rgba(201,91,75,.90);
+}
+
+
+.chart-value-label text {
+  fill: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   일반 Metrics
+========================================================= */
+
+.metrics {
+  margin: 0;
+}
+
+
+.metrics[hidden] {
+  display: none;
+}
+
+
+.metric {
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns:
+    47px
+    95px
+    1fr;
+
+  align-items: center;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.14);
+
+  font-size: 16px;
+}
+
+
+.metric:last-child {
+  border: 0;
+}
+
+
+.metric-icon {
+  width: 36px;
+  height: 38px;
+
+  object-fit: contain;
+}
+
+
+.metric dt {
+  font-weight: 500;
+}
+
+
+.metric dd {
+  margin: 0;
+
+  font-weight: 600;
 }
 
 
@@ -1145,7 +1313,7 @@ body[data-year="2030"] .scene::after {
     0
     0
     60px
-    rgba(255, 100, 75, .04);
+    rgba(255,100,75,.04);
 }
 
 
@@ -1157,7 +1325,7 @@ body[data-year="2050"] .scene::after {
     0
     0
     90px
-    rgba(255, 90, 65, .11);
+    rgba(255,90,65,.11);
 }
 
 
@@ -1167,10 +1335,10 @@ body.danger-mode .scene::after {
   background:
     radial-gradient(
       ellipse at center,
-      rgba(140, 20, 15, 0) 48%,
-      rgba(155, 28, 22, .08) 68%,
-      rgba(165, 35, 27, .22) 84%,
-      rgba(170, 40, 32, .40) 100%
+      rgba(140,20,15,0) 48%,
+      rgba(155,28,22,.08) 68%,
+      rgba(165,35,27,.22) 84%,
+      rgba(170,40,32,.40) 100%
     );
 
   box-shadow:
@@ -1178,7 +1346,7 @@ body.danger-mode .scene::after {
     0
     0
     130px
-    rgba(180, 45, 35, .42);
+    rgba(180,45,35,.42);
 }
 
 
@@ -1190,7 +1358,7 @@ body.danger-mode .camera-feed {
 
 
 /* =========================================================
-   경고 팝업
+   팝업
 ========================================================= */
 
 .danger-alert {
@@ -1234,9 +1402,9 @@ body.danger-mode .camera-feed {
   background:
     radial-gradient(
       ellipse at center,
-      rgba(0, 0, 0, .80) 0%,
-      rgba(0, 0, 0, .88) 58%,
-      rgba(60, 12, 10, .88) 100%
+      rgba(0,0,0,.80) 0%,
+      rgba(0,0,0,.88) 58%,
+      rgba(60,12,10,.88) 100%
     );
 
   box-shadow:
@@ -1244,7 +1412,7 @@ body.danger-mode .camera-feed {
     0
     0
     150px
-    rgba(180, 45, 35, .55);
+    rgba(180,45,35,.55);
 
   backdrop-filter:
     blur(4px);
@@ -1325,13 +1493,13 @@ body.danger-mode .camera-feed {
 
   border:
     1px solid
-    rgba(255, 255, 255, .22);
+    rgba(255,255,255,.22);
 
   background:
     linear-gradient(
       180deg,
-      rgba(62, 62, 62, .64),
-      rgba(20, 20, 20, .82)
+      rgba(62,62,62,.64),
+      rgba(20,20,20,.82)
     );
 
   font-size: 19px;

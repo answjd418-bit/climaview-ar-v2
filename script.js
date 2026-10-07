@@ -58,14 +58,46 @@ const riskCaption =
   );
 
 
-const generalChartSection =
+/* 폭염 전용 */
+
+const heatwaveCardSection =
   document.getElementById(
-    "general-chart-section"
+    "heatwave-card-section"
   );
 
-const generalMetrics =
+const heatwaveChartArea =
   document.getElementById(
-    "general-metrics"
+    "heatwave-chart-area"
+  );
+
+const heatwaveSelectedGlow =
+  document.getElementById(
+    "heatwave-selected-glow"
+  );
+
+const heatwaveSelectedPoint =
+  document.getElementById(
+    "heatwave-selected-point"
+  );
+
+const heatwaveImpactTile =
+  document.getElementById(
+    "heatwave-impact-tile"
+  );
+
+const heatwaveImpactValue =
+  document.getElementById(
+    "heatwave-impact-value"
+  );
+
+const heatwaveFeelsTemp =
+  document.getElementById(
+    "heatwave-feels-temp"
+  );
+
+const heatwaveExtraRisk =
+  document.getElementById(
+    "heatwave-extra-risk"
   );
 
 
@@ -97,7 +129,17 @@ const floodWarningArea =
   );
 
 
-/* 일반 metric */
+/* 일반 카드 */
+
+const generalChartSection =
+  document.getElementById(
+    "general-chart-section"
+  );
+
+const generalMetrics =
+  document.getElementById(
+    "general-metrics"
+  );
 
 const metricOneLabel =
   document.getElementById(
@@ -124,7 +166,6 @@ const warningArea =
     "warning-area"
   );
 
-
 const metricOneIcon =
   document.getElementById(
     "metric-one-icon"
@@ -141,7 +182,7 @@ const warningAreaIcon =
   );
 
 
-/* 그래프 */
+/* 일반 그래프 */
 
 const selectedPoint =
   document.getElementById(
@@ -206,76 +247,15 @@ const dangerAlertButtonText =
 
 
 /* =========================================================
-   SVG 아이콘
-========================================================= */
-
-const metricIcons = {
-
-  heatwave: {
-    metricOne:
-      "./icon_feels_temp.svg",
-
-    metricTwo:
-      "./icon_tropical_night.svg"
-  },
-
-  tropical: {
-    metricOne:
-      "./icon_night_temp.svg",
-
-    metricTwo:
-      "./icon_sleep.svg"
-  },
-
-  flood: {
-    metricOne:
-      "./icon_flood.svg",
-
-    metricTwo:
-      "./icon_heavy_rain.svg"
-  },
-
-  wildfire: {
-    metricOne:
-      "./icon_dryness.svg",
-
-    metricTwo:
-      "./icon_dry_wind.svg"
-  },
-
-  air: {
-    metricOne:
-      "./icon_pm25.svg",
-
-    metricTwo:
-      "./icon_ozone.svg"
-  }
-
-};
-
-
-const warningIcon =
-  "./icon_warning_area.svg";
-
-
-/* =========================================================
    화면 FIT
-   ★ 화면이 잘리지 않으면서 중앙 고정
 ========================================================= */
 
 function fitScene() {
 
-  const viewportWidth =
-    window.innerWidth;
-
-  const viewportHeight =
-    window.innerHeight;
-
-
   const scale =
     Math.min(
-      viewportWidth / 1366,
-      viewportHeight / 1024
+      window.innerWidth / 1366,
+      window.innerHeight / 1024
     );
 
 
@@ -287,34 +267,12 @@ function fitScene() {
 }
 
 
-/*
-  최초 실행
-*/
 fitScene();
 
 
-/*
-  브라우저 크기 변경
-*/
 window.addEventListener(
   "resize",
   fitScene
-);
-
-
-/*
-  모바일 / 태블릿 회전 대응
-*/
-window.addEventListener(
-  "orientationchange",
-  () => {
-
-    setTimeout(
-      fitScene,
-      100
-    );
-
-  }
 );
 
 
@@ -484,7 +442,156 @@ const yearProfiles = {
 
 
 /* =========================================================
-   침수 전용
+   폭염 전용 데이터
+========================================================= */
+
+const heatwaveCardProfiles = {
+
+  current: {
+
+    temperature:
+      32.5,
+
+    impact:
+      "보통",
+
+    level:
+      2,
+
+    feelsTemperature:
+      32.5,
+
+    extraRisk:
+      "온열질환, 열대야"
+
+  },
+
+
+  2030: {
+
+    temperature:
+      34.7,
+
+    impact:
+      "보통",
+
+    level:
+      2,
+
+    feelsTemperature:
+      34.7,
+
+    extraRisk:
+      "온열질환, 열대야"
+
+  },
+
+
+  2050: {
+
+    temperature:
+      37.1,
+
+    impact:
+      "높음",
+
+    level:
+      3,
+
+    feelsTemperature:
+      37.1,
+
+    extraRisk:
+      "온열질환, 열대야"
+
+  },
+
+
+  2090: {
+
+    temperature:
+      40.5,
+
+    impact:
+      "매우 높음",
+
+    level:
+      4,
+
+    feelsTemperature:
+      40.5,
+
+    extraRisk:
+      "온열질환, 열대야"
+
+  }
+
+};
+
+
+/* 폭염 그래프 좌표 */
+
+const heatwaveChartX = {
+
+  current:
+    42,
+
+  2030:
+    105,
+
+  2050:
+    188,
+
+  2090:
+    270
+
+};
+
+
+function heatwaveTemperatureToY(
+  temperature
+) {
+
+  const minTemperature =
+    25;
+
+  const maxTemperature =
+    42;
+
+
+  const top =
+    12;
+
+  const bottom =
+    124;
+
+
+  const ratio =
+    (
+      temperature -
+      minTemperature
+    )
+    /
+    (
+      maxTemperature -
+      minTemperature
+    );
+
+
+  return (
+    bottom -
+    ratio *
+    (
+      bottom -
+      top
+    )
+  );
+
+}
+
+
+/* =========================================================
+   침수 데이터
 ========================================================= */
 
 const floodCardProfiles = {
@@ -564,63 +671,10 @@ const floodCardProfiles = {
 
 
 /* =========================================================
-   일반 기후 위험
+   기타 기후위험
 ========================================================= */
 
 const climateRiskProfiles = {
-
-
-  heatwave: {
-
-    name:
-      "폭염",
-
-    unit:
-      "°C",
-
-    caption:
-      "현재 위치의 예상 최고 체감온도",
-
-    values: {
-      current: 31.2,
-      2030: 33.4,
-      2050: 35.8,
-      2090: 39.2
-    },
-
-    levels: {
-      current: 2,
-      2030: 2,
-      2050: 3,
-      2090: 4
-    },
-
-    metricOneLabel:
-      "체감온도",
-
-    metricTwoLabel:
-      "추가 위험",
-
-    metricTwoValue:
-      "열대야",
-
-    warning: {
-
-      urban:
-        "도로·광장·그늘이 적은 공간",
-
-      park:
-        "그늘이 적은 산책로·광장",
-
-      river:
-        "그늘이 적은 수변 보행로",
-
-      forest:
-        "개방된 탐방로·주차장"
-
-    }
-
-  },
 
 
   tropical: {
@@ -672,43 +726,6 @@ const climateRiskProfiles = {
         "저지대 주거지역"
 
     }
-
-  },
-
-
-  flood: {
-
-    name:
-      "침수",
-
-    unit:
-      "%",
-
-    caption:
-      "현재 위치의 상대적 침수 확률",
-
-    values: {
-      current: 23,
-      2030: 30,
-      2050: 36,
-      2090: 79
-    },
-
-    levels: {
-      current: 1,
-      2030: 2,
-      2050: 2,
-      2090: 4
-    },
-
-    metricOneLabel:
-      "침수 영향",
-
-    metricTwoLabel:
-      "평균 수온",
-
-    metricTwoValue:
-      ""
 
   },
 
@@ -822,22 +839,77 @@ const climateRiskProfiles = {
 
 
 /* =========================================================
-   위험 텍스트
+   일반 아이콘
+========================================================= */
+
+const metricIcons = {
+
+  tropical: {
+
+    metricOne:
+      "./icon_night_temp.svg",
+
+    metricTwo:
+      "./icon_sleep.svg"
+
+  },
+
+  wildfire: {
+
+    metricOne:
+      "./icon_dryness.svg",
+
+    metricTwo:
+      "./icon_dry_wind.svg"
+
+  },
+
+  air: {
+
+    metricOne:
+      "./icon_pm25.svg",
+
+    metricTwo:
+      "./icon_ozone.svg"
+
+  }
+
+};
+
+
+const warningIcon =
+  "./icon_warning_area.svg";
+
+
+/* =========================================================
+   위험 단계
 ========================================================= */
 
 function levelText(level) {
 
-  if (level <= 1) {
+  if (
+    level <= 1
+  ) {
+
     return "낮음";
   }
 
-  if (level === 2) {
+
+  if (
+    level === 2
+  ) {
+
     return "보통";
   }
 
-  if (level === 3) {
+
+  if (
+    level === 3
+  ) {
+
     return "높음";
   }
+
 
   return "매우 높음";
 
@@ -845,100 +917,380 @@ function levelText(level) {
 
 
 /* =========================================================
-   환경 탐지
+   폭염 그래프 업데이트
 ========================================================= */
 
-function detectEnvironment(data) {
+function updateHeatwaveChart() {
 
-  const source =
-    (
-      JSON.stringify(
-        data?.address || {}
-      )
-      +
-      String(
-        data?.category || ""
-      )
-      +
-      String(
-        data?.type || ""
-      )
-    )
-    .toLowerCase();
+  const years = [
+    "current",
+    "2030",
+    "2050",
+    "2090"
+  ];
 
 
-  if (
-    source.includes("river") ||
-    source.includes("water") ||
-    source.includes("stream") ||
-    source.includes("강") ||
-    source.includes("하천") ||
-    source.includes("호수")
-  ) {
+  const points =
+    years.map(
+      yearKey => {
 
-    return "river";
-  }
+        const profile =
+          heatwaveCardProfiles[
+            yearKey
+          ];
 
 
-  if (
-    source.includes("forest") ||
-    source.includes("mountain") ||
-    source.includes("산림") ||
-    source.includes("산")
-  ) {
+        return {
 
-    return "forest";
-  }
+          year:
+            yearKey,
+
+          x:
+            heatwaveChartX[
+              yearKey
+            ],
+
+          y:
+            heatwaveTemperatureToY(
+              profile.temperature
+            )
+
+        };
+
+      }
+    );
 
 
-  if (
-    source.includes("park") ||
-    source.includes("garden") ||
-    source.includes("공원")
-  ) {
+  const [
+    p0,
+    p1,
+    p2,
+    p3
+  ] =
+    points;
 
-    return "park";
-  }
+
+  const path =
+    `
+      M${p0.x} ${p0.y}
+      L${p1.x} ${p1.y}
+      L${p2.x} ${p2.y}
+      L${p3.x} ${p3.y}
+      L308 124
+      L42 124
+      Z
+    `;
 
 
-  return "urban";
+  heatwaveChartArea.setAttribute(
+    "d",
+    path
+  );
+
+
+  points.forEach(
+    point => {
+
+      const circle =
+        document.getElementById(
+          `heatwave-point-${point.year}`
+        );
+
+
+      if (
+        circle
+      ) {
+
+        circle.setAttribute(
+          "cy",
+          point.y
+        );
+
+      }
+
+    }
+  );
+
+
+  const selected =
+    points.find(
+      point =>
+        point.year ===
+        currentYear
+    );
+
+
+  heatwaveSelectedGlow.setAttribute(
+    "cx",
+    selected.x
+  );
+
+
+  heatwaveSelectedGlow.setAttribute(
+    "cy",
+    selected.y
+  );
+
+
+  heatwaveSelectedPoint.setAttribute(
+    "cx",
+    selected.x
+  );
+
+
+  heatwaveSelectedPoint.setAttribute(
+    "cy",
+    selected.y
+  );
 
 }
 
 
 /* =========================================================
-   환경 기반 자동 위험
+   폭염 전용 카드
 ========================================================= */
 
-function selectAutomaticRisk(
-  environment
-) {
+function updateHeatwaveCard() {
 
-  if (
-    environment ===
-    "river"
-  ) {
-
-    return "flood";
-  }
+  const heatwaveData =
+    heatwaveCardProfiles[
+      currentYear
+    ];
 
 
-  if (
-    environment ===
-    "forest"
-  ) {
-
-    return "wildfire";
-  }
+  const yearLabel =
+    yearProfiles[
+      currentYear
+    ].label;
 
 
-  return "heatwave";
+  infoCard.classList.remove(
+    "flood-layout",
+    "flood-level-1",
+    "flood-level-2",
+    "flood-level-3",
+    "flood-level-4"
+  );
+
+
+  infoCard.classList.add(
+    "heatwave-layout"
+  );
+
+
+  infoCard.classList.remove(
+    "heatwave-level-1",
+    "heatwave-level-2",
+    "heatwave-level-3",
+    "heatwave-level-4"
+  );
+
+
+  infoCard.classList.add(
+    `heatwave-level-${heatwaveData.level}`
+  );
+
+
+  heatwaveCardSection.hidden =
+    false;
+
+
+  floodCardSection.hidden =
+    true;
+
+
+  generalChartSection.hidden =
+    true;
+
+
+  generalMetrics.hidden =
+    true;
+
+
+  infoTitle.textContent =
+    currentYear ===
+    "current"
+      ?
+      `2026년 ${currentPlaceName}`
+      :
+      `${yearLabel} ${currentPlaceName}`;
+
+
+  riskName.textContent =
+    "";
+
+
+  riskValue.textContent =
+    heatwaveData.temperature.toFixed(
+      1
+    );
+
+
+  riskUnit.textContent =
+    "°C";
+
+
+  riskCaption.textContent =
+    "현재 위치의 예상 최고 온도";
+
+
+  heatwaveImpactValue.textContent =
+    heatwaveData.impact;
+
+
+  heatwaveFeelsTemp.textContent =
+    `${heatwaveData.feelsTemperature.toFixed(1)}°C`;
+
+
+  heatwaveExtraRisk.textContent =
+    heatwaveData.extraRisk;
+
+
+  heatwaveImpactTile.classList.remove(
+    "level-1",
+    "level-2",
+    "level-3",
+    "level-4"
+  );
+
+
+  heatwaveImpactTile.classList.add(
+    `level-${heatwaveData.level}`
+  );
+
+
+  updateHeatwaveChart();
+
+
+  document.body.dataset.riskLevel =
+    String(
+      heatwaveData.level
+    );
 
 }
 
 
 /* =========================================================
-   위험 데이터
+   침수 카드
+========================================================= */
+
+function updateFloodCard() {
+
+  const floodData =
+    floodCardProfiles[
+      currentYear
+    ];
+
+
+  const yearLabel =
+    yearProfiles[
+      currentYear
+    ].label;
+
+
+  infoCard.classList.remove(
+    "heatwave-layout",
+    "heatwave-level-1",
+    "heatwave-level-2",
+    "heatwave-level-3",
+    "heatwave-level-4"
+  );
+
+
+  infoCard.classList.add(
+    "flood-layout"
+  );
+
+
+  infoCard.classList.remove(
+    "flood-level-1",
+    "flood-level-2",
+    "flood-level-3",
+    "flood-level-4"
+  );
+
+
+  infoCard.classList.add(
+    `flood-level-${floodData.level}`
+  );
+
+
+  heatwaveCardSection.hidden =
+    true;
+
+
+  floodCardSection.hidden =
+    false;
+
+
+  generalChartSection.hidden =
+    true;
+
+
+  generalMetrics.hidden =
+    true;
+
+
+  infoTitle.textContent =
+    currentYear ===
+    "current"
+      ?
+      `2026년 ${currentPlaceName}`
+      :
+      `${yearLabel} ${currentPlaceName}`;
+
+
+  riskName.textContent =
+    "";
+
+
+  riskValue.textContent =
+    floodData.probability;
+
+
+  riskUnit.textContent =
+    "%";
+
+
+  riskCaption.textContent =
+    "현재 위치의 상대적 침수 확률";
+
+
+  floodImpactValue.textContent =
+    floodData.impact;
+
+
+  floodWaterTemp.textContent =
+    `${floodData.waterTemperature.toFixed(1)}°C`;
+
+
+  floodWarningArea.textContent =
+    floodData.warningArea;
+
+
+  floodImpactTile.classList.remove(
+    "level-1",
+    "level-2",
+    "level-3",
+    "level-4"
+  );
+
+
+  floodImpactTile.classList.add(
+    `level-${floodData.level}`
+  );
+
+
+  document.body.dataset.riskLevel =
+    String(
+      floodData.level
+    );
+
+}
+
+
+/* =========================================================
+   기타 위험 데이터
 ========================================================= */
 
 function getClimateData(
@@ -989,17 +1341,11 @@ function getClimateData(
       profile.metricTwoValue,
 
     warning:
-      profile.warning
-        ?
-        (
-          profile.warning[
-            currentEnvironment
-          ]
-          ||
-          profile.warning.urban
-        )
-        :
-        "해당 없음"
+      profile.warning[
+        currentEnvironment
+      ]
+      ||
+      profile.warning.urban
 
   };
 
@@ -1007,7 +1353,7 @@ function getClimateData(
 
 
 /* =========================================================
-   그래프
+   일반 그래프
 ========================================================= */
 
 const chartYears = [
@@ -1019,35 +1365,44 @@ const chartYears = [
 
 
 const chartX = {
-  current: 70,
-  2030: 130,
-  2050: 205,
-  2090: 275
+
+  current:
+    70,
+
+  2030:
+    130,
+
+  2050:
+    205,
+
+  2090:
+    275
+
 };
 
 
 function levelToY(level) {
 
   return {
-    1: 112,
-    2: 90,
-    3: 62,
-    4: 30
+
+    1:
+      112,
+
+    2:
+      90,
+
+    3:
+      62,
+
+    4:
+      30
+
   }[level];
 
 }
 
 
 function updateChart() {
-
-  if (
-    selectedRisk ===
-    "flood"
-  ) {
-
-    return;
-  }
-
 
   const points =
     chartYears.map(
@@ -1111,10 +1466,12 @@ function updateChart() {
   );
 
 
-  chartRiskArea.setAttribute(
-    "d",
-    path
-  );
+  const selected =
+    points.find(
+      point =>
+        point.year ===
+        currentYear
+    );
 
 
   points.forEach(
@@ -1126,7 +1483,9 @@ function updateChart() {
         );
 
 
-      if (node) {
+      if (
+        node
+      ) {
 
         node.setAttribute(
           "cy",
@@ -1137,20 +1496,6 @@ function updateChart() {
 
     }
   );
-
-
-  const selected =
-    points.find(
-      point =>
-        point.year ===
-        currentYear
-    );
-
-
-  if (!selected) {
-
-    return;
-  }
 
 
   selectedPoint.setAttribute(
@@ -1180,145 +1525,7 @@ function updateChart() {
 
 
 /* =========================================================
-   아이콘
-========================================================= */
-
-function updateMetricIcons() {
-
-  const icons =
-    metricIcons[
-      selectedRisk
-    ];
-
-
-  if (!icons) {
-
-    return;
-  }
-
-
-  metricOneIcon.src =
-    icons.metricOne;
-
-
-  metricTwoIcon.src =
-    icons.metricTwo;
-
-
-  warningAreaIcon.src =
-    warningIcon;
-
-}
-
-
-/* =========================================================
-   침수 카드
-========================================================= */
-
-function updateFloodCard() {
-
-  const floodData =
-    floodCardProfiles[
-      currentYear
-    ];
-
-
-  const yearLabel =
-    yearProfiles[
-      currentYear
-    ].label;
-
-
-  infoCard.classList.add(
-    "flood-layout"
-  );
-
-
-  infoCard.classList.remove(
-    "flood-level-1",
-    "flood-level-2",
-    "flood-level-3",
-    "flood-level-4"
-  );
-
-
-  infoCard.classList.add(
-    `flood-level-${floodData.level}`
-  );
-
-
-  generalChartSection.hidden =
-    true;
-
-
-  generalMetrics.hidden =
-    true;
-
-
-  floodCardSection.hidden =
-    false;
-
-
-  infoTitle.textContent =
-    currentYear ===
-    "current"
-      ?
-      `2026년 ${currentPlaceName}`
-      :
-      `${yearLabel} ${currentPlaceName}`;
-
-
-  riskName.textContent =
-    "";
-
-
-  riskValue.textContent =
-    floodData.probability;
-
-
-  riskUnit.textContent =
-    "%";
-
-
-  riskCaption.textContent =
-    "현재 위치의 상대적 침수 확률";
-
-
-  floodImpactValue.textContent =
-    floodData.impact;
-
-
-  floodWaterTemp.textContent =
-    `${floodData.waterTemperature.toFixed(1)}°C`;
-
-
-  floodWarningArea.textContent =
-    floodData.warningArea;
-
-
-  floodImpactTile.classList.remove(
-    "level-1",
-    "level-2",
-    "level-3",
-    "level-4"
-  );
-
-
-  floodImpactTile.classList.add(
-    `level-${floodData.level}`
-  );
-
-
-  document.body.dataset.riskLevel =
-    String(
-      floodData.level
-    );
-
-}
-
-
-/* =========================================================
-   일반 카드
+   기타 일반 카드
 ========================================================= */
 
 function updateGeneralCard() {
@@ -1337,6 +1544,12 @@ function updateGeneralCard() {
 
 
   infoCard.classList.remove(
+    "heatwave-layout",
+    "heatwave-level-1",
+    "heatwave-level-2",
+    "heatwave-level-3",
+    "heatwave-level-4",
+
     "flood-layout",
     "flood-level-1",
     "flood-level-2",
@@ -1345,16 +1558,20 @@ function updateGeneralCard() {
   );
 
 
+  heatwaveCardSection.hidden =
+    true;
+
+
+  floodCardSection.hidden =
+    true;
+
+
   generalChartSection.hidden =
     false;
 
 
   generalMetrics.hidden =
     false;
-
-
-  floodCardSection.hidden =
-    true;
 
 
   const yearLabel =
@@ -1371,32 +1588,12 @@ function updateGeneralCard() {
     `${data.name} · ${levelText(data.level)}`;
 
 
-  if (
-    selectedRisk ===
-    "wildfire"
-  ) {
-
-    riskValue.textContent =
-      levelText(
-        data.value
-      );
+  riskValue.textContent =
+    data.value;
 
 
-    riskUnit.textContent =
-      "";
-
-  }
-
-  else {
-
-    riskValue.textContent =
-      data.value;
-
-
-    riskUnit.textContent =
-      data.unit;
-
-  }
+  riskUnit.textContent =
+    data.unit;
 
 
   riskCaption.textContent =
@@ -1408,16 +1605,6 @@ function updateGeneralCard() {
 
 
   if (
-    selectedRisk ===
-    "heatwave"
-  ) {
-
-    metricOneValue.textContent =
-      `${Number(data.value).toFixed(1)}°C`;
-
-  }
-
-  else if (
     selectedRisk ===
     "air"
   ) {
@@ -1459,7 +1646,29 @@ function updateGeneralCard() {
     data.warning;
 
 
-  updateMetricIcons();
+  const icons =
+    metricIcons[
+      selectedRisk
+    ];
+
+
+  if (
+    icons
+  ) {
+
+    metricOneIcon.src =
+      icons.metricOne;
+
+
+    metricTwoIcon.src =
+      icons.metricTwo;
+
+  }
+
+
+  warningAreaIcon.src =
+    warningIcon;
+
 
   updateChart();
 
@@ -1473,12 +1682,21 @@ function updateGeneralCard() {
 
 
 /* =========================================================
-   전체 카드
+   전체 인터페이스
 ========================================================= */
 
 function updateClimateInterface() {
 
   if (
+    selectedRisk ===
+    "heatwave"
+  ) {
+
+    updateHeatwaveCard();
+
+  }
+
+  else if (
     selectedRisk ===
     "flood"
   ) {
@@ -1497,10 +1715,22 @@ function updateClimateInterface() {
 
 
 /* =========================================================
-   현재 위험 레벨
+   현재 위험 단계
 ========================================================= */
 
 function getCurrentRiskLevel() {
+
+  if (
+    selectedRisk ===
+    "heatwave"
+  ) {
+
+    return heatwaveCardProfiles[
+      currentYear
+    ].level;
+
+  }
+
 
   if (
     selectedRisk ===
@@ -1536,15 +1766,38 @@ function showDangerAlert(
     ].label;
 
 
-  const riskLabel =
+  let riskLabel =
+    "";
+
+
+  if (
+    selectedRisk ===
+    "heatwave"
+  ) {
+
+    riskLabel =
+      "폭염";
+
+  }
+
+  else if (
     selectedRisk ===
     "flood"
-      ?
-      "침수"
-      :
+  ) {
+
+    riskLabel =
+      "침수";
+
+  }
+
+  else {
+
+    riskLabel =
       climateRiskProfiles[
         selectedRisk
       ].name;
+
+  }
 
 
   dangerAlertMessage.innerHTML =
@@ -1594,7 +1847,7 @@ dangerAlertConfirm.addEventListener(
 
 
 /* =========================================================
-   연도 변경
+   연도
 ========================================================= */
 
 function changeYear(key) {
@@ -1712,10 +1965,6 @@ function changeYear(key) {
 }
 
 
-/* =========================================================
-   연도 버튼
-========================================================= */
-
 yearButtons.forEach(
   button => {
 
@@ -1735,7 +1984,7 @@ yearButtons.forEach(
 
 
 /* =========================================================
-   위험 종류 선택
+   기후 위험 선택
 ========================================================= */
 
 climateOptions.forEach(
@@ -1773,12 +2022,8 @@ climateOptions.forEach(
         updateClimateInterface();
 
 
-        const riskLevel =
-          getCurrentRiskLevel();
-
-
         if (
-          riskLevel >=
+          getCurrentRiskLevel() >=
           DANGER_LEVEL
         ) {
 
@@ -1793,6 +2038,99 @@ climateOptions.forEach(
 
   }
 );
+
+
+/* =========================================================
+   환경 탐지
+========================================================= */
+
+function detectEnvironment(data) {
+
+  const source =
+    (
+      JSON.stringify(
+        data?.address || {}
+      )
+      +
+      String(
+        data?.category || ""
+      )
+      +
+      String(
+        data?.type || ""
+      )
+    )
+    .toLowerCase();
+
+
+  if (
+    source.includes("river") ||
+    source.includes("water") ||
+    source.includes("stream") ||
+    source.includes("강") ||
+    source.includes("하천") ||
+    source.includes("호수")
+  ) {
+
+    return "river";
+  }
+
+
+  if (
+    source.includes("forest") ||
+    source.includes("mountain") ||
+    source.includes("산림") ||
+    source.includes("산")
+  ) {
+
+    return "forest";
+  }
+
+
+  if (
+    source.includes("park") ||
+    source.includes("garden") ||
+    source.includes("공원")
+  ) {
+
+    return "park";
+  }
+
+
+  return "urban";
+
+}
+
+
+/* =========================================================
+   자동 위험
+========================================================= */
+
+function selectAutomaticRisk(
+  environment
+) {
+
+  if (
+    environment ===
+    "river"
+  ) {
+
+    return "flood";
+  }
+
+
+  if (
+    environment ===
+    "forest"
+  ) {
+
+    return "wildfire";
+  }
+
+
+  return "heatwave";
+
+}
 
 
 /* =========================================================
@@ -2005,7 +2343,7 @@ function updateMapPosition(
 
 
 /* =========================================================
-   역지오코딩
+   Reverse geocode
 ========================================================= */
 
 let lastGeocodeTime =
@@ -2128,7 +2466,7 @@ function getPlaceName(data) {
 
 
 /* =========================================================
-   위치 업데이트
+   위치 갱신
 ========================================================= */
 
 async function updateReverseGeocode(
@@ -2161,7 +2499,9 @@ async function updateReverseGeocode(
     );
 
 
-  if (!data) {
+  if (
+    !data
+  ) {
 
     return;
   }
@@ -2289,14 +2629,6 @@ function startLocationTracking() {
   }
 
 
-  mapLocationName.textContent =
-    "위치 확인 중";
-
-
-  mapLocationStatus.textContent =
-    "GPS 연결 중...";
-
-
   locationWatchId =
     navigator.geolocation.watchPosition(
 
@@ -2344,7 +2676,9 @@ function closeMenu(
     );
 
 
-  if (!panel) {
+  if (
+    !panel
+  ) {
 
     return;
   }
@@ -2404,7 +2738,9 @@ menuButtons.forEach(
           );
 
 
-        if (!panel) {
+        if (
+          !panel
+        ) {
 
           return;
         }
