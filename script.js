@@ -58,7 +58,9 @@ const riskCaption =
   );
 
 
-/* 폭염 전용 */
+/* =========================================================
+   폭염 DOM
+========================================================= */
 
 const heatwaveCardSection =
   document.getElementById(
@@ -69,6 +71,31 @@ const heatwaveChartArea =
   document.getElementById(
     "heatwave-chart-area"
   );
+
+const heatwaveDangerArea =
+  document.getElementById(
+    "heatwave-danger-area"
+  );
+
+const heatwaveDangerStops = [
+
+  document.getElementById(
+    "heatwave-danger-stop-1"
+  ),
+
+  document.getElementById(
+    "heatwave-danger-stop-2"
+  ),
+
+  document.getElementById(
+    "heatwave-danger-stop-3"
+  ),
+
+  document.getElementById(
+    "heatwave-danger-stop-4"
+  )
+
+];
 
 const heatwaveSelectedGlow =
   document.getElementById(
@@ -101,7 +128,9 @@ const heatwaveExtraRisk =
   );
 
 
-/* 침수 전용 */
+/* =========================================================
+   침수 DOM
+========================================================= */
 
 const floodCardSection =
   document.getElementById(
@@ -129,7 +158,9 @@ const floodWarningArea =
   );
 
 
-/* 일반 카드 */
+/* =========================================================
+   일반 카드 DOM
+========================================================= */
 
 const generalChartSection =
   document.getElementById(
@@ -204,11 +235,6 @@ const chartArea =
     "chart-area"
   );
 
-const chartRiskArea =
-  document.getElementById(
-    "chart-risk-area"
-  );
-
 
 /* 지도 */
 
@@ -247,7 +273,7 @@ const dangerAlertButtonText =
 
 
 /* =========================================================
-   화면 FIT
+   화면 Fit
 ========================================================= */
 
 function fitScene() {
@@ -442,7 +468,7 @@ const yearProfiles = {
 
 
 /* =========================================================
-   폭염 전용 데이터
+   폭염 데이터
 ========================================================= */
 
 const heatwaveCardProfiles = {
@@ -529,8 +555,6 @@ const heatwaveCardProfiles = {
 };
 
 
-/* 폭염 그래프 좌표 */
-
 const heatwaveChartX = {
 
   current:
@@ -557,7 +581,6 @@ function heatwaveTemperatureToY(
 
   const maxTemperature =
     42;
-
 
   const top =
     12;
@@ -597,6 +620,7 @@ function heatwaveTemperatureToY(
 const floodCardProfiles = {
 
   current: {
+
     probability:
       23,
 
@@ -611,10 +635,12 @@ const floodCardProfiles = {
 
     warningArea:
       "해당 없음"
+
   },
 
 
   2030: {
+
     probability:
       30,
 
@@ -629,10 +655,12 @@ const floodCardProfiles = {
 
     warningArea:
       "해당 없음"
+
   },
 
 
   2050: {
+
     probability:
       36,
 
@@ -647,10 +675,12 @@ const floodCardProfiles = {
 
     warningArea:
       "해당 없음"
+
   },
 
 
   2090: {
+
     probability:
       79,
 
@@ -665,13 +695,14 @@ const floodCardProfiles = {
 
     warningArea:
       "해당 없음"
+
   }
 
 };
 
 
 /* =========================================================
-   기타 기후위험
+   기타 위험 데이터
 ========================================================= */
 
 const climateRiskProfiles = {
@@ -882,30 +913,24 @@ const warningIcon =
 
 
 /* =========================================================
-   위험 단계
+   위험 단계 텍스트
 ========================================================= */
 
 function levelText(level) {
 
-  if (
-    level <= 1
-  ) {
+  if (level <= 1) {
 
     return "낮음";
   }
 
 
-  if (
-    level === 2
-  ) {
+  if (level === 2) {
 
     return "보통";
   }
 
 
-  if (
-    level === 3
-  ) {
+  if (level === 3) {
 
     return "높음";
   }
@@ -917,7 +942,244 @@ function levelText(level) {
 
 
 /* =========================================================
-   폭염 그래프 업데이트
+   폭염 그래프 위험 색
+========================================================= */
+
+function setHeatwaveDangerGradient(
+  yearKey
+) {
+
+  /*
+    현재 / 2030
+    주황색 중심
+
+    2050
+    선택 지점 중심 붉은 영역 등장
+
+    2090
+    오른쪽 미래 영역 전체가 강한 붉은색
+  */
+
+
+  if (
+    yearKey ===
+    "current"
+  ) {
+
+    heatwaveDangerStops[0].setAttribute(
+      "offset",
+      "0%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[1].setAttribute(
+      "offset",
+      "10%"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
+      "stop-opacity",
+      ".08"
+    );
+
+
+    heatwaveDangerStops[2].setAttribute(
+      "offset",
+      "26%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[3].setAttribute(
+      "offset",
+      "100%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+  }
+
+
+  else if (
+    yearKey ===
+    "2030"
+  ) {
+
+    heatwaveDangerStops[0].setAttribute(
+      "offset",
+      "8%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[1].setAttribute(
+      "offset",
+      "28%"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
+      "stop-opacity",
+      ".20"
+    );
+
+
+    heatwaveDangerStops[2].setAttribute(
+      "offset",
+      "42%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[3].setAttribute(
+      "offset",
+      "100%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+  }
+
+
+  else if (
+    yearKey ===
+    "2050"
+  ) {
+
+    /*
+      목표 시안처럼
+      선택된 중후반 지점을 중심으로
+      붉은 색이 넓게 번짐
+    */
+
+    heatwaveDangerStops[0].setAttribute(
+      "offset",
+      "34%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[1].setAttribute(
+      "offset",
+      "48%"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
+      "stop-opacity",
+      ".34"
+    );
+
+
+    heatwaveDangerStops[2].setAttribute(
+      "offset",
+      "62%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-opacity",
+      ".94"
+    );
+
+
+    heatwaveDangerStops[3].setAttribute(
+      "offset",
+      "82%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+  }
+
+
+  else if (
+    yearKey ===
+    "2090"
+  ) {
+
+    /*
+      마지막 시안처럼
+      오른쪽으로 갈수록 강한 빨강
+    */
+
+    heatwaveDangerStops[0].setAttribute(
+      "offset",
+      "34%"
+    );
+
+    heatwaveDangerStops[0].setAttribute(
+      "stop-opacity",
+      "0"
+    );
+
+
+    heatwaveDangerStops[1].setAttribute(
+      "offset",
+      "54%"
+    );
+
+    heatwaveDangerStops[1].setAttribute(
+      "stop-opacity",
+      ".30"
+    );
+
+
+    heatwaveDangerStops[2].setAttribute(
+      "offset",
+      "72%"
+    );
+
+    heatwaveDangerStops[2].setAttribute(
+      "stop-opacity",
+      ".82"
+    );
+
+
+    heatwaveDangerStops[3].setAttribute(
+      "offset",
+      "100%"
+    );
+
+    heatwaveDangerStops[3].setAttribute(
+      "stop-opacity",
+      "1"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   폭염 그래프
 ========================================================= */
 
 function updateHeatwaveChart() {
@@ -982,11 +1244,23 @@ function updateHeatwaveChart() {
     `;
 
 
+  /* 기본 면 */
+
   heatwaveChartArea.setAttribute(
     "d",
     path
   );
 
+
+  /* 빨간 위험 면 */
+
+  heatwaveDangerArea.setAttribute(
+    "d",
+    path
+  );
+
+
+  /* 포인트 위치 */
 
   points.forEach(
     point => {
@@ -997,9 +1271,7 @@ function updateHeatwaveChart() {
         );
 
 
-      if (
-        circle
-      ) {
+      if (circle) {
 
         circle.setAttribute(
           "cy",
@@ -1020,6 +1292,12 @@ function updateHeatwaveChart() {
     );
 
 
+  if (!selected) {
+
+    return;
+  }
+
+
   heatwaveSelectedGlow.setAttribute(
     "cx",
     selected.x
@@ -1041,18 +1319,25 @@ function updateHeatwaveChart() {
   heatwaveSelectedPoint.setAttribute(
     "cy",
     selected.y
+  );
+
+
+  /* 선택 연도에 따른 붉은 영역 */
+
+  setHeatwaveDangerGradient(
+    currentYear
   );
 
 }
 
 
 /* =========================================================
-   폭염 전용 카드
+   폭염 카드
 ========================================================= */
 
 function updateHeatwaveCard() {
 
-  const heatwaveData =
+  const data =
     heatwaveCardProfiles[
       currentYear
     ];
@@ -1087,7 +1372,7 @@ function updateHeatwaveCard() {
 
 
   infoCard.classList.add(
-    `heatwave-level-${heatwaveData.level}`
+    `heatwave-level-${data.level}`
   );
 
 
@@ -1121,7 +1406,7 @@ function updateHeatwaveCard() {
 
 
   riskValue.textContent =
-    heatwaveData.temperature.toFixed(
+    data.temperature.toFixed(
       1
     );
 
@@ -1135,15 +1420,15 @@ function updateHeatwaveCard() {
 
 
   heatwaveImpactValue.textContent =
-    heatwaveData.impact;
+    data.impact;
 
 
   heatwaveFeelsTemp.textContent =
-    `${heatwaveData.feelsTemperature.toFixed(1)}°C`;
+    `${data.feelsTemperature.toFixed(1)}°C`;
 
 
   heatwaveExtraRisk.textContent =
-    heatwaveData.extraRisk;
+    data.extraRisk;
 
 
   heatwaveImpactTile.classList.remove(
@@ -1155,7 +1440,7 @@ function updateHeatwaveCard() {
 
 
   heatwaveImpactTile.classList.add(
-    `level-${heatwaveData.level}`
+    `level-${data.level}`
   );
 
 
@@ -1164,7 +1449,7 @@ function updateHeatwaveCard() {
 
   document.body.dataset.riskLevel =
     String(
-      heatwaveData.level
+      data.level
     );
 
 }
@@ -1176,7 +1461,7 @@ function updateHeatwaveCard() {
 
 function updateFloodCard() {
 
-  const floodData =
+  const data =
     floodCardProfiles[
       currentYear
     ];
@@ -1211,7 +1496,7 @@ function updateFloodCard() {
 
 
   infoCard.classList.add(
-    `flood-level-${floodData.level}`
+    `flood-level-${data.level}`
   );
 
 
@@ -1245,7 +1530,7 @@ function updateFloodCard() {
 
 
   riskValue.textContent =
-    floodData.probability;
+    data.probability;
 
 
   riskUnit.textContent =
@@ -1257,15 +1542,15 @@ function updateFloodCard() {
 
 
   floodImpactValue.textContent =
-    floodData.impact;
+    data.impact;
 
 
   floodWaterTemp.textContent =
-    `${floodData.waterTemperature.toFixed(1)}°C`;
+    `${data.waterTemperature.toFixed(1)}°C`;
 
 
   floodWarningArea.textContent =
-    floodData.warningArea;
+    data.warningArea;
 
 
   floodImpactTile.classList.remove(
@@ -1277,20 +1562,20 @@ function updateFloodCard() {
 
 
   floodImpactTile.classList.add(
-    `level-${floodData.level}`
+    `level-${data.level}`
   );
 
 
   document.body.dataset.riskLevel =
     String(
-      floodData.level
+      data.level
     );
 
 }
 
 
 /* =========================================================
-   기타 위험 데이터
+   기타 위험
 ========================================================= */
 
 function getClimateData(
@@ -1466,14 +1751,6 @@ function updateChart() {
   );
 
 
-  const selected =
-    points.find(
-      point =>
-        point.year ===
-        currentYear
-    );
-
-
   points.forEach(
     point => {
 
@@ -1483,9 +1760,7 @@ function updateChart() {
         );
 
 
-      if (
-        node
-      ) {
+      if (node) {
 
         node.setAttribute(
           "cy",
@@ -1496,6 +1771,14 @@ function updateChart() {
 
     }
   );
+
+
+  const selected =
+    points.find(
+      point =>
+        point.year ===
+        currentYear
+    );
 
 
   selectedPoint.setAttribute(
@@ -1525,7 +1808,7 @@ function updateChart() {
 
 
 /* =========================================================
-   기타 일반 카드
+   일반 카드
 ========================================================= */
 
 function updateGeneralCard() {
@@ -1652,9 +1935,7 @@ function updateGeneralCard() {
     ];
 
 
-  if (
-    icons
-  ) {
+  if (icons) {
 
     metricOneIcon.src =
       icons.metricOne;
@@ -1682,7 +1963,7 @@ function updateGeneralCard() {
 
 
 /* =========================================================
-   전체 인터페이스
+   전체 카드
 ========================================================= */
 
 function updateClimateInterface() {
@@ -1715,7 +1996,7 @@ function updateClimateInterface() {
 
 
 /* =========================================================
-   현재 위험 단계
+   현재 위험 레벨
 ========================================================= */
 
 function getCurrentRiskLevel() {
@@ -1847,7 +2128,7 @@ dangerAlertConfirm.addEventListener(
 
 
 /* =========================================================
-   연도
+   연도 변경
 ========================================================= */
 
 function changeYear(key) {
@@ -1984,7 +2265,7 @@ yearButtons.forEach(
 
 
 /* =========================================================
-   기후 위험 선택
+   위험 선택
 ========================================================= */
 
 climateOptions.forEach(
@@ -2103,7 +2384,7 @@ function detectEnvironment(data) {
 
 
 /* =========================================================
-   자동 위험
+   자동 위험 선택
 ========================================================= */
 
 function selectAutomaticRisk(
@@ -2134,7 +2415,7 @@ function selectAutomaticRisk(
 
 
 /* =========================================================
-   Leaflet
+   Leaflet 지도
 ========================================================= */
 
 let locationMap =
@@ -2255,7 +2536,7 @@ function initializeLocationMap() {
 
 
 /* =========================================================
-   지도 위치
+   지도 위치 갱신
 ========================================================= */
 
 function updateMapPosition(
@@ -2343,7 +2624,7 @@ function updateMapPosition(
 
 
 /* =========================================================
-   Reverse geocode
+   역지오코딩
 ========================================================= */
 
 let lastGeocodeTime =
@@ -2409,7 +2690,7 @@ async function reverseGeocode(
 
 
 /* =========================================================
-   장소명
+   장소 이름
 ========================================================= */
 
 function getPlaceName(data) {
@@ -2466,7 +2747,7 @@ function getPlaceName(data) {
 
 
 /* =========================================================
-   위치 갱신
+   위치 기반 정보
 ========================================================= */
 
 async function updateReverseGeocode(
@@ -2499,9 +2780,7 @@ async function updateReverseGeocode(
     );
 
 
-  if (
-    !data
-  ) {
+  if (!data) {
 
     return;
   }
@@ -2676,9 +2955,7 @@ function closeMenu(
     );
 
 
-  if (
-    !panel
-  ) {
+  if (!panel) {
 
     return;
   }
@@ -2722,9 +2999,7 @@ menuButtons.forEach(
         );
 
 
-        if (
-          !shouldOpen
-        ) {
+        if (!shouldOpen) {
 
           return;
         }
@@ -2738,9 +3013,7 @@ menuButtons.forEach(
           );
 
 
-        if (
-          !panel
-        ) {
+        if (!panel) {
 
           return;
         }

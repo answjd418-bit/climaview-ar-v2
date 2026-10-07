@@ -131,6 +131,7 @@
           aria-label="기후 시뮬레이션 메뉴"
         >
 
+          <!-- 기후 시뮬레이션 -->
           <div class="menu-group">
 
             <button
@@ -368,7 +369,7 @@
 
         <!-- 오른쪽 정보 카드 -->
         <section
-          class="info-card glass"
+          class="info-card glass heatwave-layout heatwave-level-2"
           id="info-card"
         >
 
@@ -447,54 +448,110 @@
 
               <defs>
 
+                <!-- 기본 면 그래프 -->
                 <linearGradient
                   id="heatwave-fill"
-                  x1="0"
+                  gradientUnits="userSpaceOnUse"
+                  x1="42"
                   y1="0"
-                  x2="1"
+                  x2="308"
                   y2="0"
                 >
 
                   <stop
                     offset="0"
-                    stop-color="#f3a742"
-                    stop-opacity=".88"
+                    stop-color="#e7a24a"
+                    stop-opacity=".84"
                   />
 
                   <stop
-                    offset=".55"
-                    stop-color="#71b7cb"
-                    stop-opacity=".72"
+                    offset=".28"
+                    stop-color="#dbbb73"
+                    stop-opacity=".80"
+                  />
+
+                  <stop
+                    offset=".56"
+                    stop-color="#89b7bc"
+                    stop-opacity=".78"
                   />
 
                   <stop
                     offset="1"
-                    stop-color="#58a8c7"
-                    stop-opacity=".85"
+                    stop-color="#54a6c5"
+                    stop-opacity=".88"
                   />
 
                 </linearGradient>
 
 
+                <!-- 선택 연도에 따라 JS로 변경되는 붉은 위험 레이어 -->
+                <linearGradient
+                  id="heatwave-danger-gradient"
+                  gradientUnits="userSpaceOnUse"
+                  x1="42"
+                  y1="0"
+                  x2="308"
+                  y2="0"
+                >
+
+                  <stop
+                    id="heatwave-danger-stop-1"
+                    offset="0%"
+                    stop-color="#ff654b"
+                    stop-opacity="0"
+                  />
+
+                  <stop
+                    id="heatwave-danger-stop-2"
+                    offset="40%"
+                    stop-color="#ff654b"
+                    stop-opacity="0"
+                  />
+
+                  <stop
+                    id="heatwave-danger-stop-3"
+                    offset="60%"
+                    stop-color="#ff493d"
+                    stop-opacity="0"
+                  />
+
+                  <stop
+                    id="heatwave-danger-stop-4"
+                    offset="100%"
+                    stop-color="#e83737"
+                    stop-opacity="0"
+                  />
+
+                </linearGradient>
+
+
+                <!-- 선택 포인트 Glow -->
                 <radialGradient
                   id="heatwave-highlight"
                 >
 
                   <stop
                     offset="0"
-                    stop-color="#ffba61"
+                    stop-color="#ffffff"
                     stop-opacity=".95"
                   />
 
                   <stop
-                    offset=".45"
-                    stop-color="#e67c2d"
-                    stop-opacity=".75"
+                    offset=".24"
+                    stop-color="#ffad67"
+                    stop-opacity=".88"
+                  />
+
+                  <stop
+                    offset=".58"
+                    stop-color="#ec6e45"
+                    stop-opacity=".55"
                   />
 
                   <stop
                     offset="1"
-                    stop-color="#e67c2d"
+                    stop-color="#ec6e45"
                     stop-opacity="0"
                   />
 
@@ -503,7 +560,7 @@
               </defs>
 
 
-              <!-- Y축 -->
+              <!-- Y축 숫자 -->
               <g class="heatwave-axis-label">
 
                 <text x="0" y="25">
@@ -525,6 +582,7 @@
               </g>
 
 
+              <!-- 축 -->
               <path
                 d="M42 12v112h266"
                 fill="none"
@@ -533,7 +591,7 @@
               />
 
 
-              <!-- 면 그래프 -->
+              <!-- 기본 면 -->
               <path
                 id="heatwave-chart-area"
                 d="
@@ -550,7 +608,25 @@
               />
 
 
-              <!-- 포인트 -->
+              <!-- 붉은 위험도 면 -->
+              <path
+                id="heatwave-danger-area"
+                d="
+                  M42 82
+                  L105 72
+                  L188 48
+                  L270 35
+                  L308 20
+                  L308 124
+                  L42 124
+                  Z
+                "
+                fill="url(#heatwave-danger-gradient)"
+                pointer-events="none"
+              />
+
+
+              <!-- 전체 연도 포인트 -->
               <g class="heatwave-points">
 
                 <circle
@@ -584,7 +660,7 @@
               </g>
 
 
-              <!-- 선택 포인트 외곽 Glow -->
+              <!-- 선택 지점 Glow -->
               <circle
                 id="heatwave-selected-glow"
                 class="heatwave-selected-glow"
@@ -594,7 +670,7 @@
               />
 
 
-              <!-- 선택 포인트 -->
+              <!-- 선택 지점 -->
               <circle
                 id="heatwave-selected-point"
                 class="heatwave-selected-point"
@@ -631,12 +707,11 @@
             </svg>
 
 
-            <!-- 하단 정보 -->
+            <!-- 폭염 하단 정보 -->
             <div class="heatwave-metric-grid">
 
-              <!-- 폭염 영향 -->
               <div
-                class="heatwave-metric-tile heatwave-impact-tile"
+                class="heatwave-metric-tile heatwave-impact-tile level-2"
                 id="heatwave-impact-tile"
               >
 
@@ -654,7 +729,6 @@
               </div>
 
 
-              <!-- 체감온도 -->
               <div class="heatwave-metric-tile">
 
                 <span class="heatwave-metric-label">
@@ -671,7 +745,6 @@
               </div>
 
 
-              <!-- 추가 위험 -->
               <div class="heatwave-extra-tile">
 
                 <span class="heatwave-metric-label">
@@ -764,7 +837,7 @@
 
 
           <!-- =================================================
-               다른 위험용 기존 그래프
+               나머지 기후위험용 그래프
           ================================================== -->
           <div
             class="chart-section"
@@ -951,7 +1024,7 @@
           </div>
 
 
-          <!-- 다른 위험용 하단 -->
+          <!-- 다른 위험 하단 -->
           <dl
             class="metrics"
             id="general-metrics"

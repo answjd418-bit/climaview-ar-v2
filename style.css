@@ -85,7 +85,6 @@ button {
 .background-layer,
 .gui-layer {
   position: absolute;
-
   inset: 0;
 }
 
@@ -280,7 +279,7 @@ button {
 
 
 /* =========================================================
-   왼쪽
+   왼쪽 패널
 ========================================================= */
 
 .left-panel {
@@ -362,7 +361,7 @@ button {
 
 
 /* =========================================================
-   메뉴
+   메뉴 드롭다운
 ========================================================= */
 
 .submenu {
@@ -582,7 +581,7 @@ button {
 
 
 /* =========================================================
-   오른쪽 기본 카드
+   오른쪽 카드
 ========================================================= */
 
 .info-card {
@@ -672,7 +671,7 @@ button {
 
 
 /* =========================================================
-   대표 수치
+   큰 수치
 ========================================================= */
 
 .risk-summary {
@@ -750,6 +749,11 @@ button {
 }
 
 
+.info-card.heatwave-layout .risk-name {
+  display: none;
+}
+
+
 .heatwave-card-section {
   padding-top: 24px;
 
@@ -806,43 +810,121 @@ button {
 .heatwave-points circle {
   fill: #69b5d1;
 
-  stroke: rgba(255,255,255,.65);
+  stroke:
+    rgba(255, 255, 255, .70);
 
-  stroke-width: 1.5;
+  stroke-width: 1.5px;
 }
 
 
+/* 붉은 위험 레이어 */
+
+#heatwave-danger-area {
+  opacity: 1;
+
+  transition:
+    opacity .35s ease;
+}
+
+
+/* 선택된 포인트 Glow */
+
 .heatwave-selected-glow {
   fill:
-    rgba(230, 131, 44, .22);
+    url(#heatwave-highlight);
 
-  stroke:
-    rgba(255, 188, 105, .20);
+  stroke: none;
 
-  stroke-width: 5px;
+  opacity: .95;
+
+  transition:
+    opacity .35s ease;
+}
+
+
+/* 선택 포인트 */
+
+.heatwave-selected-point {
+  fill: #dd8740;
+
+  stroke: #ffffff;
+
+  stroke-width: 1.8px;
+
+  transition:
+    fill .35s ease,
+    filter .35s ease;
+}
+
+
+/* 현재 / 2030 : 보통 */
+
+.info-card.heatwave-level-2
+.heatwave-selected-point {
+  fill: #dc913e;
 
   filter:
     drop-shadow(
       0
       0
-      8px
-      rgba(224, 129, 39, .95)
+      5px
+      rgba(231, 157, 66, .90)
     );
 }
 
 
+/* 2050 : 높음 */
+
+.info-card.heatwave-level-3
 .heatwave-selected-point {
-  fill: #dc8b38;
+  fill: #e96343;
 
-  stroke: #ffffff;
+  filter:
+    drop-shadow(
+      0
+      0
+      5px
+      rgba(242, 92, 58, .95)
+    )
 
-  stroke-width: 1.5;
+    drop-shadow(
+      0
+      0
+      10px
+      rgba(242, 92, 58, .55)
+    );
 }
 
 
-/* 2030 = 보통 */
-.info-card.heatwave-level-2 .risk-value,
-.info-card.heatwave-level-2 .risk-unit {
+/* 2090 : 매우 높음 */
+
+.info-card.heatwave-level-4
+.heatwave-selected-point {
+  fill: #e33f3c;
+
+  filter:
+    drop-shadow(
+      0
+      0
+      6px
+      rgba(255, 63, 57, 1)
+    )
+
+    drop-shadow(
+      0
+      0
+      12px
+      rgba(255, 63, 57, .76)
+    );
+}
+
+
+/* 큰 기온 수치 색상 */
+
+.info-card.heatwave-level-2
+.risk-value,
+.info-card.heatwave-level-2
+.risk-unit {
   text-shadow:
     0
     0
@@ -852,43 +934,45 @@ button {
     0
     0
     18px
-    rgba(231, 160, 69, .42);
+    rgba(231, 160, 69, .38);
 }
 
 
-/* 2050 = 높음 */
-.info-card.heatwave-level-3 .risk-value,
-.info-card.heatwave-level-3 .risk-unit {
+.info-card.heatwave-level-3
+.risk-value,
+.info-card.heatwave-level-3
+.risk-unit {
   text-shadow:
     0
     0
     7px
-    rgba(233, 92, 52, .95),
+    rgba(234, 93, 53, .95),
 
     0
     0
     18px
-    rgba(233, 92, 52, .50);
+    rgba(234, 93, 53, .48);
 }
 
 
-/* 2090 = 매우 높음 */
-.info-card.heatwave-level-4 .risk-value,
-.info-card.heatwave-level-4 .risk-unit {
+.info-card.heatwave-level-4
+.risk-value,
+.info-card.heatwave-level-4
+.risk-unit {
   text-shadow:
     0
     0
     8px
-    rgba(255, 43, 38, 1),
+    rgba(255, 55, 48, 1),
 
     0
     0
     20px
-    rgba(255, 43, 38, .70);
+    rgba(255, 55, 48, .67);
 }
 
 
-/* 하단 타일 */
+/* 폭염 하단 정보 */
 
 .heatwave-metric-grid {
   display: grid;
@@ -924,7 +1008,7 @@ button {
 
   border:
     1px solid
-    rgba(255,255,255,.14);
+    rgba(255, 255, 255, .14);
 
   background:
     rgba(113, 113, 113, .26);
@@ -943,7 +1027,7 @@ button {
 
 .heatwave-metric-label {
   color:
-    rgba(255,255,255,.62);
+    rgba(255, 255, 255, .62);
 
   font-size: 13px;
 
@@ -961,7 +1045,7 @@ button {
 }
 
 
-/* 보통 */
+/* 폭염 영향 보통 */
 
 .heatwave-impact-tile.level-2 {
   background:
@@ -976,14 +1060,14 @@ button {
 }
 
 
-/* 높음 */
+/* 폭염 영향 높음 */
 
 .heatwave-impact-tile.level-3 {
   background:
     linear-gradient(
       120deg,
-      rgba(202, 111, 48, .97),
-      rgba(194, 63, 50, .93)
+      rgba(204, 109, 49, .97),
+      rgba(193, 62, 49, .94)
     );
 
   border-color:
@@ -991,14 +1075,14 @@ button {
 }
 
 
-/* 매우 높음 */
+/* 폭염 영향 매우 높음 */
 
 .heatwave-impact-tile.level-4 {
   background:
     linear-gradient(
       120deg,
-      rgba(197, 56, 52, .98),
-      rgba(169, 40, 40, .94)
+      rgba(198, 55, 52, .98),
+      rgba(166, 39, 39, .95)
     );
 
   border-color:
@@ -1025,7 +1109,7 @@ button {
 
   border-top:
     1px solid
-    rgba(255,255,255,.30);
+    rgba(255, 255, 255, .30);
 }
 
 
@@ -1077,10 +1161,10 @@ button {
 
   border:
     1px solid
-    rgba(255,255,255,.13);
+    rgba(255, 255, 255, .13);
 
   background:
-    rgba(113,113,113,.25);
+    rgba(113, 113, 113, .25);
 }
 
 
@@ -1096,7 +1180,7 @@ button {
 
 .flood-metric-label {
   color:
-    rgba(255,255,255,.62);
+    rgba(255, 255, 255, .62);
 
   font-size: 13px;
 }
@@ -1110,7 +1194,7 @@ button {
 
 .flood-impact-tile.level-1 {
   background:
-    rgba(118,118,118,.27);
+    rgba(118, 118, 118, .27);
 }
 
 
@@ -1119,8 +1203,8 @@ button {
   background:
     linear-gradient(
       120deg,
-      rgba(194,132,61,.92),
-      rgba(163,105,42,.88)
+      rgba(194, 132, 61, .92),
+      rgba(163, 105, 42, .88)
     );
 }
 
@@ -1129,14 +1213,52 @@ button {
   background:
     linear-gradient(
       120deg,
-      rgba(198,57,55,.96),
-      rgba(165,42,40,.92)
+      rgba(198, 57, 55, .96),
+      rgba(165, 42, 40, .92)
     );
 }
 
 
+.info-card.flood-level-2
+.risk-value,
+.info-card.flood-level-2
+.risk-unit,
+.info-card.flood-level-3
+.risk-value,
+.info-card.flood-level-3
+.risk-unit {
+  text-shadow:
+    0
+    0
+    7px
+    rgba(204, 139, 66, .80),
+
+    0
+    0
+    17px
+    rgba(204, 139, 66, .32);
+}
+
+
+.info-card.flood-level-4
+.risk-value,
+.info-card.flood-level-4
+.risk-unit {
+  text-shadow:
+    0
+    0
+    7px
+    rgba(234, 63, 56, .90),
+
+    0
+    0
+    18px
+    rgba(234, 63, 56, .52);
+}
+
+
 /* =========================================================
-   기존 일반 그래프
+   일반 그래프
 ========================================================= */
 
 .chart-section {
@@ -1146,11 +1268,11 @@ button {
 
   border-top:
     1px solid
-    rgba(255,255,255,.29);
+    rgba(255, 255, 255, .29);
 
   border-bottom:
     1px solid
-    rgba(255,255,255,.29);
+    rgba(255, 255, 255, .29);
 }
 
 
@@ -1210,7 +1332,7 @@ button {
 
 .chart-value-label rect {
   fill:
-    rgba(201,91,75,.90);
+    rgba(201, 91, 75, .90);
 }
 
 
@@ -1250,7 +1372,7 @@ button {
 
   border-bottom:
     1px solid
-    rgba(255,255,255,.14);
+    rgba(255, 255, 255, .14);
 
   font-size: 16px;
 }
@@ -1313,7 +1435,7 @@ body[data-year="2030"] .scene::after {
     0
     0
     60px
-    rgba(255,100,75,.04);
+    rgba(255, 100, 75, .04);
 }
 
 
@@ -1325,7 +1447,7 @@ body[data-year="2050"] .scene::after {
     0
     0
     90px
-    rgba(255,90,65,.11);
+    rgba(255, 90, 65, .11);
 }
 
 
@@ -1335,10 +1457,10 @@ body.danger-mode .scene::after {
   background:
     radial-gradient(
       ellipse at center,
-      rgba(140,20,15,0) 48%,
-      rgba(155,28,22,.08) 68%,
-      rgba(165,35,27,.22) 84%,
-      rgba(170,40,32,.40) 100%
+      rgba(140, 20, 15, 0) 48%,
+      rgba(155, 28, 22, .08) 68%,
+      rgba(165, 35, 27, .22) 84%,
+      rgba(170, 40, 32, .40) 100%
     );
 
   box-shadow:
@@ -1346,7 +1468,7 @@ body.danger-mode .scene::after {
     0
     0
     130px
-    rgba(180,45,35,.42);
+    rgba(180, 45, 35, .42);
 }
 
 
@@ -1358,7 +1480,7 @@ body.danger-mode .camera-feed {
 
 
 /* =========================================================
-   팝업
+   경고 팝업
 ========================================================= */
 
 .danger-alert {
@@ -1402,9 +1524,9 @@ body.danger-mode .camera-feed {
   background:
     radial-gradient(
       ellipse at center,
-      rgba(0,0,0,.80) 0%,
-      rgba(0,0,0,.88) 58%,
-      rgba(60,12,10,.88) 100%
+      rgba(0, 0, 0, .80) 0%,
+      rgba(0, 0, 0, .88) 58%,
+      rgba(60, 12, 10, .88) 100%
     );
 
   box-shadow:
@@ -1412,7 +1534,7 @@ body.danger-mode .camera-feed {
     0
     0
     150px
-    rgba(180,45,35,.55);
+    rgba(180, 45, 35, .55);
 
   backdrop-filter:
     blur(4px);
@@ -1493,13 +1615,13 @@ body.danger-mode .camera-feed {
 
   border:
     1px solid
-    rgba(255,255,255,.22);
+    rgba(255, 255, 255, .22);
 
   background:
     linear-gradient(
       180deg,
-      rgba(62,62,62,.64),
-      rgba(20,20,20,.82)
+      rgba(62, 62, 62, .64),
+      rgba(20, 20, 20, .82)
     );
 
   font-size: 19px;
