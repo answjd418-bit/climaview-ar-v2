@@ -1583,3 +1583,16 @@ body.danger-mode .camera-feed {
   letter-spacing: -0.4px;
   white-space: nowrap;
 }
+
+/* PM2.5 label: keep the parenthesized unit on its own line. */
+.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
+  font-size: 0;
+  white-space: nowrap;
+}
+.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after {
+  content: "초미세먼지\A(PM2.5)";
+  display: block;
+  white-space: pre;
+  font-size: 11px;
+  line-height: 1.25;
+}
