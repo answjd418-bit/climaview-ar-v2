@@ -4,53 +4,111 @@
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    DOM
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 const scene =
+
+ 
 
   document.getElementById("scene");
 
  
 
+ 
+
+ 
+
 const cameraFeed =
+
+ 
 
   document.getElementById("camera-feed");
 
  
 
+ 
+
+ 
+
 const cameraStartButton =
+
+ 
 
   document.getElementById(
 
+ 
+
     "camera-start-button"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const yearButtons =
 
+ 
+
   document.querySelectorAll(
 
+ 
+
     ".year[data-year]"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const climateOptions =
+
+ 
 
   document.querySelectorAll(
 
+ 
+
     ".climate-option"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -58,59 +116,115 @@ const climateOptions =
 
 const infoCard =
 
+ 
+
   document.getElementById(
+
+ 
 
     "info-card"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const infoTitle =
 
+ 
+
   document.getElementById(
+
+ 
 
     "info-title"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const riskName =
 
+ 
+
   document.getElementById(
+
+ 
 
     "risk-name"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const riskValue =
 
+ 
+
   document.getElementById(
+
+ 
 
     "risk-value"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const riskUnit =
 
+ 
+
   document.getElementById(
+
+ 
 
     "risk-unit"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const riskCaption =
 
+ 
+
   document.getElementById(
 
+ 
+
     "risk-caption"
+
+ 
 
   );
 
@@ -118,440 +232,897 @@ const riskCaption =
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    폭염 DOM
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
 const heatwaveCardSection =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-card-section"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveChartArea =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-chart-area"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveDangerArea =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-danger-area"
 
+ 
+
   );
+
+ 
 
   const heatwaveBaseStops = [
 
  
 
+ 
+
+ 
+
     document.getElementById(
+
+ 
 
       "heatwave-base-stop-1"
 
+ 
+
     ),
+
+ 
 
   
 
+ 
+
     document.getElementById(
+
+ 
 
       "heatwave-base-stop-2"
 
+ 
+
     ),
+
+ 
 
   
 
+ 
+
     document.getElementById(
+
+ 
 
       "heatwave-base-stop-3"
 
+ 
+
     ),
 
+ 
+
   
+
+ 
 
     document.getElementById(
 
+ 
+
       "heatwave-base-stop-4"
+
+ 
 
     )
 
+ 
+
   
 
+ 
+
   ];
+
+ 
 
 const heatwaveDangerStops = [
 
  
 
+ 
+
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-danger-stop-1"
 
+ 
+
   ),
 
  
 
+ 
+
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-danger-stop-2"
 
+ 
+
   ),
 
  
 
+ 
+
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-danger-stop-3"
 
+ 
+
   ),
+
+ 
+
+ 
 
  
 
   document.getElementById(
 
+ 
+
     "heatwave-danger-stop-4"
+
+ 
 
   )
 
  
 
+ 
+
+ 
+
 ];
+
+ 
+
+ 
 
  
 
 const heatwaveSelectedGlow =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-selected-glow"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveSelectedPoint =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-selected-point"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveImpactTile =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-impact-tile"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveImpactValue =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-impact-value"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveFeelsTemp =
 
+ 
+
   document.getElementById(
+
+ 
 
     "heatwave-feels-temp"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const heatwaveExtraRisk =
 
+ 
+
   document.getElementById(
 
+ 
+
     "heatwave-extra-risk"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    대기질 DOM
 
+ 
+
 ========================================================= */
 
+ 
+
 const airCardSection = document.getElementById("air-card-section");
+
 const airChartArea = document.getElementById("air-chart-area");
+
+const airGradientStops = [
+
+  document.getElementById("air-stop-0"),
+
+  document.getElementById("air-stop-1"),
+
+  document.getElementById("air-stop-2"),
+
+  document.getElementById("air-stop-3")
+
+];
+
 const airSelectedGlow = document.getElementById("air-selected-glow");
+
 const airSelectedPoint = document.getElementById("air-selected-point");
+
 const airImpactTile = document.getElementById("air-impact-tile");
+
 const airImpactValue = document.getElementById("air-impact-value");
+
 const airPm25Value = document.getElementById("air-pm25-value");
+
 const airExtraRisk = document.getElementById("air-extra-risk");
+
+ 
 
 /* =========================================================
 
+ 
+
    산불 DOM
+
+ 
 
 ========================================================= */
 
+ 
+
 const wildfireCardSection =
+
   document.getElementById(
+
     "wildfire-card-section"
+
   );
+
+ 
 
 const wildfireImpactTile =
+
   document.getElementById(
+
     "wildfire-impact-tile"
+
   );
+
+ 
 
 const wildfireImpactValue =
+
   document.getElementById(
+
     "wildfire-impact-value"
+
   );
+
+ 
 
 const wildfireDrynessValue =
+
   document.getElementById(
+
     "wildfire-dryness-value"
+
   );
+
+ 
 
 const wildfireWarningValue =
+
   document.getElementById(
+
     "wildfire-warning-value"
+
   );
 
+ 
+
+ 
 
   /* =========================================================
 
+ 
+
    열대야 DOM
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
 const tropicalCardSection =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-card-section"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalChartArea =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-chart-area"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalDangerArea =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-danger-area"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalBaseStops = [
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-base-stop-1"
 
+ 
+
 ),
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-base-stop-2"
 
+ 
+
 ),
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-base-stop-3"
 
+ 
+
 ),
+
+ 
 
 document.getElementById(
 
+ 
+
   "tropical-base-stop-4"
+
+ 
 
 )
 
+ 
+
 ];
+
+ 
+
+ 
 
  
 
 const tropicalDangerStops = [
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-danger-stop-1"
 
+ 
+
 ),
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-danger-stop-2"
 
+ 
+
 ),
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-danger-stop-3"
 
+ 
+
 ),
+
+ 
 
 document.getElementById(
 
+ 
+
   "tropical-danger-stop-4"
 
+ 
+
 )
+
+ 
 
 ];
 
  
 
+ 
+
+ 
+
 const tropicalSelectedGlow =
+
+ 
 
 document.getElementById(
 
+ 
+
   "tropical-selected-glow"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalSelectedPoint =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-selected-point"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalImpactTile =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-impact-tile"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalImpactValue =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-impact-value"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalNightTemp =
 
+ 
+
 document.getElementById(
+
+ 
 
   "tropical-night-temp"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
 const tropicalExtraRisk =
 
+ 
+
 document.getElementById(
 
+ 
+
   "tropical-extra-risk"
+
+ 
 
 );
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    침수 DOM
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
 const floodCardSection =
 
+ 
+
   document.getElementById(
+
+ 
 
     "flood-card-section"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const floodImpactTile =
 
+ 
+
   document.getElementById(
+
+ 
 
     "flood-impact-tile"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const floodImpactValue =
 
+ 
+
   document.getElementById(
+
+ 
 
     "flood-impact-value"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const floodWaterTemp =
 
+ 
+
   document.getElementById(
 
+ 
+
     "flood-water-temp"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const floodWarningArea =
+
+ 
 
   document.getElementById(
 
+ 
+
     "flood-warning-area"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -559,109 +1130,219 @@ const floodWarningArea =
 
 /* =========================================================
 
+ 
+
    일반 카드 DOM
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 const generalChartSection =
+
+ 
 
   document.getElementById(
 
+ 
+
     "general-chart-section"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const generalMetrics =
 
+ 
+
   document.getElementById(
+
+ 
 
     "general-metrics"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricOneLabel =
 
+ 
+
   document.getElementById(
+
+ 
 
     "metric-one-label"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricOneValue =
 
+ 
+
   document.getElementById(
+
+ 
 
     "metric-one-value"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricTwoLabel =
 
+ 
+
   document.getElementById(
+
+ 
 
     "metric-two-label"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricTwoValue =
 
+ 
+
   document.getElementById(
+
+ 
 
     "metric-two-value"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const warningArea =
 
+ 
+
   document.getElementById(
+
+ 
 
     "warning-area"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricOneIcon =
 
+ 
+
   document.getElementById(
+
+ 
 
     "metric-one-icon"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const metricTwoIcon =
 
+ 
+
   document.getElementById(
 
+ 
+
     "metric-two-icon"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const warningAreaIcon =
+
+ 
 
   document.getElementById(
 
+ 
+
     "warning-area-icon"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -671,43 +1352,89 @@ const warningAreaIcon =
 
  
 
+ 
+
+ 
+
 const selectedPoint =
+
+ 
 
   document.getElementById(
 
+ 
+
     "chart-selected-point"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const chartValueLabel =
 
+ 
+
   document.getElementById(
+
+ 
 
     "chart-value-label"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const chartValueText =
 
+ 
+
   document.getElementById(
 
+ 
+
     "chart-value-text"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const chartArea =
+
+ 
 
   document.getElementById(
 
+ 
+
     "chart-area"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -717,23 +1444,49 @@ const chartArea =
 
  
 
+ 
+
+ 
+
 const mapLocationName =
+
+ 
 
   document.getElementById(
 
+ 
+
     "map-location-name"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const mapLocationStatus =
+
+ 
 
   document.getElementById(
 
+ 
+
     "map-location-status"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -743,43 +1496,89 @@ const mapLocationStatus =
 
  
 
+ 
+
+ 
+
 const dangerAlert =
+
+ 
 
   document.getElementById(
 
+ 
+
     "danger-alert"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const dangerAlertMessage =
 
+ 
+
   document.getElementById(
+
+ 
 
     "danger-alert-message"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
 const dangerAlertConfirm =
 
+ 
+
   document.getElementById(
 
+ 
+
     "danger-alert-confirm"
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 const dangerAlertButtonText =
+
+ 
 
   document.getElementById(
 
+ 
+
     "danger-alert-button-text"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -787,9 +1586,17 @@ const dangerAlertButtonText =
 
 /* =========================================================
 
+ 
+
    화면 Fit
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -797,13 +1604,25 @@ function fitScene() {
 
  
 
+ 
+
+ 
+
   const scale =
+
+ 
 
     Math.min(
 
+ 
+
       window.innerWidth / 1366,
 
+ 
+
       window.innerHeight / 1024
+
+ 
 
     );
 
@@ -811,17 +1630,39 @@ function fitScene() {
 
  
 
+ 
+
+ 
+
+ 
+
   scene.style.setProperty(
+
+ 
 
     "--scene-scale",
 
+ 
+
     scale
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -833,11 +1674,23 @@ fitScene();
 
  
 
+ 
+
+ 
+
+ 
+
 window.addEventListener(
+
+ 
 
   "resize",
 
+ 
+
   fitScene
+
+ 
 
 );
 
@@ -845,23 +1698,51 @@ window.addEventListener(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    카메라
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 let cameraStream =
+
+ 
 
   null;
 
  
 
+ 
+
+ 
+
 let cameraStarted =
 
+ 
+
   false;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -871,25 +1752,53 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     !navigator.mediaDevices ||
 
+ 
+
     !navigator.mediaDevices.getUserMedia
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     cameraStartButton.hidden =
+
+ 
 
       true;
 
  
 
+ 
+
+ 
+
     return;
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -899,17 +1808,33 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
     if (
+
+ 
 
       cameraStarted &&
 
+ 
+
       cameraStream
+
+ 
 
     ) {
 
  
 
+ 
+
+ 
+
       return;
+
+ 
 
     }
 
@@ -917,9 +1842,21 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
+ 
+
     cameraStream =
 
+ 
+
       await navigator.mediaDevices.getUserMedia({
+
+ 
+
+ 
 
  
 
@@ -927,33 +1864,67 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
           facingMode: {
+
+ 
 
             ideal:
 
+ 
+
               "environment"
 
+ 
+
           },
+
+ 
+
+ 
 
  
 
           width: {
 
+ 
+
             ideal:
 
+ 
+
               1920
+
+ 
 
           },
 
  
 
+ 
+
+ 
+
           height: {
+
+ 
 
             ideal:
 
+ 
+
               1080
 
+ 
+
           }
+
+ 
+
+ 
 
  
 
@@ -961,9 +1932,19 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
         audio:
 
+ 
+
           false
+
+ 
+
+ 
 
  
 
@@ -973,9 +1954,23 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
+ 
+
     cameraFeed.srcObject =
 
+ 
+
       cameraStream;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -987,9 +1982,23 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
+ 
+
     cameraStarted =
 
+ 
+
       true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -997,11 +2006,21 @@ async function startCamera() {
 
     cameraStartButton.hidden =
 
+ 
+
       true;
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -1009,11 +2028,21 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
     console.warn(
+
+ 
 
       "카메라 시작 실패:",
 
+ 
+
       error
+
+ 
 
     );
 
@@ -1021,13 +2050,29 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
+ 
+
     cameraStartButton.hidden =
+
+ 
 
       false;
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -1037,13 +2082,31 @@ async function startCamera() {
 
  
 
+ 
+
+ 
+
+ 
+
 cameraStartButton.addEventListener(
+
+ 
 
   "click",
 
+ 
+
   startCamera
 
+ 
+
 );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1055,45 +2118,91 @@ startCamera();
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    상태
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 let currentYear =
+
+ 
 
   "current";
 
  
 
+ 
+
+ 
+
 let selectedRisk =
+
+ 
 
   "heatwave";
 
  
 
+ 
+
+ 
+
 let autoRiskMode =
+
+ 
 
   true;
 
  
 
+ 
+
+ 
+
 let currentPlaceName =
+
+ 
 
   "현재 위치";
 
  
 
+ 
+
+ 
+
 let currentEnvironment =
+
+ 
 
   "urban";
 
  
 
+ 
+
+ 
+
 let locationWatchId =
+
+ 
 
   null;
 
@@ -1101,7 +2210,15 @@ let locationWatchId =
 
  
 
+ 
+
+ 
+
+ 
+
 const shownDangerAlerts =
+
+ 
 
   new Set();
 
@@ -1109,7 +2226,15 @@ const shownDangerAlerts =
 
  
 
+ 
+
+ 
+
+ 
+
 const DANGER_LEVEL =
+
+ 
 
   4;
 
@@ -1117,11 +2242,25 @@ const DANGER_LEVEL =
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    연도
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -1129,47 +2268,97 @@ const yearProfiles = {
 
  
 
+ 
+
+ 
+
   current: {
+
+ 
 
     label:
 
+ 
+
       "현재"
 
+ 
+
   },
+
+ 
+
+ 
 
  
 
   2030: {
 
+ 
+
     label:
+
+ 
 
       "2030년"
 
+ 
+
   },
+
+ 
+
+ 
 
  
 
   2050: {
 
+ 
+
     label:
 
+ 
+
       "2050년"
+
+ 
 
   },
 
  
 
+ 
+
+ 
+
   2090: {
+
+ 
 
     label:
 
+ 
+
       "2090년"
+
+ 
 
   }
 
  
 
+ 
+
+ 
+
 };
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1177,9 +2366,17 @@ const yearProfiles = {
 
 /* =========================================================
 
+ 
+
    폭염 데이터
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -1187,41 +2384,85 @@ const heatwaveCardProfiles = {
 
  
 
+ 
+
+ 
+
   current: {
+
+ 
+
+ 
 
  
 
     temperature:
 
+ 
+
       32.5,
+
+ 
+
+ 
 
  
 
     impact:
 
+ 
+
       "보통",
+
+ 
+
+ 
 
  
 
     level:
 
+ 
+
       2,
+
+ 
+
+ 
 
  
 
     feelsTemperature:
 
+ 
+
       32.5,
+
+ 
+
+ 
 
  
 
     extraRisk:
 
+ 
+
       "온열질환, 열대야"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1231,37 +2472,77 @@ const heatwaveCardProfiles = {
 
  
 
+ 
+
+ 
+
     temperature:
 
+ 
+
       34.7,
+
+ 
+
+ 
 
  
 
     impact:
 
+ 
+
       "보통",
+
+ 
+
+ 
 
  
 
     level:
 
+ 
+
       2,
+
+ 
+
+ 
 
  
 
     feelsTemperature:
 
+ 
+
       34.7,
+
+ 
+
+ 
 
  
 
     extraRisk:
 
+ 
+
       "온열질환, 열대야"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1271,33 +2552,67 @@ const heatwaveCardProfiles = {
 
  
 
+ 
+
+ 
+
     temperature:
 
+ 
+
       37.1,
+
+ 
+
+ 
 
  
 
     impact:
 
+ 
+
       "높음",
+
+ 
+
+ 
 
  
 
     level:
 
+ 
+
       3,
+
+ 
+
+ 
 
  
 
     feelsTemperature:
 
+ 
+
       37.1,
+
+ 
+
+ 
 
  
 
     extraRisk:
 
+ 
+
       "온열질환, 열대야"
+
+ 
+
+ 
 
  
 
@@ -1307,37 +2622,77 @@ const heatwaveCardProfiles = {
 
  
 
+ 
+
+ 
+
+ 
+
   2090: {
+
+ 
+
+ 
 
  
 
     temperature:
 
+ 
+
       40.5,
+
+ 
+
+ 
 
  
 
     impact:
 
+ 
+
       "매우 높음",
+
+ 
+
+ 
 
  
 
     level:
 
+ 
+
       4,
+
+ 
+
+ 
 
  
 
     feelsTemperature:
 
+ 
+
       40.5,
+
+ 
+
+ 
 
  
 
     extraRisk:
 
+ 
+
       "온열질환, 열대야"
+
+ 
+
+ 
 
  
 
@@ -1345,7 +2700,17 @@ const heatwaveCardProfiles = {
 
  
 
+ 
+
+ 
+
 };
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1355,27 +2720,55 @@ const heatwaveChartX = {
 
  
 
+ 
+
+ 
+
   current:
+
+ 
 
     42,
 
  
 
+ 
+
+ 
+
   2030:
+
+ 
 
     105,
 
  
 
+ 
+
+ 
+
   2050:
+
+ 
 
     188,
 
  
 
+ 
+
+ 
+
   2090:
 
+ 
+
     270
+
+ 
+
+ 
 
  
 
@@ -1385,33 +2778,67 @@ const heatwaveChartX = {
 
  
 
+ 
+
+ 
+
+ 
+
 function heatwaveTemperatureToY(
 
+ 
+
   temperature
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const minTemperature =
+
+ 
 
     25;
 
  
 
+ 
+
+ 
+
   const maxTemperature =
+
+ 
 
     42;
 
  
 
+ 
+
+ 
+
   const top =
+
+ 
 
     12;
 
  
 
+ 
+
+ 
+
   const bottom =
+
+ 
 
     124;
 
@@ -1419,23 +2846,47 @@ function heatwaveTemperatureToY(
 
  
 
+ 
+
+ 
+
+ 
+
   const ratio =
 
+ 
+
     (
+
+ 
 
       temperature -
 
+ 
+
       minTemperature
+
+ 
 
     )
 
+ 
+
     /
+
+ 
 
     (
 
+ 
+
       maxTemperature -
 
+ 
+
       minTemperature
+
+ 
 
     );
 
@@ -1443,21 +2894,45 @@ function heatwaveTemperatureToY(
 
  
 
+ 
+
+ 
+
+ 
+
   return (
+
+ 
 
     bottom -
 
+ 
+
     ratio *
+
+ 
 
     (
 
+ 
+
       bottom -
+
+ 
 
       top
 
+ 
+
     )
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -1467,128 +2942,261 @@ function heatwaveTemperatureToY(
 
  
 
-/* =========================================================
+ 
 
-   침수 데이터
-
-========================================================= */
+ 
 
  
 
 /* =========================================================
 
-   열대야 데이터
+ 
+
+   침수 데이터
+
+ 
 
 ========================================================= */
+
+ 
+
+ 
+
+ 
+
+/* =========================================================
+
+ 
+
+   열대야 데이터
+
+ 
+
+========================================================= */
+
+ 
+
+ 
 
  
 
 const wildfireCardProfiles = {
 
+ 
+
   current: {
+
     risk: "낮음",
+
     level: 1,
+
     impact: "낮음",
+
     dryness: "낮음",
+
     warning: "산림 인접 지역"
+
   },
+
+ 
 
   2030: {
+
     risk: "다소 높음",
+
     level: 2,
+
     impact: "다소 높음",
+
     dryness: "다소 높음",
+
     warning: "산림 인접 지역"
+
   },
+
+ 
 
   2050: {
+
     risk: "높음",
+
     level: 3,
+
     impact: "높음",
+
     dryness: "높음",
+
     warning: "산림/도시 경계"
+
   },
 
+ 
+
   2090: {
+
     risk: "매우 높음",
+
     level: 4,
+
     impact: "매우 높음",
+
     dryness: "매우 높음",
+
     warning: "산림/도시 경계"
+
   }
+
+ 
 
 };
 
+ 
+
+ 
 
 const tropicalCardProfiles = {
 
  
 
+ 
+
+ 
+
   current: {
+
+ 
 
     days: 11.3,
 
+ 
+
     impact: "낮음",
+
+ 
 
     level: 1,
 
+ 
+
     nightState: "낮음",
+
+ 
 
     extraRisk: "수면환경 악화"
 
+ 
+
   },
+
+ 
+
+ 
 
  
 
   2030: {
 
+ 
+
     days: 51.2,
+
+ 
 
     impact: "보통",
 
+ 
+
     level: 2,
+
+ 
 
     nightState: "증가",
 
+ 
+
     extraRisk: "수면환경 악화"
 
+ 
+
   },
+
+ 
+
+ 
 
  
 
   2050: {
 
+ 
+
     days: 77.8,
+
+ 
 
     impact: "높음",
 
+ 
+
     level: 3,
+
+ 
 
     nightState: "높음",
 
+ 
+
     extraRisk: "수면환경 악화"
+
+ 
 
   },
 
  
 
+ 
+
+ 
+
   2090: {
+
+ 
 
     days: 101,
 
+ 
+
     impact: "매우 높음",
+
+ 
 
     level: 4,
 
+ 
+
     nightState: "매우 높음",
 
+ 
+
     extraRisk: "수면환경 악화"
+
+ 
 
   }
 
  
 
+ 
+
+ 
+
 };
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1598,31 +3206,65 @@ const tropicalChartX = {
 
  
 
+ 
+
+ 
+
   current:
+
+ 
 
     42,
 
  
 
+ 
+
+ 
+
   2030:
+
+ 
 
     105,
 
  
 
+ 
+
+ 
+
   2050:
+
+ 
 
     188,
 
  
 
+ 
+
+ 
+
   2090:
+
+ 
 
     270
 
  
 
+ 
+
+ 
+
 };
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1632,25 +3274,49 @@ function tropicalDaysToY(days) {
 
  
 
+ 
+
+ 
+
   const minDays =
+
+ 
 
     0;
 
  
 
+ 
+
+ 
+
   const maxDays =
+
+ 
 
     120;
 
  
 
+ 
+
+ 
+
   const top =
+
+ 
 
     16;
 
  
 
+ 
+
+ 
+
   const bottom =
+
+ 
 
     124;
 
@@ -1658,23 +3324,47 @@ function tropicalDaysToY(days) {
 
  
 
+ 
+
+ 
+
+ 
+
   const ratio =
 
+ 
+
     (
+
+ 
 
       days -
 
+ 
+
       minDays
+
+ 
 
     )
 
+ 
+
     /
+
+ 
 
     (
 
+ 
+
       maxDays -
 
+ 
+
       minDays
+
+ 
 
     );
 
@@ -1682,21 +3372,45 @@ function tropicalDaysToY(days) {
 
  
 
+ 
+
+ 
+
+ 
+
   return (
+
+ 
 
     bottom -
 
+ 
+
     ratio *
+
+ 
 
     (
 
+ 
+
       bottom -
+
+ 
 
       top
 
+ 
+
     )
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -1704,7 +3418,15 @@ function tropicalDaysToY(days) {
 
  
 
+ 
+
+ 
+
 const floodCardProfiles = {
+
+ 
+
+ 
 
  
 
@@ -1712,37 +3434,77 @@ const floodCardProfiles = {
 
  
 
+ 
+
+ 
+
     probability:
+
+ 
 
       23,
 
  
 
+ 
+
+ 
+
     impact:
+
+ 
 
       "없음",
 
  
 
+ 
+
+ 
+
     level:
+
+ 
 
       1,
 
  
 
+ 
+
+ 
+
     waterTemperature:
+
+ 
 
       11.7,
 
  
 
+ 
+
+ 
+
     warningArea:
+
+ 
 
       "해당 없음"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1752,37 +3514,77 @@ const floodCardProfiles = {
 
  
 
+ 
+
+ 
+
     probability:
+
+ 
 
       30,
 
  
 
+ 
+
+ 
+
     impact:
+
+ 
 
       "보통",
 
  
 
+ 
+
+ 
+
     level:
+
+ 
 
       2,
 
  
 
+ 
+
+ 
+
     waterTemperature:
+
+ 
 
       13.2,
 
  
 
+ 
+
+ 
+
     warningArea:
+
+ 
 
       "해당 없음"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1792,37 +3594,77 @@ const floodCardProfiles = {
 
  
 
+ 
+
+ 
+
     probability:
+
+ 
 
       36,
 
  
 
+ 
+
+ 
+
     impact:
+
+ 
 
       "보통",
 
  
 
+ 
+
+ 
+
     level:
+
+ 
 
       2,
 
  
 
+ 
+
+ 
+
     waterTemperature:
+
+ 
 
       14.4,
 
  
 
+ 
+
+ 
+
     warningArea:
+
+ 
 
       "해당 없음"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1832,33 +3674,67 @@ const floodCardProfiles = {
 
  
 
+ 
+
+ 
+
     probability:
+
+ 
 
       79,
 
  
 
+ 
+
+ 
+
     impact:
+
+ 
 
       "매우 높음",
 
  
 
+ 
+
+ 
+
     level:
+
+ 
 
       4,
 
  
 
+ 
+
+ 
+
     waterTemperature:
+
+ 
 
       18.9,
 
  
 
+ 
+
+ 
+
     warningArea:
 
+ 
+
       "해당 없음"
+
+ 
+
+ 
 
  
 
@@ -1866,7 +3742,17 @@ const floodCardProfiles = {
 
  
 
+ 
+
+ 
+
 };
+
+ 
+
+ 
+
+ 
 
  
 
@@ -1874,25 +3760,47 @@ const floodCardProfiles = {
 
 /* =========================================================
 
+ 
+
    기타 위험 데이터
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 const airCardProfiles = {
+
   current: { days: 48.1, pm25: 26, impact: "보통", level: 2, extraRisk: "미세먼지 노출" },
+
   2030: { days: 50.1, pm25: 29, impact: "증가", level: 3, extraRisk: "호흡기 질환, 미세먼지 노출" },
+
   2050: { days: 50.1, pm25: 32, impact: "증가 전망", level: 3, extraRisk: "호흡기 질환, 미세먼지 노출" },
+
   2090: { days: 54.6, pm25: 35, impact: "높음", level: 4, extraRisk: "호흡기 질환, 미세먼지 노출" }
+
 };
 
+ 
+
 const airChartPoints = {
+
   current: { x: 48, y: 92 },
+
   2030: { x: 112, y: 84 },
+
   2050: { x: 194, y: 84 },
+
   2090: { x: 276, y: 62 }
+
 };
+
+ 
 
 const climateRiskProfiles = {
 
@@ -1900,71 +3808,145 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
+ 
+
   tropical: {
+
+ 
+
+ 
 
  
 
     name:
 
+ 
+
       "열대야",
+
+ 
+
+ 
 
  
 
     unit:
 
+ 
+
       "일",
+
+ 
+
+ 
 
  
 
     caption:
 
+ 
+
       "연간 예상 열대야 발생일수",
+
+ 
+
+ 
 
  
 
     values: {
 
+ 
+
       current: 16,
+
+ 
 
       2030: 24,
 
+ 
+
       2050: 38,
+
+ 
 
       2090: 61
 
+ 
+
     },
+
+ 
+
+ 
 
  
 
     levels: {
 
+ 
+
       current: 1,
+
+ 
 
       2030: 2,
 
+ 
+
       2050: 3,
 
+ 
+
       2090: 4
+
+ 
 
     },
 
  
 
+ 
+
+ 
+
     metricOneLabel:
+
+ 
 
       "야간 체감",
 
  
 
+ 
+
+ 
+
     metricTwoLabel:
+
+ 
 
       "추가 위험",
 
  
 
+ 
+
+ 
+
     metricTwoValue:
 
+ 
+
       "수면환경 악화",
+
+ 
+
+ 
 
  
 
@@ -1972,27 +3954,55 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
       urban:
+
+ 
 
         "고밀도 주거지·포장면 밀집 지역",
 
  
 
+ 
+
+ 
+
       park:
+
+ 
 
         "열이 축적된 광장·보행 공간",
 
  
 
+ 
+
+ 
+
       river:
+
+ 
 
         "수변 인접 주거·상업 지역",
 
  
 
+ 
+
+ 
+
       forest:
 
+ 
+
         "저지대 주거지역"
+
+ 
+
+ 
 
  
 
@@ -2000,7 +4010,17 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2010,67 +4030,135 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
     name:
+
+ 
 
       "산불",
 
  
 
+ 
+
+ 
+
     unit:
+
+ 
 
       "단계",
 
  
 
+ 
+
+ 
+
     caption:
+
+ 
 
       "현재 위치의 산불기상 위험도",
 
  
 
+ 
+
+ 
+
     values: {
+
+ 
 
       current: 1,
 
+ 
+
       2030: 2,
+
+ 
 
       2050: 3,
 
+ 
+
       2090: 4
 
+ 
+
     },
+
+ 
+
+ 
 
  
 
     levels: {
 
+ 
+
       current: 1,
+
+ 
 
       2030: 2,
 
+ 
+
       2050: 3,
 
+ 
+
       2090: 4
+
+ 
 
     },
 
  
 
+ 
+
+ 
+
     metricOneLabel:
+
+ 
 
       "건조 위험",
 
  
 
+ 
+
+ 
+
     metricTwoLabel:
+
+ 
 
       "추가 위험",
 
  
 
+ 
+
+ 
+
     metricTwoValue:
 
+ 
+
       "강풍·건조",
+
+ 
+
+ 
 
  
 
@@ -2078,31 +4166,63 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
       urban:
+
+ 
 
         "도시 외곽 산림 인접 지역",
 
  
 
+ 
+
+ 
+
       park:
+
+ 
 
         "수목 밀집 공원",
 
  
 
+ 
+
+ 
+
       river:
+
+ 
 
         "하천변 초지·수풀",
 
  
 
+ 
+
+ 
+
       forest:
+
+ 
 
         "산림 탐방로·능선 주변"
 
  
 
+ 
+
+ 
+
     }
+
+ 
+
+ 
 
  
 
@@ -2112,71 +4232,145 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
+ 
+
   air: {
+
+ 
+
+ 
 
  
 
     name:
 
+ 
+
       "대기질",
+
+ 
+
+ 
 
  
 
     unit:
 
+ 
+
       "㎍/㎥",
+
+ 
+
+ 
 
  
 
     caption:
 
+ 
+
       "예상 초미세먼지 PM2.5 농도",
+
+ 
+
+ 
 
  
 
     values: {
 
+ 
+
       current: 21,
+
+ 
 
       2030: 24,
 
+ 
+
       2050: 29,
+
+ 
 
       2090: 35
 
+ 
+
     },
+
+ 
+
+ 
 
  
 
     levels: {
 
+ 
+
       current: 1,
+
+ 
 
       2030: 2,
 
+ 
+
       2050: 2,
 
+ 
+
       2090: 3
+
+ 
 
     },
 
  
 
+ 
+
+ 
+
     metricOneLabel:
+
+ 
 
       "PM2.5",
 
  
 
+ 
+
+ 
+
     metricTwoLabel:
+
+ 
 
       "추가 위험",
 
  
 
+ 
+
+ 
+
     metricTwoValue:
 
+ 
+
       "오존",
+
+ 
+
+ 
 
  
 
@@ -2184,27 +4378,55 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
       urban:
+
+ 
 
         "교통량 많은 도로·교차로",
 
  
 
+ 
+
+ 
+
       park:
+
+ 
 
         "대형도로 인접 공원",
 
  
 
+ 
+
+ 
+
       river:
+
+ 
 
         "교량·간선도로 인접 수변",
 
  
 
+ 
+
+ 
+
       forest:
 
+ 
+
         "도시 외곽 오염 유입 구간"
+
+ 
+
+ 
 
  
 
@@ -2212,7 +4434,15 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -2222,11 +4452,25 @@ const climateRiskProfiles = {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    일반 아이콘
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -2234,23 +4478,47 @@ const metricIcons = {
 
  
 
+ 
+
+ 
+
   tropical: {
+
+ 
+
+ 
 
  
 
     metricOne:
 
+ 
+
       "./icon_night_temp.svg",
+
+ 
+
+ 
 
  
 
     metricTwo:
 
+ 
+
       "./icon_sleep.svg"
 
  
 
+ 
+
+ 
+
   },
+
+ 
+
+ 
 
  
 
@@ -2258,15 +4526,31 @@ const metricIcons = {
 
  
 
+ 
+
+ 
+
     metricOne:
+
+ 
 
       "./icon_dryness.svg",
 
  
 
+ 
+
+ 
+
     metricTwo:
 
+ 
+
       "./icon_dry_wind.svg"
+
+ 
+
+ 
 
  
 
@@ -2274,23 +4558,47 @@ const metricIcons = {
 
  
 
+ 
+
+ 
+
   air: {
+
+ 
+
+ 
 
  
 
     metricOne:
 
+ 
+
       "./icon_pm25.svg",
+
+ 
+
+ 
 
  
 
     metricTwo:
 
+ 
+
       "./icon_ozone.svg"
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -2300,7 +4608,15 @@ const metricIcons = {
 
  
 
+ 
+
+ 
+
+ 
+
 const warningIcon =
+
+ 
 
   "./icon_warning_area.svg";
 
@@ -2308,11 +4624,25 @@ const warningIcon =
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    위험 단계 텍스트
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -2320,13 +4650,29 @@ function levelText(level) {
 
  
 
+ 
+
+ 
+
   if (level <= 1) {
+
+ 
+
+ 
 
  
 
     return "낮음";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2336,9 +4682,21 @@ function levelText(level) {
 
  
 
+ 
+
+ 
+
     return "보통";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2348,9 +4706,21 @@ function levelText(level) {
 
  
 
+ 
+
+ 
+
     return "높음";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2360,7 +4730,17 @@ function levelText(level) {
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2368,9 +4748,17 @@ function levelText(level) {
 
 /* =========================================================
 
+ 
+
    폭염 그래프 위험 색
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -2378,21 +4766,43 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
   /* =====================================================
+
+ 
 
      현재
 
+ 
+
      선택점이 있는 왼쪽부터 황토색.
+
+ 
 
      오른쪽으로 갈수록 청록색.
 
  
 
+ 
+
+ 
+
      목표:
+
+ 
 
      황토 → 베이지 → 청록
 
+ 
+
   ===================================================== */
+
+ 
+
+ 
 
  
 
@@ -2400,23 +4810,49 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#D89A43"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2424,21 +4860,43 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "25%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#C7AA69"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2446,43 +4904,87 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "55%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#8AAFB5"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2490,23 +4992,45 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops.forEach(
 
+ 
+
       stop => {
+
+ 
+
+ 
 
  
 
         stop.setAttribute(
 
+ 
+
           "stop-opacity",
 
+ 
+
           "0"
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -2516,23 +5040,49 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
   /* =====================================================
 
+ 
+
      2030
+
+ 
 
      황토색 영역이 두 번째 선택점 쪽으로 이동.
 
  
 
+ 
+
+ 
+
      목표:
+
+ 
 
      앞쪽도 황토계열 유지
 
+ 
+
      → 선택점 부근이 가장 황토색
+
+ 
 
      → 뒤쪽은 청록색
 
+ 
+
   ===================================================== */
+
+ 
+
+ 
 
  
 
@@ -2540,23 +5090,49 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#B99D65"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2564,21 +5140,43 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "30%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#D79742"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2586,43 +5184,87 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "57%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#91AFAF"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2630,23 +5272,45 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops.forEach(
 
+ 
+
       stop => {
+
+ 
+
+ 
 
  
 
         stop.setAttribute(
 
+ 
+
           "stop-opacity",
 
+ 
+
           "0"
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -2656,25 +5320,53 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
   /* =====================================================
 
+ 
+
      2050
+
+ 
 
      ★ 황토색 완전히 제거
 
  
 
+ 
+
+ 
+
      선택된 2050 지점 주변만 붉게.
+
+ 
 
      왼쪽과 오른쪽은 회청색.
 
  
 
+ 
+
+ 
+
      목표:
+
+ 
 
      회청색 → 빨강 → 청록
 
+ 
+
   ===================================================== */
+
+ 
+
+ 
 
  
 
@@ -2682,23 +5374,49 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#739EAD"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2706,21 +5424,43 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "38%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#8D9EA4"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2728,43 +5468,87 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "70%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#829FAA"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2774,31 +5558,61 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "35%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#E85345"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "stop-opacity",
 
+ 
+
       "0"
+
+ 
 
     );
 
@@ -2806,33 +5620,71 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "50%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#F0694B"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".42"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2840,63 +5692,125 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "58%"
 
+ 
+
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[2].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#E7443E"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[2].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".95"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "76%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#E7443E"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "stop-opacity",
 
+ 
+
       "0"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -2906,27 +5820,57 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
   /* =====================================================
 
+ 
+
      2090
+
+ 
 
      ★ 황토색 완전히 제거
 
  
 
+ 
+
+ 
+
      앞쪽은 회청색.
 
+ 
+
      선택된 2090 지점으로 갈수록
+
+ 
 
      붉은색이 계속 강해짐.
 
  
 
+ 
+
+ 
+
      목표:
+
+ 
 
      회청색 → 회보라 → 빨강 → 진한 빨강
 
+ 
+
   ===================================================== */
+
+ 
+
+ 
 
  
 
@@ -2934,23 +5878,49 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#739EAD"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2958,21 +5928,43 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "36%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#89989E"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -2980,43 +5972,87 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "68%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#8B7A82"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#98565A"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3026,33 +6062,69 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "30%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#E85449"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[0].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       "0"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3060,31 +6132,63 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "52%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#EF604D"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[1].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".28"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3092,67 +6196,133 @@ function setHeatwaveDangerGradient(yearKey) {
 
     heatwaveDangerStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "73%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#EA443E"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     heatwaveDangerStops[2].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".80"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#D93439"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     heatwaveDangerStops[3].setAttribute(
+
+ 
 
       "stop-opacity",
 
+ 
+
       "1"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
   }
+
+ 
+
+ 
 
  
 
@@ -3160,11 +6330,23 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    열대야 그래프 위험 색
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -3172,25 +6354,49 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
   if (yearKey === "current") {
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
 
+ 
+
       "#58A7C3"
+
+ 
 
     );
 
@@ -3198,23 +6404,51 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "32%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#65AEC4"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3222,43 +6456,87 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "65%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#70B7C9"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3266,27 +6544,55 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops.forEach(
 
+ 
+
       stop => {
+
+ 
+
+ 
 
  
 
         stop.setAttribute(
 
+ 
+
           "stop-opacity",
 
+ 
+
           "0"
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3296,23 +6602,49 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#9AA7A4"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3320,21 +6652,43 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "30%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#D79742"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3342,43 +6696,87 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "58%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#91AFAF"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3386,27 +6784,55 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops.forEach(
 
+ 
+
       stop => {
+
+ 
+
+ 
 
  
 
         stop.setAttribute(
 
+ 
+
           "stop-opacity",
 
+ 
+
           "0"
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3416,23 +6842,49 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#739EAD"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3440,21 +6892,43 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "38%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#8D9EA4"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3462,21 +6936,43 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "70%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#829FAA"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3484,21 +6980,43 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[3].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "100%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[3].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#58A7C3"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3506,29 +7024,55 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "35%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#E85345"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "stop-opacity",
 
+ 
+
       "0"
+
+ 
 
     );
 
@@ -3536,33 +7080,71 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "50%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#F0694B"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".42"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3570,67 +7152,135 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "58%"
 
+ 
+
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[2].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#E7443E"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[2].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".95"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "76%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#E7443E"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "stop-opacity",
 
+ 
+
       "0"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3640,23 +7290,49 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "0%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#739EAD"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3664,21 +7340,43 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "36%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#89989E"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3686,43 +7384,87 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "68%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalBaseStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#8B7A82"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalBaseStops[3].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#98565A"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3730,31 +7472,63 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "30%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#E85449"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[0].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       "0"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3762,31 +7536,63 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "52%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#EF604D"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[1].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".28"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3794,67 +7600,133 @@ function setTropicalGradient(yearKey) {
 
     tropicalDangerStops[2].setAttribute(
 
+ 
+
       "offset",
+
+ 
 
       "73%"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[2].setAttribute(
 
+ 
+
       "stop-color",
+
+ 
 
       "#EA443E"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
     tropicalDangerStops[2].setAttribute(
 
+ 
+
       "stop-opacity",
+
+ 
 
       ".80"
 
+ 
+
     );
 
  
 
  
 
+ 
+
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "offset",
 
+ 
+
       "100%"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "stop-color",
 
+ 
+
       "#D93439"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
     tropicalDangerStops[3].setAttribute(
+
+ 
 
       "stop-opacity",
 
+ 
+
       "1"
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
   }
+
+ 
+
+ 
 
  
 
@@ -3864,11 +7736,25 @@ function setTropicalGradient(yearKey) {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    열대야 그래프
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -3876,15 +7762,29 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
   const years = [
+
+ 
 
     "current",
 
+ 
+
     "2030",
+
+ 
 
     "2050",
 
+ 
+
     "2090"
+
+ 
 
   ];
 
@@ -3892,21 +7792,47 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const points =
 
+ 
+
     years.map(
+
+ 
 
       yearKey => {
 
  
 
+ 
+
+ 
+
         const profile =
+
+ 
 
           tropicalCardProfiles[
 
+ 
+
             yearKey
 
+ 
+
           ];
+
+ 
+
+ 
+
+ 
 
  
 
@@ -3916,29 +7842,59 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
           year:
+
+ 
 
             yearKey,
 
  
 
+ 
+
+ 
+
           x:
+
+ 
 
             tropicalChartX[
 
+ 
+
               yearKey
+
+ 
 
             ],
 
  
 
+ 
+
+ 
+
           y:
+
+ 
 
             tropicalDaysToY(
 
+ 
+
               profile.days
 
+ 
+
             )
+
+ 
+
+ 
 
  
 
@@ -3946,7 +7902,13 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
@@ -3954,17 +7916,35 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const [
+
+ 
 
     p0,
 
+ 
+
     p1,
+
+ 
 
     p2,
 
+ 
+
     p3
 
+ 
+
   ] =
+
+ 
 
     points;
 
@@ -3972,23 +7952,47 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const path =
+
+ 
 
     `
 
+ 
+
       M${p0.x} ${p0.y}
+
+ 
 
       L${p1.x} ${p1.y}
 
+ 
+
       L${p2.x} ${p2.y}
+
+ 
 
       L${p3.x} ${p3.y}
 
+ 
+
       L308 124
+
+ 
 
       L42 124
 
+ 
+
       Z
+
+ 
 
     `;
 
@@ -3996,13 +8000,31 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   tropicalChartArea.setAttribute(
+
+ 
 
     "d",
 
+ 
+
     path
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4010,9 +8032,15 @@ function updateTropicalChart() {
 
   tropicalDangerArea.setAttribute(
 
+ 
+
     "d",
 
+ 
+
     path
+
+ 
 
   );
 
@@ -4020,19 +8048,43 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   points.forEach(
+
+ 
 
     point => {
 
  
 
+ 
+
+ 
+
       const circle =
+
+ 
 
         document.getElementById(
 
+ 
+
           `tropical-point-${point.year}`
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4042,13 +8094,27 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
         circle.setAttribute(
+
+ 
 
           "cy",
 
+ 
+
           point.y
 
+ 
+
         );
+
+ 
+
+ 
 
  
 
@@ -4056,9 +8122,21 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
     }
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4066,13 +8144,23 @@ function updateTropicalChart() {
 
   const selected =
 
+ 
+
     points.find(
+
+ 
 
       point =>
 
+ 
+
         point.year ===
 
+ 
+
         currentYear
+
+ 
 
     );
 
@@ -4080,9 +8168,19 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   if (!selected) {
 
+ 
+
     return;
+
+ 
 
   }
 
@@ -4090,23 +8188,51 @@ function updateTropicalChart() {
 
  
 
-  tropicalSelectedGlow.setAttribute(
+ 
 
-    "cx",
-
-    selected.x
-
-  );
+ 
 
  
 
   tropicalSelectedGlow.setAttribute(
 
+ 
+
+    "cx",
+
+ 
+
+    selected.x
+
+ 
+
+  );
+
+ 
+
+ 
+
+ 
+
+  tropicalSelectedGlow.setAttribute(
+
+ 
+
     "cy",
+
+ 
 
     selected.y
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4114,21 +8240,43 @@ function updateTropicalChart() {
 
   tropicalSelectedPoint.setAttribute(
 
+ 
+
     "cx",
 
+ 
+
     selected.x
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
   tropicalSelectedPoint.setAttribute(
+
+ 
 
     "cy",
 
+ 
+
     selected.y
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4136,9 +8284,17 @@ function updateTropicalChart() {
 
   setTropicalGradient(
 
+ 
+
     currentYear
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -4146,11 +8302,23 @@ function updateTropicalChart() {
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    폭염 그래프
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -4158,15 +8326,29 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
   const years = [
+
+ 
 
     "current",
 
+ 
+
     "2030",
+
+ 
 
     "2050",
 
+ 
+
     "2090"
+
+ 
 
   ];
 
@@ -4174,21 +8356,47 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const points =
 
+ 
+
     years.map(
+
+ 
 
       yearKey => {
 
  
 
+ 
+
+ 
+
         const profile =
+
+ 
 
           heatwaveCardProfiles[
 
+ 
+
             yearKey
 
+ 
+
           ];
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4198,29 +8406,59 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
           year:
+
+ 
 
             yearKey,
 
  
 
+ 
+
+ 
+
           x:
+
+ 
 
             heatwaveChartX[
 
+ 
+
               yearKey
+
+ 
 
             ],
 
  
 
+ 
+
+ 
+
           y:
+
+ 
 
             heatwaveTemperatureToY(
 
+ 
+
               profile.temperature
 
+ 
+
             )
+
+ 
+
+ 
 
  
 
@@ -4228,7 +8466,13 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
@@ -4236,17 +8480,35 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const [
+
+ 
 
     p0,
 
+ 
+
     p1,
+
+ 
 
     p2,
 
+ 
+
     p3
 
+ 
+
   ] =
+
+ 
 
     points;
 
@@ -4254,25 +8516,55 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const path =
+
+ 
 
     `
 
+ 
+
       M${p0.x} ${p0.y}
+
+ 
 
       L${p1.x} ${p1.y}
 
+ 
+
       L${p2.x} ${p2.y}
+
+ 
 
       L${p3.x} ${p3.y}
 
+ 
+
       L308 124
+
+ 
 
       L42 124
 
+ 
+
       Z
 
+ 
+
     `;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4282,13 +8574,29 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
   heatwaveChartArea.setAttribute(
+
+ 
 
     "d",
 
+ 
+
     path
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4298,13 +8606,29 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
   heatwaveDangerArea.setAttribute(
+
+ 
 
     "d",
 
+ 
+
     path
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4314,19 +8638,41 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
   points.forEach(
+
+ 
 
     point => {
 
  
 
+ 
+
+ 
+
       const circle =
+
+ 
 
         document.getElementById(
 
+ 
+
           `heatwave-point-${point.year}`
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4336,13 +8682,27 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
         circle.setAttribute(
+
+ 
 
           "cy",
 
+ 
+
           point.y
 
+ 
+
         );
+
+ 
+
+ 
 
  
 
@@ -4350,7 +8710,13 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
     }
+
+ 
 
   );
 
@@ -4358,17 +8724,39 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const selected =
+
+ 
 
     points.find(
 
+ 
+
       point =>
+
+ 
 
         point.year ===
 
+ 
+
         currentYear
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4378,7 +8766,13 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -4386,13 +8780,7 @@ function updateHeatwaveChart() {
 
  
 
-  heatwaveSelectedGlow.setAttribute(
-
-    "cx",
-
-    selected.x
-
-  );
+ 
 
  
 
@@ -4400,23 +8788,47 @@ function updateHeatwaveChart() {
 
   heatwaveSelectedGlow.setAttribute(
 
-    "cy",
-
-    selected.y
-
-  );
-
  
-
- 
-
-  heatwaveSelectedPoint.setAttribute(
 
     "cx",
 
+ 
+
     selected.x
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  heatwaveSelectedGlow.setAttribute(
+
+ 
+
+    "cy",
+
+ 
+
+    selected.y
+
+ 
+
+  );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4424,11 +8836,47 @@ function updateHeatwaveChart() {
 
   heatwaveSelectedPoint.setAttribute(
 
+ 
+
+    "cx",
+
+ 
+
+    selected.x
+
+ 
+
+  );
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  heatwaveSelectedPoint.setAttribute(
+
+ 
+
     "cy",
+
+ 
 
     selected.y
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4438,11 +8886,23 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
   setHeatwaveDangerGradient(
+
+ 
 
     currentYear
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -4452,11 +8912,25 @@ function updateHeatwaveChart() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    폭염 카드
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -4464,11 +8938,21 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
   const data =
+
+ 
 
     heatwaveCardProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ];
 
@@ -4476,11 +8960,23 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   const yearLabel =
+
+ 
 
     yearProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ].label;
 
@@ -4488,63 +8984,131 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   infoCard.classList.remove(
+
+ 
 
     "wildfire-layout",
 
+ 
+
     "wildfire-level-1",
+
+ 
 
     "wildfire-level-2",
 
+ 
+
     "wildfire-level-3",
+
+ 
 
     "wildfire-level-4",
 
+ 
+
     "air-layout",
+
+ 
 
     "air-level-1",
 
+ 
+
     "air-level-2",
+
+ 
 
     "air-level-3",
 
+ 
+
     "air-level-4",
 
+ 
+
     
+
+ 
 
     "flood-layout",
 
+ 
+
     "flood-level-1",
+
+ 
 
     "flood-level-2",
 
+ 
+
     "flood-level-3",
+
+ 
 
     "flood-level-4"
 
+ 
+
     
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
   infoCard.classList.remove(
+
+ 
 
     
 
+ 
+
     "tropical-layout",
+
+ 
 
 "tropical-level-1",
 
+ 
+
 "tropical-level-2",
+
+ 
 
 "tropical-level-3",
 
+ 
+
 "tropical-level-4"
+
+ 
 
     
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4552,9 +9116,19 @@ function updateHeatwaveCard() {
 
   infoCard.classList.add(
 
+ 
+
     "heatwave-layout"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4562,29 +9136,59 @@ function updateHeatwaveCard() {
 
   infoCard.classList.remove(
 
+ 
+
     "heatwave-layout",
+
+ 
 
     "heatwave-level-1",
 
+ 
+
     "heatwave-level-2",
+
+ 
 
     "heatwave-level-3",
 
+ 
+
     "heatwave-level-4",
+
+ 
 
   
 
+ 
+
     "tropical-layout",
+
+ 
 
     "tropical-level-1",
 
+ 
+
     "tropical-level-2",
+
+ 
 
     "tropical-level-3",
 
+ 
+
     "tropical-level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4592,9 +9196,19 @@ function updateHeatwaveCard() {
 
   infoCard.classList.add(
 
+ 
+
     `heatwave-level-${data.level}`
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4602,35 +9216,71 @@ function updateHeatwaveCard() {
 
   heatwaveCardSection.hidden =
 
+ 
+
     false;
+
+ 
+
+ 
 
  
 
   tropicalCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
   floodCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
  
 
   wildfireCardSection.hidden =
+
     true;
 
+ 
+
   airCardSection.hidden =
+
     true;
+
+ 
+
+ 
 
  
 
   generalChartSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4638,7 +9288,15 @@ function updateHeatwaveCard() {
 
   generalMetrics.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4646,15 +9304,27 @@ function updateHeatwaveCard() {
 
   infoTitle.textContent =
 
+ 
+
     currentYear ===
+
+ 
 
     "current"
 
+ 
+
       ?
+
+ 
 
       `2026년 ${currentPlaceName}`
 
+ 
+
       :
+
+ 
 
       `${yearLabel} ${currentPlaceName}`;
 
@@ -4662,7 +9332,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskName.textContent =
+
+ 
 
     "";
 
@@ -4670,11 +9348,23 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskValue.textContent =
+
+ 
 
     data.temperature.toFixed(
 
+ 
+
       1
+
+ 
 
     );
 
@@ -4682,7 +9372,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskUnit.textContent =
+
+ 
 
     "°C";
 
@@ -4690,7 +9388,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskCaption.textContent =
+
+ 
 
     "현재 위치의 예상 최고 온도";
 
@@ -4698,7 +9404,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   heatwaveImpactValue.textContent =
+
+ 
 
     data.impact;
 
@@ -4706,7 +9420,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   heatwaveFeelsTemp.textContent =
+
+ 
 
     `${data.feelsTemperature.toFixed(1)}°C`;
 
@@ -4714,7 +9436,15 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   heatwaveExtraRisk.textContent =
+
+ 
 
     data.extraRisk;
 
@@ -4722,17 +9452,39 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   heatwaveImpactTile.classList.remove(
+
+ 
 
     "level-1",
 
+ 
+
     "level-2",
+
+ 
 
     "level-3",
 
+ 
+
     "level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4740,9 +9492,19 @@ function updateHeatwaveCard() {
 
   heatwaveImpactTile.classList.add(
 
+ 
+
     `level-${data.level}`
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4754,13 +9516,29 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   document.body.dataset.riskLevel =
+
+ 
 
     String(
 
+ 
+
       data.level
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -4768,11 +9546,23 @@ function updateHeatwaveCard() {
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    열대야 카드
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -4780,11 +9570,21 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
   const data =
+
+ 
 
     tropicalCardProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ];
 
@@ -4792,11 +9592,23 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   const yearLabel =
+
+ 
 
     yearProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ].label;
 
@@ -4804,61 +9616,123 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   infoCard.classList.remove(
+
+ 
 
     "wildfire-layout",
 
+ 
+
     "wildfire-level-1",
+
+ 
 
     "wildfire-level-2",
 
+ 
+
     "wildfire-level-3",
+
+ 
 
     "wildfire-level-4",
 
+ 
+
     "air-layout",
+
+ 
 
     "air-level-1",
 
+ 
+
     "air-level-2",
+
+ 
 
     "air-level-3",
 
+ 
+
     "air-level-4",
+
+ 
 
     "heatwave-layout",
 
+ 
+
     "heatwave-level-1",
+
+ 
 
     "heatwave-level-2",
 
+ 
+
     "heatwave-level-3",
+
+ 
 
     "heatwave-level-4",
 
  
 
+ 
+
+ 
+
     "flood-layout",
+
+ 
 
     "flood-level-1",
 
+ 
+
     "flood-level-2",
 
+ 
+
     "flood-level-3",
+
+ 
 
     "flood-level-4",
 
  
 
+ 
+
+ 
+
     "tropical-layout",
+
+ 
 
     "tropical-level-1",
 
+ 
+
     "tropical-level-2",
+
+ 
 
     "tropical-level-3",
 
+ 
+
     "tropical-level-4"
+
+ 
 
   );
 
@@ -4866,11 +9740,27 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   infoCard.classList.add(
+
+ 
 
     "tropical-layout"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4878,9 +9768,19 @@ function updateTropicalCard() {
 
   infoCard.classList.add(
 
+ 
+
     `tropical-level-${data.level}`
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4888,13 +9788,25 @@ function updateTropicalCard() {
 
   heatwaveCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
   floodCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
@@ -4902,23 +9814,49 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
   wildfireCardSection.hidden =
+
     true;
 
+ 
+
   airCardSection.hidden =
+
     true;
+
+ 
+
+ 
 
  
 
   generalChartSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
   generalMetrics.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -4926,15 +9864,27 @@ function updateTropicalCard() {
 
   infoTitle.textContent =
 
+ 
+
     currentYear ===
+
+ 
 
     "current"
 
+ 
+
       ?
+
+ 
 
       `2026년 ${currentPlaceName}`
 
+ 
+
       :
+
+ 
 
       `${yearLabel} ${currentPlaceName}`;
 
@@ -4942,7 +9892,15 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskName.textContent =
+
+ 
 
     "";
 
@@ -4950,19 +9908,39 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskValue.textContent =
+
+ 
 
     Number.isInteger(
 
+ 
+
       data.days
+
+ 
 
     )
 
+ 
+
       ?
+
+ 
 
       data.days
 
+ 
+
       :
+
+ 
 
       data.days.toFixed(1);
 
@@ -4970,7 +9948,15 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskUnit.textContent =
+
+ 
 
     "일";
 
@@ -4978,7 +9964,15 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskCaption.textContent =
+
+ 
 
     "현재 위치의 예상 열대야 발생일수";
 
@@ -4986,7 +9980,15 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   tropicalImpactValue.textContent =
+
+ 
 
     data.impact;
 
@@ -4994,15 +9996,31 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   /*
+
+ 
 
     기존처럼 "11.3일", "51.2일"을
 
+ 
+
     한 번 더 표시하지 않는다.
+
+ 
 
   */
 
+ 
+
   tropicalNightTemp.textContent =
+
+ 
 
     data.nightState;
 
@@ -5010,7 +10028,15 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   tropicalExtraRisk.textContent =
+
+ 
 
     data.extraRisk;
 
@@ -5018,17 +10044,39 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   tropicalImpactTile.classList.remove(
+
+ 
 
     "level-1",
 
+ 
+
     "level-2",
+
+ 
 
     "level-3",
 
+ 
+
     "level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5036,9 +10084,19 @@ function updateTropicalCard() {
 
   tropicalImpactTile.classList.add(
 
+ 
+
     `level-${data.level}`
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5050,13 +10108,29 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   document.body.dataset.riskLevel =
+
+ 
 
     String(
 
+ 
+
       data.level
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -5064,11 +10138,23 @@ function updateTropicalCard() {
 
  
 
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    침수 카드
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -5076,11 +10162,21 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
   const data =
+
+ 
 
     floodCardProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ];
 
@@ -5088,11 +10184,23 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   const yearLabel =
+
+ 
 
     yearProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ].label;
 
@@ -5100,51 +10208,107 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   infoCard.classList.remove(
+
+ 
 
     "wildfire-layout",
 
+ 
+
     "wildfire-level-1",
+
+ 
 
     "wildfire-level-2",
 
+ 
+
     "wildfire-level-3",
+
+ 
 
     "wildfire-level-4",
 
+ 
+
     "air-layout",
+
+ 
 
     "air-level-1",
 
+ 
+
     "air-level-2",
+
+ 
 
     "air-level-3",
 
+ 
+
     "air-level-4",
+
+ 
 
     "heatwave-layout",
 
+ 
+
     "heatwave-level-1",
+
+ 
 
     "heatwave-level-2",
 
+ 
+
     "heatwave-level-3",
+
+ 
 
     "heatwave-level-4",
 
  
 
+ 
+
+ 
+
     "tropical-layout",
+
+ 
 
     "tropical-level-1",
 
+ 
+
     "tropical-level-2",
+
+ 
 
     "tropical-level-3",
 
+ 
+
     "tropical-level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5152,9 +10316,19 @@ function updateFloodCard() {
 
   infoCard.classList.add(
 
+ 
+
     "flood-layout"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5162,15 +10336,31 @@ function updateFloodCard() {
 
   infoCard.classList.remove(
 
+ 
+
     "flood-level-1",
+
+ 
 
     "flood-level-2",
 
+ 
+
     "flood-level-3",
+
+ 
 
     "flood-level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5178,9 +10368,19 @@ function updateFloodCard() {
 
   infoCard.classList.add(
 
+ 
+
     `flood-level-${data.level}`
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5188,17 +10388,31 @@ function updateFloodCard() {
 
   heatwaveCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
   tropicalCardSection.hidden =
 
+ 
+
     true;
 
  
 
+ 
+
+ 
+
   floodCardSection.hidden =
+
+ 
 
     false;
 
@@ -5206,17 +10420,39 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   wildfireCardSection.hidden =
+
     true;
 
+ 
+
   airCardSection.hidden =
+
     true;
+
+ 
+
+ 
 
  
 
   generalChartSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5224,7 +10460,15 @@ function updateFloodCard() {
 
   generalMetrics.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5232,15 +10476,27 @@ function updateFloodCard() {
 
   infoTitle.textContent =
 
+ 
+
     currentYear ===
+
+ 
 
     "current"
 
+ 
+
       ?
+
+ 
 
       `2026년 ${currentPlaceName}`
 
+ 
+
       :
+
+ 
 
       `${yearLabel} ${currentPlaceName}`;
 
@@ -5248,7 +10504,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskName.textContent =
+
+ 
 
     "";
 
@@ -5256,7 +10520,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskValue.textContent =
+
+ 
 
     data.probability;
 
@@ -5264,7 +10536,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskUnit.textContent =
+
+ 
 
     "%";
 
@@ -5272,7 +10552,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskCaption.textContent =
+
+ 
 
     "현재 위치의 상대적 침수 확률";
 
@@ -5280,7 +10568,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   floodImpactValue.textContent =
+
+ 
 
     data.impact;
 
@@ -5288,7 +10584,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   floodWaterTemp.textContent =
+
+ 
 
     `${data.waterTemperature.toFixed(1)}°C`;
 
@@ -5296,7 +10600,15 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   floodWarningArea.textContent =
+
+ 
 
     data.warningArea;
 
@@ -5304,17 +10616,39 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   floodImpactTile.classList.remove(
+
+ 
 
     "level-1",
 
+ 
+
     "level-2",
+
+ 
 
     "level-3",
 
+ 
+
     "level-4"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5322,7 +10656,11 @@ function updateFloodCard() {
 
   floodImpactTile.classList.add(
 
+ 
+
     `level-${data.level}`
+
+ 
 
   );
 
@@ -5330,13 +10668,29 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   document.body.dataset.riskLevel =
+
+ 
 
     String(
 
+ 
+
       data.level
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -5346,31 +10700,67 @@ function updateFloodCard() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    기타 위험
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 function getClimateData(
+
+ 
 
   riskKey,
 
+ 
+
   yearKey
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const profile =
+
+ 
 
     climateRiskProfiles[
 
+ 
+
       riskKey
 
+ 
+
     ];
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5380,9 +10770,21 @@ function getClimateData(
 
  
 
+ 
+
+ 
+
     return null;
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5392,77 +10794,155 @@ function getClimateData(
 
  
 
+ 
+
+ 
+
     name:
+
+ 
 
       profile.name,
 
  
 
+ 
+
+ 
+
     unit:
+
+ 
 
       profile.unit,
 
  
 
+ 
+
+ 
+
     caption:
+
+ 
 
       profile.caption,
 
  
 
+ 
+
+ 
+
     value:
+
+ 
 
       profile.values[
 
+ 
+
         yearKey
 
+ 
+
       ],
+
+ 
+
+ 
 
  
 
     level:
 
+ 
+
       profile.levels[
 
+ 
+
         yearKey
+
+ 
 
       ],
 
  
 
+ 
+
+ 
+
     metricOneLabel:
+
+ 
 
       profile.metricOneLabel,
 
  
 
+ 
+
+ 
+
     metricTwoLabel:
+
+ 
 
       profile.metricTwoLabel,
 
  
 
+ 
+
+ 
+
     metricTwoValue:
+
+ 
 
       profile.metricTwoValue,
 
  
 
+ 
+
+ 
+
     warning:
+
+ 
 
       profile.warning[
 
+ 
+
         currentEnvironment
+
+ 
 
       ]
 
+ 
+
       ||
+
+ 
 
       profile.warning.urban
 
  
 
+ 
+
+ 
+
   };
+
+ 
+
+ 
 
  
 
@@ -5472,25 +10952,55 @@ function getClimateData(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    일반 그래프
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 const chartYears = [
+
+ 
 
   "current",
 
+ 
+
   "2030",
+
+ 
 
   "2050",
 
+ 
+
   "2090"
 
+ 
+
 ];
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5500,27 +11010,55 @@ const chartX = {
 
  
 
+ 
+
+ 
+
   current:
+
+ 
 
     70,
 
  
 
+ 
+
+ 
+
   2030:
+
+ 
 
     130,
 
  
 
+ 
+
+ 
+
   2050:
+
+ 
 
     205,
 
  
 
+ 
+
+ 
+
   2090:
 
+ 
+
     275
+
+ 
+
+ 
 
  
 
@@ -5530,7 +11068,17 @@ const chartX = {
 
  
 
+ 
+
+ 
+
+ 
+
 function levelToY(level) {
+
+ 
+
+ 
 
  
 
@@ -5538,27 +11086,55 @@ function levelToY(level) {
 
  
 
+ 
+
+ 
+
     1:
+
+ 
 
       112,
 
  
 
+ 
+
+ 
+
     2:
+
+ 
 
       90,
 
  
 
+ 
+
+ 
+
     3:
+
+ 
 
       62,
 
  
 
+ 
+
+ 
+
     4:
 
+ 
+
       30
+
+ 
+
+ 
 
  
 
@@ -5566,7 +11142,17 @@ function levelToY(level) {
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5576,23 +11162,49 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
   const points =
 
+ 
+
     chartYears.map(
+
+ 
 
       yearKey => {
 
  
 
+ 
+
+ 
+
         const data =
+
+ 
 
           getClimateData(
 
+ 
+
             selectedRisk,
+
+ 
 
             yearKey
 
+ 
+
           );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5602,35 +11214,71 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
           year:
+
+ 
 
             yearKey,
 
  
 
+ 
+
+ 
+
           x:
+
+ 
 
             chartX[
 
+ 
+
               yearKey
+
+ 
 
             ],
 
  
 
+ 
+
+ 
+
           y:
+
+ 
 
             levelToY(
 
+ 
+
               data.level
+
+ 
 
             ),
 
  
 
+ 
+
+ 
+
           level:
 
+ 
+
             data.level
+
+ 
+
+ 
 
  
 
@@ -5638,7 +11286,13 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
@@ -5646,17 +11300,35 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const [
+
+ 
 
     p0,
 
+ 
+
     p1,
+
+ 
 
     p2,
 
+ 
+
     p3
 
+ 
+
   ] =
+
+ 
 
     points;
 
@@ -5664,23 +11336,47 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   const path =
+
+ 
 
     `
 
+ 
+
       M${p0.x} ${p0.y}
+
+ 
 
       L${p1.x} ${p1.y}
 
+ 
+
       L${p2.x} ${p2.y}
+
+ 
 
       L${p3.x} ${p3.y}
 
+ 
+
       L304 122
+
+ 
 
       L70 122
 
+ 
+
       Z
+
+ 
 
     `;
 
@@ -5688,11 +11384,23 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   chartArea.setAttribute(
+
+ 
 
     "d",
 
+ 
+
     path
+
+ 
 
   );
 
@@ -5700,19 +11408,43 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   points.forEach(
+
+ 
 
     point => {
 
  
 
+ 
+
+ 
+
       const node =
+
+ 
 
         document.getElementById(
 
+ 
+
           `chart-point-${point.year}`
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5722,13 +11454,27 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
         node.setAttribute(
+
+ 
 
           "cy",
 
+ 
+
           point.y
 
+ 
+
         );
+
+ 
+
+ 
 
  
 
@@ -5736,9 +11482,21 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
     }
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5746,13 +11504,23 @@ function updateChart() {
 
   const selected =
 
+ 
+
     points.find(
+
+ 
 
       point =>
 
+ 
+
         point.year ===
 
+ 
+
         currentYear
+
+ 
 
     );
 
@@ -5760,13 +11528,31 @@ function updateChart() {
 
  
 
+ 
+
+ 
+
+ 
+
   selectedPoint.setAttribute(
+
+ 
 
     "cx",
 
+ 
+
     selected.x
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5774,11 +11560,23 @@ function updateChart() {
 
   selectedPoint.setAttribute(
 
+ 
+
     "cy",
+
+ 
 
     selected.y
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5786,11 +11584,23 @@ function updateChart() {
 
   chartValueText.textContent =
 
+ 
+
     levelText(
+
+ 
 
       selected.level
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5798,15 +11608,31 @@ function updateChart() {
 
   chartValueLabel.setAttribute(
 
+ 
+
     "transform",
 
+ 
+
     `translate(${selected.x} ${selected.y - 7})`
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5814,167 +11640,409 @@ function updateChart() {
 
 /* =========================================================
 
+ 
+
    일반 카드
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
+function setAirGradient(year) {
+
+  const palettes = {
+
+    current: [
+
+      { offset: "0%", color: "#c8893f" },
+
+      { offset: "24%", color: "#d79a4a" },
+
+      { offset: "58%", color: "#8faeb1" },
+
+      { offset: "100%", color: "#58a7c3" }
+
+    ],
+
+    2030: [
+
+      { offset: "0%", color: "#73a7b5" },
+
+      { offset: "25%", color: "#d28b43" },
+
+      { offset: "48%", color: "#d86f45" },
+
+      { offset: "100%", color: "#58a7c3" }
+
+    ],
+
+    2050: [
+
+      { offset: "0%", color: "#69a8bc" },
+
+      { offset: "38%", color: "#9aa6a3" },
+
+      { offset: "64%", color: "#e06a45" },
+
+      { offset: "100%", color: "#58a7c3" }
+
+    ],
+
+    2090: [
+
+      { offset: "0%", color: "#69a8bc" },
+
+      { offset: "42%", color: "#879da5" },
+
+      { offset: "68%", color: "#c86b62" },
+
+      { offset: "100%", color: "#ff4148" }
+
+    ]
+
+  };
+
+ 
+
+  const palette = palettes[year] || palettes.current;
+
+  airGradientStops.forEach((stop, index) => {
+
+    if (!stop) return;
+
+    stop.setAttribute("offset", palette[index].offset);
+
+    stop.setAttribute("stop-color", palette[index].color);
+
+  });
+
+}
+
+ 
+
 function updateAirCard() {
+
   const data = airCardProfiles[currentYear];
+
   if (!data) return;
 
+ 
+
   infoCard.classList.remove(
+
     "heatwave-layout", "heatwave-level-1", "heatwave-level-2", "heatwave-level-3", "heatwave-level-4",
+
     "flood-layout", "flood-level-1", "flood-level-2", "flood-level-3", "flood-level-4",
+
     "tropical-layout", "tropical-level-1", "tropical-level-2", "tropical-level-3", "tropical-level-4",
+
     "wildfire-layout", "wildfire-level-1", "wildfire-level-2", "wildfire-level-3", "wildfire-level-4",
+
     "air-layout", "air-level-1", "air-level-2", "air-level-3", "air-level-4"
+
   );
+
   infoCard.classList.add("air-layout", `air-level-${data.level}`);
 
+ 
+
   heatwaveCardSection.hidden = true;
+
   floodCardSection.hidden = true;
+
   tropicalCardSection.hidden = true;
+
   wildfireCardSection.hidden = true;
+
   airCardSection.hidden = false;
+
   generalChartSection.hidden = true;
+
   generalMetrics.hidden = true;
+
+ 
 
   const yearLabel = yearProfiles[currentYear].label;
+
   infoTitle.textContent = currentYear === "current"
+
     ? `2026년 ${currentPlaceName}`
+
     : `${yearLabel} ${currentPlaceName}`;
+
   riskName.textContent = "";
+
   riskValue.textContent = data.days;
+
   riskUnit.textContent = "일";
+
   riskCaption.textContent = "현재 위치의 대기질 위험 기상일수";
 
+ 
+
   airImpactTile.classList.remove("level-1", "level-2", "level-3", "level-4");
+
   airImpactTile.classList.add(`level-${data.level}`);
+
   airImpactValue.textContent = data.impact;
+
   airPm25Value.textContent = `${data.pm25}㎍/㎥`;
+
   airExtraRisk.textContent = data.extraRisk;
 
+ 
+
   const years = ["current", "2030", "2050", "2090"];
+
   const selectedIndex = years.indexOf(currentYear);
+
   const pts = years.map(year => airChartPoints[year]);
+
   let path = `M${pts[0].x} ${pts[0].y}`;
+
   for (let i = 1; i < pts.length; i += 1) path += ` L${pts[i].x} ${pts[i].y}`;
+
   path += " L300 122 L48 122 Z";
+
   airChartArea.setAttribute("d", path);
 
+  setAirGradient(currentYear);
+
+ 
+
   years.forEach((year, index) => {
+
     const point = document.getElementById(`air-point-${year}`);
+
     point.style.opacity = index === selectedIndex ? "0" : "1";
+
   });
+
   const selected = airChartPoints[currentYear];
+
   airSelectedGlow.setAttribute("cx", selected.x);
+
   airSelectedGlow.setAttribute("cy", selected.y);
+
   airSelectedPoint.setAttribute("cx", selected.x);
+
   airSelectedPoint.setAttribute("cy", selected.y);
 
+ 
+
   document.body.dataset.riskLevel = String(data.level);
+
 }
+
+ 
 
 function updateWildfireCard() {
-
-  const data =
-    wildfireCardProfiles[
-      currentYear
-    ];
-
-  const yearLabel =
-    yearProfiles[
-      currentYear
-    ].label;
-
-  infoCard.classList.remove(
-    "heatwave-layout",
-    "heatwave-level-1",
-    "heatwave-level-2",
-    "heatwave-level-3",
-    "heatwave-level-4",
-
-    "flood-layout",
-    "flood-level-1",
-    "flood-level-2",
-    "flood-level-3",
-    "flood-level-4",
-
-    "tropical-layout",
-    "tropical-level-1",
-    "tropical-level-2",
-    "tropical-level-3",
-    "tropical-level-4",
-
-    "wildfire-layout",
-    "wildfire-level-1",
-    "wildfire-level-2",
-    "wildfire-level-3",
-    "wildfire-level-4"
-  );
-
-  infoCard.classList.add(
-    "wildfire-layout",
-    `wildfire-level-${data.level}`
-  );
-
-  heatwaveCardSection.hidden = true;
-  floodCardSection.hidden = true;
-  tropicalCardSection.hidden = true;
-  airCardSection.hidden = true;
-  wildfireCardSection.hidden = false;
-  generalChartSection.hidden = true;
-  generalMetrics.hidden = true;
-
-  infoTitle.textContent =
-    currentYear === "current"
-      ? `2026년 ${currentPlaceName}`
-      : `${yearLabel} ${currentPlaceName}`;
-
-  riskName.textContent = "";
-  riskValue.textContent = data.risk;
-  riskUnit.textContent = "";
-  riskCaption.textContent =
-    "현재 위치의 산불 발생 확률";
-
-  wildfireImpactTile.classList.remove(
-    "level-1",
-    "level-2",
-    "level-3",
-    "level-4"
-  );
-
-  wildfireImpactTile.classList.add(
-    `level-${data.level}`
-  );
-
-  wildfireImpactValue.textContent =
-    data.impact;
-
-  wildfireDrynessValue.textContent =
-    data.dryness;
-
-  wildfireWarningValue.textContent =
-    data.warning;
-
-}
-
-
-function updateGeneralCard() {
 
  
 
   const data =
 
-    getClimateData(
-
-      selectedRisk,
+    wildfireCardProfiles[
 
       currentYear
 
+    ];
+
+ 
+
+  const yearLabel =
+
+    yearProfiles[
+
+      currentYear
+
+    ].label;
+
+ 
+
+  infoCard.classList.remove(
+
+    "heatwave-layout",
+
+    "heatwave-level-1",
+
+    "heatwave-level-2",
+
+    "heatwave-level-3",
+
+    "heatwave-level-4",
+
+ 
+
+    "flood-layout",
+
+    "flood-level-1",
+
+    "flood-level-2",
+
+    "flood-level-3",
+
+    "flood-level-4",
+
+ 
+
+    "tropical-layout",
+
+    "tropical-level-1",
+
+    "tropical-level-2",
+
+    "tropical-level-3",
+
+    "tropical-level-4",
+
+ 
+
+    "wildfire-layout",
+
+    "wildfire-level-1",
+
+    "wildfire-level-2",
+
+    "wildfire-level-3",
+
+    "wildfire-level-4"
+
+  );
+
+ 
+
+  infoCard.classList.add(
+
+    "wildfire-layout",
+
+    `wildfire-level-${data.level}`
+
+  );
+
+ 
+
+  heatwaveCardSection.hidden = true;
+
+  floodCardSection.hidden = true;
+
+  tropicalCardSection.hidden = true;
+
+  airCardSection.hidden = true;
+
+  wildfireCardSection.hidden = false;
+
+  generalChartSection.hidden = true;
+
+  generalMetrics.hidden = true;
+
+ 
+
+  infoTitle.textContent =
+
+    currentYear === "current"
+
+      ? `2026년 ${currentPlaceName}`
+
+      : `${yearLabel} ${currentPlaceName}`;
+
+ 
+
+  riskName.textContent = "";
+
+  riskValue.textContent = data.risk;
+
+  riskUnit.textContent = "";
+
+  riskCaption.textContent =
+
+    "현재 위치의 산불 발생 확률";
+
+ 
+
+  wildfireImpactTile.classList.remove(
+
+    "level-1",
+
+    "level-2",
+
+    "level-3",
+
+    "level-4"
+
+  );
+
+ 
+
+  wildfireImpactTile.classList.add(
+
+    `level-${data.level}`
+
+  );
+
+ 
+
+  wildfireImpactValue.textContent =
+
+    data.impact;
+
+ 
+
+  wildfireDrynessValue.textContent =
+
+    data.dryness;
+
+ 
+
+  wildfireWarningValue.textContent =
+
+    data.warning;
+
+ 
+
+}
+
+ 
+
+ 
+
+function updateGeneralCard() {
+
+ 
+
+ 
+
+ 
+
+  const data =
+
+ 
+
+    getClimateData(
+
+ 
+
+      selectedRisk,
+
+ 
+
+      currentYear
+
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5984,9 +12052,21 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
     return;
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -5994,59 +12074,115 @@ function updateGeneralCard() {
 
   infoCard.classList.remove(
 
+ 
+
     "wildfire-layout",
+
+ 
 
     "wildfire-level-1",
 
+ 
+
     "wildfire-level-2",
+
+ 
 
     "wildfire-level-3",
 
+ 
+
     "wildfire-level-4",
+
+ 
 
     "air-layout",
 
+ 
+
     "air-level-1",
+
+ 
 
     "air-level-2",
 
+ 
+
     "air-level-3",
+
+ 
 
     "air-level-4",
 
+ 
+
     "heatwave-layout",
+
+ 
 
     "heatwave-level-1",
 
+ 
+
     "heatwave-level-2",
 
+ 
+
     "heatwave-level-3",
+
+ 
 
     "heatwave-level-4",
 
  
 
+ 
+
+ 
+
     "flood-layout",
+
+ 
 
     "flood-level-1",
 
+ 
+
     "flood-level-2",
 
+ 
+
     "flood-level-3",
+
+ 
 
     "flood-level-4",
 
  
 
+ 
+
+ 
+
     "tropical-layout",
+
+ 
 
     "tropical-level-1",
 
+ 
+
     "tropical-level-2",
+
+ 
 
     "tropical-level-3",
 
+ 
+
     "tropical-level-4"
+
+ 
 
   );
 
@@ -6054,9 +12190,23 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   heatwaveCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6064,27 +12214,55 @@ function updateGeneralCard() {
 
   floodCardSection.hidden =
 
+ 
+
     true;
+
+ 
+
+ 
 
  
 
   tropicalCardSection.hidden =
 
+ 
+
     true;
 
  
 
+ 
+
+ 
+
   wildfireCardSection.hidden =
+
     true;
 
+ 
+
   airCardSection.hidden =
+
     true;
+
+ 
+
+ 
 
  
 
   generalChartSection.hidden =
 
+ 
+
     false;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6092,7 +12270,15 @@ function updateGeneralCard() {
 
   generalMetrics.hidden =
 
+ 
+
     false;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6100,9 +12286,15 @@ function updateGeneralCard() {
 
   const yearLabel =
 
+ 
+
     yearProfiles[
 
+ 
+
       currentYear
+
+ 
 
     ].label;
 
@@ -6110,7 +12302,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   infoTitle.textContent =
+
+ 
 
     `${yearLabel} ${currentPlaceName}의 기후위험`;
 
@@ -6118,7 +12318,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskName.textContent =
+
+ 
 
     `${data.name} · ${levelText(data.level)}`;
 
@@ -6126,7 +12334,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskValue.textContent =
+
+ 
 
     data.value;
 
@@ -6134,7 +12350,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskUnit.textContent =
+
+ 
 
     data.unit;
 
@@ -6142,7 +12366,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   riskCaption.textContent =
+
+ 
 
     data.caption;
 
@@ -6150,7 +12382,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   metricOneLabel.textContent =
+
+ 
 
     data.metricOneLabel;
 
@@ -6158,43 +12398,89 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     selectedRisk ===
 
+ 
+
     "air"
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     metricOneValue.textContent =
+
+ 
 
       `${data.value} ㎍/㎥`;
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
   else if (
 
+ 
+
     selectedRisk ===
 
+ 
+
     "tropical"
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     metricOneValue.textContent =
+
+ 
 
       `${data.value}일`;
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -6202,13 +12488,27 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
     metricOneValue.textContent =
+
+ 
 
       levelText(
 
+ 
+
         data.level
 
+ 
+
       );
+
+ 
+
+ 
 
  
 
@@ -6218,7 +12518,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   metricTwoLabel.textContent =
+
+ 
 
     data.metricTwoLabel;
 
@@ -6226,7 +12534,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   metricTwoValue.textContent =
+
+ 
 
     data.metricTwoValue;
 
@@ -6234,7 +12550,15 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   warningArea.textContent =
+
+ 
 
     data.warning;
 
@@ -6242,13 +12566,31 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   const icons =
+
+ 
 
     metricIcons[
 
+ 
+
       selectedRisk
 
+ 
+
     ];
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6258,7 +12600,13 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
     metricOneIcon.src =
+
+ 
 
       icons.metricOne;
 
@@ -6266,9 +12614,21 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
     metricTwoIcon.src =
 
+ 
+
       icons.metricTwo;
+
+ 
+
+ 
 
  
 
@@ -6278,9 +12638,23 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   warningAreaIcon.src =
 
+ 
+
     warningIcon;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6292,13 +12666,29 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
   document.body.dataset.riskLevel =
+
+ 
 
     String(
 
+ 
+
       data.level
 
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -6308,11 +12698,25 @@ function updateGeneralCard() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    전체 카드
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -6320,13 +12724,27 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     selectedRisk ===
 
+ 
+
     "heatwave"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
@@ -6334,17 +12752,35 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
   else if (
 
+ 
+
     selectedRisk ===
+
+ 
 
     "flood"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
@@ -6352,17 +12788,35 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
   else if (
 
+ 
+
     selectedRisk ===
+
+ 
 
     "tropical"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
@@ -6370,29 +12824,59 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
+  }
+
+ 
+
+ 
+
+ 
+
+  else if (
+
+    selectedRisk ===
+
+    "air"
+
+  ) {
+
+ 
+
+    updateAirCard();
+
+ 
+
   }
 
  
 
   else if (
+
     selectedRisk ===
-    "air"
-  ) {
 
-    updateAirCard();
-
-  }
-
-  else if (
-    selectedRisk ===
     "wildfire"
+
   ) {
+
+ 
 
     updateWildfireCard();
 
+ 
+
   }
 
+ 
+
   else {
+
+ 
+
+ 
 
  
 
@@ -6400,7 +12884,15 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -6410,11 +12902,25 @@ function updateClimateInterface() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    현재 위험 레벨
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -6422,21 +12928,43 @@ function getCurrentRiskLevel() {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     selectedRisk ===
 
+ 
+
     "heatwave"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
     return heatwaveCardProfiles[
 
+ 
+
       currentYear
 
+ 
+
     ].level;
+
+ 
+
+ 
 
  
 
@@ -6446,21 +12974,45 @@ function getCurrentRiskLevel() {
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     selectedRisk ===
 
+ 
+
     "flood"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
     return floodCardProfiles[
 
+ 
+
       currentYear
 
+ 
+
     ].level;
+
+ 
+
+ 
 
  
 
@@ -6468,59 +13020,119 @@ function getCurrentRiskLevel() {
 
  
 
+ 
+
+ 
+
   if (
 
+ 
+
     selectedRisk ===
+
+ 
 
     "tropical"
 
+ 
+
   ) {
 
+ 
+
   
+
+ 
 
     return tropicalCardProfiles[
 
+ 
+
       currentYear
 
+ 
+
     ].level;
+
+ 
 
   
 
+ 
+
   }
 
  
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
     selectedRisk ===
+
     "air"
+
   ) {
+
+ 
 
     return airCardProfiles[currentYear].level;
 
+ 
+
   }
+
+ 
 
   if (
+
     selectedRisk ===
+
     "wildfire"
+
   ) {
 
+ 
+
     return wildfireCardProfiles[
+
       currentYear
+
     ].level;
 
+ 
+
   }
+
+ 
+
+ 
 
  
 
   return getClimateData(
 
+ 
+
     selectedRisk,
+
+ 
 
     currentYear
 
+ 
+
   ).level;
+
+ 
+
+ 
 
  
 
@@ -6530,27 +13142,55 @@ function getCurrentRiskLevel() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    경고 팝업
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 function showDangerAlert(
 
+ 
+
   yearKey
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const yearLabel =
+
+ 
 
     yearProfiles[
 
+ 
+
       yearKey
+
+ 
 
     ].label;
 
@@ -6558,7 +13198,15 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
   let riskLabel =
+
+ 
 
     "";
 
@@ -6566,43 +13214,89 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     selectedRisk ===
 
+ 
+
     "heatwave"
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     riskLabel =
+
+ 
 
       "폭염";
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
   else if (
 
+ 
+
     selectedRisk ===
 
+ 
+
     "flood"
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     riskLabel =
+
+ 
 
       "침수";
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -6610,13 +13304,27 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
     riskLabel =
+
+ 
 
       climateRiskProfiles[
 
+ 
+
         selectedRisk
 
+ 
+
       ].name;
+
+ 
+
+ 
 
  
 
@@ -6626,11 +13334,23 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
   dangerAlertMessage.innerHTML =
+
+ 
 
     `${yearLabel}, 위험 단계가 크게 상승합니다.<br>
 
+ 
+
     이후 화면에서는 현재 공간의 예상 ${riskLabel}<br>
+
+ 
 
     위험 정보가 강조되어 표시됩니다.`;
 
@@ -6638,7 +13358,15 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
   dangerAlertButtonText.textContent =
+
+ 
 
     `${yearLabel} 시뮬레이션 보기`;
 
@@ -6646,11 +13374,27 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
   dangerAlert.classList.add(
+
+ 
 
     "show"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6658,11 +13402,21 @@ function showDangerAlert(
 
   dangerAlert.setAttribute(
 
+ 
+
     "aria-hidden",
+
+ 
 
     "false"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -6672,19 +13426,43 @@ function showDangerAlert(
 
  
 
+ 
+
+ 
+
+ 
+
 dangerAlertConfirm.addEventListener(
 
+ 
+
   "click",
+
+ 
 
   () => {
 
  
 
+ 
+
+ 
+
     dangerAlert.classList.remove(
+
+ 
 
       "show"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6692,11 +13470,23 @@ dangerAlertConfirm.addEventListener(
 
     dangerAlert.setAttribute(
 
+ 
+
       "aria-hidden",
+
+ 
 
       "true"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6704,13 +13494,23 @@ dangerAlertConfirm.addEventListener(
 
     document.body.classList.add(
 
+ 
+
       "danger-mode"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
 
 );
 
@@ -6718,11 +13518,25 @@ dangerAlertConfirm.addEventListener(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    연도 변경
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -6730,19 +13544,37 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     !yearProfiles[
 
+ 
+
       key
 
+ 
+
     ]
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -6750,9 +13582,23 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
   currentYear =
 
+ 
+
     key;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6760,7 +13606,15 @@ function changeYear(key) {
 
   document.body.dataset.year =
 
+ 
+
     key;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6768,13 +13622,23 @@ function changeYear(key) {
 
   yearButtons.forEach(
 
+ 
+
     button => {
+
+ 
+
+ 
 
  
 
       const selected =
 
+ 
+
         button.dataset.year ===
+
+ 
 
         key;
 
@@ -6782,13 +13646,31 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
       button.classList.toggle(
+
+ 
 
         "selected",
 
+ 
+
         selected
 
+ 
+
       );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6796,21 +13678,43 @@ function changeYear(key) {
 
       button.setAttribute(
 
+ 
+
         "aria-pressed",
+
+ 
 
         String(
 
+ 
+
           selected
 
+ 
+
         )
+
+ 
 
       );
 
  
 
+ 
+
+ 
+
     }
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6822,7 +13726,15 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
   const riskLevel =
+
+ 
 
     getCurrentRiskLevel();
 
@@ -6830,17 +13742,35 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     riskLevel >=
 
+ 
+
     DANGER_LEVEL
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     const alertKey =
+
+ 
 
       `${selectedRisk}-${key}`;
 
@@ -6848,23 +13778,51 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
     if (
+
+ 
 
       !shownDangerAlerts.has(
 
+ 
+
         alertKey
 
+ 
+
       )
+
+ 
 
     ) {
 
  
 
+ 
+
+ 
+
       document.body.classList.remove(
+
+ 
 
         "danger-mode"
 
+ 
+
       );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6872,9 +13830,19 @@ function changeYear(key) {
 
       showDangerAlert(
 
+ 
+
         key
 
+ 
+
       );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6882,13 +13850,25 @@ function changeYear(key) {
 
       shownDangerAlerts.add(
 
+ 
+
         alertKey
+
+ 
 
       );
 
  
 
+ 
+
+ 
+
     }
+
+ 
+
+ 
 
  
 
@@ -6896,11 +13876,23 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
       document.body.classList.add(
+
+ 
 
         "danger-mode"
 
+ 
+
       );
+
+ 
+
+ 
 
  
 
@@ -6908,7 +13900,15 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -6916,11 +13916,25 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
     document.body.classList.remove(
+
+ 
 
       "danger-mode"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6928,9 +13942,19 @@ function changeYear(key) {
 
     dangerAlert.classList.remove(
 
+ 
+
       "show"
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -6938,15 +13962,29 @@ function changeYear(key) {
 
     dangerAlert.setAttribute(
 
+ 
+
       "aria-hidden",
 
+ 
+
       "true"
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -6956,35 +13994,71 @@ function changeYear(key) {
 
  
 
+ 
+
+ 
+
+ 
+
 yearButtons.forEach(
+
+ 
 
   button => {
 
  
 
+ 
+
+ 
+
     button.addEventListener(
 
+ 
+
       "click",
+
+ 
 
       () => {
 
  
 
+ 
+
+ 
+
         changeYear(
 
+ 
+
           button.dataset.year
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
 
 );
 
@@ -6992,29 +14066,59 @@ yearButtons.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    위험 선택
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 climateOptions.forEach(
+
+ 
 
   button => {
 
  
 
+ 
+
+ 
+
     button.addEventListener(
 
+ 
+
       "click",
+
+ 
 
       () => {
 
  
 
+ 
+
+ 
+
         autoRiskMode =
+
+ 
 
           false;
 
@@ -7022,7 +14126,15 @@ climateOptions.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         selectedRisk =
+
+ 
 
           button.dataset.risk;
 
@@ -7030,25 +14142,55 @@ climateOptions.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         climateOptions.forEach(
+
+ 
 
           item => {
 
  
 
+ 
+
+ 
+
             item.classList.toggle(
+
+ 
 
               "active",
 
+ 
+
               item === button
+
+ 
 
             );
 
  
 
+ 
+
+ 
+
           }
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7056,9 +14198,19 @@ climateOptions.forEach(
 
         document.body.classList.remove(
 
+ 
+
           "danger-mode"
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7070,21 +14222,45 @@ climateOptions.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         if (
+
+ 
 
           getCurrentRiskLevel() >=
 
+ 
+
           DANGER_LEVEL
+
+ 
 
         ) {
 
  
 
+ 
+
+ 
+
           document.body.classList.add(
+
+ 
 
             "danger-mode"
 
+ 
+
           );
+
+ 
+
+ 
 
  
 
@@ -7092,13 +14268,25 @@ climateOptions.forEach(
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
 
 );
 
@@ -7106,11 +14294,25 @@ climateOptions.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    환경 탐지
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -7118,33 +14320,65 @@ function detectEnvironment(data) {
 
  
 
+ 
+
+ 
+
   const source =
+
+ 
 
     (
 
+ 
+
       JSON.stringify(
+
+ 
 
         data?.address || {}
 
+ 
+
       )
+
+ 
 
       +
 
+ 
+
       String(
+
+ 
 
         data?.category || ""
 
+ 
+
       )
+
+ 
 
       +
 
+ 
+
       String(
+
+ 
 
         data?.type || ""
 
+ 
+
       )
 
+ 
+
     )
+
+ 
 
     .toLowerCase();
 
@@ -7152,27 +14386,59 @@ function detectEnvironment(data) {
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     source.includes("river") ||
 
+ 
+
     source.includes("water") ||
+
+ 
 
     source.includes("stream") ||
 
+ 
+
     source.includes("강") ||
+
+ 
 
     source.includes("하천") ||
 
+ 
+
     source.includes("호수")
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
     return "river";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7180,21 +14446,43 @@ function detectEnvironment(data) {
 
   if (
 
+ 
+
     source.includes("forest") ||
+
+ 
 
     source.includes("mountain") ||
 
+ 
+
     source.includes("산림") ||
+
+ 
 
     source.includes("산")
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
     return "forest";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7202,19 +14490,39 @@ function detectEnvironment(data) {
 
   if (
 
+ 
+
     source.includes("park") ||
+
+ 
 
     source.includes("garden") ||
 
+ 
+
     source.includes("공원")
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return "park";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7224,7 +14532,17 @@ function detectEnvironment(data) {
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7232,33 +14550,67 @@ function detectEnvironment(data) {
 
 /* =========================================================
 
+ 
+
    자동 위험 선택
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 function selectAutomaticRisk(
 
+ 
+
   environment
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     environment ===
 
+ 
+
     "river"
 
+ 
+
   ) {
+
+ 
+
+ 
 
  
 
     return "flood";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7266,17 +14618,35 @@ function selectAutomaticRisk(
 
   if (
 
+ 
+
     environment ===
 
+ 
+
     "forest"
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return "wildfire";
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7286,7 +14656,17 @@ function selectAutomaticRisk(
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7294,27 +14674,55 @@ function selectAutomaticRisk(
 
 /* =========================================================
 
+ 
+
    Leaflet 지도
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 let locationMap =
 
+ 
+
   null;
+
+ 
+
+ 
 
  
 
 let currentLocationMarker =
 
+ 
+
   null;
+
+ 
+
+ 
 
  
 
 let accuracyCircle =
 
+ 
+
   null;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7324,17 +14732,33 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     locationMap ||
 
+ 
+
     !window.L
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -7342,63 +14766,131 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
+ 
+
   locationMap =
+
+ 
 
     L.map(
 
+ 
+
       "location-map",
+
+ 
 
       {
 
  
 
+ 
+
+ 
+
         zoomControl:
 
+ 
+
           false,
+
+ 
+
+ 
 
  
 
         attributionControl:
 
+ 
+
           true,
+
+ 
+
+ 
 
  
 
         dragging:
 
+ 
+
           true,
+
+ 
+
+ 
 
  
 
         scrollWheelZoom:
 
+ 
+
           false,
+
+ 
+
+ 
 
  
 
         doubleClickZoom:
 
+ 
+
           true
+
+ 
+
+ 
 
  
 
       }
 
+ 
+
     )
+
+ 
 
     .setView(
 
+ 
+
       [
+
+ 
 
         37.5665,
 
+ 
+
         126.9780
+
+ 
 
       ],
 
+ 
+
       15
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7408,7 +14900,15 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+ 
+
+ 
 
  
 
@@ -7416,15 +14916,31 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
       maxZoom:
+
+ 
 
         19,
 
  
 
+ 
+
+ 
+
       attribution:
 
+ 
+
         "&copy; OpenStreetMap contributors"
+
+ 
+
+ 
 
  
 
@@ -7432,13 +14948,29 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
   )
+
+ 
 
   .addTo(
 
+ 
+
     locationMap
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7446,17 +14978,33 @@ function initializeLocationMap() {
 
   currentLocationMarker =
 
+ 
+
     L.circleMarker(
+
+ 
+
+ 
 
  
 
       [
 
+ 
+
         37.5665,
+
+ 
 
         126.9780
 
+ 
+
       ],
+
+ 
+
+ 
 
  
 
@@ -7464,33 +15012,67 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
         radius:
+
+ 
 
           7,
 
  
 
+ 
+
+ 
+
         color:
+
+ 
 
           "#ffffff",
 
  
 
+ 
+
+ 
+
         weight:
+
+ 
 
           3,
 
  
 
+ 
+
+ 
+
         fillColor:
+
+ 
 
           "#a9d8e7",
 
  
 
+ 
+
+ 
+
         fillOpacity:
 
+ 
+
           1
+
+ 
+
+ 
 
  
 
@@ -7498,13 +15080,29 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
     )
+
+ 
 
     .addTo(
 
+ 
+
       locationMap
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7512,7 +15110,13 @@ function initializeLocationMap() {
 
   setTimeout(
 
+ 
+
     () => {
+
+ 
+
+ 
 
  
 
@@ -7520,11 +15124,23 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
     },
+
+ 
 
     100
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -7534,39 +15150,83 @@ function initializeLocationMap() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    지도 위치 갱신
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 function updateMapPosition(
+
+ 
 
   latitude,
 
+ 
+
   longitude,
 
+ 
+
   accuracy
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   if (
+
+ 
 
     !locationMap ||
 
+ 
+
     !currentLocationMarker
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return;
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7574,11 +15234,19 @@ function updateMapPosition(
 
   const coordinates =
 
+ 
+
     [
+
+ 
 
       latitude,
 
+ 
+
       longitude
+
+ 
 
     ];
 
@@ -7586,13 +15254,31 @@ function updateMapPosition(
 
  
 
+ 
+
+ 
+
+ 
+
   locationMap.setView(
+
+ 
 
     coordinates,
 
+ 
+
     16
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7600,7 +15286,11 @@ function updateMapPosition(
 
   currentLocationMarker.setLatLng(
 
+ 
+
     coordinates
+
+ 
 
   );
 
@@ -7608,19 +15298,43 @@ function updateMapPosition(
 
  
 
+ 
+
+ 
+
+ 
+
   if (
 
+ 
+
     accuracyCircle
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     accuracyCircle.setLatLng(
+
+ 
 
       coordinates
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7628,13 +15342,25 @@ function updateMapPosition(
 
     accuracyCircle.setRadius(
 
+ 
+
       accuracy
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -7642,65 +15368,131 @@ function updateMapPosition(
 
  
 
+ 
+
+ 
+
     accuracyCircle =
+
+ 
 
       L.circle(
 
+ 
+
         coordinates,
+
+ 
 
         {
 
  
 
+ 
+
+ 
+
           radius:
+
+ 
 
             accuracy,
 
  
 
+ 
+
+ 
+
           color:
+
+ 
 
             "#ffffff",
 
  
 
+ 
+
+ 
+
           weight:
+
+ 
 
             1,
 
  
 
+ 
+
+ 
+
           opacity:
+
+ 
 
             .4,
 
  
 
+ 
+
+ 
+
           fillColor:
+
+ 
 
             "#a9d8e7",
 
  
 
+ 
+
+ 
+
           fillOpacity:
+
+ 
 
             .1
 
  
 
+ 
+
+ 
+
         }
+
+ 
 
       )
 
+ 
+
       .addTo(
 
+ 
+
         locationMap
+
+ 
 
       );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -7710,15 +15502,31 @@ function updateMapPosition(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    역지오코딩
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 let lastGeocodeTime =
+
+ 
 
   0;
 
@@ -7726,13 +15534,29 @@ let lastGeocodeTime =
 
  
 
+ 
+
+ 
+
+ 
+
 async function reverseGeocode(
+
+ 
 
   latitude,
 
+ 
+
   longitude
 
+ 
+
 ) {
+
+ 
+
+ 
 
  
 
@@ -7740,35 +15564,69 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
     const url =
+
+ 
 
       "https://nominatim.openstreetmap.org/reverse"
 
+ 
+
       +
+
+ 
 
       "?format=jsonv2"
 
+ 
+
       +
+
+ 
 
       `&lat=${latitude}`
 
+ 
+
       +
+
+ 
 
       `&lon=${longitude}`
 
+ 
+
       +
+
+ 
 
       "&zoom=18"
 
+ 
+
       +
+
+ 
 
       "&addressdetails=1"
 
+ 
+
       +
+
+ 
 
       "&namedetails=1"
 
+ 
+
       +
+
+ 
 
       "&accept-language=ko";
 
@@ -7776,11 +15634,23 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
     const response =
+
+ 
 
       await fetch(
 
+ 
+
         url
+
+ 
 
       );
 
@@ -7788,17 +15658,39 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
     if (
 
+ 
+
       !response.ok
+
+ 
 
     ) {
 
  
 
+ 
+
+ 
+
       return null;
 
+ 
+
     }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7808,7 +15700,15 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -7816,13 +15716,29 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
     console.warn(
+
+ 
 
       "주소 조회 실패:",
 
+ 
+
       error
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7832,7 +15748,15 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
 
  
 
@@ -7842,11 +15766,25 @@ async function reverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
+
+ 
 
    장소 이름
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -7854,7 +15792,13 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
   const address =
+
+ 
 
     data.address || {};
 
@@ -7862,9 +15806,23 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
+ 
+
   const namedetails =
 
+ 
+
     data.namedetails || {};
+
+ 
+
+ 
+
+ 
 
  
 
@@ -7874,15 +15832,31 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     namedetails[
 
+ 
+
       "name:ko"
+
+ 
 
     ]
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7890,7 +15864,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7898,7 +15880,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7906,7 +15896,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7914,7 +15912,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7922,7 +15928,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7930,7 +15944,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7938,7 +15960,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
     ||
+
+ 
+
+ 
 
  
 
@@ -7946,7 +15976,15 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -7956,25 +15994,51 @@ function getPlaceName(data) {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    위치 기반 정보
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 async function updateReverseGeocode(
+
+ 
 
   latitude,
 
+ 
+
   longitude
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const now =
+
+ 
 
     Date.now();
 
@@ -7982,19 +16046,39 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
   if (
+
+ 
 
     now -
 
+ 
+
     lastGeocodeTime <
 
+ 
+
     5000
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -8002,7 +16086,15 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
   lastGeocodeTime =
+
+ 
 
     now;
 
@@ -8010,15 +16102,35 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
   const data =
+
+ 
 
     await reverseGeocode(
 
+ 
+
       latitude,
+
+ 
 
       longitude
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8028,9 +16140,21 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
     return;
 
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8038,11 +16162,23 @@ async function updateReverseGeocode(
 
   currentPlaceName =
 
+ 
+
     getPlaceName(
+
+ 
 
       data
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8050,11 +16186,23 @@ async function updateReverseGeocode(
 
   currentEnvironment =
 
+ 
+
     detectEnvironment(
+
+ 
 
       data
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8062,7 +16210,15 @@ async function updateReverseGeocode(
 
   mapLocationName.textContent =
 
+ 
+
     currentPlaceName;
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8070,7 +16226,15 @@ async function updateReverseGeocode(
 
   mapLocationStatus.textContent =
 
+ 
+
     data.display_name || "";
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8078,17 +16242,31 @@ async function updateReverseGeocode(
 
   if (
 
+ 
+
     autoRiskMode
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     selectedRisk =
+
+ 
 
       selectAutomaticRisk(
 
+ 
+
         currentEnvironment
+
+ 
 
       );
 
@@ -8096,31 +16274,67 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
+ 
+
     climateOptions.forEach(
+
+ 
 
       item => {
 
  
 
+ 
+
+ 
+
         item.classList.toggle(
+
+ 
 
           "active",
 
+ 
+
           item.dataset.risk ===
 
+ 
+
           selectedRisk
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8130,7 +16344,17 @@ async function updateReverseGeocode(
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8138,21 +16362,39 @@ async function updateReverseGeocode(
 
 /* =========================================================
 
+ 
+
    GPS
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 function handleLocationSuccess(
 
+ 
+
   position
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const latitude =
+
+ 
 
     position.coords.latitude;
 
@@ -8160,7 +16402,15 @@ function handleLocationSuccess(
 
  
 
+ 
+
+ 
+
+ 
+
   const longitude =
+
+ 
 
     position.coords.longitude;
 
@@ -8168,15 +16418,31 @@ function handleLocationSuccess(
 
  
 
+ 
+
+ 
+
+ 
+
   const accuracy =
+
+ 
 
     Math.max(
 
+ 
+
       position.coords.accuracy
+
+ 
 
       || 20,
 
+ 
+
       5
+
+ 
 
     );
 
@@ -8184,15 +16450,35 @@ function handleLocationSuccess(
 
  
 
+ 
+
+ 
+
+ 
+
   updateMapPosition(
+
+ 
 
     latitude,
 
+ 
+
     longitude,
+
+ 
 
     accuracy
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8200,15 +16486,31 @@ function handleLocationSuccess(
 
   updateReverseGeocode(
 
+ 
+
     latitude,
 
+ 
+
     longitude
+
+ 
 
   );
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8216,17 +16518,31 @@ function handleLocationSuccess(
 
 function handleLocationError(
 
+ 
+
   error
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   console.warn(
+
+ 
 
     "GPS 오류:",
 
+ 
+
     error
+
+ 
 
   );
 
@@ -8234,7 +16550,15 @@ function handleLocationError(
 
  
 
+ 
+
+ 
+
+ 
+
   mapLocationName.textContent =
+
+ 
 
     "현재 위치";
 
@@ -8242,13 +16566,31 @@ function handleLocationError(
 
  
 
+ 
+
+ 
+
+ 
+
   mapLocationStatus.textContent =
+
+ 
 
     "위치 정보를 확인할 수 없습니다";
 
  
 
+ 
+
+ 
+
 }
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8258,7 +16600,17 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
   initializeLocationMap();
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8266,13 +16618,23 @@ function startLocationTracking() {
 
   if (
 
+ 
+
     !navigator.geolocation
+
+ 
 
   ) {
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -8280,9 +16642,21 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
+ 
+
   locationWatchId =
 
+ 
+
     navigator.geolocation.watchPosition(
+
+ 
+
+ 
 
  
 
@@ -8290,7 +16664,15 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
       handleLocationError,
+
+ 
+
+ 
 
  
 
@@ -8298,21 +16680,43 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
         enableHighAccuracy:
+
+ 
 
           true,
 
  
 
+ 
+
+ 
+
         maximumAge:
+
+ 
 
           5000,
 
  
 
+ 
+
+ 
+
         timeout:
 
+ 
+
           15000
+
+ 
+
+ 
 
  
 
@@ -8320,7 +16724,15 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
     );
+
+ 
+
+ 
 
  
 
@@ -8330,19 +16742,39 @@ function startLocationTracking() {
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    메뉴
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 const menuButtons =
+
+ 
 
   document.querySelectorAll(
 
+ 
+
     ".menu[aria-controls]"
+
+ 
 
   );
 
@@ -8350,25 +16782,55 @@ const menuButtons =
 
  
 
+ 
+
+ 
+
+ 
+
 function closeMenu(
 
+ 
+
   button
+
+ 
 
 ) {
 
  
 
+ 
+
+ 
+
   const panel =
+
+ 
 
     document.getElementById(
 
+ 
+
       button.getAttribute(
+
+ 
 
         "aria-controls"
 
+ 
+
       )
 
+ 
+
     );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8378,7 +16840,13 @@ function closeMenu(
 
  
 
+ 
+
+ 
+
     return;
+
+ 
 
   }
 
@@ -8386,13 +16854,31 @@ function closeMenu(
 
  
 
+ 
+
+ 
+
+ 
+
   button.setAttribute(
+
+ 
 
     "aria-expanded",
 
+ 
+
     "false"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8400,9 +16886,19 @@ function closeMenu(
 
   panel.classList.remove(
 
+ 
+
     "open"
 
+ 
+
   );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8410,11 +16906,21 @@ function closeMenu(
 
   panel.setAttribute(
 
+ 
+
     "aria-hidden",
+
+ 
 
     "true"
 
+ 
+
   );
+
+ 
+
+ 
 
  
 
@@ -8424,27 +16930,55 @@ function closeMenu(
 
  
 
+ 
+
+ 
+
+ 
+
 menuButtons.forEach(
+
+ 
 
   button => {
 
  
 
+ 
+
+ 
+
     button.addEventListener(
 
+ 
+
       "click",
+
+ 
 
       () => {
 
  
 
+ 
+
+ 
+
         const shouldOpen =
+
+ 
 
           button.getAttribute(
 
+ 
+
             "aria-expanded"
 
+ 
+
           ) !==
+
+ 
 
           "true";
 
@@ -8452,11 +16986,27 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         menuButtons.forEach(
+
+ 
 
           closeMenu
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8466,7 +17016,13 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
           return;
+
+ 
 
         }
 
@@ -8474,17 +17030,39 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         const panel =
+
+ 
 
           document.getElementById(
 
+ 
+
             button.getAttribute(
+
+ 
 
               "aria-controls"
 
+ 
+
             )
 
+ 
+
           );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8494,7 +17072,13 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
           return;
+
+ 
 
         }
 
@@ -8502,13 +17086,31 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
         button.setAttribute(
+
+ 
 
           "aria-expanded",
 
+ 
+
           "true"
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8516,9 +17118,19 @@ menuButtons.forEach(
 
         panel.classList.add(
 
+ 
+
           "open"
 
+ 
+
         );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8526,21 +17138,39 @@ menuButtons.forEach(
 
         panel.setAttribute(
 
+ 
+
           "aria-hidden",
 
+ 
+
           "false"
+
+ 
 
         );
 
  
 
+ 
+
+ 
+
       }
+
+ 
 
     );
 
  
 
+ 
+
+ 
+
   }
+
+ 
 
 );
 
@@ -8548,37 +17178,77 @@ menuButtons.forEach(
 
  
 
+ 
+
+ 
+
+ 
+
 /* =========================================================
 
+ 
+
    종료
+
+ 
 
 ========================================================= */
 
  
 
+ 
+
+ 
+
 window.addEventListener(
 
+ 
+
   "pagehide",
+
+ 
 
   () => {
 
  
 
+ 
+
+ 
+
     if (
+
+ 
 
       locationWatchId !== null &&
 
+ 
+
       navigator.geolocation
+
+ 
 
     ) {
 
  
 
+ 
+
+ 
+
       navigator.geolocation.clearWatch(
+
+ 
 
         locationWatchId
 
+ 
+
       );
+
+ 
+
+ 
 
  
 
@@ -8586,9 +17256,21 @@ window.addEventListener(
 
  
 
+ 
+
+ 
+
   }
 
+ 
+
 );
+
+ 
+
+ 
+
+ 
 
  
 
@@ -8596,9 +17278,17 @@ window.addEventListener(
 
 /* =========================================================
 
+ 
+
    초기화
 
+ 
+
 ========================================================= */
+
+ 
+
+ 
 
  
 
@@ -8606,15 +17296,31 @@ initializeLocationMap();
 
  
 
+ 
+
+ 
+
 updateClimateInterface();
+
+ 
+
+ 
 
  
 
 changeYear(
 
+ 
+
   "current"
 
+ 
+
 );
+
+ 
+
+ 
 
  
 
