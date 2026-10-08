@@ -1171,6 +1171,15 @@ body.danger-mode .camera-feed {
   font-weight: 700;
   line-height: 1.25;
 }
+/* 열대야 추가 위험 카드 왼쪽 정렬 */
+.tropical-metric:last-child {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding-left: 24px;
+}
 /* =========================================================
    열대야 위험 단계
 ========================================================= */
