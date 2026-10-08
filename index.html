@@ -1,60 +1,46 @@
 <!doctype html>
 <html lang="ko">
- 
 <head>
   <meta charset="UTF-8">
- 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
- 
   <meta
     name="theme-color"
     content="#162733"
   >
- 
   <title>ClimaView AR</title>
- 
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   >
- 
   <link
     rel="stylesheet"
     href="style.css"
   >
- 
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   ></script>
- 
   <script
     src="script.js"
     defer
   ></script>
 </head>
- 
- 
 <body
   data-year="current"
   data-risk-level="2"
 >
- 
   <main
     class="viewport"
     aria-label="ClimaView 기후위기 AR 시뮬레이션"
   >
- 
     <div
       class="scene"
       id="scene"
     >
- 
       <!-- 카메라 -->
       <div class="background-layer">
- 
         <video
           id="camera-feed"
           class="camera-feed"
@@ -62,10 +48,7 @@
           muted
           playsinline
         ></video>
- 
       </div>
- 
- 
       <button
         id="camera-start-button"
         class="camera-start-button glass"
@@ -74,18 +57,13 @@
       >
         카메라 시작
       </button>
- 
- 
       <!-- GUI -->
       <div class="gui-layer">
- 
- 
         <!-- 상단 연도 -->
         <nav
           class="timeline glass"
           aria-label="시뮬레이션 연도"
         >
- 
           <button
             class="year selected"
             type="button"
@@ -94,7 +72,6 @@
           >
             현재
           </button>
- 
           <button
             class="year"
             type="button"
@@ -103,7 +80,6 @@
           >
             2030년
           </button>
- 
           <button
             class="year"
             type="button"
@@ -112,7 +88,6 @@
           >
             2050년
           </button>
- 
           <button
             class="year"
             type="button"
@@ -121,311 +96,218 @@
           >
             2090년
           </button>
- 
         </nav>
- 
- 
         <!-- 왼쪽 패널 -->
         <aside
           class="left-panel"
           aria-label="기후 시뮬레이션 메뉴"
         >
- 
           <!-- 기후 시뮬레이션 -->
           <div class="menu-group">
- 
             <button
               class="menu glass"
               type="button"
               aria-expanded="false"
               aria-controls="climate-menu"
             >
- 
               <span>기후 시뮬레이션</span>
- 
               <span
                 class="chevron"
                 aria-hidden="true"
               ></span>
- 
             </button>
- 
- 
             <div
               class="submenu glass"
               id="climate-menu"
               aria-hidden="true"
             >
- 
               <div class="submenu-divider"></div>
- 
- 
               <button
                 class="submenu-item climate-option active"
                 type="button"
                 data-risk="heatwave"
               >
- 
                 <img
                   class="climate-menu-icon"
                   src="./heatwave.svg"
                   alt=""
                 >
- 
                 <span>폭염</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="flood"
               >
- 
                 <img
                   class="climate-menu-icon"
                   src="./sealevel.svg"
                   alt=""
                 >
- 
                 <span>침수</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="tropical"
               >
- 
                 <img
                   class="climate-menu-icon"
                   src="./tropical.svg"
                   alt=""
                 >
- 
                 <span>열대야</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="wildfire"
               >
- 
                 <img
                   class="climate-menu-icon"
                   src="./forest%20fires.svg"
                   alt=""
                 >
- 
                 <span>산불</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item climate-option"
                 type="button"
                 data-risk="air"
               >
- 
                 <img
                   class="climate-menu-icon"
                   src="./air%20quality.svg"
                   alt=""
                 >
- 
                 <span>대기질</span>
- 
               </button>
- 
             </div>
- 
           </div>
- 
- 
           <!-- 대응 요소 -->
           <div class="menu-group">
- 
             <button
               class="menu response-menu glass"
               type="button"
               aria-expanded="false"
               aria-controls="response-menu"
             >
- 
               <span>대응 요소 배치</span>
- 
               <span
                 class="chevron"
                 aria-hidden="true"
               ></span>
- 
             </button>
- 
- 
             <div
               class="submenu glass"
               id="response-menu"
               aria-hidden="true"
             >
- 
               <div class="submenu-divider"></div>
- 
- 
               <button
                 class="submenu-item"
                 type="button"
               >
- 
                 <img
                   class="response-menu-icon"
                   src="./tree.svg"
                   alt=""
                 >
- 
                 <span>가로수</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item"
                 type="button"
               >
- 
                 <img
                   class="response-menu-icon"
                   src="./shade.svg"
                   alt=""
                 >
- 
                 <span>그늘막</span>
- 
               </button>
- 
- 
               <button
                 class="submenu-item"
                 type="button"
               >
- 
                 <img
                   class="response-menu-icon"
                   src="./pavement.svg"
                   alt=""
                 >
- 
                 <span>투수포장</span>
- 
               </button>
- 
             </div>
- 
           </div>
- 
- 
           <!-- 현재 위치 지도 -->
           <section
             class="map-card glass"
             id="map-card"
             aria-label="현재 위치 지도"
           >
- 
             <div
               id="location-map"
               class="location-map"
               aria-label="GPS 기반 현재 위치 지도"
             ></div>
- 
- 
             <div class="map-card-footer">
- 
               <span
                 class="map-location-name"
                 id="map-location-name"
               >
                 위치 확인 중
               </span>
- 
               <span
                 class="map-location-status"
                 id="map-location-status"
               >
                 GPS 연결 중...
               </span>
- 
             </div>
- 
           </section>
- 
         </aside>
- 
- 
         <!-- 오른쪽 정보 카드 -->
         <section
           class="info-card glass heatwave-layout heatwave-level-2"
           id="info-card"
         >
- 
           <header class="card-header">
- 
             <h1 id="info-title">
               현재 위치의 기후위험
             </h1>
- 
             <span class="scenario">
               SSP5 - 8.5
             </span>
- 
           </header>
- 
- 
           <!-- 대표 수치 -->
           <div class="risk-summary">
- 
             <p
               class="risk-name"
               id="risk-name"
             >
               폭염 · 보통
             </p>
- 
- 
             <div class="risk-value-row">
- 
               <span
                 class="risk-value"
                 id="risk-value"
               >
                 32.5
               </span>
- 
               <span
                 class="risk-unit"
                 id="risk-unit"
               >
                 °C
               </span>
- 
             </div>
- 
           </div>
- 
- 
           <p
             class="risk-caption"
             id="risk-caption"
           >
             현재 위치의 예상 최고 온도
           </p>
- 
- 
           <!-- =================================================
                폭염 전용 카드
           ================================================== -->
@@ -433,21 +315,16 @@
             class="heatwave-card-section"
             id="heatwave-card-section"
           >
- 
             <h2 class="heatwave-section-title">
               현재 지역의 기후 위험 변화
             </h2>
- 
- 
             <svg
               class="heatwave-chart"
               viewBox="0 0 336 165"
               role="img"
               aria-label="폭염 기온 변화 추이"
             >
- 
               <defs>
- 
                 <!-- 기본 면 그래프 -->
 <linearGradient
 id="heatwave-fill"
@@ -463,21 +340,18 @@ y2="0"
   stop-color="#e7a24a"
   stop-opacity=".84"
 />
- 
 <stop
   id="heatwave-base-stop-2"
   offset=".28"
   stop-color="#dbbb73"
   stop-opacity=".80"
 />
- 
 <stop
   id="heatwave-base-stop-3"
   offset=".56"
   stop-color="#89b7bc"
   stop-opacity=".78"
 />
- 
 <stop
   id="heatwave-base-stop-4"
   offset="1"
@@ -485,8 +359,6 @@ y2="0"
   stop-opacity=".88"
 />
 </linearGradient>
- 
- 
                 <!-- 선택 연도에 따라 JS로 변경되는 붉은 위험 레이어 -->
                 <linearGradient
                   id="heatwave-danger-gradient"
@@ -496,94 +368,72 @@ y2="0"
                   x2="308"
                   y2="0"
                 >
- 
                   <stop
                     id="heatwave-danger-stop-1"
                     offset="0%"
                     stop-color="#ff654b"
                     stop-opacity="0"
                   />
- 
                   <stop
                     id="heatwave-danger-stop-2"
                     offset="40%"
                     stop-color="#ff654b"
                     stop-opacity="0"
                   />
- 
                   <stop
                     id="heatwave-danger-stop-3"
                     offset="60%"
                     stop-color="#ff493d"
                     stop-opacity="0"
                   />
- 
                   <stop
                     id="heatwave-danger-stop-4"
                     offset="100%"
                     stop-color="#e83737"
                     stop-opacity="0"
                   />
- 
                 </linearGradient>
- 
- 
                 <!-- 선택 포인트 Glow -->
                 <radialGradient
                   id="heatwave-highlight"
                 >
- 
                   <stop
                     offset="0"
                     stop-color="#ffffff"
                     stop-opacity=".95"
                   />
- 
                   <stop
                     offset=".24"
                     stop-color="#ffad67"
                     stop-opacity=".88"
                   />
- 
                   <stop
                     offset=".58"
                     stop-color="#ec6e45"
                     stop-opacity=".55"
                   />
- 
                   <stop
                     offset="1"
                     stop-color="#ec6e45"
                     stop-opacity="0"
                   />
- 
                 </radialGradient>
- 
               </defs>
- 
- 
               <!-- Y축 숫자 -->
               <g class="heatwave-axis-label">
- 
                 <text x="0" y="25">
                   40
                 </text>
- 
                 <text x="0" y="58">
                   35
                 </text>
- 
                 <text x="0" y="91">
                   30
                 </text>
- 
                 <text x="0" y="124">
                   25
                 </text>
- 
               </g>
- 
- 
               <!-- 축 -->
               <path
                 d="M42 12v112h266"
@@ -591,8 +441,6 @@ y2="0"
                 stroke="rgba(255,255,255,.75)"
                 stroke-width="1"
               />
- 
- 
               <!-- 기본 면 -->
               <path
                 id="heatwave-chart-area"
@@ -608,8 +456,6 @@ y2="0"
                 "
                 fill="url(#heatwave-fill)"
               />
- 
- 
               <!-- 붉은 위험도 면 -->
               <path
                 id="heatwave-danger-area"
@@ -626,42 +472,33 @@ y2="0"
                 fill="url(#heatwave-danger-gradient)"
                 pointer-events="none"
               />
- 
- 
               <!-- 전체 연도 포인트 -->
               <g class="heatwave-points">
- 
                 <circle
                   id="heatwave-point-current"
                   cx="42"
                   cy="82"
                   r="5"
                 />
- 
                 <circle
                   id="heatwave-point-2030"
                   cx="105"
                   cy="72"
                   r="5"
                 />
- 
                 <circle
                   id="heatwave-point-2050"
                   cx="188"
                   cy="48"
                   r="5"
                 />
- 
                 <circle
                   id="heatwave-point-2090"
                   cx="270"
                   cy="35"
                   r="5"
                 />
- 
               </g>
- 
- 
               <!-- 선택 지점 Glow -->
               <circle
                 id="heatwave-selected-glow"
@@ -670,8 +507,6 @@ y2="0"
                 cy="82"
                 r="14"
               />
- 
- 
               <!-- 선택 지점 -->
               <circle
                 id="heatwave-selected-point"
@@ -680,93 +515,65 @@ y2="0"
                 cy="82"
                 r="8"
               />
- 
- 
               <!-- X축 -->
               <g
                 class="heatwave-x-label"
                 text-anchor="middle"
               >
- 
                 <text x="42" y="150">
                   현재
                 </text>
- 
                 <text x="105" y="150">
                   2030
                 </text>
- 
                 <text x="188" y="150">
                   2050
                 </text>
- 
                 <text x="270" y="150">
                   2090
                 </text>
- 
               </g>
- 
             </svg>
- 
- 
             <!-- 폭염 하단 정보 -->
             <div class="heatwave-metric-grid">
- 
               <div
                 class="heatwave-metric-tile heatwave-impact-tile level-2"
                 id="heatwave-impact-tile"
               >
- 
                 <span class="heatwave-metric-label">
                   폭염 영향
                 </span>
- 
                 <strong
                   class="heatwave-metric-value"
                   id="heatwave-impact-value"
                 >
                   보통
                 </strong>
- 
               </div>
- 
- 
               <div class="heatwave-metric-tile">
- 
                 <span class="heatwave-metric-label">
                   체감온도
                 </span>
- 
                 <strong
                   class="heatwave-metric-value"
                   id="heatwave-feels-temp"
                 >
                   32.5°C
                 </strong>
- 
               </div>
- 
- 
               <div class="heatwave-extra-tile">
- 
                 <span class="heatwave-metric-label">
                   추가 위험
                 </span>
- 
                 <strong
                   class="heatwave-metric-value"
                   id="heatwave-extra-risk"
                 >
                   온열질환, 열대야
                 </strong>
- 
               </div>
- 
             </div>
- 
           </div>
- 
- 
           <!-- =================================================
                침수 전용 카드
           ================================================== -->
@@ -775,69 +582,48 @@ y2="0"
             id="flood-card-section"
             hidden
           >
- 
             <h2 class="flood-section-title">
               현재 지역의 기후 위험 변화
             </h2>
- 
- 
             <div class="flood-metric-grid">
- 
               <div
                 class="flood-metric-tile flood-impact-tile"
                 id="flood-impact-tile"
               >
- 
                 <span class="flood-metric-label">
                   침수 영향
                 </span>
- 
                 <strong
                   id="flood-impact-value"
                   class="flood-metric-value"
                 >
                   없음
                 </strong>
- 
               </div>
- 
- 
               <div class="flood-metric-tile">
- 
                 <span class="flood-metric-label">
                   평균 수온
                 </span>
- 
                 <strong
                   id="flood-water-temp"
                   class="flood-metric-value"
                 >
                   11.7°C
                 </strong>
- 
               </div>
- 
- 
               <div class="flood-warning-tile">
- 
                 <span class="flood-metric-label">
                   주의 지역
                 </span>
- 
                 <strong
                   id="flood-warning-area"
                   class="flood-metric-value"
                 >
                   해당 없음
                 </strong>
- 
               </div>
- 
             </div>
- 
           </div>
- 
- 
           <!-- =================================================
                나머지 기후위험용 그래프
           ================================================== -->
@@ -846,19 +632,14 @@ y2="0"
             id="general-chart-section"
             hidden
           >
- 
             <h2>
               지역 기후위험 변화 추이
             </h2>
- 
- 
             <svg
               class="chart"
               viewBox="0 0 336 168"
             >
- 
               <defs>
- 
                 <linearGradient
                   id="chart-fill"
                   x1="0"
@@ -866,104 +647,77 @@ y2="0"
                   x2="1"
                   y2="0"
                 >
- 
                   <stop
                     offset="0"
                     stop-color="#4ca8ce"
                     stop-opacity=".30"
                   />
- 
                   <stop
                     offset=".62"
                     stop-color="#62c7ed"
                     stop-opacity=".72"
                   />
- 
                   <stop
                     offset="1"
                     stop-color="#ef7769"
                     stop-opacity=".90"
                   />
- 
                 </linearGradient>
- 
               </defs>
- 
- 
               <g class="axis-label risk-axis-label">
- 
                 <text x="8" y="28">
                   매우 높음
                 </text>
- 
                 <text x="8" y="60">
                   높음
                 </text>
- 
                 <text x="8" y="92">
                   보통
                 </text>
- 
                 <text x="8" y="124">
                   낮음
                 </text>
- 
               </g>
- 
- 
               <path
                 d="M70 14v108h234"
                 fill="none"
                 stroke="rgba(255,255,255,.72)"
                 stroke-width="1"
               />
- 
- 
               <path
                 id="chart-area"
                 fill="url(#chart-fill)"
               />
- 
- 
               <path
                 id="chart-risk-area"
                 fill="none"
               />
- 
- 
               <g class="chart-anchor-points">
- 
                 <circle
                   id="chart-point-current"
                   cx="70"
                   cy="112"
                   r="5"
                 />
- 
                 <circle
                   id="chart-point-2030"
                   cx="130"
                   cy="102"
                   r="5"
                 />
- 
                 <circle
                   id="chart-point-2050"
                   cx="205"
                   cy="82"
                   r="5"
                 />
- 
                 <circle
                   id="chart-point-2090"
                   cx="275"
                   cy="48"
                   r="5"
                 />
- 
               </g>
- 
- 
               <circle
                 id="chart-selected-point"
                 class="chart-selected-point"
@@ -971,13 +725,10 @@ y2="0"
                 cy="112"
                 r="6"
               />
- 
- 
               <g
                 class="chart-value-label"
                 id="chart-value-label"
               >
- 
                 <rect
                   x="-28"
                   y="-29"
@@ -985,7 +736,6 @@ y2="0"
                   height="26"
                   rx="13"
                 />
- 
                 <text
                   id="chart-value-text"
                   x="0"
@@ -994,37 +744,26 @@ y2="0"
                 >
                   보통
                 </text>
- 
               </g>
- 
- 
               <g
                 class="axis-label"
                 text-anchor="middle"
               >
- 
                 <text x="70" y="151">
                   현재
                 </text>
- 
                 <text x="130" y="151">
                   2030
                 </text>
- 
                 <text x="205" y="151">
                   2050
                 </text>
- 
                 <text x="275" y="151">
                   2090
                 </text>
- 
               </g>
- 
             </svg>
- 
           </div>
- 
           <!-- =========================================================
      열대야 전용 카드
 ========================================================= -->
@@ -1034,14 +773,12 @@ class="tropical-card-section"
 hidden
 >
 <div class="tropical-chart-wrap">
- 
   <svg
     class="tropical-chart"
     viewBox="0 0 330 160"
     aria-label="열대야 발생일수 변화 그래프"
   >
     <defs>
- 
       <!-- 기본 그래프 색상 -->
       <linearGradient
         id="tropical-fill"
@@ -1076,7 +813,6 @@ hidden
           stop-opacity=".88"
         />
       </linearGradient>
- 
       <!-- 위험도 강조 -->
       <linearGradient
         id="tropical-danger-gradient"
@@ -1111,7 +847,6 @@ hidden
           stop-opacity="0"
         />
       </linearGradient>
- 
       <filter
         id="tropical-glow"
         x="-100%"
@@ -1123,9 +858,7 @@ hidden
           stdDeviation="5"
         />
       </filter>
- 
     </defs>
- 
     <!-- Y축 가이드 -->
     <g class="tropical-grid">
       <line x1="42" y1="16" x2="308" y2="16" />
@@ -1134,7 +867,6 @@ hidden
       <line x1="42" y1="97" x2="308" y2="97" />
       <line x1="42" y1="124" x2="308" y2="124" />
     </g>
- 
     <!-- Y축 숫자 -->
     <g class="tropical-y-labels">
       <text x="32" y="20">120</text>
@@ -1143,19 +875,16 @@ hidden
       <text x="32" y="101">30</text>
       <text x="32" y="128">0</text>
     </g>
- 
     <!-- 기본 면 -->
     <path
       id="tropical-chart-area"
       fill="url(#tropical-fill)"
     />
- 
     <!-- 위험 강조 면 -->
     <path
       id="tropical-danger-area"
       fill="url(#tropical-danger-gradient)"
     />
- 
     <!-- 각 연도 포인트 -->
     <circle
       id="tropical-point-current"
@@ -1164,7 +893,6 @@ hidden
       cy="124"
       r="3"
     />
- 
     <circle
       id="tropical-point-2030"
       class="tropical-point"
@@ -1172,7 +900,6 @@ hidden
       cy="124"
       r="3"
     />
- 
     <circle
       id="tropical-point-2050"
       class="tropical-point"
@@ -1180,7 +907,6 @@ hidden
       cy="124"
       r="3"
     />
- 
     <circle
       id="tropical-point-2090"
       class="tropical-point"
@@ -1188,7 +914,6 @@ hidden
       cy="124"
       r="3"
     />
- 
     <!-- 선택된 점 Glow -->
     <circle
       id="tropical-selected-glow"
@@ -1198,7 +923,6 @@ hidden
       r="10"
       filter="url(#tropical-glow)"
     />
- 
     <!-- 선택된 점 -->
     <circle
       id="tropical-selected-point"
@@ -1207,7 +931,6 @@ hidden
       cy="124"
       r="5"
     />
- 
     <!-- X축 -->
     <g class="tropical-x-labels">
       <text x="42" y="148">현재</text>
@@ -1215,14 +938,10 @@ hidden
       <text x="188" y="148">2050</text>
       <text x="270" y="148">2090</text>
     </g>
- 
   </svg>
- 
 </div>
- 
 <!-- 하단 정보 -->
 <div class="tropical-metrics">
- 
   <div
     id="tropical-impact-tile"
     class="tropical-metric tropical-impact-tile"
@@ -1230,7 +949,6 @@ hidden
     <span class="tropical-metric-label">
       열대야 영향
     </span>
- 
     <strong
       id="tropical-impact-value"
       class="tropical-metric-value"
@@ -1238,12 +956,10 @@ hidden
       낮음
     </strong>
   </div>
- 
   <div class="tropical-metric">
     <span class="tropical-metric-label">
       야간 고온
     </span>
- 
     <strong
       id="tropical-night-temp"
       class="tropical-metric-value"
@@ -1251,12 +967,10 @@ hidden
       11.3일
     </strong>
   </div>
- 
   <div class="tropical-metric">
     <span class="tropical-metric-label">
       추가 위험
     </span>
- 
     <strong
       id="tropical-extra-risk"
       class="tropical-metric-value"
@@ -1264,139 +978,96 @@ hidden
       수면환경 악화
     </strong>
   </div>
- 
 </div>
 </section>
- 
- 
           <!-- 다른 위험 하단 -->
           <dl
             class="metrics"
             id="general-metrics"
             hidden
           >
- 
             <div class="metric">
- 
               <img
                 id="metric-one-icon"
                 class="metric-icon"
                 src="./icon_night_temp.svg"
                 alt=""
               >
- 
               <dt id="metric-one-label">
                 야간 체감
               </dt>
- 
               <dd id="metric-one-value">
                 16일
               </dd>
- 
             </div>
- 
- 
             <div class="metric">
- 
               <img
                 id="metric-two-icon"
                 class="metric-icon"
                 src="./icon_sleep.svg"
                 alt=""
               >
- 
               <dt id="metric-two-label">
                 추가 위험
               </dt>
- 
               <dd id="metric-two-value">
                 수면환경 악화
               </dd>
- 
             </div>
- 
- 
             <div class="metric">
- 
               <img
                 id="warning-area-icon"
                 class="metric-icon"
                 src="./icon_warning_area.svg"
                 alt=""
               >
- 
               <dt>
                 주의 환경
               </dt>
- 
               <dd id="warning-area">
                 고밀도 주거지
               </dd>
- 
             </div>
- 
           </dl>
- 
         </section>
- 
       </div>
- 
- 
       <!-- 위험 경고 팝업 -->
       <div
         id="danger-alert"
         class="danger-alert"
         aria-hidden="true"
       >
- 
         <div class="danger-alert-backdrop"></div>
- 
- 
         <div class="danger-alert-content">
- 
           <img
             class="danger-alert-icon-image"
             src="./icon_warning_area.svg"
             alt=""
           >
- 
           <h2>
             ATTENTION!
           </h2>
- 
- 
           <p
             id="danger-alert-message"
             class="danger-alert-message"
           >
             2090년, 위험 단계가 크게 상승합니다.
           </p>
- 
- 
           <button
             id="danger-alert-confirm"
             class="danger-alert-confirm"
             type="button"
           >
- 
             <span id="danger-alert-button-text">
               2090년 시뮬레이션 보기
             </span>
- 
             <span aria-hidden="true">
               →
             </span>
- 
           </button>
- 
         </div>
- 
       </div>
- 
     </div>
- 
   </main>
- 
 </body>
- 
 </html>
