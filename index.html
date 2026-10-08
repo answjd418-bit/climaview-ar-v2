@@ -160,6 +160,7 @@
               <div class="submenu-divider"></div>
 
 
+
               <button
                 class="submenu-item climate-option active"
                 type="button"
@@ -318,6 +319,7 @@
                 <img
                   class="response-menu-icon"
                   src="./pavement.svg"
+
                   alt=""
                 >
 
@@ -799,6 +801,7 @@ y2="0"
                   없음
                 </strong>
 
+
               </div>
 
 
@@ -958,6 +961,7 @@ y2="0"
                   id="chart-point-2090"
                   cx="275"
                   cy="48"
+
                   r="5"
                 />
 
@@ -1026,6 +1030,68 @@ y2="0"
           </div>
 
           <!-- =========================================================
+               산불 전용 카드
+          ================================================== -->
+          <section
+            id="wildfire-card-section"
+            class="wildfire-card-section"
+            hidden
+          >
+
+            <h2 class="wildfire-section-title">
+              현재 지역의 기후 위험 변화
+            </h2>
+
+            <div class="wildfire-metric-grid">
+
+              <div
+                id="wildfire-impact-tile"
+                class="wildfire-metric-tile wildfire-impact-tile"
+              >
+                <span class="wildfire-metric-label">
+                  산불 영향
+                </span>
+
+                <strong
+                  id="wildfire-impact-value"
+                  class="wildfire-metric-value"
+                >
+                  낮음
+                </strong>
+              </div>
+
+              <div class="wildfire-metric-tile">
+                <span class="wildfire-metric-label">
+                  건조 위험
+                </span>
+
+                <strong
+                  id="wildfire-dryness-value"
+                  class="wildfire-metric-value"
+                >
+                  낮음
+                </strong>
+              </div>
+
+              <div class="wildfire-warning-tile">
+                <span class="wildfire-metric-label">
+                  주의 환경
+                </span>
+
+                <strong
+                  id="wildfire-warning-value"
+                  class="wildfire-metric-value"
+                >
+                  산림 인접 지역
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================================
      열대야 전용 카드
 ========================================================= -->
 <section
@@ -1056,6 +1122,7 @@ hidden
           offset="0%"
           stop-color="#58A7C3"
           stop-opacity=".88"
+
         />
         <stop
           id="tropical-base-stop-2"
@@ -1376,6 +1443,7 @@ hidden
           <button
             id="danger-alert-confirm"
             class="danger-alert-confirm"
+
             type="button"
           >
 

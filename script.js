@@ -292,6 +292,38 @@ const heatwaveExtraRisk =
 
  
 
+/* =========================================================
+
+   산불 DOM
+
+========================================================= */
+
+const wildfireCardSection =
+  document.getElementById(
+    "wildfire-card-section"
+  );
+
+const wildfireImpactTile =
+  document.getElementById(
+    "wildfire-impact-tile"
+  );
+
+const wildfireImpactValue =
+  document.getElementById(
+    "wildfire-impact-value"
+  );
+
+const wildfireDrynessValue =
+  document.getElementById(
+    "wildfire-dryness-value"
+  );
+
+const wildfireWarningValue =
+  document.getElementById(
+    "wildfire-warning-value"
+  );
+
+
   /* =========================================================
 
    열대야 DOM
@@ -1436,6 +1468,43 @@ function heatwaveTemperatureToY(
 
  
 
+const wildfireCardProfiles = {
+
+  current: {
+    risk: "낮음",
+    level: 1,
+    impact: "낮음",
+    dryness: "낮음",
+    warning: "산림 인접 지역"
+  },
+
+  2030: {
+    risk: "다소 높음",
+    level: 2,
+    impact: "다소 높음",
+    dryness: "다소 높음",
+    warning: "산림 인접 지역"
+  },
+
+  2050: {
+    risk: "높음",
+    level: 3,
+    impact: "높음",
+    dryness: "높음",
+    warning: "산림/도시 경계"
+  },
+
+  2090: {
+    risk: "매우 높음",
+    level: 4,
+    impact: "매우 높음",
+    dryness: "매우 높음",
+    warning: "산림/도시 경계"
+  }
+
+};
+
+
 const tropicalCardProfiles = {
 
  
@@ -1529,6 +1598,7 @@ const tropicalChartX = {
   2050:
 
     188,
+
 
  
 
@@ -1690,6 +1760,7 @@ const floodCardProfiles = {
 
       13.2,
 
+
  
 
     warningArea:
@@ -1849,6 +1920,7 @@ const climateRiskProfiles = {
       2090: 4
 
     },
+
 
  
 
@@ -2010,6 +2082,7 @@ const climateRiskProfiles = {
 
   },
 
+
  
 
  
@@ -2169,6 +2242,7 @@ const metricIcons = {
     metricTwo:
 
       "./icon_dry_wind.svg"
+
 
  
 
@@ -2330,6 +2404,7 @@ function setHeatwaveDangerGradient(yearKey) {
 
       "25%"
 
+
     );
 
  
@@ -2489,6 +2564,7 @@ function setHeatwaveDangerGradient(yearKey) {
     heatwaveBaseStops[2].setAttribute(
 
       "offset",
+
 
       "57%"
 
@@ -2650,6 +2726,7 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+
     heatwaveBaseStops[3].setAttribute(
 
       "offset",
@@ -2809,6 +2886,7 @@ function setHeatwaveDangerGradient(yearKey) {
  
 
   /* =====================================================
+
 
      2090
 
@@ -2970,6 +3048,7 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
+
     heatwaveDangerStops[1].setAttribute(
 
       "stop-color",
@@ -3129,6 +3208,7 @@ function setTropicalGradient(yearKey) {
       "65%"
 
     );
+
 
  
 
@@ -3290,6 +3370,7 @@ function setTropicalGradient(yearKey) {
 
       stop => {
 
+
  
 
         stop.setAttribute(
@@ -3449,6 +3530,7 @@ function setTropicalGradient(yearKey) {
  
 
     tropicalDangerStops[1].setAttribute(
+
 
       "stop-color",
 
@@ -3610,6 +3692,7 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[3].setAttribute(
 
+
       "offset",
 
       "100%"
@@ -3769,6 +3852,7 @@ function setTropicalGradient(yearKey) {
 /* =========================================================
 
    열대야 그래프
+
 
 ========================================================= */
 
@@ -3930,6 +4014,7 @@ function updateTropicalChart() {
 
       const circle =
 
+
         document.getElementById(
 
           `tropical-point-${point.year}`
@@ -4089,6 +4174,7 @@ function updateHeatwaveChart() {
           heatwaveCardProfiles[
 
             yearKey
+
 
           ];
 
@@ -4250,6 +4336,7 @@ function updateHeatwaveChart() {
 
       }
 
+
  
 
     }
@@ -4392,6 +4479,16 @@ function updateHeatwaveCard() {
 
   infoCard.classList.remove(
 
+    "wildfire-layout",
+
+    "wildfire-level-1",
+
+    "wildfire-level-2",
+
+    "wildfire-level-3",
+
+    "wildfire-level-4",
+
     
 
     "flood-layout",
@@ -4399,6 +4496,7 @@ function updateHeatwaveCard() {
     "flood-level-1",
 
     "flood-level-2",
+
 
     "flood-level-3",
 
@@ -4499,6 +4597,11 @@ function updateHeatwaveCard() {
     true;
 
  
+
+ 
+
+  wildfireCardSection.hidden =
+    true;
 
  
 
@@ -4680,6 +4783,16 @@ function updateTropicalCard() {
 
   infoCard.classList.remove(
 
+    "wildfire-layout",
+
+    "wildfire-level-1",
+
+    "wildfire-level-2",
+
+    "wildfire-level-3",
+
+    "wildfire-level-4",
+
     "heatwave-layout",
 
     "heatwave-level-1",
@@ -4753,6 +4866,11 @@ function updateTropicalCard() {
  
 
  tropicalCardSection.hidden = false;
+
+ 
+
+  wildfireCardSection.hidden =
+    true;
 
  
 
@@ -4860,6 +4978,7 @@ function updateTropicalCard() {
 
     data.extraRisk;
 
+
  
 
  
@@ -4948,6 +5067,16 @@ function updateFloodCard() {
 
   infoCard.classList.remove(
 
+    "wildfire-layout",
+
+    "wildfire-level-1",
+
+    "wildfire-level-2",
+
+    "wildfire-level-3",
+
+    "wildfire-level-4",
+
     "heatwave-layout",
 
     "heatwave-level-1",
@@ -5010,6 +5139,7 @@ function updateFloodCard() {
 
  
 
+
  
 
   heatwaveCardSection.hidden =
@@ -5029,6 +5159,11 @@ function updateFloodCard() {
     false;
 
  
+
+ 
+
+  wildfireCardSection.hidden =
+    true;
 
  
 
@@ -5638,6 +5773,91 @@ function updateChart() {
 
  
 
+function updateWildfireCard() {
+
+  const data =
+    wildfireCardProfiles[
+      currentYear
+    ];
+
+
+  const yearLabel =
+    yearProfiles[
+      currentYear
+    ].label;
+
+  infoCard.classList.remove(
+    "heatwave-layout",
+    "heatwave-level-1",
+    "heatwave-level-2",
+    "heatwave-level-3",
+    "heatwave-level-4",
+
+    "flood-layout",
+    "flood-level-1",
+    "flood-level-2",
+    "flood-level-3",
+    "flood-level-4",
+
+    "tropical-layout",
+    "tropical-level-1",
+    "tropical-level-2",
+    "tropical-level-3",
+    "tropical-level-4",
+
+    "wildfire-layout",
+    "wildfire-level-1",
+    "wildfire-level-2",
+    "wildfire-level-3",
+    "wildfire-level-4"
+  );
+
+  infoCard.classList.add(
+    "wildfire-layout",
+    `wildfire-level-${data.level}`
+  );
+
+  heatwaveCardSection.hidden = true;
+  floodCardSection.hidden = true;
+  tropicalCardSection.hidden = true;
+  wildfireCardSection.hidden = false;
+  generalChartSection.hidden = true;
+  generalMetrics.hidden = true;
+
+  infoTitle.textContent =
+    currentYear === "current"
+      ? `2026년 ${currentPlaceName}`
+      : `${yearLabel} ${currentPlaceName}`;
+
+  riskName.textContent = "";
+  riskValue.textContent = data.risk;
+  riskUnit.textContent = "";
+  riskCaption.textContent =
+    "현재 위치의 산불 발생 확률";
+
+  wildfireImpactTile.classList.remove(
+    "level-1",
+    "level-2",
+    "level-3",
+    "level-4"
+  );
+
+  wildfireImpactTile.classList.add(
+    `level-${data.level}`
+  );
+
+  wildfireImpactValue.textContent =
+    data.impact;
+
+  wildfireDrynessValue.textContent =
+    data.dryness;
+
+  wildfireWarningValue.textContent =
+    data.warning;
+
+}
+
+
 function updateGeneralCard() {
 
  
@@ -5669,6 +5889,16 @@ function updateGeneralCard() {
  
 
   infoCard.classList.remove(
+
+    "wildfire-layout",
+
+    "wildfire-level-1",
+
+    "wildfire-level-2",
+
+    "wildfire-level-3",
+
+    "wildfire-level-4",
 
     "heatwave-layout",
 
@@ -5726,6 +5956,11 @@ function updateGeneralCard() {
 
   tropicalCardSection.hidden =
 
+    true;
+
+ 
+
+  wildfireCardSection.hidden =
     true;
 
  
@@ -5865,6 +6100,7 @@ function updateGeneralCard() {
  
 
  
+
 
   metricTwoLabel.textContent =
 
@@ -6022,6 +6258,16 @@ function updateClimateInterface() {
 
  
 
+  else if (
+    selectedRisk ===
+    "wildfire"
+
+  ) {
+
+    updateWildfireCard();
+
+  }
+
   else {
 
  
@@ -6122,6 +6368,19 @@ function getCurrentRiskLevel() {
 
  
 
+  if (
+    selectedRisk ===
+    "wildfire"
+  ) {
+
+    return wildfireCardProfiles[
+      currentYear
+    ].level;
+
+  }
+
+ 
+
   return getClimateData(
 
     selectedRisk,
@@ -6163,6 +6422,7 @@ function showDangerAlert(
     ].label;
 
  
+
 
  
 
@@ -6324,6 +6584,7 @@ dangerAlertConfirm.addEventListener(
 
  
 
+
  
 
 /* =========================================================
@@ -6483,6 +6744,7 @@ function changeYear(key) {
         key
 
       );
+
 
  
 
@@ -6644,6 +6906,7 @@ climateOptions.forEach(
 
  
 
+
             item.classList.toggle(
 
               "active",
@@ -6803,6 +7066,7 @@ function detectEnvironment(data) {
     return "forest";
 
   }
+
 
  
 
@@ -6964,6 +7228,7 @@ function initializeLocationMap() {
 
           false,
 
+
  
 
         attributionControl:
@@ -7123,6 +7388,7 @@ function initializeLocationMap() {
     () => {
 
  
+
 
       locationMap.invalidateSize();
 
@@ -7284,6 +7550,7 @@ function updateMapPosition(
 
  
 
+
           fillColor:
 
             "#a9d8e7",
@@ -7443,6 +7710,7 @@ async function reverseGeocode(
   }
 
  
+
 
 }
 
@@ -7604,6 +7872,7 @@ async function updateReverseGeocode(
 
     return;
 
+
   }
 
  
@@ -7763,6 +8032,7 @@ function handleLocationSuccess(
   const latitude =
 
     position.coords.latitude;
+
 
  
 
@@ -7924,6 +8194,7 @@ function startLocationTracking() {
 
  
 
+
       }
 
  
@@ -8083,6 +8354,7 @@ menuButtons.forEach(
  
 
         const panel =
+
 
           document.getElementById(
 
