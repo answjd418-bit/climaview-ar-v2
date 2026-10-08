@@ -4231,3 +4231,43 @@ body.danger-mode .camera-feed {
   line-height: 1.25;
  
 }
+ 
+/* Tropical card: reference layout (two upper tiles + full-width lower tile) */
+.info-card.tropical-layout .tropical-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 8px;
+  margin-top: 18px;
+}
+.info-card.tropical-layout .tropical-metric {
+  min-height: 60px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.info-card.tropical-layout .tropical-metric:last-child {
+  grid-column: 1 / -1;
+  min-height: 60px;
+  padding: 10px 14px;
+}
+.info-card.tropical-layout .tropical-metric-label {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.info-card.tropical-layout .tropical-metric-value {
+  font-size: 17px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.info-card.tropical-layout .tropical-card-section {
+  padding-top: 24px;
+}
+.info-card.tropical-layout .tropical-chart-wrap {
+  margin-top: 12px;
+}
+.info-card.tropical-layout .tropical-chart {
+  width: 100%;
+  height: auto;
+}
