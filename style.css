@@ -1523,3 +1523,43 @@ body.danger-mode .camera-feed {
   font-weight: 650;
   white-space: nowrap;
 }
+/* Air-quality information card: reference layout adjustments only */
+.info-card.air-layout .air-card-section {
+  overflow: visible;
+}
+.info-card.air-layout .air-chart {
+  width: 100%;
+  max-width: 336px;
+  height: 165px;
+  overflow: visible;
+}
+.info-card.air-layout .air-y-labels text {
+  text-anchor: end;
+  font-size: 14px;
+}
+.info-card.air-layout .air-x-labels text {
+  text-anchor: middle;
+  font-size: 14px;
+}
+.info-card.air-layout .air-metric-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 8px;
+  margin-top: 4px;
+}
+.info-card.air-layout .air-metric-tile,
+.info-card.air-layout .air-warning-tile {
+  min-height: 60px;
+  padding: 0 10px;
+  gap: 8px;
+  overflow: visible;
+}
+.info-card.air-layout .air-warning-tile {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  padding-left: 34px;
+}
+.info-card.air-layout .air-warning-tile .air-metric-label,
+.info-card.air-layout .air-warning-tile .air-metric-value {
+  text-align: left;
+  white-space: nowrap;
+}
