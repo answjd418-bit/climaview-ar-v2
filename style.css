@@ -1566,10 +1566,10 @@ body.danger-mode .camera-feed {
 
 /* Air-quality card: PM2.5 tile spacing only */
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) {
-  justify-content: space-between;
-  gap: 12px;
-  padding-left: 12px;
-  padding-right: 12px;
+  justify-content: center;
+  gap: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
