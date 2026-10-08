@@ -160,7 +160,6 @@
               <div class="submenu-divider"></div>
 
 
-
               <button
                 class="submenu-item climate-option active"
                 type="button"
@@ -319,7 +318,6 @@
                 <img
                   class="response-menu-icon"
                   src="./pavement.svg"
-
                   alt=""
                 >
 
@@ -801,7 +799,6 @@ y2="0"
                   없음
                 </strong>
 
-
               </div>
 
 
@@ -961,7 +958,6 @@ y2="0"
                   id="chart-point-2090"
                   cx="275"
                   cy="48"
-
                   r="5"
                 />
 
@@ -1028,6 +1024,65 @@ y2="0"
             </svg>
 
           </div>
+
+          <!-- =========================================================
+               대기질 전용 카드
+          ========================================================= -->
+          <section
+            id="air-card-section"
+            class="air-card-section"
+            hidden
+          >
+            <h2 class="air-section-title">현재 지역의 기후 위험 변화</h2>
+
+            <svg class="air-chart" viewBox="0 0 336 150" aria-label="대기질 위험 변화 그래프">
+              <defs>
+                <linearGradient id="air-chart-fill" x1="0" y1="0" x2="1" y2="0">
+                  <stop id="air-stop-0" offset="0%" stop-color="#c8893f"/>
+                  <stop id="air-stop-1" offset="38%" stop-color="#d56d45"/>
+                  <stop id="air-stop-2" offset="70%" stop-color="#79a8b7"/>
+                  <stop id="air-stop-3" offset="100%" stop-color="#58a7c3"/>
+                </linearGradient>
+              </defs>
+              <g class="air-y-labels">
+                <text x="10" y="25">80</text>
+                <text x="10" y="57">60</text>
+                <text x="10" y="89">40</text>
+                <text x="10" y="121">20</text>
+              </g>
+              <path d="M48 14v108h252" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="1"/>
+              <path id="air-chart-area" fill="url(#air-chart-fill)"/>
+              <g class="air-points">
+                <circle id="air-point-current" cx="48" cy="92" r="5"/>
+                <circle id="air-point-2030" cx="112" cy="84" r="5"/>
+                <circle id="air-point-2050" cx="194" cy="84" r="5"/>
+                <circle id="air-point-2090" cx="276" cy="62" r="5"/>
+              </g>
+              <circle id="air-selected-glow" class="air-selected-glow" cx="48" cy="92" r="13"/>
+              <circle id="air-selected-point" class="air-selected-point" cx="48" cy="92" r="7"/>
+              <g class="air-x-labels">
+                <text x="48" y="145">현재</text>
+                <text x="112" y="145">2030</text>
+                <text x="194" y="145">2050</text>
+                <text x="276" y="145">2090</text>
+              </g>
+            </svg>
+
+            <div class="air-metric-grid">
+              <div id="air-impact-tile" class="air-metric-tile air-impact-tile">
+                <span class="air-metric-label">대기질 영향</span>
+                <strong id="air-impact-value" class="air-metric-value">보통</strong>
+              </div>
+              <div class="air-metric-tile">
+                <span class="air-metric-label">초미세먼지 (PM2.5)</span>
+                <strong id="air-pm25-value" class="air-metric-value">26㎍/㎥</strong>
+              </div>
+              <div class="air-warning-tile">
+                <span class="air-metric-label">추가 위험</span>
+                <strong id="air-extra-risk" class="air-metric-value">미세먼지 노출</strong>
+              </div>
+            </div>
+          </section>
 
           <!-- =========================================================
                산불 전용 카드
@@ -1122,7 +1177,6 @@ hidden
           offset="0%"
           stop-color="#58A7C3"
           stop-opacity=".88"
-
         />
         <stop
           id="tropical-base-stop-2"
@@ -1443,7 +1497,6 @@ hidden
           <button
             id="danger-alert-confirm"
             class="danger-alert-confirm"
-
             type="button"
           >
 
