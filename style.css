@@ -158,7 +158,6 @@ button {
 
   -webkit-backdrop-filter:
     blur(22px);
-
 }
 
 
@@ -319,7 +318,6 @@ button {
       rgba(31, 37, 16, .72),
       rgba(60, 59, 27, .56)
     );
-
 
   cursor: pointer;
 
@@ -641,7 +639,6 @@ button {
 
   min-width: 0;
 
-
   font-size: 17px;
   font-weight: 500;
 
@@ -961,7 +958,6 @@ button {
 .info-card.heatwave-level-4
 .risk-value,
 .info-card.heatwave-level-4
-
 .risk-unit {
   text-shadow:
     0
@@ -1282,7 +1278,6 @@ button {
 
 .chart-section[hidden] {
   display: none;
-
 }
 
 
@@ -1763,7 +1758,6 @@ body.danger-mode .camera-feed {
 
   border-color:
     rgba(237, 121, 67, 0.48);
-
 }
 
 .tropical-impact-tile.level-4 {
@@ -1924,7 +1918,6 @@ body.danger-mode .camera-feed {
 
 .wildfire-metric-value {
   color: #ffffff;
-
   font-size: 17px;
   font-weight: 650;
   white-space: nowrap;
@@ -1971,3 +1964,42 @@ body.danger-mode .camera-feed {
     0 0 8px rgba(220, 62, 59, 1),
     0 0 20px rgba(220, 62, 59, .67);
 }
+
+
+/* =========================================================
+   대기질 전용 카드
+========================================================= */
+.info-card.air-layout {
+  height: 578px;
+  background: linear-gradient(145deg, rgba(42,45,48,.93), rgba(48,48,48,.91));
+}
+.info-card.air-layout .risk-name { display: none; }
+.air-card-section {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.30);
+}
+.air-card-section[hidden] { display: none; }
+.air-section-title { margin: 0 0 12px; font-size: 17px; font-weight: 600; }
+.air-chart { width: 336px; height: 165px; display: block; overflow: visible; }
+.air-y-labels text, .air-x-labels text { fill: #fff; font-family: inherit; font-size: 14px; }
+.air-y-labels text { text-anchor: end; }
+.air-x-labels text { text-anchor: middle; }
+.air-points circle { fill: #69b5d1; stroke: rgba(255,255,255,.70); stroke-width: 1.5px; }
+.air-selected-glow { fill: rgba(213,109,69,.30); }
+.air-selected-point { fill: #c8893f; stroke: #fff; stroke-width: 1.8px; }
+.info-card.air-level-3 .air-selected-point { fill: #df6845; filter: drop-shadow(0 0 6px rgba(232,96,62,.80)); }
+.info-card.air-level-4 .air-selected-point { fill: #df4141; filter: drop-shadow(0 0 7px rgba(255,63,57,1)); }
+.info-card.air-level-2 .risk-value, .info-card.air-level-2 .risk-unit { text-shadow: 0 0 7px rgba(204,139,66,.90), 0 0 18px rgba(204,139,66,.38); }
+.info-card.air-level-3 .risk-value, .info-card.air-level-3 .risk-unit { text-shadow: 0 0 7px rgba(234,93,53,.95), 0 0 18px rgba(234,93,53,.48); }
+.info-card.air-level-4 .risk-value, .info-card.air-level-4 .risk-unit { text-shadow: 0 0 8px rgba(255,55,48,1), 0 0 20px rgba(255,55,48,.67); }
+.air-metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; margin-top: 4px; }
+.air-metric-tile, .air-warning-tile {
+  min-height: 60px; padding: 0 14px; display: flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(113,113,113,.26);
+}
+.air-warning-tile { grid-column: 1 / -1; justify-content: flex-start; padding-left: 38px; }
+.air-metric-label { color: rgba(255,255,255,.62); font-size: 12px; white-space: nowrap; }
+.air-metric-value { color: #fff; font-size: 16px; font-weight: 650; white-space: nowrap; }
+.air-impact-tile.level-2 { background: linear-gradient(120deg, rgba(194,128,53,.96), rgba(169,105,37,.92)); }
+.air-impact-tile.level-3 { background: linear-gradient(120deg, rgba(204,109,49,.97), rgba(193,62,49,.94)); }
+.air-impact-tile.level-4 { background: linear-gradient(120deg, rgba(198,55,52,.98), rgba(166,39,39,.95)); }

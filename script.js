@@ -294,6 +294,21 @@ const heatwaveExtraRisk =
 
 /* =========================================================
 
+   대기질 DOM
+
+========================================================= */
+
+const airCardSection = document.getElementById("air-card-section");
+const airChartArea = document.getElementById("air-chart-area");
+const airSelectedGlow = document.getElementById("air-selected-glow");
+const airSelectedPoint = document.getElementById("air-selected-point");
+const airImpactTile = document.getElementById("air-impact-tile");
+const airImpactValue = document.getElementById("air-impact-value");
+const airPm25Value = document.getElementById("air-pm25-value");
+const airExtraRisk = document.getElementById("air-extra-risk");
+
+/* =========================================================
+
    산불 DOM
 
 ========================================================= */
@@ -1599,7 +1614,6 @@ const tropicalChartX = {
 
     188,
 
-
  
 
   2090:
@@ -1760,7 +1774,6 @@ const floodCardProfiles = {
 
       13.2,
 
-
  
 
     warningArea:
@@ -1867,6 +1880,20 @@ const floodCardProfiles = {
 
  
 
+const airCardProfiles = {
+  current: { days: 48.1, pm25: 26, impact: "보통", level: 2, extraRisk: "미세먼지 노출" },
+  2030: { days: 50.1, pm25: 29, impact: "증가", level: 3, extraRisk: "호흡기 질환, 미세먼지 노출" },
+  2050: { days: 50.1, pm25: 32, impact: "증가 전망", level: 3, extraRisk: "호흡기 질환, 미세먼지 노출" },
+  2090: { days: 54.6, pm25: 35, impact: "높음", level: 4, extraRisk: "호흡기 질환, 미세먼지 노출" }
+};
+
+const airChartPoints = {
+  current: { x: 48, y: 92 },
+  2030: { x: 112, y: 84 },
+  2050: { x: 194, y: 84 },
+  2090: { x: 276, y: 62 }
+};
+
 const climateRiskProfiles = {
 
  
@@ -1920,7 +1947,6 @@ const climateRiskProfiles = {
       2090: 4
 
     },
-
 
  
 
@@ -2082,7 +2108,6 @@ const climateRiskProfiles = {
 
   },
 
-
  
 
  
@@ -2242,7 +2267,6 @@ const metricIcons = {
     metricTwo:
 
       "./icon_dry_wind.svg"
-
 
  
 
@@ -2404,7 +2428,6 @@ function setHeatwaveDangerGradient(yearKey) {
 
       "25%"
 
-
     );
 
  
@@ -2564,7 +2587,6 @@ function setHeatwaveDangerGradient(yearKey) {
     heatwaveBaseStops[2].setAttribute(
 
       "offset",
-
 
       "57%"
 
@@ -2726,7 +2748,6 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
-
     heatwaveBaseStops[3].setAttribute(
 
       "offset",
@@ -2886,7 +2907,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
 
   /* =====================================================
-
 
      2090
 
@@ -3048,7 +3068,6 @@ function setHeatwaveDangerGradient(yearKey) {
 
  
 
-
     heatwaveDangerStops[1].setAttribute(
 
       "stop-color",
@@ -3208,7 +3227,6 @@ function setTropicalGradient(yearKey) {
       "65%"
 
     );
-
 
  
 
@@ -3370,7 +3388,6 @@ function setTropicalGradient(yearKey) {
 
       stop => {
 
-
  
 
         stop.setAttribute(
@@ -3530,7 +3547,6 @@ function setTropicalGradient(yearKey) {
  
 
     tropicalDangerStops[1].setAttribute(
-
 
       "stop-color",
 
@@ -3692,7 +3708,6 @@ function setTropicalGradient(yearKey) {
 
     tropicalBaseStops[3].setAttribute(
 
-
       "offset",
 
       "100%"
@@ -3852,7 +3867,6 @@ function setTropicalGradient(yearKey) {
 /* =========================================================
 
    열대야 그래프
-
 
 ========================================================= */
 
@@ -4014,7 +4028,6 @@ function updateTropicalChart() {
 
       const circle =
 
-
         document.getElementById(
 
           `tropical-point-${point.year}`
@@ -4174,7 +4187,6 @@ function updateHeatwaveChart() {
           heatwaveCardProfiles[
 
             yearKey
-
 
           ];
 
@@ -4336,7 +4348,6 @@ function updateHeatwaveChart() {
 
       }
 
-
  
 
     }
@@ -4489,6 +4500,16 @@ function updateHeatwaveCard() {
 
     "wildfire-level-4",
 
+    "air-layout",
+
+    "air-level-1",
+
+    "air-level-2",
+
+    "air-level-3",
+
+    "air-level-4",
+
     
 
     "flood-layout",
@@ -4496,7 +4517,6 @@ function updateHeatwaveCard() {
     "flood-level-1",
 
     "flood-level-2",
-
 
     "flood-level-3",
 
@@ -4601,6 +4621,9 @@ function updateHeatwaveCard() {
  
 
   wildfireCardSection.hidden =
+    true;
+
+  airCardSection.hidden =
     true;
 
  
@@ -4793,6 +4816,16 @@ function updateTropicalCard() {
 
     "wildfire-level-4",
 
+    "air-layout",
+
+    "air-level-1",
+
+    "air-level-2",
+
+    "air-level-3",
+
+    "air-level-4",
+
     "heatwave-layout",
 
     "heatwave-level-1",
@@ -4870,6 +4903,9 @@ function updateTropicalCard() {
  
 
   wildfireCardSection.hidden =
+    true;
+
+  airCardSection.hidden =
     true;
 
  
@@ -4978,7 +5014,6 @@ function updateTropicalCard() {
 
     data.extraRisk;
 
-
  
 
  
@@ -5077,6 +5112,16 @@ function updateFloodCard() {
 
     "wildfire-level-4",
 
+    "air-layout",
+
+    "air-level-1",
+
+    "air-level-2",
+
+    "air-level-3",
+
+    "air-level-4",
+
     "heatwave-layout",
 
     "heatwave-level-1",
@@ -5139,7 +5184,6 @@ function updateFloodCard() {
 
  
 
-
  
 
   heatwaveCardSection.hidden =
@@ -5163,6 +5207,9 @@ function updateFloodCard() {
  
 
   wildfireCardSection.hidden =
+    true;
+
+  airCardSection.hidden =
     true;
 
  
@@ -5773,13 +5820,69 @@ function updateChart() {
 
  
 
+function updateAirCard() {
+  const data = airCardProfiles[currentYear];
+  if (!data) return;
+
+  infoCard.classList.remove(
+    "heatwave-layout", "heatwave-level-1", "heatwave-level-2", "heatwave-level-3", "heatwave-level-4",
+    "flood-layout", "flood-level-1", "flood-level-2", "flood-level-3", "flood-level-4",
+    "tropical-layout", "tropical-level-1", "tropical-level-2", "tropical-level-3", "tropical-level-4",
+    "wildfire-layout", "wildfire-level-1", "wildfire-level-2", "wildfire-level-3", "wildfire-level-4",
+    "air-layout", "air-level-1", "air-level-2", "air-level-3", "air-level-4"
+  );
+  infoCard.classList.add("air-layout", `air-level-${data.level}`);
+
+  heatwaveCardSection.hidden = true;
+  floodCardSection.hidden = true;
+  tropicalCardSection.hidden = true;
+  wildfireCardSection.hidden = true;
+  airCardSection.hidden = false;
+  generalChartSection.hidden = true;
+  generalMetrics.hidden = true;
+
+  const yearLabel = yearProfiles[currentYear].label;
+  infoTitle.textContent = currentYear === "current"
+    ? `2026년 ${currentPlaceName}`
+    : `${yearLabel} ${currentPlaceName}`;
+  riskName.textContent = "";
+  riskValue.textContent = data.days;
+  riskUnit.textContent = "일";
+  riskCaption.textContent = "현재 위치의 대기질 위험 기상일수";
+
+  airImpactTile.classList.remove("level-1", "level-2", "level-3", "level-4");
+  airImpactTile.classList.add(`level-${data.level}`);
+  airImpactValue.textContent = data.impact;
+  airPm25Value.textContent = `${data.pm25}㎍/㎥`;
+  airExtraRisk.textContent = data.extraRisk;
+
+  const years = ["current", "2030", "2050", "2090"];
+  const selectedIndex = years.indexOf(currentYear);
+  const pts = years.map(year => airChartPoints[year]);
+  let path = `M${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length; i += 1) path += ` L${pts[i].x} ${pts[i].y}`;
+  path += " L300 122 L48 122 Z";
+  airChartArea.setAttribute("d", path);
+
+  years.forEach((year, index) => {
+    const point = document.getElementById(`air-point-${year}`);
+    point.style.opacity = index === selectedIndex ? "0" : "1";
+  });
+  const selected = airChartPoints[currentYear];
+  airSelectedGlow.setAttribute("cx", selected.x);
+  airSelectedGlow.setAttribute("cy", selected.y);
+  airSelectedPoint.setAttribute("cx", selected.x);
+  airSelectedPoint.setAttribute("cy", selected.y);
+
+  document.body.dataset.riskLevel = String(data.level);
+}
+
 function updateWildfireCard() {
 
   const data =
     wildfireCardProfiles[
       currentYear
     ];
-
 
   const yearLabel =
     yearProfiles[
@@ -5820,6 +5923,7 @@ function updateWildfireCard() {
   heatwaveCardSection.hidden = true;
   floodCardSection.hidden = true;
   tropicalCardSection.hidden = true;
+  airCardSection.hidden = true;
   wildfireCardSection.hidden = false;
   generalChartSection.hidden = true;
   generalMetrics.hidden = true;
@@ -5900,6 +6004,16 @@ function updateGeneralCard() {
 
     "wildfire-level-4",
 
+    "air-layout",
+
+    "air-level-1",
+
+    "air-level-2",
+
+    "air-level-3",
+
+    "air-level-4",
+
     "heatwave-layout",
 
     "heatwave-level-1",
@@ -5961,6 +6075,9 @@ function updateGeneralCard() {
  
 
   wildfireCardSection.hidden =
+    true;
+
+  airCardSection.hidden =
     true;
 
  
@@ -6100,7 +6217,6 @@ function updateGeneralCard() {
  
 
  
-
 
   metricTwoLabel.textContent =
 
@@ -6260,8 +6376,16 @@ function updateClimateInterface() {
 
   else if (
     selectedRisk ===
-    "wildfire"
+    "air"
+  ) {
 
+    updateAirCard();
+
+  }
+
+  else if (
+    selectedRisk ===
+    "wildfire"
   ) {
 
     updateWildfireCard();
@@ -6370,6 +6494,15 @@ function getCurrentRiskLevel() {
 
   if (
     selectedRisk ===
+    "air"
+  ) {
+
+    return airCardProfiles[currentYear].level;
+
+  }
+
+  if (
+    selectedRisk ===
     "wildfire"
   ) {
 
@@ -6422,7 +6555,6 @@ function showDangerAlert(
     ].label;
 
  
-
 
  
 
@@ -6584,7 +6716,6 @@ dangerAlertConfirm.addEventListener(
 
  
 
-
  
 
 /* =========================================================
@@ -6744,7 +6875,6 @@ function changeYear(key) {
         key
 
       );
-
 
  
 
@@ -6906,7 +7036,6 @@ climateOptions.forEach(
 
  
 
-
             item.classList.toggle(
 
               "active",
@@ -7066,7 +7195,6 @@ function detectEnvironment(data) {
     return "forest";
 
   }
-
 
  
 
@@ -7228,7 +7356,6 @@ function initializeLocationMap() {
 
           false,
 
-
  
 
         attributionControl:
@@ -7388,7 +7515,6 @@ function initializeLocationMap() {
     () => {
 
  
-
 
       locationMap.invalidateSize();
 
@@ -7550,7 +7676,6 @@ function updateMapPosition(
 
  
 
-
           fillColor:
 
             "#a9d8e7",
@@ -7710,7 +7835,6 @@ async function reverseGeocode(
   }
 
  
-
 
 }
 
@@ -7872,7 +7996,6 @@ async function updateReverseGeocode(
 
     return;
 
-
   }
 
  
@@ -8032,7 +8155,6 @@ function handleLocationSuccess(
   const latitude =
 
     position.coords.latitude;
-
 
  
 
@@ -8194,7 +8316,6 @@ function startLocationTracking() {
 
  
 
-
       }
 
  
@@ -8354,7 +8475,6 @@ menuButtons.forEach(
  
 
         const panel =
-
 
           document.getElementById(
 
