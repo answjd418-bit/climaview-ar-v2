@@ -1511,6 +1511,8 @@ body.danger-mode .camera-feed {
 }
 .info-card.tropical-layout .tropical-metric:last-child {
   grid-column: 1 / -1;
+  justify-content: flex-start;
+  padding-left: 24px;
 }
 .info-card.tropical-layout .tropical-metric-label {
   font-size: 13px;
