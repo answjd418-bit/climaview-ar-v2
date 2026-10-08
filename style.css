@@ -1536,6 +1536,7 @@ body.danger-mode .camera-feed {
 .info-card.air-layout .air-y-labels text {
   text-anchor: end;
   font-size: 14px;
+  transform: translateX(10px);
 }
 .info-card.air-layout .air-x-labels text {
   text-anchor: middle;
