@@ -4103,3 +4103,129 @@ body.danger-mode .camera-feed {
 .air-impact-tile.level-4 { background: linear-gradient(120deg, rgba(198,55,52,.98), rgba(166,39,39,.95)); }
 
  
+
+/* =========================================================
+
+   열대야 카드 가독성 보정
+
+   - 2번 레퍼런스처럼 카드 높이/텍스트 스케일 확대
+
+   - 다른 위험 카드에는 영향 없음
+
+========================================================= */
+
+.info-card.tropical-layout {
+
+  height: 578px;
+
+  box-sizing: border-box;
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      rgba(42, 45, 48, .93),
+
+      rgba(48, 48, 48, .91)
+
+    );
+
+}
+
+.info-card.tropical-layout .risk-name {
+
+  display: none;
+
+}
+
+.info-card.tropical-layout .card-header h1 {
+
+  font-size: 18px;
+
+}
+
+.info-card.tropical-layout .scenario {
+
+  font-size: 16px;
+
+}
+
+.info-card.tropical-layout .risk-value {
+
+  font-size: 68px;
+
+  line-height: 1;
+
+  letter-spacing: -3px;
+
+}
+
+.info-card.tropical-layout .risk-unit {
+
+  font-size: 32px;
+
+}
+
+.info-card.tropical-layout .risk-caption {
+
+  margin: 10px 0 24px;
+
+  font-size: 16px;
+
+}
+
+.info-card.tropical-layout .tropical-card-section {
+
+  padding-top: 22px;
+
+  border-top: 1px solid rgba(255, 255, 255, .30);
+
+}
+
+.info-card.tropical-layout .tropical-chart-wrap {
+
+  margin-top: 8px;
+
+}
+
+.info-card.tropical-layout .tropical-y-labels text,
+
+.info-card.tropical-layout .tropical-x-labels text {
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+}
+
+.info-card.tropical-layout .tropical-metrics {
+
+  gap: 8px;
+
+  margin-top: 16px;
+
+}
+
+.info-card.tropical-layout .tropical-metric {
+
+  min-height: 78px;
+
+  padding: 12px 10px;
+
+}
+
+.info-card.tropical-layout .tropical-metric-label {
+
+  font-size: 13px;
+
+}
+
+.info-card.tropical-layout .tropical-metric-value {
+
+  font-size: 16px;
+
+  line-height: 1.25;
+
+}
