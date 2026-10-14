@@ -17352,7 +17352,7 @@ startLocationTracking();
     main.replaceChildren();infoCard.classList.remove("detail-source-hidden");
   }
   panel.addEventListener("transitionend",event=>{
-    if(event.target===panel && event.propertyName==="width" && !opened)finishClose();
+    if(event.target===panel && event.propertyName==="opacity" && !opened)finishClose();
   });
   const chartRisks=new Set(["heatwave","tropical","air"]);
   function fill() {
@@ -17383,20 +17383,22 @@ startLocationTracking();
     document.getElementById("detail-action-text").textContent=guide.actionText;
   }
   function open() {
-    if(opened || closing)return;clearTimeout(closingTimer);fill();opened=true;
+    if(opened)return;clearTimeout(closingTimer);closing=false;fill();opened=true;
     panel.inert=false;panel.setAttribute("aria-hidden","false");
     panel.classList.add("is-visible");backdrop.classList.add("is-open");
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{
-      panel.classList.add("is-open");infoCard.classList.add("detail-source-hidden");
+    infoCard.classList.add("detail-source-hidden");
+    requestAnimationFrame(()=>{
+      panel.classList.add("is-open");
       closeButton.focus({preventScroll:true});
-    }));
+    });
   }
   function close() {
     if(!opened || closing)return;opened=false;closing=true;
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
+    infoCard.classList.remove("detail-source-hidden");
     openButton.focus({preventScroll:true});
-    // Keep the original hidden until the slide-back has completed.
-    closingTimer=setTimeout(finishClose,300);
+    // Opacity transition ends first; timer is only a fallback.
+    closingTimer=setTimeout(finishClose,260);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
