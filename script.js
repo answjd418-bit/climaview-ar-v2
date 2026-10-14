@@ -17357,6 +17357,7 @@ startLocationTracking();
   const chartRisks=new Set(["heatwave","tropical","air"]);
   function fill() {
     const guide=details[selectedRisk]||details.heatwave;
+    panel.dataset.risk=selectedRisk;
     main.replaceChildren();
     const clone=infoCard.cloneNode(true);
     clone.removeAttribute("id");clone.classList.add("detail-card-copy");

@@ -1866,3 +1866,11 @@ body.danger-mode .camera-feed {
 .detail-backdrop{transition:opacity .33s ease!important;}
 .info-card.detail-source-hidden{transition:none!important;}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.detail-backdrop{transition-duration:.01ms!important;transition-delay:0ms!important}}
+ 
+/* Air quality detail only: reduce the excessive empty middle band. */
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p,
+.detail-panel.is-open.detail-has-chart.air-layout .detail-side-card:nth-child(2) p {
+  transform:translateY(-64px);
+}
+/* The detail view uses the same right-hand guidance card for all risks.
+   Limit this correction to air quality via the class set by the script. */
