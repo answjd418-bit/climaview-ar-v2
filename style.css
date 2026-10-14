@@ -1042,55 +1042,46 @@ body.danger-mode .camera-feed {
 .danger-alert-content {
   position: relative;
   z-index: 2;
-  width: 560px;
+  width: 680px;
+  max-width: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 .danger-alert-icon-image {
-  width: 82px;
-  height: 82px;
-  margin-bottom: 12px;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 16px;
   object-fit: contain;
-  filter:
-    brightness(4);
+  filter: brightness(4);
 }
 .danger-alert-content h2 {
-  margin:
-    0
-    0
-    30px;
-  font-size: 21px;
-  font-weight: 500;
+  margin: 0 0 32px;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
 }
 .danger-alert-message {
   margin: 0;
-  font-size: 19px;
-  line-height: 1.55;
+  font-size: 24px;
+  line-height: 1.65;
+  font-weight: 400;
+  word-break: keep-all;
 }
 .danger-alert-confirm {
-  min-width: 300px;
-  height: 62px;
-  margin-top: 45px;
-  padding:
-    0
-    34px;
+  min-width: 370px;
+  height: 76px;
+  margin-top: 40px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border-radius: 31px;
-  border:
-    1px solid
-    rgba(255, 255, 255, .22);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(62, 62, 62, .64),
-      rgba(20, 20, 20, .82)
-    );
-  font-size: 19px;
+  gap: 10px;
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: linear-gradient(180deg, rgba(62, 62, 62, .64), rgba(20, 20, 20, .82));
+  font-size: 23px;
   font-weight: 600;
   cursor: pointer;
 }
