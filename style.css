@@ -1536,7 +1536,6 @@ body.danger-mode .camera-feed {
 .info-card.air-layout .air-y-labels text {
   text-anchor: end;
   font-size: 14px;
-  transform: translateX(10px);
 }
 .info-card.air-layout .air-x-labels text {
   text-anchor: middle;
@@ -1597,3 +1596,68 @@ body.danger-mode .camera-feed {
   font-size: 11px;
   line-height: 1.25;
 }
+
+
+/* =========================================================
+   Reference typography & spacing update (1366 x 1024)
+   Scope: visual styling only. Keep the existing years/data/JS.
+========================================================= */
+.timeline { left: 405px; width: 556px; height: 66px; padding: 8px 10px; gap: 6px; background: rgba(36,39,43,.78); border: 1px solid rgba(255,255,255,.12); }
+.year { width: 130px; min-width: 130px; flex: 0 0 130px; height: 46px; font-size: 21px; }
+.year.selected { background: rgba(185,190,197,.20); }
+.left-panel { left: 40px; top: 190px; width: 245px; }
+.menu { height: 78px; padding: 0 29px; font-size: 21px; border-radius: 24px; background: rgba(35,35,35,.87); }
+.response-menu { background: rgba(42,40,39,.86); }
+.submenu { background: rgba(34,34,34,.88); padding-left: 10px; padding-right: 10px; }
+.submenu.open { max-height: 405px; }
+.submenu-item { min-height: 72px; padding: 0 17px; gap: 16px; font-size: 18px; font-weight: 550; }
+.climate-menu-icon { width: 32px; height: 32px; }
+.map-card { width: 245px; height: 216px; border-radius: 24px; background: rgba(39,39,39,.88); }
+.location-map { height: 144px; }
+.map-location-name { font-size: 17px; }
+.map-location-status { font-size: 11px; }
+.info-card { left: 906px; top: 190px; width: 420px; padding: 24px 20px 22px; border-radius: 23px; }
+.card-header { height: 32px; gap: 8px; }
+.card-header h1 { font-size: 20px; font-weight: 550; }
+.scenario { font-size: 14px; padding: 6px 15px; }
+.risk-summary { margin-top: 12px; }
+.risk-value-row { margin-top: 6px; gap: 3px; }
+.risk-value { font-size: 72px; line-height: 1.03; letter-spacing: -3px; }
+.risk-unit { font-size: 35px; }
+.risk-caption { margin: 7px 0 26px; font-size: 18px; line-height: 1.4; }
+.info-card.heatwave-layout, .info-card.tropical-layout, .info-card.air-layout { height: auto; min-height: 640px; }
+.info-card.flood-layout, .info-card.wildfire-layout { height: auto; min-height: 458px; }
+.info-card.wildfire-layout .risk-value { font-size: 70px; letter-spacing: -3px; }
+.heatwave-card-section, .flood-card-section, .wildfire-card-section,
+.info-card.tropical-layout .tropical-card-section, .air-card-section { padding-top: 28px; }
+.heatwave-section-title, .flood-section-title, .wildfire-section-title,
+.info-card.tropical-layout .tropical-section-title, .air-section-title { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+.heatwave-chart, .info-card.tropical-layout .tropical-chart,
+.info-card.air-layout .air-chart { width: 100%; max-width: 370px; height: 172px; }
+.heatwave-axis-label, .heatwave-x-label { font-size: 15px; }
+.info-card.tropical-layout .tropical-y-labels text,
+.info-card.tropical-layout .tropical-x-labels text,
+.info-card.air-layout .air-y-labels text,
+.info-card.air-layout .air-x-labels text { font-size: 15px; }
+.heatwave-metric-grid, .flood-metric-grid, .wildfire-metric-grid,
+.info-card.tropical-layout .tropical-metrics,
+.info-card.air-layout .air-metric-grid { gap: 10px 8px; margin-top: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.heatwave-metric-tile, .heatwave-extra-tile,
+.flood-metric-tile, .flood-warning-tile,
+.wildfire-metric-tile, .wildfire-warning-tile,
+.info-card.tropical-layout .tropical-metric,
+.info-card.air-layout .air-metric-tile,
+.info-card.air-layout .air-warning-tile { min-height: 70px; padding-left: 10px; padding-right: 10px; gap: 9px; border-radius: 12px; }
+.heatwave-extra-tile, .flood-warning-tile, .wildfire-warning-tile,
+.info-card.tropical-layout .tropical-metric:last-child,
+.info-card.air-layout .air-warning-tile { padding-left: 30px; }
+.heatwave-metric-label, .flood-metric-label, .wildfire-metric-label,
+.info-card.tropical-layout .tropical-metric-label,
+.info-card.air-layout .air-metric-label { font-size: 14px; line-height: 1.25; }
+.heatwave-metric-value, .flood-metric-value, .wildfire-metric-value,
+.info-card.tropical-layout .tropical-metric-value,
+.info-card.air-layout .air-metric-value { font-size: 19px; font-weight: 650; line-height: 1.25; }
+/* Keep the two-line PM2.5 label readable without crowding its value. */
+.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) { gap: 7px; padding-left: 6px; padding-right: 6px; }
+.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after { font-size: 12px; line-height: 1.18; }
+.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value { font-size: 16px; letter-spacing: -.5px; }
