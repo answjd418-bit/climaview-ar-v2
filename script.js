@@ -17325,67 +17325,64 @@ changeYear(
  
  
 startLocationTracking();
+ 
 /* =========================================================
-   상세정보 슬라이드 확장 (기존 카드/카메라/GPS 동작 유지)
+   Reference-matched expanding detail: live card clone keeps SVG chart
 ========================================================= */
 (function initializeDetailPanel() {
   const panel = document.getElementById("detail-panel");
   const backdrop = document.getElementById("detail-backdrop");
+  const main = document.getElementById("detail-main");
   const openButton = document.getElementById("card-expand-control");
   const closeButton = document.getElementById("detail-close");
-  if (!panel || !backdrop || !openButton || !closeButton || !infoCard) return;
- 
-  const guides = {
-    heatwave: { title:"폭염", description:"높은 기온이 지속되면 열 스트레스와 온열질환 위험이 커질 수 있습니다.", tips:["한낮 야외 활동을 줄이고 그늘에서 휴식하기", "수분을 충분히 섭취하고 실내 온도 확인하기", "노약자와 어린이의 건강 상태 살피기"] },
-    tropical: { title:"열대야", description:"야간 기온이 높게 유지되면 수면의 질이 떨어지고 피로가 누적될 수 있습니다.", tips:["잠들기 전 실내 환기와 적정 온도 유지하기", "수분을 보충하고 늦은 시간 격한 운동 피하기", "취약계층의 야간 실내 환경 확인하기"] },
-    flood: { title:"침수", description:"집중호우와 수위 상승 시 저지대와 하천 주변의 침수 위험이 증가할 수 있습니다.", tips:["기상특보와 하천 출입 통제 정보 확인하기", "침수 우려 지하 공간과 저지대 접근 피하기", "비상 대피 경로와 가까운 안전 장소 확인하기"] },
-    wildfire: { title:"산불", description:"건조한 날씨와 바람은 산불 발생 및 확산 위험을 높일 수 있습니다.", tips:["산림 인접 지역의 화기 사용 자제하기", "산불 경보와 출입 통제 안내 확인하기", "연기 발생 시 안전한 실내로 이동하기"] },
-    air: { title:"대기질", description:"대기오염 물질 농도가 높아지면 호흡기와 눈 등에 자극을 줄 수 있습니다.", tips:["실시간 대기질 정보 확인하기", "농도가 높은 날에는 장시간 야외 활동 줄이기", "실내 공기질과 환기 시점 관리하기"] }
+  if (!panel || !backdrop || !main || !openButton || !closeButton || !infoCard) return;
+  const details = {
+    heatwave: {noun:"폭염", action:"미래의 폭염을 낮추는 실천 방법", description:"예상 최고기온이 높아질수록 열 스트레스와 온열질환 위험이 증가할 수 있습니다.", actionText:"냉난방 에너지 사용을 줄이고, 대중교통과 자전거를 이용해 온실가스 배출을 줄입니다. 또한 나무 심기와 도시 녹지 보전에 참여해 열섬 현상을 완화하고, 다회용품 사용과 불필요한 소비를 줄여 자원 낭비와 탄소 배출 감소에 기여합니다."},
+    tropical: {noun:"열대야", action:"열대야 피해를 줄이는 대응 방법", description:"밤에도 높은 기온이 유지되면 수면의 질이 떨어지고 피로가 누적되며 취약계층의 건강 부담이 커질 수 있습니다.", actionText:"취침 전 실내를 환기하고 적절한 냉방과 수분 섭취로 수면 환경을 관리합니다. 그늘과 녹지를 늘리는 지역 활동에 참여하고, 에너지 절약을 실천해 장기적인 기온 상승 완화에 기여합니다."},
+    air: {noun:"대기질", action:"대기오염 노출을 줄이는 실천 방법", description:"초미세먼지 농도와 대기질 위험 기상일수가 증가하면 호흡기 자극과 야외 활동의 제약이 커질 수 있습니다.", actionText:"실시간 대기질 정보를 확인하고 오염이 심한 날에는 장시간 야외 활동을 줄입니다. 적절한 시간에 환기하고 대중교통 이용, 불필요한 자동차 운행 감소 등 배출 저감 행동을 실천합니다."},
+    flood: {noun:"침수", action:"침수 피해를 줄이는 대응 방법", description:"강한 강수와 하천 수위 상승이 겹치면 저지대와 지하 공간을 중심으로 침수 피해 가능성이 커질 수 있습니다.", actionText:"집중호우 시 하천변과 저지대 접근을 피하고, 침수 위험이 높아지면 안전한 장소로 대피합니다. 침수된 도로나 지하 공간에는 진입하지 않으며, 기상 특보와 재난 안내를 확인합니다."},
+    wildfire: {noun:"산불", action:"산불 피해를 줄이는 대응 방법", description:"건조한 날씨와 강한 바람이 이어지면 산불 발생과 확산 위험이 높아질 수 있습니다.", actionText:"산림 인접 지역에서 화기 사용을 자제하고 산불 경보와 출입 통제 안내를 확인합니다. 연기가 발생하면 바람 방향과 대피 안내를 살펴 안전한 곳으로 이동합니다."}
   };
-  let opened = false;
-  let closeTimer = null;
-  function syncDetail() {
-    const guide = guides[selectedRisk] || guides.heatwave;
-    const level = typeof getCurrentRiskLevel === "function" ? getCurrentRiskLevel() : 1;
-    document.getElementById("detail-title").textContent = guide.title + " 상세정보";
-    document.getElementById("detail-kicker").textContent = (yearProfiles[currentYear]?.label || "현재") + " · 기후위험 분석";
-    document.getElementById("detail-location").textContent = currentPlaceName;
-    document.getElementById("detail-number").textContent = riskValue.textContent.trim();
-    document.getElementById("detail-unit").textContent = riskUnit.textContent.trim();
-    document.getElementById("detail-caption").textContent = riskCaption.textContent.trim();
-    document.getElementById("detail-level").textContent = levelText(level);
-    document.getElementById("detail-description").textContent = guide.description;
-    const list = document.getElementById("detail-tips");
-    list.replaceChildren(...guide.tips.map(t => { const li=document.createElement("li");li.textContent=t;return li; }));
+  let opened=false, closingTimer;
+  const chartRisks=new Set(["heatwave","tropical","air"]);
+  function fill() {
+    const guide=details[selectedRisk]||details.heatwave;
+    main.replaceChildren();
+    const clone=infoCard.cloneNode(true);
+    clone.removeAttribute("id");clone.classList.add("detail-card-copy");
+    clone.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
+    clone.querySelectorAll(".card-expand-control").forEach(node=>node.remove());
+    main.appendChild(clone);
+    panel.classList.toggle("detail-has-chart",chartRisks.has(selectedRisk));
+    panel.classList.toggle("detail-no-chart",!chartRisks.has(selectedRisk));
+    const yr=currentYear==="current"?"2026년":yearProfiles[currentYear].label;
+    document.getElementById("detail-summary-title").textContent=yr+" "+guide.noun+" 예측 요약";
+    document.getElementById("detail-description").textContent=guide.description;
+    document.getElementById("detail-action-title").textContent=guide.action;
+    document.getElementById("detail-action-text").textContent=guide.actionText;
   }
-  function setStartGeometry() {
-    const sceneBox = scene.getBoundingClientRect();
-    const box = infoCard.getBoundingClientRect();
-    const scale = sceneBox.width / 1366 || 1;
-    panel.style.setProperty("--detail-left", ((box.left-sceneBox.left)/scale)+"px");
-    panel.style.setProperty("--detail-top", ((box.top-sceneBox.top)/scale)+"px");
-    panel.style.setProperty("--detail-width", (box.width/scale)+"px");
-    panel.style.setProperty("--detail-height", (box.height/scale)+"px");
-  }
-  function openDetail() {
-    if (opened) return;
-    clearTimeout(closeTimer);
-    syncDetail();setStartGeometry();opened=true;
+  function open() {
+    if(opened)return;clearTimeout(closingTimer);fill();opened=true;
     panel.inert=false;panel.setAttribute("aria-hidden","false");
-    backdrop.classList.add("is-open");panel.classList.add("is-visible");
-    requestAnimationFrame(() => requestAnimationFrame(() => {panel.classList.add("is-open");closeButton.focus({preventScroll:true});}));
+    panel.classList.add("is-visible");backdrop.classList.add("is-open");
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      panel.classList.add("is-open");infoCard.classList.add("detail-source-hidden");
+      closeButton.focus({preventScroll:true});
+    }));
   }
-  function closeDetail() {
-    if (!opened) return;
-    opened=false;panel.classList.remove("is-open");backdrop.classList.remove("is-open");
+  function close() {
+    if(!opened)return;opened=false;
+    panel.classList.remove("is-open");backdrop.classList.remove("is-open");
+    infoCard.classList.remove("detail-source-hidden");
     openButton.focus({preventScroll:true});
-    closeTimer=setTimeout(() => {if (!opened) {panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");}},580);
+    closingTimer=setTimeout(()=>{if(!opened){panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");main.replaceChildren();}},580);
   }
-  openButton.addEventListener("click",openDetail);
-  closeButton.addEventListener("click",closeDetail);
-  backdrop.addEventListener("click",closeDetail);
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&opened)closeDetail();});
-  const observer = new MutationObserver(()=>{if(opened)syncDetail();});
-  observer.observe(riskValue,{childList:true,characterData:true,subtree:true});
-  observer.observe(infoTitle,{childList:true,characterData:true,subtree:true});
+  openButton.addEventListener("click",open);
+  infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
+  closeButton.addEventListener("click",close);
+  backdrop.addEventListener("click",close);
+  document.addEventListener("keydown",event=>{if(event.key==="Escape"&&opened)close();});
+  const observer=new MutationObserver(()=>{if(opened)fill();});
+  observer.observe(infoCard,{childList:true,subtree:true,characterData:true,attributes:false});
 })();
+ 

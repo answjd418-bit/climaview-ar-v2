@@ -3039,32 +3039,16 @@ hidden
  
  
   
-    <!-- 상세정보 슬라이드 패널 -->
+    <!-- 상세정보: 기존 정보 카드를 그대로 확장하는 2열 패널 -->
     <div class="detail-backdrop" id="detail-backdrop" aria-hidden="true"></div>
-    <section class="detail-panel" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-hidden="true" inert>
-      <div class="detail-panel-top">
-        <span class="detail-eyebrow">CLIMAVIEW · CLIMATE INSIGHT</span>
-        <button type="button" class="detail-close" id="detail-close" aria-label="상세정보 닫기">× <span>닫기</span></button>
-      </div>
+    <section class="detail-panel" id="detail-panel" role="dialog" aria-modal="true" aria-label="기후위험 상세정보" aria-hidden="true" inert>
       <div class="detail-panel-body">
-        <div class="detail-main">
-          <p class="detail-kicker" id="detail-kicker">기후위험 상세 분석</p>
-          <h2 id="detail-title">기후위험 상세정보</h2>
-          <p class="detail-location" id="detail-location"></p>
-          <div class="detail-number-row"><strong id="detail-number">—</strong><span id="detail-unit"></span></div>
-          <p class="detail-caption" id="detail-caption"></p>
-          <div class="detail-level-box"><span>예상 영향 수준</span><strong id="detail-level"></strong></div>
-          <div class="detail-note"><span class="detail-note-label">데이터 안내</span><p>선택한 연도와 기후위험에 따른 시뮬레이션 정보입니다. 실제 관측 및 예보와 차이가 있을 수 있습니다.</p></div>
-        </div>
+        <div class="detail-main" id="detail-main"></div>
         <div class="detail-side">
-          <span class="detail-side-label">RISK GUIDANCE</span>
-          <h3>예상 영향 및 대응 방법</h3>
-          <p id="detail-description"></p>
-          <div class="detail-divider"></div>
-          <h4>생활 속 대응 가이드</h4>
-          <ul id="detail-tips"></ul>
-          <div class="detail-scenario">기후 시나리오 <strong>SSP5 - 8.5</strong></div>
+          <div class="detail-side-card"><h3 id="detail-summary-title"></h3><p id="detail-description"></p></div>
+          <div class="detail-side-card"><h3 id="detail-action-title"></h3><p id="detail-action-text"></p></div>
         </div>
+        <button type="button" class="detail-close" id="detail-close" aria-label="상세정보 닫기" title="상세정보 닫기">⤡</button>
       </div>
     </section>
 </main>
