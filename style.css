@@ -1717,3 +1717,32 @@ body.danger-mode .camera-feed {
 .detail-panel.detail-has-chart .detail-side{height:100%;box-sizing:border-box}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side{transition-duration:.01ms!important;transition-delay:0ms!important}}
  
+ 
+/* 2026-10-14: prevent hidden risk sections from overlapping active graphs */
+.detail-card-copy [hidden]{display:none!important}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section[hidden],
+.detail-panel.detail-has-chart .detail-card-copy .tropical-card-section[hidden],
+.detail-panel.detail-has-chart .detail-card-copy .air-card-section[hidden]{display:none!important}
+/* Keep the chart and the bottom metric tiles in their own layout flow. */
+.detail-panel.detail-has-chart .detail-card-copy{overflow:hidden!important}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section:not([hidden]),
+.detail-panel.detail-has-chart .detail-card-copy .tropical-card-section:not([hidden]),
+.detail-panel.detail-has-chart .detail-card-copy .air-card-section:not([hidden]){
+  display:flex!important;flex-direction:column!important;min-height:0!important;
+  flex:1 1 auto!important;padding-top:20px!important;
+}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+.detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+.detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{
+  margin-top:auto!important;padding-top:12px!important;flex-shrink:0!important;
+}
+/* Reference: compact two-card stack for no-chart risks. */
+.detail-panel.detail-no-chart .detail-side{gap:20px;padding-top:25px;padding-bottom:22px}
+.detail-panel.detail-no-chart .detail-side-card{flex:none;box-sizing:border-box}
+.detail-panel.detail-no-chart .detail-side-card:first-child{height:174px}
+.detail-panel.detail-no-chart .detail-side-card:nth-child(2){height:214px}
+/* Reference corner inset and minimalist inward-arrow close control. */
+.detail-close{right:15px!important;top:14px!important;width:44px!important;height:44px!important;
+  padding:10px!important;border:0!important;border-radius:0 0 0 19px!important;
+  background:rgba(38,41,44,.96)!important;box-shadow:none!important;display:grid;place-items:center}
+.detail-close svg{display:block;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}

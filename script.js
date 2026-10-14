@@ -17362,6 +17362,16 @@ startLocationTracking();
     clone.removeAttribute("id");clone.classList.add("detail-card-copy");
     clone.querySelectorAll("[id]").forEach(node=>node.removeAttribute("id"));
     clone.querySelectorAll(".card-expand-control").forEach(node=>node.remove());
+    // Only the selected risk section is allowed in the expanded clone.
+    // Other sections may have CSS display:flex rules overriding HTML hidden.
+    const riskSections={heatwave:".heatwave-card-section",flood:".flood-card-section",tropical:".tropical-card-section",wildfire:".wildfire-card-section",air:".air-card-section"};
+    for(const [risk,selector] of Object.entries(riskSections)){
+      clone.querySelectorAll(selector).forEach(section=>{
+        const active=risk===selectedRisk;
+        section.hidden=!active;
+        section.style.setProperty("display",active?"":"none",active?"":"important");
+      });
+    }
     main.appendChild(clone);
     panel.classList.toggle("detail-has-chart",chartRisks.has(selectedRisk));
     panel.classList.toggle("detail-no-chart",!chartRisks.has(selectedRisk));
@@ -17395,4 +17405,3 @@ startLocationTracking();
   const observer=new MutationObserver(()=>{if(opened)fill();});
   observer.observe(infoCard,{childList:true,subtree:true,characterData:true,attributes:false});
 })();
- 
