@@ -1627,3 +1627,49 @@ body.danger-mode .camera-feed {
 .detail-no-chart .detail-side-card p{font-size:16px}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side,.info-card{transition-duration:.01ms!important;transition-delay:0ms!important}}
  
+ 
+/* === 2026-10-14: typography, glass, centered slide refinement === */
+/* Keep the underlying climate camera visible through both cards. */
+.info-card:not(.detail-card-copy){
+ background:linear-gradient(145deg,rgba(36,40,44,.78),rgba(42,43,46,.75))!important;
+ -webkit-backdrop-filter:blur(24px) saturate(125%);backdrop-filter:blur(24px) saturate(125%);
+ border:1px solid rgba(255,255,255,.17);
+}
+.timeline{left:405px;width:558px;gap:6px;padding:8px 10px;background:rgba(36,39,43,.76);border:1px solid rgba(255,255,255,.12)}
+.year{width:130px;min-width:130px;flex:0 0 130px;font-size:21px}
+.menu{font-size:21px}.submenu-item{font-size:18px}.map-location-name{font-size:17px}
+.card-header h1{font-size:20px}.scenario{font-size:14px}
+.risk-value{font-size:72px;line-height:1.03;letter-spacing:-3px}.risk-unit{font-size:35px}
+.risk-caption{font-size:18px;line-height:1.4}
+.heatwave-section-title,.flood-section-title,.wildfire-section-title,.info-card.tropical-layout .tropical-section-title,.air-section-title{font-size:19px}
+.heatwave-metric-label,.flood-metric-label,.wildfire-metric-label,.info-card.tropical-layout .tropical-metric-label,.info-card.air-layout .air-metric-label{font-size:14px}
+.heatwave-metric-value,.flood-metric-value,.wildfire-metric-value,.info-card.tropical-layout .tropical-metric-value,.info-card.air-layout .air-metric-value{font-size:19px}
+.heatwave-axis-label,.heatwave-x-label,.info-card.tropical-layout .tropical-y-labels text,.info-card.tropical-layout .tropical-x-labels text,.info-card.air-layout .air-y-labels text,.info-card.air-layout .air-x-labels text{font-size:15px}
+/* The PM2.5 two-line tile needs its own slightly smaller type. */
+.info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-label{font-size:0}
+.info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-label::after{font-size:12px}
+.info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-value{font-size:16px}
+/* Separate the expand button from the scenario badge and title. */
+.info-card:not(.detail-card-copy) .card-header{padding-right:43px;box-sizing:border-box}
+.card-expand-control{right:12px;top:13px;width:35px;height:35px;border-radius:10px;
+ display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;
+ background:rgba(255,255,255,.085);border:1px solid rgba(255,255,255,.18);
+ -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .2s,transform .2s}
+.card-expand-control:hover{background:rgba(255,255,255,.18);transform:scale(1.04)}
+.card-expand-control span{display:block;line-height:1}
+/* The panel begins at the source card, then slides into the true scene center. */
+.detail-panel{left:906px;top:190px;width:420px;height:600px;
+ background:linear-gradient(145deg,rgba(38,42,46,.82),rgba(43,45,48,.79));
+ -webkit-backdrop-filter:blur(28px) saturate(125%);backdrop-filter:blur(28px) saturate(125%);
+ border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 65px rgba(0,0,0,.24);
+ transition:left .62s cubic-bezier(.22,1,.36,1),top .62s cubic-bezier(.22,1,.36,1),width .62s cubic-bezier(.22,1,.36,1),height .62s cubic-bezier(.22,1,.36,1),opacity .18s ease}
+.detail-panel.is-open{left:calc((1366px - 915px)/2);top:calc((1024px - 640px)/2);width:915px;height:640px}
+.detail-panel.detail-no-chart.is-open{left:calc((1366px - 915px)/2);top:calc((1024px - 458px)/2);height:458px}
+.detail-side-card{background:rgba(255,255,255,.10);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.detail-side-card h3{font-size:21px}.detail-side-card p,.detail-no-chart .detail-side-card p{font-size:17px;line-height:1.65}
+.detail-close{right:12px;top:12px;width:37px;height:37px;border-radius:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:21px}
+.detail-side-card:first-child{padding-right:58px}
+.detail-backdrop{background:rgba(8,13,19,.46)}
+/* Cloned chart stays visible, including SVG geometry. */
+.detail-card-copy .heatwave-chart,.detail-card-copy .tropical-chart,.detail-card-copy .air-chart{display:block;visibility:visible;opacity:1}
+@media(prefers-reduced-motion:reduce){.detail-panel{transition-duration:.01ms!important}}

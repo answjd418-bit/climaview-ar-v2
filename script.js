@@ -17375,7 +17375,7 @@ startLocationTracking();
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
     infoCard.classList.remove("detail-source-hidden");
     openButton.focus({preventScroll:true});
-    closingTimer=setTimeout(()=>{if(!opened){panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");main.replaceChildren();}},580);
+    closingTimer=setTimeout(()=>{if(!opened){panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");main.replaceChildren();}},660);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
@@ -17385,4 +17385,3 @@ startLocationTracking();
   const observer=new MutationObserver(()=>{if(opened)fill();});
   observer.observe(infoCard,{childList:true,subtree:true,characterData:true,attributes:false});
 })();
- 
