@@ -1180,7 +1180,7 @@ body.danger-mode .camera-feed {
   gap: 10px;
   padding-left: 24px;
 }
- 
+
 /* =========================================================
    열대야 위험 단계
 ========================================================= */
@@ -1563,7 +1563,7 @@ body.danger-mode .camera-feed {
   text-align: left;
   white-space: nowrap;
 }
- 
+
 /* Air-quality card: PM2.5 tile spacing only */
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) {
   justify-content: center;
@@ -1571,19 +1571,19 @@ body.danger-mode .camera-feed {
   padding-left: 8px;
   padding-right: 8px;
 }
- 
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
   flex: 0 0 auto;
   text-align: left;
 }
- 
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value {
   flex: 0 0 auto;
   font-size: 14px;
   letter-spacing: -0.4px;
   white-space: nowrap;
 }
- 
+
 /* PM2.5 label: keep the parenthesized unit on its own line. */
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
   font-size: 0;
@@ -1596,8 +1596,8 @@ body.danger-mode .camera-feed {
   font-size: 11px;
   line-height: 1.25;
 }
- 
- 
+
+
 /* =========================================================
    ClimaView reference detail: seamless horizontal card expansion
 ========================================================= */
@@ -1626,8 +1626,8 @@ body.danger-mode .camera-feed {
 .detail-no-chart .detail-side-card{padding-top:17px;padding-bottom:17px}
 .detail-no-chart .detail-side-card p{font-size:16px}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side,.info-card{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
- 
+
+
 /* === 2026-10-14: typography, glass, centered slide refinement === */
 /* Keep the underlying climate camera visible through both cards. */
 .info-card:not(.detail-card-copy){
@@ -1673,14 +1673,14 @@ body.danger-mode .camera-feed {
 /* Cloned chart stays visible, including SVG geometry. */
 .detail-card-copy .heatwave-chart,.detail-card-copy .tropical-chart,.detail-card-copy .air-chart{display:block;visibility:visible;opacity:1}
 @media(prefers-reduced-motion:reduce){.detail-panel{transition-duration:.01ms!important}}
- 
+
 /* 2026-10-14: warning typography restored to reference scale */
 .danger-alert-content{width:620px;max-width:calc(100% - 48px)}
 .danger-alert-icon-image{width:100px;height:100px;margin-bottom:13px}
 .danger-alert-content h2{font-size:30px;font-weight:650;line-height:1.2;margin:0 0 28px}
 .danger-alert-message{font-size:24px;line-height:1.5;font-weight:400;word-break:keep-all}
 .danger-alert-confirm{min-width:340px;height:76px;margin-top:30px;padding:0 38px;border-radius:40px;font-size:23px;font-weight:600}
- 
+
 /* Center the expanded card in the actual scene, regardless of screen scaling. */
 .detail-panel{
   left:calc(50% + 433px);top:50%;
@@ -1698,7 +1698,7 @@ body.danger-mode .camera-feed {
 .detail-panel:not(.is-open) .detail-side{opacity:0;transform:translateX(18px);transition-delay:0s;transition-duration:.16s}
 .info-card.detail-source-hidden{opacity:0;pointer-events:none;transition:opacity .12s ease}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.info-card.detail-source-hidden{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
+
 /* 2026-10-14: detail chart card bottom alignment and faster close */
 .detail-panel{transition:left .43s cubic-bezier(.25,.8,.25,1),top .43s cubic-bezier(.25,.8,.25,1),width .43s cubic-bezier(.25,.8,.25,1),height .43s cubic-bezier(.25,.8,.25,1),opacity .10s ease}
 .detail-backdrop{transition:opacity .34s ease}
@@ -1716,8 +1716,8 @@ body.danger-mode .camera-feed {
 /* Keep the right-side cards aligned to the full height. */
 .detail-panel.detail-has-chart .detail-side{height:100%;box-sizing:border-box}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
- 
+
+
 /* 2026-10-14: prevent hidden risk sections from overlapping active graphs */
 .detail-card-copy [hidden]{display:none!important}
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section[hidden],
@@ -1746,7 +1746,7 @@ body.danger-mode .camera-feed {
   padding:10px!important;border:0!important;border-radius:0 0 0 19px!important;
   background:rgba(38,41,44,.96)!important;box-shadow:none!important;display:grid;place-items:center}
 .detail-close svg{display:block;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
- 
+
 /* 2026-10-14: match the reference expanded-card proportions.
    Layout only; risk data, chart SVG, controls and transitions stay intact. */
 .detail-panel.is-open.detail-has-chart .detail-side{
@@ -1797,8 +1797,8 @@ body.danger-mode .camera-feed {
   position:relative!important;
   z-index:1!important;
 }
- 
- 
+
+
 /* 2026-10-14: final annotated reference alignment; expanded state only. */
 .card-expand-control .detail-icon-open{width:18px;height:15px;display:block;object-fit:contain}
 .detail-close .detail-icon-close{width:24px;height:24px;display:block;object-fit:contain}
@@ -1823,8 +1823,8 @@ body.danger-mode .camera-feed {
 .detail-panel.is-open .detail-side-card p{margin-top:auto!important;margin-bottom:0!important}
 /* Reference-style information marker after the expanded metric caption. */
 .detail-panel.is-open .detail-card-copy .risk-caption::after{content:'i';display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:8px;width:16px;height:16px;border-radius:50%;background:rgba(210,214,219,.68);color:#2e3338;font-size:12px;font-weight:800;font-style:normal;line-height:1}
- 
- 
+
+
 /* === 2026-10-14 refinement: glass continuity, bottom fit, smooth return === */
 /* Glass on the entire expanded surface, not just its nested tiles. */
 .detail-panel, .detail-panel.is-visible {
@@ -1866,7 +1866,7 @@ body.danger-mode .camera-feed {
 .detail-backdrop{transition:opacity .33s ease!important;}
 .info-card.detail-source-hidden{transition:none!important;}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.detail-backdrop{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
+
 /* Air quality detail only: reduce the excessive empty middle band. */
 .detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p,
 .detail-panel.is-open.detail-has-chart.air-layout .detail-side-card:nth-child(2) p {
@@ -1874,7 +1874,7 @@ body.danger-mode .camera-feed {
 }
 /* The detail view uses the same right-hand guidance card for all risks.
    Limit this correction to air quality via the class set by the script. */
- 
+
 /* 2026-10-14: final reference layouts for expanded climate cards. */
 /* The air graph tick labels have a small, readable gap to the axis. */
 .info-card.air-layout .air-y-labels text,
@@ -1901,7 +1901,7 @@ body.danger-mode .camera-feed {
 .detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-metric-grid {
   padding-top:5px!important;
 }
- 
+
 /* 2026-10-14: unify the four remaining risk detail layouts with air quality. */
 .detail-panel.is-open.detail-has-chart[data-risk="heatwave"],
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] {height:590px!important;}
@@ -1921,7 +1921,7 @@ body.danger-mode .camera-feed {
 .detail-panel .air-impact-tile {gap:5px!important;padding-left:6px!important;padding-right:6px!important;}
 .info-card.air-layout .air-impact-tile .air-metric-value,
 .detail-panel .air-impact-tile .air-metric-value {font-size:17px!important;white-space:nowrap!important;}
- 
+
 /* 2026-10-14: compact open control aligned to the card's top-right corner. */
 .info-card:not(.detail-card-copy) .card-expand-control {
   position:absolute!important;
@@ -1948,8 +1948,8 @@ body.danger-mode .camera-feed {
 .info-card:not(.detail-card-copy) .card-expand-control:focus-visible {
   background:rgba(255,255,255,.14)!important;
 }
- 
- 
+
+
 /* 2026-10-14: targeted whitespace correction ONLY for flood, tropical and wildfire detail cards. */
 /* Reduce overall card height instead of shifting explanatory text artificially. */
 .detail-panel.is-open.detail-no-chart[data-risk="flood"],
@@ -1979,4 +1979,15 @@ body.danger-mode .camera-feed {
 .detail-panel.is-open[data-risk="tropical"] .detail-side-card:nth-child(2) p {
   margin-top:auto!important;
   margin-bottom:8px!important;
+}
+
+/* 2026-10-14: uniform detail glass and immediate close response. */
+.detail-panel,.detail-panel.is-visible {
+  background:rgba(255,255,255,.105)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(115%)!important;
+  backdrop-filter:blur(14px) saturate(115%)!important;
+}
+.detail-panel .detail-main,.detail-panel .detail-side {background:transparent!important;}
+.detail-panel:not(.is-open) {
+  transition:left .28s cubic-bezier(.25,.8,.25,1),top .28s cubic-bezier(.25,.8,.25,1),width .28s cubic-bezier(.25,.8,.25,1),height .28s cubic-bezier(.25,.8,.25,1),opacity .10s ease!important;
 }

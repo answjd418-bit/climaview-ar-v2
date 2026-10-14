@@ -17396,7 +17396,7 @@ startLocationTracking();
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
     openButton.focus({preventScroll:true});
     // Keep the original hidden until the slide-back has completed.
-    closingTimer=setTimeout(finishClose,420);
+    closingTimer=setTimeout(finishClose,300);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
