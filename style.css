@@ -1698,3 +1698,22 @@ body.danger-mode .camera-feed {
 .detail-panel:not(.is-open) .detail-side{opacity:0;transform:translateX(18px);transition-delay:0s;transition-duration:.16s}
 .info-card.detail-source-hidden{opacity:0;pointer-events:none;transition:opacity .12s ease}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.info-card.detail-source-hidden{transition-duration:.01ms!important;transition-delay:0ms!important}}
+ 
+/* 2026-10-14: detail chart card bottom alignment and faster close */
+.detail-panel{transition:left .43s cubic-bezier(.25,.8,.25,1),top .43s cubic-bezier(.25,.8,.25,1),width .43s cubic-bezier(.25,.8,.25,1),height .43s cubic-bezier(.25,.8,.25,1),opacity .10s ease}
+.detail-backdrop{transition:opacity .34s ease}
+.detail-panel .detail-side{transition:opacity .20s ease,transform .35s cubic-bezier(.25,.8,.25,1)}
+.detail-panel.is-open .detail-side{transition-delay:.12s}
+.detail-panel:not(.is-open) .detail-side{transition-delay:0s;transition-duration:.12s}
+/* Use the full left-column height so the metrics align with the right card bottom. */
+.detail-panel.detail-has-chart .detail-card-copy{display:flex!important;flex-direction:column!important;}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section,
+.detail-panel.detail-has-chart .detail-card-copy .tropical-card-section,
+.detail-panel.detail-has-chart .detail-card-copy .air-card-section{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+.detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+.detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{margin-top:auto!important;padding-top:14px;}
+/* Keep the right-side cards aligned to the full height. */
+.detail-panel.detail-has-chart .detail-side{height:100%;box-sizing:border-box}
+@media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side{transition-duration:.01ms!important;transition-delay:0ms!important}}
+ 

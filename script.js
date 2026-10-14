@@ -17385,7 +17385,7 @@ startLocationTracking();
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
     openButton.focus({preventScroll:true});
     // Keep the original hidden until the slide-back has completed.
-    closingTimer=setTimeout(finishClose,630);
+    closingTimer=setTimeout(finishClose,460);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
@@ -17395,3 +17395,4 @@ startLocationTracking();
   const observer=new MutationObserver(()=>{if(opened)fill();});
   observer.observe(infoCard,{childList:true,subtree:true,characterData:true,attributes:false});
 })();
+ 
