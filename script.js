@@ -17343,7 +17343,7 @@ startLocationTracking();
     flood: {noun:"침수", action:"침수 피해를 줄이는 대응 방법", description:"강한 강수와 하천 수위 상승이 겹치면 저지대와 지하 공간을 중심으로 침수 피해 가능성이 커질 수 있습니다.", actionText:"집중호우 시 하천변과 저지대 접근을 피하고, 침수 위험이 높아지면 안전한 장소로 대피합니다. 침수된 도로나 지하 공간에는 진입하지 않으며, 기상 특보와 재난 안내를 확인합니다."},
     wildfire: {noun:"산불", action:"산불 피해를 줄이는 대응 방법", description:"건조한 날씨와 강한 바람이 이어지면 산불 발생과 확산 위험이 높아질 수 있습니다.", actionText:"산림 인접 지역에서 화기 사용을 자제하고 산불 경보와 출입 통제 안내를 확인합니다. 연기가 발생하면 바람 방향과 대피 안내를 살펴 안전한 곳으로 이동합니다."}
   };
-  let opened=false, closingTimer;
+  let opened=false, closingTimer, openingTimer;
   let closing=false;
   function finishClose(){
     if(opened || !closing)return;
@@ -17383,22 +17383,29 @@ startLocationTracking();
     document.getElementById("detail-action-text").textContent=guide.actionText;
   }
   function open() {
-    if(opened)return;clearTimeout(closingTimer);closing=false;fill();opened=true;
+    if(opened)return;
+    clearTimeout(closingTimer);clearTimeout(openingTimer);closing=false;
+    fill();opened=true;
     panel.inert=false;panel.setAttribute("aria-hidden","false");
-    panel.classList.add("is-visible");backdrop.classList.add("is-open");
+    // Geometry is centered from the start; animate only opacity/translate.
+    panel.classList.add("is-visible");
     infoCard.classList.add("detail-source-hidden");
-    requestAnimationFrame(()=>{
+    backdrop.classList.add("is-open");
+    // After the source begins sliding left, reveal the centered dialog.
+    openingTimer=setTimeout(()=>{
+      if(!opened)return;
       panel.classList.add("is-open");
       closeButton.focus({preventScroll:true});
-    });
+    },150);
   }
   function close() {
-    if(!opened || closing)return;opened=false;closing=true;
+    if(!opened || closing)return;
+    clearTimeout(openingTimer);opened=false;closing=true;
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
+    // Restore the original card immediately; no waiting for geometry animation.
     infoCard.classList.remove("detail-source-hidden");
     openButton.focus({preventScroll:true});
-    // Opacity transition ends first; timer is only a fallback.
-    closingTimer=setTimeout(finishClose,260);
+    closingTimer=setTimeout(finishClose,290);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});

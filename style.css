@@ -2029,3 +2029,24 @@ body.danger-mode .camera-feed {
 @media(prefers-reduced-motion:reduce){
   .detail-panel,.detail-backdrop{transition-duration:.01ms!important;}
 }
+ 
+/* 2026-10-14: centered two-stage reveal. Fixed geometry prevents text reflow. */
+.detail-panel,.detail-panel.is-visible,.detail-panel.is-open,.detail-panel.detail-no-chart.is-open {
+ left:50%!important;top:50%!important;width:915px!important;
+ transform:translate(-50%,-50%) translateX(24px)!important;
+ opacity:0!important;pointer-events:none!important;
+ transition:opacity .24s ease,transform .34s cubic-bezier(.2,.8,.2,1)!important;
+ will-change:opacity,transform!important;
+ background:rgba(255,255,255,.105)!important;
+}
+.detail-panel.is-visible.is-open {
+ opacity:1!important;pointer-events:auto!important;
+ transform:translate(-50%,-50%) translateX(0)!important;
+}
+/* Stage 1: original card moves left and fades before center dialog appears. */
+.info-card:not(.detail-card-copy){transition:opacity .19s ease,transform .19s ease!important;}
+.info-card.detail-source-hidden {opacity:0!important;transform:translateX(-28px)!important;pointer-events:none!important;}
+.detail-panel .detail-panel-body,.detail-panel .detail-main,.detail-panel .detail-side,.detail-panel .detail-card-copy{background:transparent!important;background-image:none!important;}
+.detail-panel .detail-side{opacity:1!important;transform:none!important;transition:none!important;}
+.detail-backdrop{transition:opacity .25s ease!important;}
+@media(prefers-reduced-motion:reduce){.detail-panel,.info-card,.detail-backdrop{transition-duration:.01ms!important;}}
