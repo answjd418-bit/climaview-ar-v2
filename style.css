@@ -1042,46 +1042,55 @@ body.danger-mode .camera-feed {
 .danger-alert-content {
   position: relative;
   z-index: 2;
-  width: 680px;
-  max-width: calc(100% - 80px);
+  width: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 .danger-alert-icon-image {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 16px;
+  width: 82px;
+  height: 82px;
+  margin-bottom: 12px;
   object-fit: contain;
-  filter: brightness(4);
+  filter:
+    brightness(4);
 }
 .danger-alert-content h2 {
-  margin: 0 0 32px;
-  font-size: 30px;
-  line-height: 1.2;
-  font-weight: 700;
+  margin:
+    0
+    0
+    30px;
+  font-size: 21px;
+  font-weight: 500;
 }
 .danger-alert-message {
   margin: 0;
-  font-size: 24px;
-  line-height: 1.65;
-  font-weight: 400;
-  word-break: keep-all;
+  font-size: 19px;
+  line-height: 1.55;
 }
 .danger-alert-confirm {
-  min-width: 370px;
-  height: 76px;
-  margin-top: 40px;
-  padding: 0 40px;
+  min-width: 300px;
+  height: 62px;
+  margin-top: 45px;
+  padding:
+    0
+    34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  border-radius: 38px;
-  border: 1px solid rgba(255, 255, 255, .22);
-  background: linear-gradient(180deg, rgba(62, 62, 62, .64), rgba(20, 20, 20, .82));
-  font-size: 23px;
+  gap: 8px;
+  border-radius: 31px;
+  border:
+    1px solid
+    rgba(255, 255, 255, .22);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(62, 62, 62, .64),
+      rgba(20, 20, 20, .82)
+    );
+  font-size: 19px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -1171,7 +1180,7 @@ body.danger-mode .camera-feed {
   gap: 10px;
   padding-left: 24px;
 }
-
+ 
 /* =========================================================
    열대야 위험 단계
 ========================================================= */
@@ -1554,7 +1563,7 @@ body.danger-mode .camera-feed {
   text-align: left;
   white-space: nowrap;
 }
-
+ 
 /* Air-quality card: PM2.5 tile spacing only */
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) {
   justify-content: center;
@@ -1562,19 +1571,19 @@ body.danger-mode .camera-feed {
   padding-left: 8px;
   padding-right: 8px;
 }
-
+ 
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
   flex: 0 0 auto;
   text-align: left;
 }
-
+ 
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value {
   flex: 0 0 auto;
   font-size: 14px;
   letter-spacing: -0.4px;
   white-space: nowrap;
 }
-
+ 
 /* PM2.5 label: keep the parenthesized unit on its own line. */
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
   font-size: 0;
@@ -1587,68 +1596,63 @@ body.danger-mode .camera-feed {
   font-size: 11px;
   line-height: 1.25;
 }
-
-
+ 
 /* =========================================================
-   Reference typography & spacing update (1366 x 1024)
-   Scope: visual styling only. Keep the existing years/data/JS.
+   상세정보 패널: 카드 위치에서 중앙으로 자연스럽게 슬라이드 확장
 ========================================================= */
-.timeline { left: 405px; width: 556px; height: 66px; padding: 8px 10px; gap: 6px; background: rgba(36,39,43,.78); border: 1px solid rgba(255,255,255,.12); }
-.year { width: 130px; min-width: 130px; flex: 0 0 130px; height: 46px; font-size: 21px; }
-.year.selected { background: rgba(185,190,197,.20); }
-.left-panel { left: 40px; top: 190px; width: 245px; }
-.menu { height: 78px; padding: 0 29px; font-size: 21px; border-radius: 24px; background: rgba(35,35,35,.87); }
-.response-menu { background: rgba(42,40,39,.86); }
-.submenu { background: rgba(34,34,34,.88); padding-left: 10px; padding-right: 10px; }
-.submenu.open { max-height: 405px; }
-.submenu-item { min-height: 72px; padding: 0 17px; gap: 16px; font-size: 18px; font-weight: 550; }
-.climate-menu-icon { width: 32px; height: 32px; }
-.map-card { width: 245px; height: 216px; border-radius: 24px; background: rgba(39,39,39,.88); }
-.location-map { height: 144px; }
-.map-location-name { font-size: 17px; }
-.map-location-status { font-size: 11px; }
-.info-card { left: 906px; top: 190px; width: 420px; padding: 24px 20px 22px; border-radius: 23px; }
-.card-header { height: 32px; gap: 8px; }
-.card-header h1 { font-size: 20px; font-weight: 550; }
-.scenario { font-size: 14px; padding: 6px 15px; }
-.risk-summary { margin-top: 12px; }
-.risk-value-row { margin-top: 6px; gap: 3px; }
-.risk-value { font-size: 72px; line-height: 1.03; letter-spacing: -3px; }
-.risk-unit { font-size: 35px; }
-.risk-caption { margin: 7px 0 26px; font-size: 18px; line-height: 1.4; }
-.info-card.heatwave-layout, .info-card.tropical-layout, .info-card.air-layout { height: auto; min-height: 640px; }
-.info-card.flood-layout, .info-card.wildfire-layout { height: auto; min-height: 458px; }
-.info-card.wildfire-layout .risk-value { font-size: 70px; letter-spacing: -3px; }
-.heatwave-card-section, .flood-card-section, .wildfire-card-section,
-.info-card.tropical-layout .tropical-card-section, .air-card-section { padding-top: 28px; }
-.heatwave-section-title, .flood-section-title, .wildfire-section-title,
-.info-card.tropical-layout .tropical-section-title, .air-section-title { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
-.heatwave-chart, .info-card.tropical-layout .tropical-chart,
-.info-card.air-layout .air-chart { width: 100%; max-width: 370px; height: 172px; }
-.heatwave-axis-label, .heatwave-x-label { font-size: 15px; }
-.info-card.tropical-layout .tropical-y-labels text,
-.info-card.tropical-layout .tropical-x-labels text,
-.info-card.air-layout .air-y-labels text,
-.info-card.air-layout .air-x-labels text { font-size: 15px; }
-.heatwave-metric-grid, .flood-metric-grid, .wildfire-metric-grid,
-.info-card.tropical-layout .tropical-metrics,
-.info-card.air-layout .air-metric-grid { gap: 10px 8px; margin-top: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.heatwave-metric-tile, .heatwave-extra-tile,
-.flood-metric-tile, .flood-warning-tile,
-.wildfire-metric-tile, .wildfire-warning-tile,
-.info-card.tropical-layout .tropical-metric,
-.info-card.air-layout .air-metric-tile,
-.info-card.air-layout .air-warning-tile { min-height: 70px; padding-left: 10px; padding-right: 10px; gap: 9px; border-radius: 12px; }
-.heatwave-extra-tile, .flood-warning-tile, .wildfire-warning-tile,
-.info-card.tropical-layout .tropical-metric:last-child,
-.info-card.air-layout .air-warning-tile { padding-left: 30px; }
-.heatwave-metric-label, .flood-metric-label, .wildfire-metric-label,
-.info-card.tropical-layout .tropical-metric-label,
-.info-card.air-layout .air-metric-label { font-size: 14px; line-height: 1.25; }
-.heatwave-metric-value, .flood-metric-value, .wildfire-metric-value,
-.info-card.tropical-layout .tropical-metric-value,
-.info-card.air-layout .air-metric-value { font-size: 19px; font-weight: 650; line-height: 1.25; }
-/* Keep the two-line PM2.5 label readable without crowding its value. */
-.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) { gap: 7px; padding-left: 6px; padding-right: 6px; }
-.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after { font-size: 12px; line-height: 1.18; }
-.info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value { font-size: 16px; letter-spacing: -.5px; }
+.card-expand-control {
+  position:absolute; top:13px; right:15px; z-index:5; width:30px; height:30px;
+  border:1px solid rgba(255,255,255,.2); border-radius:10px;
+  color:#fff; background:rgba(255,255,255,.1); cursor:pointer;
+  font-size:19px; line-height:1; display:grid; place-items:center;
+  transition:background .2s ease,transform .25s ease;
+}
+.card-expand-control:hover,.card-expand-control:focus-visible {background:rgba(255,255,255,.24);transform:scale(1.06)}
+.info-card .card-header {padding-right:36px}
+.detail-backdrop {position:absolute;inset:0;z-index:70;background:rgba(8,15,20,.0);
+  opacity:0;pointer-events:none;transition:opacity .48s ease,background .48s ease}
+.detail-backdrop.is-open {opacity:1;pointer-events:auto;background:rgba(8,15,20,.60)}
+.detail-panel {
+  position:absolute;left:var(--detail-left,940px);top:var(--detail-top,190px);
+  width:var(--detail-width,386px);height:var(--detail-height,578px);
+  z-index:71;box-sizing:border-box;overflow:hidden;visibility:hidden;opacity:0;
+  border-radius:25px;border:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(130deg,rgba(39,47,53,.98),rgba(31,36,41,.97));
+  box-shadow:0 24px 90px rgba(0,0,0,.28);color:#f7f9fa;
+  backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);
+  transition:left .56s cubic-bezier(.22,1,.36,1),top .56s cubic-bezier(.22,1,.36,1),
+    width .56s cubic-bezier(.22,1,.36,1),height .56s cubic-bezier(.22,1,.36,1),
+    opacity .32s ease,visibility 0s linear .56s;
+}
+.detail-panel.is-visible {visibility:visible;opacity:1;transition:left .56s cubic-bezier(.22,1,.36,1),top .56s cubic-bezier(.22,1,.36,1),width .56s cubic-bezier(.22,1,.36,1),height .56s cubic-bezier(.22,1,.36,1),opacity .3s ease}
+.detail-panel.is-open {left:245px;top:165px;width:890px;height:665px}
+.detail-panel-top {height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 33px;border-bottom:1px solid rgba(255,255,255,.1)}
+.detail-eyebrow,.detail-side-label {font-size:11px;font-weight:700;letter-spacing:2px;color:#8dc6d9}
+.detail-close {color:white;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);border-radius:11px;padding:9px 13px;font-size:22px;cursor:pointer;display:flex;align-items:center;gap:9px;line-height:1}
+.detail-close span {font-size:13px}
+.detail-panel-body {display:grid;grid-template-columns:1fr 1fr;height:calc(100% - 68px)}
+.detail-main {padding:45px 39px;min-width:0}
+.detail-kicker {color:#9bcddd;font-size:13px;margin:0 0 14px}
+.detail-main h2 {font-size:32px;font-weight:650;line-height:1.25;letter-spacing:-1px;margin:0 0 10px}
+.detail-location {font-size:15px;color:rgba(255,255,255,.6);margin:0 0 34px}
+.detail-number-row {display:flex;align-items:baseline;gap:10px}
+.detail-number-row strong {font-size:76px;letter-spacing:-3px;line-height:1.1}
+.detail-number-row span {font-size:29px;font-weight:600}
+.detail-caption {font-size:14px;color:rgba(255,255,255,.6);margin:12px 0 35px}
+.detail-level-box {display:flex;justify-content:space-between;align-items:center;border-radius:15px;padding:18px 20px;background:rgba(255,255,255,.09)}
+.detail-level-box span {font-size:14px;color:#d0d8dc}.detail-level-box strong {font-size:19px;color:#9ad6df}
+.detail-note {margin-top:36px}.detail-note-label {font-size:12px;font-weight:700;color:#9bcddd}
+.detail-note p {font-size:12px;line-height:1.8;color:rgba(255,255,255,.5);margin:8px 0}
+.detail-side {padding:48px 36px;background:rgba(255,255,255,.055);min-width:0}
+.detail-side h3 {font-size:23px;letter-spacing:-.5px;margin:17px 0 15px}
+.detail-side > p {font-size:15px;line-height:1.85;color:rgba(245,249,250,.76);min-height:90px}
+.detail-divider {height:1px;background:rgba(255,255,255,.14);margin:25px 0}
+.detail-side h4 {font-size:16px;margin:0 0 18px}.detail-side ul {padding-left:19px;margin:0;display:grid;gap:16px;color:rgba(245,249,250,.77);font-size:14px;line-height:1.65}
+.detail-side li::marker {color:#8dc6d9}
+.detail-scenario {margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.5)}
+.detail-scenario strong {color:#dce9ec;font-weight:600}
+.detail-panel-body > * {opacity:0;transform:translateX(17px);transition:opacity .3s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.detail-panel.is-open .detail-panel-body > * {opacity:1;transform:translateX(0);transition-delay:.17s}
+@media (prefers-reduced-motion:reduce) {
+ .detail-panel,.detail-backdrop,.detail-panel-body > * {transition-duration:.01ms!important;transition-delay:0ms!important}
+}
