@@ -1874,3 +1874,30 @@ body.danger-mode .camera-feed {
 }
 /* The detail view uses the same right-hand guidance card for all risks.
    Limit this correction to air quality via the class set by the script. */
+ 
+/* 2026-10-14: final reference layouts for expanded climate cards. */
+/* The air graph tick labels have a small, readable gap to the axis. */
+.info-card.air-layout .air-y-labels text,
+.detail-panel .air-y-labels text { text-anchor:end!important;transform:none!important; }
+/* Match the reference: compact flood/wildfire layout, and graph-led climate layout. */
+.detail-panel.is-open.detail-no-chart .detail-side {
+  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
+  gap:20px!important;padding:25px 20px 22px 0!important;
+}
+.detail-panel.is-open.detail-has-chart .detail-side {
+  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
+  gap:20px!important;padding:24px 20px 20px 0!important;
+}
+.detail-panel.is-open .detail-side-card {min-height:0!important;height:100%!important;box-sizing:border-box!important;}
+/* Air-quality detail: remove the oversized empty vertical band by reducing
+   the expanded panel height rather than visually offsetting text inside a tall card. */
+.detail-panel.is-open.detail-has-chart[data-risk="air"] {height:590px!important;}
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p {
+  transform:none!important;
+}
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-card-section:not([hidden]) {
+  padding-top:12px!important;
+}
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-metric-grid {
+  padding-top:5px!important;
+}
