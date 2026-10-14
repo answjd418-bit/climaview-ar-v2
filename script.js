@@ -17344,6 +17344,16 @@ startLocationTracking();
     wildfire: {noun:"산불", action:"산불 피해를 줄이는 대응 방법", description:"건조한 날씨와 강한 바람이 이어지면 산불 발생과 확산 위험이 높아질 수 있습니다.", actionText:"산림 인접 지역에서 화기 사용을 자제하고 산불 경보와 출입 통제 안내를 확인합니다. 연기가 발생하면 바람 방향과 대피 안내를 살펴 안전한 곳으로 이동합니다."}
   };
   let opened=false, closingTimer;
+  let closing=false;
+  function finishClose(){
+    if(opened || !closing)return;
+    closing=false;clearTimeout(closingTimer);
+    panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");
+    main.replaceChildren();infoCard.classList.remove("detail-source-hidden");
+  }
+  panel.addEventListener("transitionend",event=>{
+    if(event.target===panel && event.propertyName==="width" && !opened)finishClose();
+  });
   const chartRisks=new Set(["heatwave","tropical","air"]);
   function fill() {
     const guide=details[selectedRisk]||details.heatwave;
@@ -17362,7 +17372,7 @@ startLocationTracking();
     document.getElementById("detail-action-text").textContent=guide.actionText;
   }
   function open() {
-    if(opened)return;clearTimeout(closingTimer);fill();opened=true;
+    if(opened || closing)return;clearTimeout(closingTimer);fill();opened=true;
     panel.inert=false;panel.setAttribute("aria-hidden","false");
     panel.classList.add("is-visible");backdrop.classList.add("is-open");
     requestAnimationFrame(()=>requestAnimationFrame(()=>{
@@ -17371,11 +17381,11 @@ startLocationTracking();
     }));
   }
   function close() {
-    if(!opened)return;opened=false;
+    if(!opened || closing)return;opened=false;closing=true;
     panel.classList.remove("is-open");backdrop.classList.remove("is-open");
-    infoCard.classList.remove("detail-source-hidden");
     openButton.focus({preventScroll:true});
-    closingTimer=setTimeout(()=>{if(!opened){panel.classList.remove("is-visible");panel.inert=true;panel.setAttribute("aria-hidden","true");main.replaceChildren();}},660);
+    // Keep the original hidden until the slide-back has completed.
+    closingTimer=setTimeout(finishClose,630);
   }
   openButton.addEventListener("click",open);
   infoCard.addEventListener("click",event=>{if(!opened && !event.target.closest("button,a,input,select"))open();});
