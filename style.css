@@ -1746,3 +1746,54 @@ body.danger-mode .camera-feed {
   padding:10px!important;border:0!important;border-radius:0 0 0 19px!important;
   background:rgba(38,41,44,.96)!important;box-shadow:none!important;display:grid;place-items:center}
 .detail-close svg{display:block;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+ 
+/* 2026-10-14: match the reference expanded-card proportions.
+   Layout only; risk data, chart SVG, controls and transitions stay intact. */
+.detail-panel.is-open.detail-has-chart .detail-side{
+  display:grid!important;
+  grid-template-rows:174px minmax(0,1fr)!important;
+  gap:20px!important;
+  align-content:stretch!important;
+}
+.detail-panel.is-open.detail-has-chart .detail-side-card{
+  height:100%!important;
+  min-height:0!important;
+  flex:none!important;
+  box-sizing:border-box!important;
+}
+.detail-panel.is-open.detail-has-chart .detail-side-card:first-child{
+  padding-right:58px!important;
+}
+.detail-panel.is-open.detail-no-chart .detail-side{
+  display:grid!important;
+  grid-template-rows:174px minmax(0,1fr)!important;
+  gap:20px!important;
+  padding-top:25px!important;
+  padding-bottom:22px!important;
+  box-sizing:border-box!important;
+}
+.detail-panel.is-open.detail-no-chart .detail-side-card{
+  height:100%!important;
+  min-height:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+.detail-panel.is-open .detail-side-card p{
+  margin-top:auto!important;
+  margin-bottom:0!important;
+}
+.detail-panel.is-open .detail-side-card h3{
+  flex-shrink:0!important;
+}
+/* Chart, labels and metric tiles remain separated in the left column. */
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-chart,
+.detail-panel.detail-has-chart .detail-card-copy .tropical-chart,
+.detail-panel.detail-has-chart .detail-card-copy .air-chart{
+  flex-shrink:0!important;
+}
+.detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+.detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+.detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{
+  position:relative!important;
+  z-index:1!important;
+}
