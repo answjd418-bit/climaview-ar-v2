@@ -1948,3 +1948,35 @@ body.danger-mode .camera-feed {
 .info-card:not(.detail-card-copy) .card-expand-control:focus-visible {
   background:rgba(255,255,255,.14)!important;
 }
+ 
+ 
+/* 2026-10-14: targeted whitespace correction ONLY for flood, tropical and wildfire detail cards. */
+/* Reduce overall card height instead of shifting explanatory text artificially. */
+.detail-panel.is-open.detail-no-chart[data-risk="flood"],
+.detail-panel.is-open.detail-no-chart[data-risk="wildfire"] {
+  height:410px!important;
+}
+.detail-panel.is-open.detail-has-chart[data-risk="tropical"] {
+  height:550px!important;
+}
+/* Maintain the reference's two stacked panels, with less unused vertical space. */
+.detail-panel.is-open.detail-no-chart[data-risk="flood"] .detail-side,
+.detail-panel.is-open.detail-no-chart[data-risk="wildfire"] .detail-side {
+  grid-template-rows:155px minmax(0,1fr)!important;
+  gap:16px!important;
+  padding-top:20px!important;
+  padding-bottom:18px!important;
+}
+.detail-panel.is-open.detail-has-chart[data-risk="tropical"] .detail-side {
+  grid-template-rows:160px minmax(0,1fr)!important;
+  gap:16px!important;
+  padding-top:20px!important;
+  padding-bottom:18px!important;
+}
+/* Bring the action copy up inside its card while keeping the title at the top. */
+.detail-panel.is-open[data-risk="flood"] .detail-side-card:nth-child(2) p,
+.detail-panel.is-open[data-risk="wildfire"] .detail-side-card:nth-child(2) p,
+.detail-panel.is-open[data-risk="tropical"] .detail-side-card:nth-child(2) p {
+  margin-top:auto!important;
+  margin-bottom:8px!important;
+}
