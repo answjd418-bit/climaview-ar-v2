@@ -1,2163 +1,4269 @@
 :root {
+
   color-scheme: dark;
+
   font-family:
+
     -apple-system,
+
     BlinkMacSystemFont,
+
     "Apple SD Gothic Neo",
+
     "Noto Sans KR",
+
     "Malgun Gothic",
+
     Arial,
+
     sans-serif;
+
   color: #ffffff;
+
   background: #162733;
+
 }
+
 * {
+
   box-sizing: border-box;
+
 }
+
 html,
+
 body {
+
   width: 100%;
+
   height: 100%;
+
   margin: 0;
+
   overflow: hidden;
+
   background: #162733;
+
 }
+
 button {
+
   font: inherit;
+
   color: inherit;
+
 }
+
 /* =========================================================
+
    화면
+
 ========================================================= */
+
 .viewport {
+
   position: fixed;
+
   inset: 0;
+
   width: 100vw;
+
   height: 100vh;
+
   height: 100dvh;
+
   overflow: hidden;
+
   background: #162733;
+
 }
+
 .scene {
+
   position: absolute;
+
   left: 50%;
+
   top: 50%;
+
   width: 1366px;
 
+ 
+
   height: 1024px;
+
   overflow: hidden;
+
   background: #000000;
+
   transform:
+
     translate(-50%, -50%)
+
     scale(
+
       var(--scene-scale, 1)
+
     );
+
   transform-origin:
+
     center center;
+
 }
+
 .background-layer,
+
 .gui-layer {
+
   position: absolute;
+
   inset: 0;
+
 }
+
 /* =========================================================
+
    카메라
+
 ========================================================= */
 
 .background-layer {
+
   z-index: 0;
+
   overflow: hidden;
+
   background: #000000;
+
 }
+
 .camera-feed {
+
   position: absolute;
+
   inset: 0;
+
   width: 100%;
+
   height: 100%;
+
   display: block;
+
   object-fit: cover;
+
   background: #000000;
+
   transition:
+
     filter .35s ease;
+
 }
+
 .camera-start-button {
+
   position: absolute;
+
   z-index: 20;
+
   left: 50%;
+
   bottom: 70px;
+
   transform:
+
     translateX(-50%);
+
   min-width: 170px;
+
   height: 52px;
+
   padding:
 
+ 
+
     0
+
     24px;
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .18);
+
   border-radius: 26px;
+
   background:
+
     rgba(55, 78, 96, .54);
+
   font-size: 17px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   backdrop-filter:
-    blur(22px);
-  -webkit-backdrop-filter:
-    blur(22px);
-}
-.camera-start-button[hidden] {
-  display: none;
-}
-/* =========================================================
-   Glass
-========================================================= */
-.glass {
-  border:
-    1px solid
-    rgba(255, 255, 255, .14);
-  box-shadow:
-    inset
-    0
-    1px
-    1px
-    rgba(255, 255, 255, .08),
-    0
-    10px
-    30px
-    rgba(10, 24, 40, .08);
-  backdrop-filter:
+
     blur(22px);
 
   -webkit-backdrop-filter:
+
     blur(22px);
+
 }
-.gui-layer {
-  z-index: 3;
+
+.camera-start-button[hidden] {
+
+  display: none;
+
 }
+
 /* =========================================================
+
+   Glass
+
+========================================================= */
+
+.glass {
+
+  border:
+
+    1px solid
+
+    rgba(255, 255, 255, .14);
+
+  box-shadow:
+
+    inset
+
+    0
+
+    1px
+
+    1px
+
+    rgba(255, 255, 255, .08),
+
+    0
+
+    10px
+
+    30px
+
+    rgba(10, 24, 40, .08);
+
+  backdrop-filter:
+
+    blur(22px);
+
+  -webkit-backdrop-filter:
+
+    blur(22px);
+
+}
+
+.gui-layer {
+
+  z-index: 3;
+
+}
+
+/* =========================================================
+
+ 
 
    타임라인
+
 ========================================================= */
+
 .timeline {
+
   position: absolute;
+
   top: 40px;
+
   left: 412px;
+
   width: 540px;
+
   height: 64px;
+
   padding:
+
     8px
+
     12px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 8px;
+
   border-radius: 34px;
-  background:
-    rgba(52, 81, 111, .40);
-}
-.year {
-  width: 122px;
-  min-width: 122px;
-  height: 46px;
-  flex:
-    0
-    0
-    122px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 24px;
-  background: transparent;
-  color:
-    rgba(240, 247, 255, .56);
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-.year.selected {
-  color: #ffffff;
-  border:
-    1px solid
-    rgba(255, 255, 255, .20);
 
   background:
-    rgba(177, 208, 239, .18);
-  font-weight: 600;
+
+    rgba(52, 81, 111, .40);
+
 }
+
+.year {
+
+  width: 122px;
+
+  min-width: 122px;
+
+  height: 46px;
+
+  flex:
+
+    0
+
+    0
+
+    122px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 24px;
+
+  background: transparent;
+
+  color:
+
+    rgba(240, 247, 255, .56);
+
+  cursor: pointer;
+
+  font-size: 20px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+}
+
+.year.selected {
+
+  color: #ffffff;
+
+  border:
+
+    1px solid
+
+    rgba(255, 255, 255, .20);
+
+ 
+
+  background:
+
+    rgba(177, 208, 239, .18);
+
+  font-weight: 600;
+
+}
+
 /* =========================================================
+
    왼쪽 패널
+
 ========================================================= */
+
 .left-panel {
+
   position: absolute;
+
   top: 190px;
+
   left: 40px;
 
   width: 230px;
+
 }
+
 .menu-group {
+
   margin-bottom: 19px;
+
 }
+
 .menu {
+
   width: 100%;
+
   height: 84px;
+
   padding:
+
     0
+
     28px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   border-radius: 27px;
+
   background:
+
     linear-gradient(
+
       120deg,
+
       rgba(31, 37, 16, .72),
+
       rgba(60, 59, 27, .56)
+
     );
+
   cursor: pointer;
+
   font-size: 20px;
+
   font-weight: 600;
+
 }
+
 .response-menu {
+
   background:
+
     linear-gradient(
+
       120deg,
+
       rgba(100, 87, 73, .58),
+
       rgba(148, 125, 105, .43)
+
     );
+
 }
+
 .chevron {
 
+ 
+
   width: 0;
+
   height: 0;
+
   border-left:
+
     7px solid transparent;
+
   border-right:
+
     7px solid transparent;
+
   border-top:
+
     7px solid #ffffff;
+
   transition:
+
     transform .3s ease;
+
 }
+
 .menu[aria-expanded="true"] .chevron {
+
   transform:
+
     rotate(180deg);
+
 }
+
 /* =========================================================
+
    메뉴 드롭다운
+
 ========================================================= */
+
 .submenu {
+
   max-height: 0;
+
   margin-top: 0;
+
   overflow: hidden;
+
   opacity: 0;
+
   padding:
+
     0
+
     10px;
+
   border-radius:
+
     0
+
     0
+
     25px
 
     25px;
+
   background:
+
     rgba(34, 37, 17, .74);
+
   transition:
+
     max-height .3s ease,
+
     opacity .3s ease,
+
     padding .3s ease,
+
     margin .3s ease;
+
 }
+
 .submenu.open {
+
   max-height: 390px;
+
   margin-top: -20px;
+
   padding:
+
     26px
+
     10px
 
+ 
+
     14px;
+
   opacity: 1;
+
 }
+
 .submenu-divider {
+
   height: 1px;
+
   margin:
+
     0
+
     10px
+
     12px;
+
   background:
+
     rgba(255, 255, 255, .24);
+
 }
+
 .submenu-item {
+
   width: 100%;
+
   min-height: 64px;
+
   padding:
+
     0
+
     14px;
+
   display: flex;
+
   align-items: center;
+
   gap: 16px;
+
   border: 0;
+
   border-radius: 18px;
+
   background: transparent;
+
   color: #ffffff;
+
   cursor: pointer;
+
 }
+
 .submenu-item.active {
+
   background:
+
     rgba(173, 163, 109, .22);
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .09);
+
 }
+
 .climate-menu-icon {
+
   width: 30px;
+
   height: 30px;
+
   object-fit: contain;
+
 }
+
 .response-menu-icon {
+
   width: 40px;
+
   height: 40px;
+
   object-fit: contain;
+
 }
+
 /* =========================================================
 
+ 
+
    지도
+
 ========================================================= */
+
 .map-card {
 
   width: 230px;
+
   height: 216px;
+
   margin-top: 20px;
+
   overflow: hidden;
+
   border-radius: 28px;
+
   background:
+
     linear-gradient(
+
       145deg,
+
       rgba(59, 69, 49, .70),
+
       rgba(88, 73, 55, .60)
+
     );
+
 }
+
 .location-map {
+
   width: 100%;
+
   height: 144px;
+
   overflow: hidden;
+
   border-radius:
+
     28px
+
     28px
+
     0
+
     0;
+
   background: #24342f;
+
 }
+
 .location-map .leaflet-tile-pane {
+
   filter:
+
     brightness(.68)
+
     saturate(.72)
+
     contrast(1.05)
+
     hue-rotate(12deg);
+
 }
+
 .location-map .leaflet-control-attribution {
+
   font-size: 7px;
+
   background:
+
     rgba(18, 28, 28, .68);
+
   color:
+
     rgba(255, 255, 255, .72);
+
 }
+
 .map-card-footer {
+
   height: 72px;
+
   padding:
+
     9px
+
     18px;
 
+ 
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   gap: 4px;
+
 }
+
 .map-location-name {
+
   width: 100%;
+
   font-size: 16px;
+
   font-weight: 650;
+
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
+
 .map-location-status {
+
   width: 100%;
+
   color:
+
     rgba(235, 244, 250, .68);
+
   font-size: 10px;
+
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
 
 /* =========================================================
+
    오른쪽 카드
+
 ========================================================= */
+
 .info-card {
+
   position: absolute;
+
   left: 940px;
+
   top: 190px;
+
   width: 386px;
+
   padding:
+
     24px
+
     20px
+
     20px
+
     29px;
+
   border-radius: 25px;
+
   background:
+
     linear-gradient(
+
       145deg,
+
       rgba(40, 45, 49, .91),
+
       rgba(48, 50, 51, .88)
+
     );
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .13);
 
+ 
+
   backdrop-filter:
+
     blur(24px);
+
   -webkit-backdrop-filter:
+
     blur(24px);
+
   transition:
+
     height .35s ease,
+
     background .35s ease,
+
     border-color .35s ease;
+
 }
+
 .card-header {
+
   height: 32px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
 }
+
 .card-header h1 {
+
   margin: 0;
+
   min-width: 0;
+
   font-size: 17px;
+
   font-weight: 500;
+
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
+
 .scenario {
+
   flex-shrink: 0;
+
   padding:
+
     5px
+
     14px;
+
   border-radius: 20px;
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .22);
+
   background:
+
     rgba(220, 232, 255, .12);
+
   font-size: 16px;
+
 }
+
 /* =========================================================
+
    큰 수치
+
 ========================================================= */
+
 .risk-summary {
 
   margin-top: 10px;
+
 }
+
 .risk-name {
+
   margin:
+
+ 
 
     7px
+
     0
+
     0;
+
   color:
+
     rgba(240, 247, 255, .72);
+
   font-size: 15px;
+
   font-weight: 600;
+
 }
+
 .risk-value-row {
+
   display: flex;
+
   align-items: baseline;
+
   gap: 4px;
+
   margin-top: 5px;
+
 }
+
 .risk-value {
+
   font-size: 62px;
+
   font-weight: 700;
+
   line-height: 1;
+
   letter-spacing: -3px;
+
 }
+
 .risk-unit {
+
   font-size: 30px;
+
   font-weight: 700;
+
 }
+
 .risk-caption {
+
   margin:
+
     10px
+
     0
+
     24px;
+
   color:
+
     rgba(225, 229, 232, .60);
+
   font-size: 15px;
+
 }
+
 /* =========================================================
+
    폭염 전용
+
 ========================================================= */
+
 .info-card.heatwave-layout {
+
   height: 578px;
+
   background:
+
     linear-gradient(
+
       145deg,
+
       rgba(42, 45, 48, .93),
+
       rgba(48, 48, 48, .91)
+
     );
+
 }
+
+ 
 
 .info-card.heatwave-layout .risk-name {
+
   display: none;
+
 }
+
 .heatwave-card-section {
+
   padding-top: 24px;
+
   border-top:
+
     1px solid
+
     rgba(255, 255, 255, .30);
+
 }
+
 .heatwave-card-section[hidden] {
+
   display: none;
+
 }
+
 .heatwave-section-title {
+
   margin:
 
     0
+
     0
+
     14px;
+
   font-size: 17px;
+
   font-weight: 600;
+
 }
+
 .heatwave-chart {
+
   width: 336px;
+
   height: 165px;
+
   display: block;
+
   overflow: visible;
+
 }
+
 .heatwave-axis-label {
+
   fill: #ffffff;
+
   font-family: inherit;
+
   font-size: 15px;
+
 }
+
 .heatwave-x-label {
+
   fill: #ffffff;
+
   font-family: inherit;
+
   font-size: 14px;
+
 }
+
 .heatwave-points circle {
+
   fill: #69b5d1;
+
   stroke:
+
     rgba(255, 255, 255, .70);
+
   stroke-width: 1.5px;
+
 }
+
 /* 붉은 위험 레이어 */
+
 #heatwave-danger-area {
+
   opacity: 1;
 
+ 
+
   transition:
+
     opacity .35s ease;
+
 }
+
 /* 선택된 포인트 Glow */
+
 .heatwave-selected-glow {
+
   fill:
+
     url(#heatwave-highlight);
+
   stroke: none;
+
   opacity: .95;
+
   transition:
+
     opacity .35s ease;
+
 }
+
 /* 선택 포인트 */
+
 .heatwave-selected-point {
+
   fill: #dd8740;
+
   stroke: #ffffff;
+
   stroke-width: 1.8px;
+
   transition:
+
     fill .35s ease,
+
     filter .35s ease;
+
 }
+
 /* 현재 / 2030 : 보통 */
+
 .info-card.heatwave-level-2
+
 .heatwave-selected-point {
+
   fill: #dc913e;
+
   filter:
+
     drop-shadow(
+
       0
+
       0
+
       5px
+
       rgba(231, 157, 66, .90)
+
     );
+
 }
 
 /* 2050 : 높음 */
+
 .info-card.heatwave-level-3
+
 .heatwave-selected-point {
+
   fill: #e96343;
+
   filter:
+
     drop-shadow(
+
       0
+
       0
+
       5px
+
       rgba(242, 92, 58, .95)
+
     )
+
     drop-shadow(
 
+ 
+
       0
+
       0
+
       10px
+
       rgba(242, 92, 58, .55)
+
     );
+
 }
+
 /* 2090 : 매우 높음 */
+
 .info-card.heatwave-level-4
+
 .heatwave-selected-point {
+
   fill: #e33f3c;
+
   filter:
+
     drop-shadow(
+
       0
+
       0
+
       6px
+
       rgba(255, 63, 57, 1)
+
     )
+
     drop-shadow(
+
       0
+
       0
+
       12px
+
       rgba(255, 63, 57, .76)
+
     );
+
 }
+
 /* 큰 기온 수치 색상 */
+
 .info-card.heatwave-level-2
+
 .risk-value,
+
 .info-card.heatwave-level-2
+
 .risk-unit {
+
   text-shadow:
-    0
-    0
-    7px
-    rgba(231, 160, 69, .90),
-    0
-    0
-    18px
-    rgba(231, 160, 69, .38);
-}
-.info-card.heatwave-level-3
-.risk-value,
-.info-card.heatwave-level-3
-.risk-unit {
-  text-shadow:
+
     0
 
     0
+
     7px
+
+    rgba(231, 160, 69, .90),
+
+    0
+
+    0
+
+    18px
+
+    rgba(231, 160, 69, .38);
+
+}
+
+.info-card.heatwave-level-3
+
+.risk-value,
+
+.info-card.heatwave-level-3
+
+.risk-unit {
+
+  text-shadow:
+
+    0
+
+ 
+
+    0
+
+    7px
+
     rgba(234, 93, 53, .95),
+
     0
+
     0
+
     18px
 
     rgba(234, 93, 53, .48);
+
 }
+
 .info-card.heatwave-level-4
+
 .risk-value,
+
 .info-card.heatwave-level-4
+
 .risk-unit {
+
   text-shadow:
+
     0
+
     0
+
     8px
+
     rgba(255, 55, 48, 1),
+
     0
+
     0
+
     20px
+
     rgba(255, 55, 48, .67);
+
 }
+
 /* 폭염 하단 정보 */
+
 .heatwave-metric-grid {
+
   display: grid;
+
   grid-template-columns:
+
     1fr
+
     1fr;
+
   gap:
+
     10px
+
     8px;
+
   margin-top: 4px;
+
 }
+
 .heatwave-metric-tile,
+
 .heatwave-extra-tile {
+
   min-height: 60px;
+
   padding:
+
     0
+
     14px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 10px;
+
   border-radius: 12px;
+
   border:
 
+ 
+
     1px solid
+
     rgba(255, 255, 255, .14);
+
   background:
+
     rgba(113, 113, 113, .26);
+
 }
+
 .heatwave-extra-tile {
+
   grid-column:
+
     1 / -1;
+
   justify-content: flex-start;
+
   padding-left: 38px;
+
 }
+
 .heatwave-metric-label {
+
   color:
+
     rgba(255, 255, 255, .62);
+
   font-size: 13px;
+
   white-space: nowrap;
+
 }
+
 .heatwave-metric-value {
+
   color: #ffffff;
+
   font-size: 17px;
+
   font-weight: 650;
+
   white-space: nowrap;
+
 }
+
 /* 폭염 영향 보통 */
+
 .heatwave-impact-tile.level-2 {
 
   background:
+
     linear-gradient(
+
       120deg,
+
       rgba(194, 128, 53, .96),
+
       rgba(169, 105, 37, .92)
+
     );
+
   border-color:
+
     rgba(255, 203, 126, .18);
-}
-/* 폭염 영향 높음 */
-.heatwave-impact-tile.level-3 {
-  background:
-    linear-gradient(
-      120deg,
-      rgba(204, 109, 49, .97),
-      rgba(193, 62, 49, .94)
-    );
-  border-color:
-    rgba(255, 160, 100, .20);
+
 }
 
-/* 폭염 영향 매우 높음 */
-.heatwave-impact-tile.level-4 {
+/* 폭염 영향 높음 */
+
+.heatwave-impact-tile.level-3 {
+
   background:
+
     linear-gradient(
+
       120deg,
-      rgba(198, 55, 52, .98),
-      rgba(166, 39, 39, .95)
+
+      rgba(204, 109, 49, .97),
+
+      rgba(193, 62, 49, .94)
+
     );
+
   border-color:
+
+    rgba(255, 160, 100, .20);
+
+}
+
+ 
+
+/* 폭염 영향 매우 높음 */
+
+.heatwave-impact-tile.level-4 {
+
+  background:
+
+    linear-gradient(
+
+      120deg,
+
+      rgba(198, 55, 52, .98),
+
+      rgba(166, 39, 39, .95)
+
+    );
+
+  border-color:
+
     rgba(255, 105, 100, .24);
+
 }
+
 /* =========================================================
+
    침수 전용
+
 ========================================================= */
+
 .info-card.flood-layout {
+
   height: 415px;
+
 }
+
 .info-card.flood-layout .risk-name {
+
   display: none;
+
 }
+
 .flood-card-section {
+
   padding-top: 23px;
+
   border-top:
+
     1px solid
+
     rgba(255, 255, 255, .30);
+
 }
+
 .flood-card-section[hidden] {
+
   display: none;
+
 }
+
 .flood-section-title {
+
   margin:
+
     0
+
     0
+
     20px;
+
   font-size: 17px;
+
   font-weight: 600;
+
 }
+
 .flood-metric-grid {
+
   display: grid;
+
   grid-template-columns:
+
     1fr
+
     1fr;
+
   gap:
+
     10px
 
     8px;
 
+ 
+
 }
+
 .flood-metric-tile,
+
 .flood-warning-tile {
+
   min-height: 60px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 10px;
+
   padding:
+
     0
+
     14px;
+
   border-radius: 12px;
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .13);
+
   background:
+
     rgba(113, 113, 113, .25);
+
 }
+
 .flood-warning-tile {
+
   grid-column:
+
     1 / -1;
+
   justify-content: flex-start;
+
   padding-left: 38px;
+
 }
+
 .flood-metric-label {
+
   color:
+
     rgba(255, 255, 255, .62);
+
   font-size: 13px;
+
 }
+
 .flood-metric-value {
+
   font-size: 17px;
+
   font-weight: 650;
+
 }
+
 .flood-impact-tile.level-1 {
+
   background:
+
     rgba(118, 118, 118, .27);
+
 }
+
 .flood-impact-tile.level-2,
+
 .flood-impact-tile.level-3 {
+
   background:
+
     linear-gradient(
+
       120deg,
+
       rgba(194, 132, 61, .92),
+
       rgba(163, 105, 42, .88)
+
     );
 
+ 
+
 }
+
 .flood-impact-tile.level-4 {
+
   background:
+
     linear-gradient(
+
       120deg,
+
       rgba(198, 57, 55, .96),
+
       rgba(165, 42, 40, .92)
+
     );
+
 }
+
 .info-card.flood-level-2
+
 .risk-value,
+
 .info-card.flood-level-2
+
 .risk-unit,
+
 .info-card.flood-level-3
+
 .risk-value,
+
 .info-card.flood-level-3
+
 .risk-unit {
 
   text-shadow:
+
     0
+
     0
+
     7px
+
     rgba(204, 139, 66, .80),
+
     0
+
     0
+
     17px
+
     rgba(204, 139, 66, .32);
+
 }
+
 .info-card.flood-level-4
+
 .risk-value,
+
 .info-card.flood-level-4
+
 .risk-unit {
+
   text-shadow:
+
     0
+
     0
+
     7px
+
     rgba(234, 63, 56, .90),
+
     0
+
     0
+
     18px
+
     rgba(234, 63, 56, .52);
+
 }
+
 /* =========================================================
+
    일반 그래프
+
 ========================================================= */
+
 .chart-section {
 
+ 
+
   height: 244px;
+
   padding-top: 24px;
+
   border-top:
+
     1px solid
+
     rgba(255, 255, 255, .29);
+
   border-bottom:
+
     1px solid
+
     rgba(255, 255, 255, .29);
+
 }
+
 .chart-section[hidden] {
+
   display: none;
+
 }
+
 .chart-section h2 {
+
   margin:
+
     0
+
     0
+
     22px;
+
   font-size: 17px;
+
   font-weight: 500;
+
 }
+
 .chart {
+
   width: 336px;
+
   height: 164px;
+
 }
+
 .axis-label {
+
   fill: #ffffff;
+
   font-family: inherit;
+
   font-size: 15px;
+
 }
+
 .risk-axis-label {
+
   font-size: 11px;
+
 }
+
 .chart-anchor-points circle {
+
   fill: #6eb8d4;
+
   stroke: #438da9;
+
   stroke-width: 2;
 
 }
+
 .chart-selected-point {
+
   fill: #ee7562;
+
   stroke: #ffb2a8;
+
   stroke-width: 2;
+
 }
+
 .chart-value-label rect {
+
   fill:
+
     rgba(201, 91, 75, .90);
 
+ 
+
 }
+
 .chart-value-label text {
+
   fill: #ffffff;
+
   font-size: 11px;
+
   font-weight: 600;
+
 }
+
 /* =========================================================
+
    일반 Metrics
-========================================================= */
-.metrics {
-  margin: 0;
-}
-.metrics[hidden] {
-  display: none;
-}
-.metric {
-  height: 72px;
-  display: grid;
-  grid-template-columns:
-    47px
-    95px
-    1fr;
-  align-items: center;
-  border-bottom:
-    1px solid
-    rgba(255, 255, 255, .14);
-  font-size: 16px;
-}
-.metric:last-child {
-  border: 0;
-}
-.metric-icon {
-  width: 36px;
-  height: 38px;
-  object-fit: contain;
-}
-.metric dt {
-  font-weight: 500;
-}
-.metric dd {
-  margin: 0;
-  font-weight: 600;
-}
-/* =========================================================
-   화면 위험 효과
 
 ========================================================= */
+
+.metrics {
+
+  margin: 0;
+
+}
+
+.metrics[hidden] {
+
+  display: none;
+
+}
+
+.metric {
+
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns:
+
+    47px
+
+    95px
+
+    1fr;
+
+  align-items: center;
+
+  border-bottom:
+
+    1px solid
+
+    rgba(255, 255, 255, .14);
+
+  font-size: 16px;
+
+}
+
+.metric:last-child {
+
+  border: 0;
+
+}
+
+.metric-icon {
+
+  width: 36px;
+
+  height: 38px;
+
+  object-fit: contain;
+
+}
+
+.metric dt {
+
+  font-weight: 500;
+
+}
+
+.metric dd {
+
+  margin: 0;
+
+  font-weight: 600;
+
+}
+
+/* =========================================================
+
+   화면 위험 효과
+
+ 
+
+========================================================= */
+
 .scene::after {
+
   content: "";
+
   position: absolute;
+
   inset: 0;
+
   z-index: 4;
+
   pointer-events: none;
+
   opacity: 0;
+
   transition:
 
     opacity .45s ease,
+
     background .45s ease,
+
     box-shadow .45s ease;
+
 }
+
 body[data-year="2030"] .scene::after {
+
   opacity: .15;
+
   box-shadow:
+
     inset
-    0
-    0
-    60px
-    rgba(255, 100, 75, .04);
-}
-body[data-year="2050"] .scene::after {
-  opacity: 1;
-  box-shadow:
-    inset
-    0
-    0
-    90px
-    rgba(255, 90, 65, .11);
-}
-body.danger-mode .scene::after {
-  opacity: 1;
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(140, 20, 15, 0) 48%,
-      rgba(155, 28, 22, .08) 68%,
-      rgba(165, 35, 27, .22) 84%,
-      rgba(170, 40, 32, .40) 100%
-    );
-  box-shadow:
-    inset
-    0
+
     0
 
-    130px
-    rgba(180, 45, 35, .42);
+    0
+
+    60px
+
+    rgba(255, 100, 75, .04);
+
 }
-body.danger-mode .camera-feed {
-  filter:
-    brightness(.64)
-    saturate(.75);
-}
-/* =========================================================
-   경고 팝업
-========================================================= */
-.danger-alert {
-  position: absolute;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity .35s ease,
-    visibility .35s ease;
-}
-.danger-alert.show {
+
+body[data-year="2050"] .scene::after {
+
   opacity: 1;
+
+  box-shadow:
+
+    inset
+
+    0
+
+    0
+
+    90px
+
+    rgba(255, 90, 65, .11);
+
+}
+
+body.danger-mode .scene::after {
+
+  opacity: 1;
+
+  background:
+
+    radial-gradient(
+
+      ellipse at center,
+
+      rgba(140, 20, 15, 0) 48%,
+
+      rgba(155, 28, 22, .08) 68%,
+
+      rgba(165, 35, 27, .22) 84%,
+
+      rgba(170, 40, 32, .40) 100%
+
+    );
+
+  box-shadow:
+
+    inset
+
+    0
+
+    0
+
+ 
+
+    130px
+
+    rgba(180, 45, 35, .42);
+
+}
+
+body.danger-mode .camera-feed {
+
+  filter:
+
+    brightness(.64)
+
+    saturate(.75);
+
+}
+
+/* =========================================================
+
+   경고 팝업
+
+========================================================= */
+
+.danger-alert {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+
+    opacity .35s ease,
+
+    visibility .35s ease;
+
+}
+
+.danger-alert.show {
+
+  opacity: 1;
+
   visibility: visible;
 
   pointer-events: auto;
+
 }
+
 .danger-alert-backdrop {
+
   position: absolute;
+
   inset: 0;
+
   background:
+
     radial-gradient(
+
       ellipse at center,
+
       rgba(0, 0, 0, .80) 0%,
+
       rgba(0, 0, 0, .88) 58%,
+
       rgba(60, 12, 10, .88) 100%
+
     );
+
   box-shadow:
+
     inset
+
     0
+
     0
+
     150px
 
+ 
+
     rgba(180, 45, 35, .55);
+
   backdrop-filter:
+
     blur(4px);
+
   -webkit-backdrop-filter:
+
     blur(4px);
+
 }
+
 .danger-alert-content {
+
   position: relative;
+
   z-index: 2;
+
   width: 560px;
+
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
   text-align: center;
+
 }
+
 .danger-alert-icon-image {
+
   width: 82px;
+
   height: 82px;
+
   margin-bottom: 12px;
+
   object-fit: contain;
+
   filter:
+
     brightness(4);
+
 }
+
 .danger-alert-content h2 {
+
   margin:
+
     0
+
     0
+
     30px;
+
   font-size: 21px;
+
   font-weight: 500;
+
 }
+
 .danger-alert-message {
+
   margin: 0;
+
   font-size: 19px;
+
   line-height: 1.55;
+
 }
+
 .danger-alert-confirm {
+
   min-width: 300px;
+
   height: 62px;
+
   margin-top: 45px;
+
   padding:
+
     0
+
     34px;
+
   display: flex;
+
   align-items: center;
+
+ 
 
   justify-content: center;
 
   gap: 8px;
+
   border-radius: 31px;
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, .22);
+
   background:
+
     linear-gradient(
+
       180deg,
+
       rgba(62, 62, 62, .64),
+
       rgba(20, 20, 20, .82)
+
     );
+
   font-size: 19px;
+
   font-weight: 600;
+
   cursor: pointer;
-}
-/* =========================================================
-   열대야 전용 카드
-========================================================= */
-.tropical-card-section {
-  width: 100%;
-}
-.tropical-chart-wrap {
-  width: 100%;
-  margin-top: 8px;
-}
-.tropical-chart {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-.tropical-grid line {
-  stroke: rgba(255, 255, 255, 0.14);
-  stroke-width: 1;
-}
-.tropical-y-labels text,
-.tropical-x-labels text {
-  fill: rgba(255, 255, 255, 0.68);
-  font-size: 9px;
-  font-weight: 500;
-}
-.tropical-y-labels text {
-  text-anchor: end;
+
 }
 
-.tropical-x-labels text {
-  text-anchor: middle;
-}
-.tropical-point {
-  fill: #69b5d1;
-  stroke: rgba(255, 255, 255, 0.70);
-  stroke-width: 1.5px;
-}
-.tropical-selected-glow {
-  fill: rgba(89, 176, 205, 0.42);
-}
-.tropical-selected-point {
-  fill: #ffffff;
-  stroke: #58a7c3;
-  stroke-width: 3;
-}
 /* =========================================================
-   열대야 하단 Metrics
+
+   열대야 전용 카드
+
 ========================================================= */
+
+.tropical-card-section {
+
+  width: 100%;
+
+}
+
+.tropical-chart-wrap {
+
+  width: 100%;
+
+  margin-top: 8px;
+
+}
+
+.tropical-chart {
+
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  overflow: visible;
+
+}
+
+.tropical-grid line {
+
+  stroke: rgba(255, 255, 255, 0.14);
+
+  stroke-width: 1;
+
+}
+
+.tropical-y-labels text,
+
+.tropical-x-labels text {
+
+  fill: rgba(255, 255, 255, 0.68);
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+}
+
+.tropical-y-labels text {
+
+  text-anchor: end;
+
+}
+
+ 
+
+.tropical-x-labels text {
+
+  text-anchor: middle;
+
+}
+
+.tropical-point {
+
+  fill: #69b5d1;
+
+  stroke: rgba(255, 255, 255, 0.70);
+
+  stroke-width: 1.5px;
+
+}
+
+.tropical-selected-glow {
+
+  fill: rgba(89, 176, 205, 0.42);
+
+}
+
+.tropical-selected-point {
+
+  fill: #ffffff;
+
+  stroke: #58a7c3;
+
+  stroke-width: 3;
+
+}
+
+/* =========================================================
+
+   열대야 하단 Metrics
+
+========================================================= */
+
 .tropical-metrics {
 
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 8px;
+
   margin-top: 14px;
+
 }
+
 .tropical-metric {
+
   min-height: 78px;
+
   padding: 12px 10px;
+
   border-radius: 14px;
+
   background:
+
     rgba(255, 255, 255, 0.08);
+
   border:
+
     1px solid
+
     rgba(255, 255, 255, 0.12);
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
+
 }
+
 .tropical-metric-label {
+
   color:
+
     rgba(255, 255, 255, 0.66);
+
   font-size: 11px;
+
   font-weight: 500;
+
 }
+
 .tropical-metric-value {
+
   color: #ffffff;
+
   font-size: 14px;
 
-  font-weight: 700;
-  line-height: 1.25;
-}
-/* 열대야 추가 위험 카드 왼쪽 정렬 */
-.tropical-metric:last-child {
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  padding-left: 24px;
-}
  
+
+  font-weight: 700;
+
+  line-height: 1.25;
+
+}
+
+/* 열대야 추가 위험 카드 왼쪽 정렬 */
+
+.tropical-metric:last-child {
+
+  grid-column: 1 / -1;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  padding-left: 24px;
+
+}
+
+ 
+
 /* =========================================================
+
    열대야 위험 단계
+
 ========================================================= */
+
 .tropical-impact-tile.level-1 {
+
   background:
+
     rgba(76, 155, 190, 0.24);
+
   border-color:
+
     rgba(102, 190, 222, 0.38);
+
 }
+
 .tropical-impact-tile.level-2 {
+
   background:
+
     rgba(194, 139, 61, 0.26);
+
   border-color:
+
     rgba(226, 165, 75, 0.42);
+
 }
+
 .tropical-impact-tile.level-3 {
+
   background:
+
     rgba(213, 100, 58, 0.28);
+
   border-color:
+
     rgba(237, 121, 67, 0.48);
+
 }
+
 .tropical-impact-tile.level-4 {
+
   background:
+
     rgba(203, 59, 54, 0.30);
 
   border-color:
+
     rgba(236, 76, 67, 0.52);
+
 }
+
 /* =========================================================
+
    선택점 위험도 색
+
 ========================================================= */
+
 .info-card.tropical-level-1
+
 .tropical-selected-point {
+
+ 
 
   stroke: #58a7c3;
-}
-.info-card.tropical-level-1
-.tropical-selected-glow {
-  fill: rgba(88, 167, 195, 0.42);
-}
-.info-card.tropical-level-2
-.tropical-selected-point {
-  stroke: #d79742;
-}
-.info-card.tropical-level-2
-.tropical-selected-glow {
-  fill: rgba(215, 151, 66, 0.42);
-}
-.info-card.tropical-level-3
-.tropical-selected-point {
-  stroke: #e96545;
-}
-.info-card.tropical-level-3
-.tropical-selected-glow {
-  fill: rgba(233, 101, 69, 0.46);
-}
-.info-card.tropical-level-4
-.tropical-selected-point {
-  stroke: #dc3e3b;
-}
-.info-card.tropical-level-4
-.tropical-selected-glow {
-  fill: rgba(220, 62, 59, 0.50);
-}
-/* =========================================================
-   열대야 대표 수치 위험도 Glow
-========================================================= */
-/* 현재 : 낮음 - 파란 계열, Glow 거의 없음 */
-.info-card.tropical-level-1 .risk-value,
-.info-card.tropical-level-1 .risk-unit {
-  text-shadow:
-    0 0 6px rgba(88, 167, 195, 0.18);
-}
-/* 2030 : 보통 - 황토 / 주황 */
-.info-card.tropical-level-2 .risk-value,
-.info-card.tropical-level-2 .risk-unit {
-  text-shadow:
-    0 0 7px rgba(215, 151, 66, 0.90),
-    0 0 18px rgba(215, 151, 66, 0.38);
 
 }
-/* 2050 : 높음 - 주황 / 빨강 */
-.info-card.tropical-level-3 .risk-value,
-.info-card.tropical-level-3 .risk-unit {
-  text-shadow:
-    0 0 7px rgba(233, 101, 69, 0.95),
-    0 0 18px rgba(233, 101, 69, 0.48);
+
+.info-card.tropical-level-1
+
+.tropical-selected-glow {
+
+  fill: rgba(88, 167, 195, 0.42);
+
 }
+
+.info-card.tropical-level-2
+
+.tropical-selected-point {
+
+  stroke: #d79742;
+
+}
+
+.info-card.tropical-level-2
+
+.tropical-selected-glow {
+
+  fill: rgba(215, 151, 66, 0.42);
+
+}
+
+.info-card.tropical-level-3
+
+.tropical-selected-point {
+
+  stroke: #e96545;
+
+}
+
+.info-card.tropical-level-3
+
+.tropical-selected-glow {
+
+  fill: rgba(233, 101, 69, 0.46);
+
+}
+
+.info-card.tropical-level-4
+
+.tropical-selected-point {
+
+  stroke: #dc3e3b;
+
+}
+
+.info-card.tropical-level-4
+
+.tropical-selected-glow {
+
+  fill: rgba(220, 62, 59, 0.50);
+
+}
+
+/* =========================================================
+
+   열대야 대표 수치 위험도 Glow
+
+========================================================= */
+
+/* 현재 : 낮음 - 파란 계열, Glow 거의 없음 */
+
+.info-card.tropical-level-1 .risk-value,
+
+.info-card.tropical-level-1 .risk-unit {
+
+  text-shadow:
+
+    0 0 6px rgba(88, 167, 195, 0.18);
+
+}
+
+/* 2030 : 보통 - 황토 / 주황 */
+
+.info-card.tropical-level-2 .risk-value,
+
+.info-card.tropical-level-2 .risk-unit {
+
+  text-shadow:
+
+    0 0 7px rgba(215, 151, 66, 0.90),
+
+    0 0 18px rgba(215, 151, 66, 0.38);
+
+ 
+
+}
+
+/* 2050 : 높음 - 주황 / 빨강 */
+
+.info-card.tropical-level-3 .risk-value,
+
+.info-card.tropical-level-3 .risk-unit {
+
+  text-shadow:
+
+    0 0 7px rgba(233, 101, 69, 0.95),
+
+    0 0 18px rgba(233, 101, 69, 0.48);
+
+}
+
 /* 2090 : 매우 높음 - 강한 빨강 */
+
 .info-card.tropical-level-4 .risk-value,
 
 .info-card.tropical-level-4 .risk-unit {
+
   text-shadow:
+
     0 0 8px rgba(220, 62, 59, 1),
+
     0 0 20px rgba(220, 62, 59, 0.67);
-}
-/* =========================================================
-   산불 전용 카드
-========================================================= */
-.info-card.wildfire-layout {
-  height: 415px;
-}
-.info-card.wildfire-layout .risk-name {
-  display: none;
-}
-.info-card.wildfire-layout .risk-value {
-  font-size: 58px;
-  letter-spacing: -3px;
-}
-.wildfire-card-section {
-  padding-top: 23px;
-  border-top: 1px solid rgba(255, 255, 255, .30);
-}
-.wildfire-card-section[hidden] {
-  display: none;
-}
-.wildfire-section-title {
-  margin: 0 0 20px;
-  font-size: 17px;
-  font-weight: 600;
-}
-.wildfire-metric-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px 8px;
+
 }
 
-.wildfire-metric-tile,
-.wildfire-warning-tile {
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, .13);
-  background: rgba(113, 113, 113, .25);
+/* =========================================================
+
+   산불 전용 카드
+
+========================================================= */
+
+.info-card.wildfire-layout {
+
+  height: 415px;
+
 }
-.wildfire-warning-tile {
-  grid-column: 1 / -1;
-  justify-content: flex-start;
-  padding-left: 38px;
+
+.info-card.wildfire-layout .risk-name {
+
+  display: none;
+
 }
-.wildfire-metric-label {
-  color: rgba(255, 255, 255, .62);
-  font-size: 13px;
-  white-space: nowrap;
+
+.info-card.wildfire-layout .risk-value {
+
+  font-size: 58px;
+
+  letter-spacing: -3px;
+
 }
-.wildfire-metric-value {
-  color: #ffffff;
+
+.wildfire-card-section {
+
+  padding-top: 23px;
+
+  border-top: 1px solid rgba(255, 255, 255, .30);
+
+}
+
+.wildfire-card-section[hidden] {
+
+  display: none;
+
+}
+
+.wildfire-section-title {
+
+  margin: 0 0 20px;
+
   font-size: 17px;
-  font-weight: 650;
-  white-space: nowrap;
+
+  font-weight: 600;
+
 }
+
+.wildfire-metric-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px 8px;
+
+}
+
+ 
+
+.wildfire-metric-tile,
+
+.wildfire-warning-tile {
+
+  min-height: 60px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, .13);
+
+  background: rgba(113, 113, 113, .25);
+
+}
+
+.wildfire-warning-tile {
+
+  grid-column: 1 / -1;
+
+  justify-content: flex-start;
+
+  padding-left: 38px;
+
+}
+
+.wildfire-metric-label {
+
+  color: rgba(255, 255, 255, .62);
+
+  font-size: 13px;
+
+  white-space: nowrap;
+
+}
+
+.wildfire-metric-value {
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
+}
+
 .wildfire-impact-tile.level-1 {
 
   background: linear-gradient(120deg, rgba(55, 157, 198, .96), rgba(46, 137, 174, .92));
+
   border-color: rgba(116, 205, 236, .20);
+
 }
+
 .wildfire-impact-tile.level-2 {
+
   background: linear-gradient(120deg, rgba(194, 132, 61, .96), rgba(163, 105, 42, .92));
+
   border-color: rgba(255, 203, 126, .18);
+
 }
+
 .wildfire-impact-tile.level-3 {
+
   background: linear-gradient(120deg, rgba(204, 109, 49, .97), rgba(193, 62, 49, .94));
+
   border-color: rgba(255, 160, 100, .20);
+
 }
+
 .wildfire-impact-tile.level-4 {
+
   background: linear-gradient(120deg, rgba(198, 55, 52, .98), rgba(166, 39, 39, .95));
+
   border-color: rgba(255, 105, 100, .24);
+
 }
+
 .info-card.wildfire-level-1 .risk-value {
 
+ 
+
   text-shadow: none;
+
 }
+
 .info-card.wildfire-level-2 .risk-value {
+
   text-shadow:
+
     0 0 7px rgba(215, 151, 66, .90),
+
     0 0 18px rgba(215, 151, 66, .38);
+
 }
+
 .info-card.wildfire-level-3 .risk-value {
+
   text-shadow:
+
     0 0 7px rgba(233, 101, 69, .95),
+
     0 0 18px rgba(233, 101, 69, .48);
+
 }
+
 .info-card.wildfire-level-4 .risk-value {
+
   text-shadow:
+
     0 0 8px rgba(220, 62, 59, 1),
+
     0 0 20px rgba(220, 62, 59, .67);
+
 }
+
 /* =========================================================
+
    대기질 전용 카드
+
 ========================================================= */
+
 .info-card.air-layout {
+
   height: 578px;
+
   box-sizing: border-box;
+
   background: linear-gradient(145deg, rgba(42,45,48,.93), rgba(48,48,48,.91));
+
 }
+
 .info-card.air-layout .risk-name { display: none; }
+
 .air-card-section {
+
   width: 100%;
+
   min-width: 0;
+
   box-sizing: border-box;
+
   padding-top: 24px;
+
   border-top: 1px solid rgba(255,255,255,.30);
+
   overflow: hidden;
+
 }
+
 .air-card-section[hidden] { display: none; }
+
 .air-section-title { margin: 0 0 12px; font-size: 17px; font-weight: 600; }
+
 .air-chart { width: 100%; max-width: 336px; height: 165px; display: block; overflow: hidden; }
+
 .air-y-labels text, .air-x-labels text { fill: #fff; font-family: inherit; font-size: 14px; }
+
 .air-y-labels text { text-anchor: end; }
+
 .air-x-labels text { text-anchor: middle; }
+
 .air-points circle { fill: #69b5d1; stroke: rgba(255,255,255,.70); stroke-width: 1.5px; }
+
 .air-selected-glow { fill: rgba(213,109,69,.30); }
+
 .air-selected-point { fill: #c8893f; stroke: #fff; stroke-width: 1.8px; }
+
 .info-card.air-level-3 .air-selected-point { fill: #df6845; filter: drop-shadow(0 0 6px rgba(232,96,62,.80)); }
+
 .info-card.air-level-4 .air-selected-point { fill: #df4141; filter: drop-shadow(0 0 7px rgba(255,63,57,1)); }
 
+ 
+
 .info-card.air-level-2 .risk-value, .info-card.air-level-2 .risk-unit { text-shadow: 0 0 7px rgba(204,139,66,.90), 0 0 18px rgba(204,139,66,.38); }
+
 .info-card.air-level-3 .risk-value, .info-card.air-level-3 .risk-unit { text-shadow: 0 0 7px rgba(234,93,53,.95), 0 0 18px rgba(234,93,53,.48); }
 
 .info-card.air-level-4 .risk-value, .info-card.air-level-4 .risk-unit { text-shadow: 0 0 8px rgba(255,55,48,1), 0 0 20px rgba(255,55,48,.67); }
+
 .air-metric-grid {
+
   width: 100%;
+
   min-width: 0;
+
   box-sizing: border-box;
+
   display: grid;
+
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
   gap: 10px 8px;
+
   margin-top: 4px;
+
 }
+
 .air-metric-tile, .air-warning-tile {
+
   min-width: 0;
+
   min-height: 60px;
+
   box-sizing: border-box;
+
   padding: 0 10px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 8px;
+
   border-radius: 12px;
+
   border: 1px solid rgba(255,255,255,.14);
+
   background: rgba(113,113,113,.26);
+
   overflow: hidden;
+
 }
+
 .air-warning-tile {
+
   grid-column: 1 / -1;
+
   justify-content: center;
+
   padding: 0 14px;
+
 }
+
 .air-metric-label {
+
   min-width: 0;
+
   flex: 0 1 auto;
+
   color: rgba(255,255,255,.62);
+
   font-size: 11px;
+
   line-height: 1.25;
+
   white-space: normal;
+
   text-align: center;
+
 }
+
 .air-metric-value {
+
   min-width: 0;
+
   flex: 0 1 auto;
+
   color: #fff;
+
   font-size: 15px;
 
+ 
+
   font-weight: 650;
+
   line-height: 1.2;
+
   white-space: nowrap;
+
 }
+
 .air-warning-tile .air-metric-value {
+
   white-space: normal;
+
   text-align: center;
+
 }
+
 .air-impact-tile.level-2 { background: linear-gradient(120deg, rgba(194,128,53,.96), rgba(169,105,37,.92)); }
+
 .air-impact-tile.level-3 { background: linear-gradient(120deg, rgba(204,109,49,.97), rgba(193,62,49,.94)); }
+
 .air-impact-tile.level-4 { background: linear-gradient(120deg, rgba(198,55,52,.98), rgba(166,39,39,.95)); }
+
 /* =========================================================
+
    열대야 카드: 참고 시안 레이아웃 전용 조정
+
    다른 위험 카드에는 적용되지 않음
+
 ========================================================= */
+
 .info-card.tropical-layout {
+
   height: 578px;
+
   background: linear-gradient(145deg, rgba(42,45,48,.93), rgba(48,48,48,.91));
+
 }
+
 .info-card.tropical-layout .risk-name { display: none; }
+
 .info-card.tropical-layout .risk-caption { margin-bottom: 24px; }
 
 .info-card.tropical-layout .tropical-card-section {
+
   padding-top: 24px;
+
   border-top: 1px solid rgba(255,255,255,.30);
-}
-.info-card.tropical-layout .tropical-section-title {
-  margin: 0 0 14px;
-  font-size: 17px;
-  font-weight: 600;
-}
-.info-card.tropical-layout .tropical-chart-wrap { margin-top: 0; }
-.info-card.tropical-layout .tropical-chart {
-  width: 336px;
-  height: 165px;
-  max-width: 100%;
-}
-.info-card.tropical-layout .tropical-y-labels text,
-.info-card.tropical-layout .tropical-x-labels text {
-  fill: #ffffff;
-  font-size: 14px;
-}
-.info-card.tropical-layout .tropical-metrics {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 8px;
-  margin-top: 4px;
 
 }
-.info-card.tropical-layout .tropical-metric {
-  min-width: 0;
-  min-height: 60px;
-  padding: 0 10px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  background: rgba(113,113,113,.26);
-}
-.info-card.tropical-layout .tropical-impact-tile.level-1 {
-  background: linear-gradient(120deg, rgba(55,157,198,.96), rgba(46,137,174,.92));
-  border-color: rgba(116,205,236,.20);
-}
-.info-card.tropical-layout .tropical-impact-tile.level-2 {
-  background: linear-gradient(120deg, rgba(194,132,61,.96), rgba(163,105,42,.92));
-}
-.info-card.tropical-layout .tropical-impact-tile.level-3 {
-  background: linear-gradient(120deg, rgba(204,109,49,.97), rgba(193,62,49,.94));
-}
-.info-card.tropical-layout .tropical-impact-tile.level-4 {
-  background: linear-gradient(120deg, rgba(198,55,52,.98), rgba(166,39,39,.95));
-}
-.info-card.tropical-layout .tropical-metric:last-child {
-  grid-column: 1 / -1;
-  justify-content: flex-start;
-  padding-left: 24px;
-}
-.info-card.tropical-layout .tropical-metric-label {
-  font-size: 13px;
-  white-space: nowrap;
-}
-.info-card.tropical-layout .tropical-metric-value {
+
+.info-card.tropical-layout .tropical-section-title {
+
+  margin: 0 0 14px;
+
   font-size: 17px;
-  font-weight: 650;
+
+  font-weight: 600;
+
+}
+
+.info-card.tropical-layout .tropical-chart-wrap { margin-top: 0; }
+
+.info-card.tropical-layout .tropical-chart {
+
+  width: 336px;
+
+  height: 165px;
+
+  max-width: 100%;
+
+}
+
+.info-card.tropical-layout .tropical-y-labels text,
+
+.info-card.tropical-layout .tropical-x-labels text {
+
+  fill: #ffffff;
+
+  font-size: 14px;
+
+}
+
+.info-card.tropical-layout .tropical-metrics {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px 8px;
+
+  margin-top: 4px;
+
+ 
+
+}
+
+.info-card.tropical-layout .tropical-metric {
+
+  min-width: 0;
+
+  min-height: 60px;
+
+  padding: 0 10px;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  background: rgba(113,113,113,.26);
+
+}
+
+.info-card.tropical-layout .tropical-impact-tile.level-1 {
+
+  background: linear-gradient(120deg, rgba(55,157,198,.96), rgba(46,137,174,.92));
+
+  border-color: rgba(116,205,236,.20);
+
+}
+
+.info-card.tropical-layout .tropical-impact-tile.level-2 {
+
+  background: linear-gradient(120deg, rgba(194,132,61,.96), rgba(163,105,42,.92));
+
+}
+
+.info-card.tropical-layout .tropical-impact-tile.level-3 {
+
+  background: linear-gradient(120deg, rgba(204,109,49,.97), rgba(193,62,49,.94));
+
+}
+
+.info-card.tropical-layout .tropical-impact-tile.level-4 {
+
+  background: linear-gradient(120deg, rgba(198,55,52,.98), rgba(166,39,39,.95));
+
+}
+
+.info-card.tropical-layout .tropical-metric:last-child {
+
+  grid-column: 1 / -1;
+
+  justify-content: flex-start;
+
+  padding-left: 24px;
+
+}
+
+.info-card.tropical-layout .tropical-metric-label {
+
+  font-size: 13px;
+
   white-space: nowrap;
+
+}
+
+.info-card.tropical-layout .tropical-metric-value {
+
+  font-size: 17px;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
 }
 
 /* Air-quality information card: reference layout adjustments only */
+
 .info-card.air-layout .air-card-section {
+
   overflow: visible;
+
 }
+
 .info-card.air-layout .air-chart {
 
+ 
+
   width: 100%;
+
   max-width: 336px;
+
   height: 165px;
+
   overflow: visible;
+
 }
+
 .info-card.air-layout .air-y-labels text {
+
   text-anchor: end;
+
   font-size: 14px;
+
 }
+
 .info-card.air-layout .air-x-labels text {
+
   text-anchor: middle;
+
   font-size: 14px;
+
 }
+
 .info-card.air-layout .air-metric-grid {
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 10px 8px;
+
   margin-top: 4px;
+
 }
+
 .info-card.air-layout .air-metric-tile,
+
 .info-card.air-layout .air-warning-tile {
+
   min-height: 60px;
+
   padding: 0 10px;
+
   gap: 8px;
+
   overflow: visible;
+
 }
+
 .info-card.air-layout .air-warning-tile {
+
   grid-column: 1 / -1;
+
   justify-content: flex-start;
+
   padding-left: 34px;
+
 }
+
 .info-card.air-layout .air-warning-tile .air-metric-label,
+
 .info-card.air-layout .air-warning-tile .air-metric-value {
+
   text-align: left;
+
   white-space: nowrap;
+
 }
+
  
+
 /* Air-quality card: PM2.5 tile spacing only */
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) {
+
   justify-content: center;
+
   gap: 6px;
+
   padding-left: 8px;
+
   padding-right: 8px;
+
 }
+
  
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
 
+ 
+
   flex: 0 0 auto;
+
   text-align: left;
+
 }
+
  
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value {
+
   flex: 0 0 auto;
+
   font-size: 14px;
+
   letter-spacing: -0.4px;
+
   white-space: nowrap;
+
 }
+
  
+
 /* PM2.5 label: keep the parenthesized unit on its own line. */
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label {
 
   font-size: 0;
+
   white-space: nowrap;
+
 }
+
 .info-card.air-layout .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after {
+
   content: "초미세먼지\A(PM2.5)";
+
   display: block;
+
   white-space: pre;
+
   font-size: 11px;
+
   line-height: 1.25;
+
 }
+
  
+
  
+
 /* =========================================================
+
    ClimaView reference detail: seamless horizontal card expansion
+
 ========================================================= */
+
 .card-expand-control{position:absolute;right:13px;top:12px;z-index:4;border:0;background:transparent;color:white;font-size:22px;cursor:pointer;width:32px;height:32px}
+
 .info-card{cursor:pointer;transition:opacity .18s ease}
+
 .info-card.detail-source-hidden{opacity:0;pointer-events:none}
+
 .detail-backdrop{position:absolute;inset:0;z-index:70;background:rgba(8,13,19,.55);opacity:0;pointer-events:none;transition:opacity .5s ease}
+
 .detail-backdrop.is-open{opacity:1;pointer-events:auto}
+
 .detail-panel{position:absolute;left:906px;top:190px;width:420px;height:600px;z-index:71;visibility:hidden;opacity:0;pointer-events:none;overflow:hidden;box-sizing:border-box;border-radius:24px;background:rgba(38,40,42,.96);border:1px solid rgba(255,255,255,.12);color:white;box-shadow:0 18px 60px rgba(0,0,0,.20);transition:left .56s cubic-bezier(.22,1,.36,1),top .56s cubic-bezier(.22,1,.36,1),width .56s cubic-bezier(.22,1,.36,1),height .56s cubic-bezier(.22,1,.36,1),opacity .15s ease;will-change:left,width}
+
 .detail-panel.is-visible{visibility:visible;opacity:1;pointer-events:auto}
+
 .detail-panel.is-open{left:225px;top:190px;width:915px;height:640px}
+
 .detail-panel.detail-no-chart.is-open{top:283px;height:458px}
+
 .detail-panel-body{display:grid;grid-template-columns:420px minmax(0,1fr);height:100%;position:relative}
+
 .detail-main{min-width:0;overflow:hidden;position:relative}
+
 .detail-card-copy.info-card{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;box-sizing:border-box!important;background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;cursor:default!important;margin:0!important;opacity:1!important;transform:none!important;padding:24px 20px 22px!important}
+
 .detail-card-copy .card-header{padding-right:0}
+
 .detail-card-copy .heatwave-chart,.detail-card-copy .tropical-chart,.detail-card-copy .air-chart{max-width:370px!important}
+
 .detail-side{min-width:0;padding:25px 20px 22px 0;display:flex;flex-direction:column;gap:20px;opacity:0;transform:translateX(25px);transition:opacity .26s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+
 .detail-panel.is-open .detail-side{opacity:1;transform:translateX(0);transition-delay:.22s}
+
 .detail-side-card{background:rgba(255,255,255,.095);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:19px 20px;display:flex;flex-direction:column;flex:1;min-height:0}
 
+ 
+
 .detail-side-card h3{font-size:20px;font-weight:600;margin:0;line-height:1.4;letter-spacing:-.45px}
+
 .detail-side-card p{font-size:16px;font-weight:450;line-height:1.75;margin:auto 0 0;word-break:keep-all;overflow-wrap:break-word}
+
 .detail-close{position:absolute;right:17px;top:13px;z-index:3;width:44px;height:44px;border:0;background:rgba(38,40,42,.97);border-radius:12px;color:#fff;font-size:25px;cursor:pointer;line-height:1}
+
 .detail-side-card:first-child{padding-right:58px}
+
 .detail-no-chart .detail-side{gap:20px}
+
 .detail-no-chart .detail-side-card{padding-top:17px;padding-bottom:17px}
+
 .detail-no-chart .detail-side-card p{font-size:16px}
+
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side,.info-card{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
  
+
  
+
 /* === 2026-10-14: typography, glass, centered slide refinement === */
+
 /* Keep the underlying climate camera visible through both cards. */
+
 .info-card:not(.detail-card-copy){
+
  background:linear-gradient(145deg,rgba(36,40,44,.78),rgba(42,43,46,.75))!important;
+
  -webkit-backdrop-filter:blur(24px) saturate(125%);backdrop-filter:blur(24px) saturate(125%);
+
  border:1px solid rgba(255,255,255,.17);
+
 }
+
 .timeline{left:405px;width:558px;gap:6px;padding:8px 10px;background:rgba(36,39,43,.76);border:1px solid rgba(255,255,255,.12)}
+
 .year{width:130px;min-width:130px;flex:0 0 130px;font-size:21px}
+
 .menu{font-size:21px}.submenu-item{font-size:18px}.map-location-name{font-size:17px}
+
 .card-header h1{font-size:20px}.scenario{font-size:14px}
+
 .risk-value{font-size:72px;line-height:1.03;letter-spacing:-3px}.risk-unit{font-size:35px}
+
 .risk-caption{font-size:18px;line-height:1.4}
+
 .heatwave-section-title,.flood-section-title,.wildfire-section-title,.info-card.tropical-layout .tropical-section-title,.air-section-title{font-size:19px}
+
 .heatwave-metric-label,.flood-metric-label,.wildfire-metric-label,.info-card.tropical-layout .tropical-metric-label,.info-card.air-layout .air-metric-label{font-size:14px}
+
 .heatwave-metric-value,.flood-metric-value,.wildfire-metric-value,.info-card.tropical-layout .tropical-metric-value,.info-card.air-layout .air-metric-value{font-size:19px}
+
 .heatwave-axis-label,.heatwave-x-label,.info-card.tropical-layout .tropical-y-labels text,.info-card.tropical-layout .tropical-x-labels text,.info-card.air-layout .air-y-labels text,.info-card.air-layout .air-x-labels text{font-size:15px}
+
 /* The PM2.5 two-line tile needs its own slightly smaller type. */
+
 .info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-label{font-size:0}
+
 .info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-label::after{font-size:12px}
+
 .info-card.air-layout .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-value{font-size:16px}
+
 /* Separate the expand button from the scenario badge and title. */
 
 .info-card:not(.detail-card-copy) .card-header{padding-right:43px;box-sizing:border-box}
+
 .card-expand-control{right:12px;top:13px;width:35px;height:35px;border-radius:10px;
+
  display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;
+
  background:rgba(255,255,255,.085);border:1px solid rgba(255,255,255,.18);
+
  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .2s,transform .2s}
+
 .card-expand-control:hover{background:rgba(255,255,255,.18);transform:scale(1.04)}
+
 .card-expand-control span{display:block;line-height:1}
+
 /* The panel begins at the source card, then slides into the true scene center. */
+
 .detail-panel{left:906px;top:190px;width:420px;height:600px;
+
  background:linear-gradient(145deg,rgba(38,42,46,.82),rgba(43,45,48,.79));
+
  -webkit-backdrop-filter:blur(28px) saturate(125%);backdrop-filter:blur(28px) saturate(125%);
+
  border:1px solid rgba(255,255,255,.18);box-shadow:0 20px 65px rgba(0,0,0,.24);
+
  transition:left .62s cubic-bezier(.22,1,.36,1),top .62s cubic-bezier(.22,1,.36,1),width .62s cubic-bezier(.22,1,.36,1),height .62s cubic-bezier(.22,1,.36,1),opacity .18s ease}
 
+ 
+
 .detail-panel.is-open{left:calc((1366px - 915px)/2);top:calc((1024px - 640px)/2);width:915px;height:640px}
+
 .detail-panel.detail-no-chart.is-open{left:calc((1366px - 915px)/2);top:calc((1024px - 458px)/2);height:458px}
+
 .detail-side-card{background:rgba(255,255,255,.10);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+
 .detail-side-card h3{font-size:21px}.detail-side-card p,.detail-no-chart .detail-side-card p{font-size:17px;line-height:1.65}
+
 .detail-close{right:12px;top:12px;width:37px;height:37px;border-radius:10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:21px}
+
 .detail-side-card:first-child{padding-right:58px}
+
 .detail-backdrop{background:rgba(8,13,19,.46)}
+
 /* Cloned chart stays visible, including SVG geometry. */
+
 .detail-card-copy .heatwave-chart,.detail-card-copy .tropical-chart,.detail-card-copy .air-chart{display:block;visibility:visible;opacity:1}
+
 @media(prefers-reduced-motion:reduce){.detail-panel{transition-duration:.01ms!important}}
+
  
+
 /* 2026-10-14: warning typography restored to reference scale */
+
 .danger-alert-content{width:620px;max-width:calc(100% - 48px)}
+
 .danger-alert-icon-image{width:100px;height:100px;margin-bottom:13px}
+
 .danger-alert-content h2{font-size:30px;font-weight:650;line-height:1.2;margin:0 0 28px}
+
 .danger-alert-message{font-size:24px;line-height:1.5;font-weight:400;word-break:keep-all}
+
 .danger-alert-confirm{min-width:340px;height:76px;margin-top:30px;padding:0 38px;border-radius:40px;font-size:23px;font-weight:600}
+
  
+
 /* Center the expanded card in the actual scene, regardless of screen scaling. */
+
 .detail-panel{
+
   left:calc(50% + 433px);top:50%;
+
   transform:translate(-50%,-50%);
+
   transition:left .56s cubic-bezier(.22,1,.36,1),width .56s cubic-bezier(.22,1,.36,1),height .56s cubic-bezier(.22,1,.36,1),opacity .16s ease;
+
   will-change:left,width,height;
+
 }
+
 .detail-panel.is-open,
+
 .detail-panel.detail-no-chart.is-open{
+
   left:50%;top:50%;width:915px;
+
 }
+
 .detail-panel.is-open{height:640px}
+
 .detail-panel.detail-no-chart.is-open{height:458px}
+
 /* Avoid a delayed second card when the panel closes. */
+
 .detail-panel:not(.is-open) .detail-side{opacity:0;transform:translateX(18px);transition-delay:0s;transition-duration:.16s}
+
 .info-card.detail-source-hidden{opacity:0;pointer-events:none;transition:opacity .12s ease}
+
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.info-card.detail-source-hidden{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
  
+
 /* 2026-10-14: detail chart card bottom alignment and faster close */
+
 .detail-panel{transition:left .43s cubic-bezier(.25,.8,.25,1),top .43s cubic-bezier(.25,.8,.25,1),width .43s cubic-bezier(.25,.8,.25,1),height .43s cubic-bezier(.25,.8,.25,1),opacity .10s ease}
+
 .detail-backdrop{transition:opacity .34s ease}
+
 .detail-panel .detail-side{transition:opacity .20s ease,transform .35s cubic-bezier(.25,.8,.25,1)}
+
 .detail-panel.is-open .detail-side{transition-delay:.12s}
+
 .detail-panel:not(.is-open) .detail-side{transition-delay:0s;transition-duration:.12s}
+
 /* Use the full left-column height so the metrics align with the right card bottom. */
+
 .detail-panel.detail-has-chart .detail-card-copy{display:flex!important;flex-direction:column!important;}
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section,
 
+ 
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-card-section,
+
 .detail-panel.detail-has-chart .detail-card-copy .air-card-section{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;}
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+
 .detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{margin-top:auto!important;padding-top:14px;}
 
 /* Keep the right-side cards aligned to the full height. */
+
 .detail-panel.detail-has-chart .detail-side{height:100%;box-sizing:border-box}
+
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
  
+
  
+
 /* 2026-10-14: prevent hidden risk sections from overlapping active graphs */
+
 .detail-card-copy [hidden]{display:none!important}
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section[hidden],
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-card-section[hidden],
+
 .detail-panel.detail-has-chart .detail-card-copy .air-card-section[hidden]{display:none!important}
+
 /* Keep the chart and the bottom metric tiles in their own layout flow. */
+
 .detail-panel.detail-has-chart .detail-card-copy{overflow:hidden!important}
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section:not([hidden]),
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-card-section:not([hidden]),
+
 .detail-panel.detail-has-chart .detail-card-copy .air-card-section:not([hidden]){
+
   display:flex!important;flex-direction:column!important;min-height:0!important;
+
   flex:1 1 auto!important;padding-top:20px!important;
+
 }
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+
 .detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{
+
   margin-top:auto!important;padding-top:12px!important;flex-shrink:0!important;
+
 }
+
 /* Reference: compact two-card stack for no-chart risks. */
+
 .detail-panel.detail-no-chart .detail-side{gap:20px;padding-top:25px;padding-bottom:22px}
+
 .detail-panel.detail-no-chart .detail-side-card{flex:none;box-sizing:border-box}
+
 .detail-panel.detail-no-chart .detail-side-card:first-child{height:174px}
+
 .detail-panel.detail-no-chart .detail-side-card:nth-child(2){height:214px}
+
 /* Reference corner inset and minimalist inward-arrow close control. */
+
 .detail-close{right:15px!important;top:14px!important;width:44px!important;height:44px!important;
+
   padding:10px!important;border:0!important;border-radius:0 0 0 19px!important;
+
   background:rgba(38,41,44,.96)!important;box-shadow:none!important;display:grid;place-items:center}
+
 .detail-close svg{display:block;width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
  
+
 /* 2026-10-14: match the reference expanded-card proportions.
+
    Layout only; risk data, chart SVG, controls and transitions stay intact. */
+
 .detail-panel.is-open.detail-has-chart .detail-side{
+
   display:grid!important;
+
   grid-template-rows:174px minmax(0,1fr)!important;
+
   gap:20px!important;
+
+ 
 
   align-content:stretch!important;
+
 }
+
 .detail-panel.is-open.detail-has-chart .detail-side-card{
+
   height:100%!important;
+
   min-height:0!important;
+
   flex:none!important;
+
   box-sizing:border-box!important;
+
 }
+
 .detail-panel.is-open.detail-has-chart .detail-side-card:first-child{
+
   padding-right:58px!important;
+
 }
+
 .detail-panel.is-open.detail-no-chart .detail-side{
+
   display:grid!important;
+
   grid-template-rows:174px minmax(0,1fr)!important;
+
   gap:20px!important;
+
   padding-top:25px!important;
+
   padding-bottom:22px!important;
+
   box-sizing:border-box!important;
+
 }
+
 .detail-panel.is-open.detail-no-chart .detail-side-card{
+
   height:100%!important;
+
   min-height:0!important;
+
   width:100%!important;
+
   box-sizing:border-box!important;
 
 }
+
 .detail-panel.is-open .detail-side-card p{
+
   margin-top:auto!important;
+
   margin-bottom:0!important;
+
 }
+
 .detail-panel.is-open .detail-side-card h3{
+
   flex-shrink:0!important;
+
 }
+
 /* Chart, labels and metric tiles remain separated in the left column. */
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-chart,
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-chart,
+
 .detail-panel.detail-has-chart .detail-card-copy .air-chart{
+
   flex-shrink:0!important;
+
 }
+
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+
 .detail-panel.detail-has-chart .detail-card-copy .tropical-metrics,
+
 .detail-panel.detail-has-chart .detail-card-copy .air-metric-grid{
+
   position:relative!important;
+
   z-index:1!important;
+
 }
+
  
 
  
+
+ 
+
 /* 2026-10-14: final annotated reference alignment; expanded state only. */
+
 .card-expand-control .detail-icon-open{width:18px;height:15px;display:block;object-fit:contain}
+
 .detail-close .detail-icon-close{width:24px;height:24px;display:block;object-fit:contain}
+
 .detail-panel.is-open .detail-close{right:0!important;top:0!important;width:56px!important;height:56px!important;padding:15px!important;border-radius:0 22px 0 28px!important;background:rgba(35,38,42,.98)!important;z-index:6!important}
+
 /* Left metrics: remove the excess blank space beneath the plot. */
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-card-section:not([hidden]),
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-card-section:not([hidden]),
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .air-card-section:not([hidden]){flex:1 1 auto!important;display:flex!important;flex-direction:column!important}
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-metrics,
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .air-metric-grid{margin-top:25px!important;padding-top:0!important;margin-bottom:0!important;flex-shrink:0!important}
+
 /* Bring the lower row nearer the graph without stretching chart geometry. */
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-chart,
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-chart,
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy .air-chart{flex:0 0 auto!important}
+
 /* Right-hand explanatory tiles: reference widths, short summary, long action. */
+
 .detail-panel.is-open .detail-side{padding:24px 20px 20px 0!important;gap:20px!important;min-width:0!important}
+
 .detail-panel.is-open.detail-has-chart .detail-side{grid-template-rows:174px minmax(0,1fr)!important}
+
 .detail-panel.is-open.detail-no-chart .detail-side{grid-template-rows:174px minmax(0,1fr)!important}
+
 .detail-panel.is-open .detail-side-card{width:100%!important;min-width:0!important;padding:19px 20px!important}
+
 .detail-panel.is-open .detail-side-card:first-child{padding-right:66px!important}
+
 .detail-panel.is-open .detail-side-card p{margin-top:auto!important;margin-bottom:0!important}
+
 /* Reference-style information marker after the expanded metric caption. */
+
 .detail-panel.is-open .detail-card-copy .risk-caption::after{content:'i';display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:8px;width:16px;height:16px;border-radius:50%;background:rgba(210,214,219,.68);color:#2e3338;font-size:12px;font-weight:800;font-style:normal;line-height:1}
+
  
+
  
+
 /* === 2026-10-14 refinement: glass continuity, bottom fit, smooth return === */
+
 /* Glass on the entire expanded surface, not just its nested tiles. */
+
 .detail-panel, .detail-panel.is-visible {
+
   background:linear-gradient(135deg,rgba(38,42,46,.75),rgba(40,42,46,.69))!important;
+
   -webkit-backdrop-filter:blur(25px) saturate(125%)!important;
+
   backdrop-filter:blur(25px) saturate(125%)!important;
+
   border:1px solid rgba(255,255,255,.18)!important;
+
   box-shadow:0 20px 60px rgba(0,0,0,.26)!important;
+
 }
+
 .detail-panel .detail-main {background:rgba(25,28,31,.13);}
+
 .detail-panel .detail-side {background:rgba(255,255,255,.015);}
+
 .detail-panel .detail-side-card {
+
   background:rgba(255,255,255,.105)!important;
+
   -webkit-backdrop-filter:blur(14px) saturate(115%);
+
   backdrop-filter:blur(14px) saturate(115%);
+
   border:1px solid rgba(255,255,255,.13)!important;
 
 }
+
 /* Make the graph cards fill their lower edge, instead of leaving a large empty band. */
 
+ 
+
 .detail-panel.is-open.detail-has-chart .detail-card-copy{
+
   display:flex!important;flex-direction:column!important;
+
   padding-bottom:18px!important;
-}
-.detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-card-section:not([hidden]),
-.detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-card-section:not([hidden]),
-.detail-panel.is-open.detail-has-chart .detail-card-copy .air-card-section:not([hidden]){
-  flex:1 1 auto!important;min-height:0!important;display:flex!important;flex-direction:column!important;
-}
-.detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-metric-grid,
-.detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-metrics,
-.detail-panel.is-open.detail-has-chart .detail-card-copy .air-metric-grid{
-  margin-top:auto!important;padding-top:8px!important;margin-bottom:0!important;
-}
-/* Closing is a single, shorter slide; avoid the lingering phantom card. */
-.detail-panel{transition:left .39s cubic-bezier(.22,.78,.28,1),width .39s cubic-bezier(.22,.78,.28,1),height .39s cubic-bezier(.22,.78,.28,1),opacity .12s ease!important;}
-.detail-panel.is-open{transition-duration:.52s!important;transition-timing-function:cubic-bezier(.22,1,.36,1)!important;}
-.detail-panel .detail-side{transition:opacity .15s ease,transform .36s cubic-bezier(.22,.78,.28,1)!important;transition-delay:0s!important;}
-.detail-panel.is-open .detail-side{transition-delay:.10s!important;}
-.detail-panel:not(.is-open) .detail-side{opacity:0!important;transform:translateX(12px)!important;transition-delay:0s!important;}
-.detail-backdrop{transition:opacity .33s ease!important;}
-.info-card.detail-source-hidden{transition:none!important;}
-@media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.detail-backdrop{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
-/* Air quality detail only: reduce the excessive empty middle band. */
-.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p,
-.detail-panel.is-open.detail-has-chart.air-layout .detail-side-card:nth-child(2) p {
-  transform:translateY(-64px);
-}
-/* The detail view uses the same right-hand guidance card for all risks.
-   Limit this correction to air quality via the class set by the script. */
- 
-/* 2026-10-14: final reference layouts for expanded climate cards. */
-/* The air graph tick labels have a small, readable gap to the axis. */
-.info-card.air-layout .air-y-labels text,
-.detail-panel .air-y-labels text { text-anchor:end!important;transform:none!important; }
-/* Match the reference: compact flood/wildfire layout, and graph-led climate layout. */
-.detail-panel.is-open.detail-no-chart .detail-side {
-  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
-  gap:20px!important;padding:25px 20px 22px 0!important;
-}
-.detail-panel.is-open.detail-has-chart .detail-side {
-  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
-  gap:20px!important;padding:24px 20px 20px 0!important;
+
 }
 
-.detail-panel.is-open .detail-side-card {min-height:0!important;height:100%!important;box-sizing:border-box!important;}
-/* Air-quality detail: remove the oversized empty vertical band by reducing
-   the expanded panel height rather than visually offsetting text inside a tall card. */
-.detail-panel.is-open.detail-has-chart[data-risk="air"] {height:590px!important;}
-.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p {
-  transform:none!important;
+.detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-card-section:not([hidden]),
+
+.detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-card-section:not([hidden]),
+
+.detail-panel.is-open.detail-has-chart .detail-card-copy .air-card-section:not([hidden]){
+
+  flex:1 1 auto!important;min-height:0!important;display:flex!important;flex-direction:column!important;
+
 }
-.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-card-section:not([hidden]) {
-  padding-top:12px!important;
+
+.detail-panel.is-open.detail-has-chart .detail-card-copy .heatwave-metric-grid,
+
+.detail-panel.is-open.detail-has-chart .detail-card-copy .tropical-metrics,
+
+.detail-panel.is-open.detail-has-chart .detail-card-copy .air-metric-grid{
+
+  margin-top:auto!important;padding-top:8px!important;margin-bottom:0!important;
+
 }
-.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-metric-grid {
-  padding-top:5px!important;
-}
+
+/* Closing is a single, shorter slide; avoid the lingering phantom card. */
+
+.detail-panel{transition:left .39s cubic-bezier(.22,.78,.28,1),width .39s cubic-bezier(.22,.78,.28,1),height .39s cubic-bezier(.22,.78,.28,1),opacity .12s ease!important;}
+
+.detail-panel.is-open{transition-duration:.52s!important;transition-timing-function:cubic-bezier(.22,1,.36,1)!important;}
+
+.detail-panel .detail-side{transition:opacity .15s ease,transform .36s cubic-bezier(.22,.78,.28,1)!important;transition-delay:0s!important;}
+
+.detail-panel.is-open .detail-side{transition-delay:.10s!important;}
+
+.detail-panel:not(.is-open) .detail-side{opacity:0!important;transform:translateX(12px)!important;transition-delay:0s!important;}
+
+.detail-backdrop{transition:opacity .33s ease!important;}
+
+.info-card.detail-source-hidden{transition:none!important;}
+
+@media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.detail-backdrop{transition-duration:.01ms!important;transition-delay:0ms!important}}
+
  
+
+/* Air quality detail only: reduce the excessive empty middle band. */
+
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p,
+
+.detail-panel.is-open.detail-has-chart.air-layout .detail-side-card:nth-child(2) p {
+
+  transform:translateY(-64px);
+
+}
+
+/* The detail view uses the same right-hand guidance card for all risks.
+
+   Limit this correction to air quality via the class set by the script. */
+
+ 
+
+/* 2026-10-14: final reference layouts for expanded climate cards. */
+
+/* The air graph tick labels have a small, readable gap to the axis. */
+
+.info-card.air-layout .air-y-labels text,
+
+.detail-panel .air-y-labels text { text-anchor:end!important;transform:none!important; }
+
+/* Match the reference: compact flood/wildfire layout, and graph-led climate layout. */
+
+.detail-panel.is-open.detail-no-chart .detail-side {
+
+  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
+
+  gap:20px!important;padding:25px 20px 22px 0!important;
+
+}
+
+.detail-panel.is-open.detail-has-chart .detail-side {
+
+  display:grid!important;grid-template-rows:174px minmax(0,1fr)!important;
+
+  gap:20px!important;padding:24px 20px 20px 0!important;
+
+}
+
+ 
+
+.detail-panel.is-open .detail-side-card {min-height:0!important;height:100%!important;box-sizing:border-box!important;}
+
+/* Air-quality detail: remove the oversized empty vertical band by reducing
+
+   the expanded panel height rather than visually offsetting text inside a tall card. */
+
+.detail-panel.is-open.detail-has-chart[data-risk="air"] {height:590px!important;}
+
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-side-card:nth-child(2) p {
+
+  transform:none!important;
+
+}
+
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-card-section:not([hidden]) {
+
+  padding-top:12px!important;
+
+}
+
+.detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-metric-grid {
+
+  padding-top:5px!important;
+
+}
+
+ 
+
 /* 2026-10-14: unify the four remaining risk detail layouts with air quality. */
+
 .detail-panel.is-open.detail-has-chart[data-risk="heatwave"],
 
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] {height:590px!important;}
+
 .detail-panel.is-open.detail-has-chart[data-risk="heatwave"] .detail-card-copy .heatwave-card-section:not([hidden]),
+
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] .detail-card-copy .tropical-card-section:not([hidden]) {padding-top:12px!important;}
+
 .detail-panel.is-open.detail-has-chart[data-risk="heatwave"] .detail-card-copy .heatwave-metric-grid,
+
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] .detail-card-copy .tropical-metrics {padding-top:5px!important;}
+
 /* Flood and wildfire use the same compact two-column grid as the reference. */
+
 .detail-panel.is-open.detail-no-chart {height:458px!important;}
+
 .detail-panel.is-open.detail-no-chart .detail-side {grid-template-rows:174px minmax(0,1fr)!important;}
+
 .detail-panel.is-open.detail-no-chart .detail-card-copy .flood-card-section:not([hidden]),
+
 .detail-panel.is-open.detail-no-chart .detail-card-copy .wildfire-card-section:not([hidden]) {padding-top:20px!important;}
+
 /* Keep the air-impact label on one line, including the 2050 value. */
+
 .info-card.air-layout .air-impact-tile .air-metric-label,
+
 .detail-panel .air-impact-tile .air-metric-label {white-space:nowrap!important;word-break:keep-all!important;flex-shrink:0!important;font-size:13px!important;letter-spacing:-.35px!important;}
+
 .info-card.air-layout .air-impact-tile,
+
 .detail-panel .air-impact-tile {gap:5px!important;padding-left:6px!important;padding-right:6px!important;}
+
 .info-card.air-layout .air-impact-tile .air-metric-value,
+
 .detail-panel .air-impact-tile .air-metric-value {font-size:17px!important;white-space:nowrap!important;}
+
  
+
 /* 2026-10-14: compact open control aligned to the card's top-right corner. */
+
 .info-card:not(.detail-card-copy) .card-expand-control {
+
   position:absolute!important;
+
   top:8px!important;
+
   right:9px!important;
+
   width:38px!important;
+
   height:38px!important;
+
   padding:7px!important;
+
   border:0!important;
+
   border-radius:11px!important;
+
   background:rgba(255,255,255,.035)!important;
 
+ 
+
   box-shadow:none!important;
+
   display:flex!important;
+
   align-items:center!important;
+
   justify-content:center!important;
+
   z-index:8!important;
+
 }
+
 .info-card:not(.detail-card-copy) .card-expand-control .detail-icon-open {
+
   width:22px!important;
+
   height:22px!important;
+
   object-fit:contain!important;
+
 }
+
 .info-card:not(.detail-card-copy) .card-expand-control:hover,
+
 .info-card:not(.detail-card-copy) .card-expand-control:focus-visible {
+
   background:rgba(255,255,255,.14)!important;
+
 }
+
  
+
  
+
 /* 2026-10-14: targeted whitespace correction ONLY for flood, tropical and wildfire detail cards. */
+
 /* Reduce overall card height instead of shifting explanatory text artificially. */
+
 .detail-panel.is-open.detail-no-chart[data-risk="flood"],
+
 .detail-panel.is-open.detail-no-chart[data-risk="wildfire"] {
+
   height:410px!important;
+
 }
+
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] {
+
   height:550px!important;
+
 }
+
 /* Maintain the reference's two stacked panels, with less unused vertical space. */
+
 .detail-panel.is-open.detail-no-chart[data-risk="flood"] .detail-side,
+
 .detail-panel.is-open.detail-no-chart[data-risk="wildfire"] .detail-side {
+
   grid-template-rows:155px minmax(0,1fr)!important;
+
   gap:16px!important;
+
   padding-top:20px!important;
+
   padding-bottom:18px!important;
+
 }
+
 .detail-panel.is-open.detail-has-chart[data-risk="tropical"] .detail-side {
 
   grid-template-rows:160px minmax(0,1fr)!important;
+
   gap:16px!important;
+
   padding-top:20px!important;
+
   padding-bottom:18px!important;
+
 }
+
 /* Bring the action copy up inside its card while keeping the title at the top. */
+
 .detail-panel.is-open[data-risk="flood"] .detail-side-card:nth-child(2) p,
+
 .detail-panel.is-open[data-risk="wildfire"] .detail-side-card:nth-child(2) p,
+
 .detail-panel.is-open[data-risk="tropical"] .detail-side-card:nth-child(2) p {
+
   margin-top:auto!important;
 
+ 
+
   margin-bottom:8px!important;
+
 }
+
  
+
 /* 2026-10-14: uniform detail glass and immediate close response. */
+
 .detail-panel,.detail-panel.is-visible {
+
   background:rgba(255,255,255,.105)!important;
+
   -webkit-backdrop-filter:blur(14px) saturate(115%)!important;
+
   backdrop-filter:blur(14px) saturate(115%)!important;
+
 }
+
 .detail-panel .detail-main,.detail-panel .detail-side {background:transparent!important;}
+
 .detail-panel:not(.is-open) {
+
   transition:left .28s cubic-bezier(.25,.8,.25,1),top .28s cubic-bezier(.25,.8,.25,1),width .28s cubic-bezier(.25,.8,.25,1),height .28s cubic-bezier(.25,.8,.25,1),opacity .10s ease!important;
+
 }
+
  
+
  
+
 /* 2026-10-14: fade-only detail interaction and single continuous glass surface.
+
    Keep all five risk-specific sizes, charts, text and card positions unchanged. */
+
 .detail-panel,
+
 .detail-panel.is-visible,
+
 .detail-panel.is-open,
+
 .detail-panel.detail-no-chart.is-open {
+
   left:calc((1366px - 915px)/2)!important;
+
   width:915px!important;
+
   background:rgba(255,255,255,.105)!important;
+
   -webkit-backdrop-filter:blur(14px) saturate(115%)!important;
+
   backdrop-filter:blur(14px) saturate(115%)!important;
+
   transition:opacity .22s ease-out!important;
+
   will-change:opacity!important;
+
 }
+
 .detail-panel {opacity:0!important;pointer-events:none!important;}
+
 .detail-panel.is-visible.is-open {opacity:1!important;pointer-events:auto!important;}
+
 .detail-panel .detail-panel-body,
+
 .detail-panel .detail-main,
+
 .detail-panel .detail-side,
+
 .detail-panel .detail-card-copy {
+
   background:transparent!important;
+
   background-image:none!important;
+
   -webkit-backdrop-filter:none!important;
+
   backdrop-filter:none!important;
+
 }
+
 .detail-panel .detail-main::before,.detail-panel .detail-main::after,
+
 .detail-panel .detail-side::before,.detail-panel .detail-side::after {
+
   content:none!important;display:none!important;
+
 }
+
 .detail-panel .detail-side {
 
-  opacity:1!important;transform:none!important;transition:none!important;
-}
-.detail-backdrop {transition:opacity .22s ease-out!important;}
-@media(prefers-reduced-motion:reduce){
-  .detail-panel,.detail-backdrop{transition-duration:.01ms!important;}
-}
  
+
+  opacity:1!important;transform:none!important;transition:none!important;
+
+}
+
+.detail-backdrop {transition:opacity .22s ease-out!important;}
+
+@media(prefers-reduced-motion:reduce){
+
+  .detail-panel,.detail-backdrop{transition-duration:.01ms!important;}
+
+}
+
+ 
+
 /* 2026-10-14: centered two-stage reveal. Fixed geometry prevents text reflow. */
 
 .detail-panel,.detail-panel.is-visible,.detail-panel.is-open,.detail-panel.detail-no-chart.is-open {
+
  left:50%!important;top:50%!important;width:915px!important;
+
  transform:translate(-50%,-50%) translateX(24px)!important;
+
  opacity:0!important;pointer-events:none!important;
+
  transition:opacity .24s ease,transform .34s cubic-bezier(.2,.8,.2,1)!important;
+
  will-change:opacity,transform!important;
+
  background:rgba(255,255,255,.105)!important;
+
 }
+
 .detail-panel.is-visible.is-open {
+
  opacity:1!important;pointer-events:auto!important;
+
  transform:translate(-50%,-50%) translateX(0)!important;
+
 }
+
 /* Stage 1: original card moves left and fades before center dialog appears. */
+
 .info-card:not(.detail-card-copy){transition:opacity .19s ease,transform .19s ease!important;}
+
 .info-card.detail-source-hidden {opacity:0!important;transform:translateX(-28px)!important;pointer-events:none!important;}
+
 .detail-panel .detail-panel-body,.detail-panel .detail-main,.detail-panel .detail-side,.detail-panel .detail-card-copy{background:transparent!important;background-image:none!important;}
+
 .detail-panel .detail-side{opacity:1!important;transform:none!important;transition:none!important;}
+
 .detail-backdrop{transition:opacity .25s ease!important;}
+
 @media(prefers-reduced-motion:reduce){.detail-panel,.info-card,.detail-backdrop{transition-duration:.01ms!important;}}
 
+ 
+
 /* Primary figure emphasis, isolated from card geometry and existing glow. */
+
 .risk-value.primary-value-pulse {
+
   animation: primary-value-highlight 760ms ease-out both;
+
 }
+
 @keyframes primary-value-highlight {
+
   0%, 100% { opacity: 1; filter: brightness(1); }
+
   18%, 51% { opacity: .58; filter: brightness(1.4); }
+
   34%, 70% { opacity: 1; filter: brightness(1.12); }
+
 }
+
 @media (prefers-reduced-motion: reduce) {
+
   .risk-value.primary-value-pulse { animation: none; }
+
 }
+
+ 
 
 /* Tropical selected marker: same dimensions and luminous emphasis as heatwave. */
+
 .tropical-selected-point {
+
   stroke: #ffffff;
+
   stroke-width: 1.8px;
 
+ 
+
   filter: drop-shadow(0 0 5px currentColor);
+
 }
+
 .tropical-selected-glow {
+
   opacity: .95;
+
 }
+
 .info-card.tropical-level-1 .tropical-selected-point { color: #58a7c3; fill: #58a7c3; }
+
 .info-card.tropical-level-2 .tropical-selected-point { color: #d79742; fill: #d79742; }
+
 .info-card.tropical-level-3 .tropical-selected-point { color: #e96545; fill: #e96545; }
+
 .info-card.tropical-level-4 .tropical-selected-point { color: #dc3e3b; fill: #dc3e3b; }
 
-/* 열대야 선택 원만 보정: 다른 그래프처럼 또렷한 작은 원 */
-.tropical-selected-glow { opacity: .22; filter: none; }
-.tropical-selected-point { filter: none; stroke: #ffffff; stroke-width: 1.8px; }
+ 
+
+/* 열대야 선택 원: 흰색 테두리와 위험 단계별 은은한 발광 */
+
+.info-card.tropical-layout .tropical-selected-point {
+
+  stroke: #ffffff;
+
+  stroke-width: 2px;
+
+  filter: drop-shadow(0 0 5px currentColor);
+
+}
+
+.tropical-selected-glow { opacity: .55; filter: none; }
