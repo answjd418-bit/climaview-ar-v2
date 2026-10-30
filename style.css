@@ -1596,8 +1596,7 @@ body.danger-mode .camera-feed {
   font-size: 11px;
   line-height: 1.25;
 }
- 
- 
+
 /* =========================================================
    ClimaView reference detail: seamless horizontal card expansion
 ========================================================= */
@@ -1626,8 +1625,7 @@ body.danger-mode .camera-feed {
 .detail-no-chart .detail-side-card{padding-top:17px;padding-bottom:17px}
 .detail-no-chart .detail-side-card p{font-size:16px}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side,.info-card{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
- 
+
 /* === 2026-10-14: typography, glass, centered slide refinement === */
 /* Keep the underlying climate camera visible through both cards. */
 .info-card:not(.detail-card-copy){
@@ -1716,8 +1714,7 @@ body.danger-mode .camera-feed {
 /* Keep the right-side cards aligned to the full height. */
 .detail-panel.detail-has-chart .detail-side{height:100%;box-sizing:border-box}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-backdrop,.detail-side{transition-duration:.01ms!important;transition-delay:0ms!important}}
- 
- 
+
 /* 2026-10-14: prevent hidden risk sections from overlapping active graphs */
 .detail-card-copy [hidden]{display:none!important}
 .detail-panel.detail-has-chart .detail-card-copy .heatwave-card-section[hidden],
@@ -1797,8 +1794,7 @@ body.danger-mode .camera-feed {
   position:relative!important;
   z-index:1!important;
 }
- 
- 
+
 /* 2026-10-14: final annotated reference alignment; expanded state only. */
 .card-expand-control .detail-icon-open{width:18px;height:15px;display:block;object-fit:contain}
 .detail-close .detail-icon-close{width:24px;height:24px;display:block;object-fit:contain}
@@ -1823,8 +1819,7 @@ body.danger-mode .camera-feed {
 .detail-panel.is-open .detail-side-card p{margin-top:auto!important;margin-bottom:0!important}
 /* Reference-style information marker after the expanded metric caption. */
 .detail-panel.is-open .detail-card-copy .risk-caption::after{content:'i';display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:8px;width:16px;height:16px;border-radius:50%;background:rgba(210,214,219,.68);color:#2e3338;font-size:12px;font-weight:800;font-style:normal;line-height:1}
- 
- 
+
 /* === 2026-10-14 refinement: glass continuity, bottom fit, smooth return === */
 /* Glass on the entire expanded surface, not just its nested tiles. */
 .detail-panel, .detail-panel.is-visible {
@@ -1948,8 +1943,7 @@ body.danger-mode .camera-feed {
 .info-card:not(.detail-card-copy) .card-expand-control:focus-visible {
   background:rgba(255,255,255,.14)!important;
 }
- 
- 
+
 /* 2026-10-14: targeted whitespace correction ONLY for flood, tropical and wildfire detail cards. */
 /* Reduce overall card height instead of shifting explanatory text artificially. */
 .detail-panel.is-open.detail-no-chart[data-risk="flood"],
@@ -1991,8 +1985,7 @@ body.danger-mode .camera-feed {
 .detail-panel:not(.is-open) {
   transition:left .28s cubic-bezier(.25,.8,.25,1),top .28s cubic-bezier(.25,.8,.25,1),width .28s cubic-bezier(.25,.8,.25,1),height .28s cubic-bezier(.25,.8,.25,1),opacity .10s ease!important;
 }
- 
- 
+
 /* 2026-10-14: fade-only detail interaction and single continuous glass surface.
    Keep all five risk-specific sizes, charts, text and card positions unchanged. */
 .detail-panel,
@@ -2050,3 +2043,30 @@ body.danger-mode .camera-feed {
 .detail-panel .detail-side{opacity:1!important;transform:none!important;transition:none!important;}
 .detail-backdrop{transition:opacity .25s ease!important;}
 @media(prefers-reduced-motion:reduce){.detail-panel,.info-card,.detail-backdrop{transition-duration:.01ms!important;}}
+
+/* Primary figure emphasis, isolated from card geometry and existing glow. */
+.risk-value.primary-value-pulse {
+  animation: primary-value-highlight 760ms ease-out both;
+}
+@keyframes primary-value-highlight {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  18%, 51% { opacity: .58; filter: brightness(1.4); }
+  34%, 70% { opacity: 1; filter: brightness(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .risk-value.primary-value-pulse { animation: none; }
+}
+
+/* Tropical selected marker: same dimensions and luminous emphasis as heatwave. */
+.tropical-selected-point {
+  stroke: #ffffff;
+  stroke-width: 1.8px;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+.tropical-selected-glow {
+  opacity: .95;
+}
+.info-card.tropical-level-1 .tropical-selected-point { color: #58a7c3; fill: #58a7c3; }
+.info-card.tropical-level-2 .tropical-selected-point { color: #d79742; fill: #d79742; }
+.info-card.tropical-level-3 .tropical-selected-point { color: #e96545; fill: #e96545; }
+.info-card.tropical-level-4 .tropical-selected-point { color: #dc3e3b; fill: #dc3e3b; }
