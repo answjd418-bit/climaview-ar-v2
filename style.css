@@ -98,7 +98,6 @@ button {
     rgba(55, 78, 96, .54);
   font-size: 17px;
   font-weight: 600;
-
   cursor: pointer;
   backdrop-filter:
     blur(22px);
@@ -199,7 +198,6 @@ button {
   width: 100%;
   height: 84px;
   padding:
-
     0
     28px;
   display: flex;
@@ -300,7 +298,6 @@ button {
 .submenu-item.active {
   background:
     rgba(173, 163, 109, .22);
-
   border:
     1px solid
     rgba(255, 255, 255, .09);
@@ -401,7 +398,6 @@ button {
     linear-gradient(
       145deg,
       rgba(40, 45, 49, .91),
-
       rgba(48, 50, 51, .88)
     );
   border:
@@ -502,7 +498,6 @@ button {
 }
 .heatwave-card-section {
   padding-top: 24px;
-
   border-top:
     1px solid
     rgba(255, 255, 255, .30);
@@ -603,7 +598,6 @@ button {
       0
       0
       6px
-
       rgba(255, 63, 57, 1)
     )
     drop-shadow(
@@ -704,7 +698,6 @@ button {
 }
 /* 폭염 영향 보통 */
 .heatwave-impact-tile.level-2 {
-
   background:
     linear-gradient(
       120deg,
@@ -805,7 +798,6 @@ button {
 }
 .flood-impact-tile.level-1 {
   background:
-
     rgba(118, 118, 118, .27);
 }
 .flood-impact-tile.level-2,
@@ -906,7 +898,6 @@ button {
 .chart-value-label rect {
   fill:
     rgba(201, 91, 75, .90);
-
 }
 .chart-value-label text {
   fill: #ffffff;
@@ -1007,7 +998,6 @@ body.danger-mode .camera-feed {
 }
 /* =========================================================
    경고 팝업
-
 ========================================================= */
 .danger-alert {
   position: absolute;
@@ -1108,7 +1098,6 @@ body.danger-mode .camera-feed {
    열대야 전용 카드
 ========================================================= */
 .tropical-card-section {
-
   width: 100%;
 }
 .tropical-chart-wrap {
@@ -1209,7 +1198,6 @@ body.danger-mode .camera-feed {
 }
 .tropical-impact-tile.level-3 {
   background:
-
     rgba(213, 100, 58, 0.28);
   border-color:
     rgba(237, 121, 67, 0.48);
@@ -1310,7 +1298,6 @@ body.danger-mode .camera-feed {
   font-size: 17px;
   font-weight: 600;
 }
-
 .wildfire-metric-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1411,7 +1398,6 @@ body.danger-mode .camera-feed {
 .info-card.air-level-4 .risk-value, .info-card.air-level-4 .risk-unit { text-shadow: 0 0 8px rgba(255,55,48,1), 0 0 20px rgba(255,55,48,.67); }
 .air-metric-grid {
   width: 100%;
-
   min-width: 0;
   box-sizing: border-box;
   display: grid;
@@ -1512,7 +1498,6 @@ body.danger-mode .camera-feed {
 }
 .info-card.tropical-layout .tropical-impact-tile.level-1 {
   background: linear-gradient(120deg, rgba(55,157,198,.96), rgba(46,137,174,.92));
-
   border-color: rgba(116,205,236,.20);
 }
 .info-card.tropical-layout .tropical-impact-tile.level-2 {
@@ -1613,7 +1598,6 @@ body.danger-mode .camera-feed {
 }
  
  
-
 /* =========================================================
    ClimaView reference detail: seamless horizontal card expansion
 ========================================================= */
@@ -1714,7 +1698,6 @@ body.danger-mode .camera-feed {
 .detail-panel:not(.is-open) .detail-side{opacity:0;transform:translateX(18px);transition-delay:0s;transition-duration:.16s}
 .info-card.detail-source-hidden{opacity:0;pointer-events:none;transition:opacity .12s ease}
 @media(prefers-reduced-motion:reduce){.detail-panel,.detail-side,.info-card.detail-source-hidden{transition-duration:.01ms!important;transition-delay:0ms!important}}
-
  
 /* 2026-10-14: detail chart card bottom alignment and faster close */
 .detail-panel{transition:left .43s cubic-bezier(.25,.8,.25,1),top .43s cubic-bezier(.25,.8,.25,1),width .43s cubic-bezier(.25,.8,.25,1),height .43s cubic-bezier(.25,.8,.25,1),opacity .10s ease}
@@ -1815,7 +1798,6 @@ body.danger-mode .camera-feed {
   z-index:1!important;
 }
  
-
  
 /* 2026-10-14: final annotated reference alignment; expanded state only. */
 .card-expand-control .detail-icon-open{width:18px;height:15px;display:block;object-fit:contain}
@@ -1916,7 +1898,6 @@ body.danger-mode .camera-feed {
 .detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-card-section:not([hidden]) {
   padding-top:12px!important;
 }
-
 .detail-panel.is-open.detail-has-chart[data-risk="air"] .detail-card-copy .air-metric-grid {
   padding-top:5px!important;
 }
@@ -2017,7 +1998,6 @@ body.danger-mode .camera-feed {
 .detail-panel,
 .detail-panel.is-visible,
 .detail-panel.is-open,
-
 .detail-panel.detail-no-chart.is-open {
   left:calc((1366px - 915px)/2)!important;
   width:915px!important;
@@ -2070,16 +2050,3 @@ body.danger-mode .camera-feed {
 .detail-panel .detail-side{opacity:1!important;transform:none!important;transition:none!important;}
 .detail-backdrop{transition:opacity .25s ease!important;}
 @media(prefers-reduced-motion:reduce){.detail-panel,.info-card,.detail-backdrop{transition-duration:.01ms!important;}}
-
-/* Key metric emphasis: only on a changed future year */
-.risk-value.rolling-flash, .risk-unit.rolling-flash {
-  animation: key-metric-flash 0.82s ease-in-out both;
-}
-@keyframes key-metric-flash {
-  0%, 100% { opacity: 1; filter: brightness(1); }
-  17%, 49% { opacity: .42; filter: brightness(1.45); }
-  32%, 65% { opacity: 1; filter: brightness(1.18); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .risk-value.rolling-flash, .risk-unit.rolling-flash { animation: none; }
-}
