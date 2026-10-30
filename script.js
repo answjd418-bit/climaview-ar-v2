@@ -98,7 +98,6 @@ const climateOptions =
  
  
  
-
     ".climate-option"
  
  
@@ -199,7 +198,6 @@ const riskUnit =
  
  
  
-
   document.getElementById(
  
  
@@ -300,7 +298,6 @@ const heatwaveDangerArea =
  
  
  
-
   document.getElementById(
  
  
@@ -401,7 +398,6 @@ const heatwaveDangerStops = [
  
  
  
-
     "heatwave-danger-stop-1"
  
  
@@ -502,7 +498,6 @@ const heatwaveSelectedPoint =
  
  
  
-
   );
  
  
@@ -603,7 +598,6 @@ const heatwaveExtraRisk =
  
  
  
-
 const airCardSection = document.getElementById("air-card-section");
  
 const airChartArea = document.getElementById("air-chart-area");
@@ -704,7 +698,6 @@ const wildfireWarningValue =
  
    열대야 DOM
  
-
  
  
 ========================================================= */
@@ -805,7 +798,6 @@ document.getElementById(
  
 document.getElementById(
  
-
  
  
   "tropical-base-stop-3"
@@ -906,7 +898,6 @@ document.getElementById(
  
   "tropical-selected-glow"
  
-
  
  
 );
@@ -1007,7 +998,6 @@ document.getElementById(
  
   "tropical-extra-risk"
  
-
  
  
 );
@@ -1108,7 +1098,6 @@ const floodWaterTemp =
  
   );
  
-
  
  
  
@@ -1209,7 +1198,6 @@ const metricOneLabel =
  
   );
  
-
  
  
  
@@ -1310,7 +1298,6 @@ const metricOneIcon =
  
   );
  
-
  
  
  
@@ -1411,7 +1398,6 @@ const chartValueLabel =
  
 const chartValueText =
  
-
  
  
   document.getElementById(
@@ -1512,7 +1498,6 @@ const mapLocationStatus =
  
  
  
-
  
  
 const dangerAlert =
@@ -1613,7 +1598,6 @@ const dangerAlertButtonText =
  
  
  
-
  
  
 function fitScene() {
@@ -1714,7 +1698,6 @@ window.addEventListener(
  
  
  
-
  
  
  
@@ -1815,7 +1798,6 @@ async function startCamera() {
  
  
  
-
  
  
  
@@ -1916,7 +1898,6 @@ async function startCamera() {
  
               1920
  
-
  
  
           },
@@ -2017,7 +1998,6 @@ async function startCamera() {
  
  
  
-
  
  
  
@@ -2118,7 +2098,6 @@ cameraStartButton.addEventListener(
  
   startCamera
  
-
  
  
 );
@@ -2219,7 +2198,6 @@ let currentEnvironment =
  
  
  
-
  
  
 let locationWatchId =
@@ -2320,7 +2298,6 @@ const yearProfiles = {
  
     label:
  
-
  
  
       "2030년"
@@ -2421,7 +2398,6 @@ const heatwaveCardProfiles = {
  
     temperature:
  
-
  
  
       32.5,
@@ -2522,7 +2498,6 @@ const heatwaveCardProfiles = {
  
  
  
-
  
  
     level:
@@ -2623,7 +2598,6 @@ const heatwaveCardProfiles = {
  
       37.1,
  
-
  
  
  
@@ -2724,7 +2698,6 @@ const heatwaveCardProfiles = {
  
   }
  
-
  
  
  
@@ -2825,7 +2798,6 @@ function heatwaveTemperatureToY(
  
  
  
-
  
  
   const minTemperature =
@@ -2926,7 +2898,6 @@ function heatwaveTemperatureToY(
  
  
  
-
  
  
   return (
@@ -3027,7 +2998,6 @@ const wildfireCardProfiles = {
  
   },
  
-
  
  
   2030: {
@@ -3128,7 +3098,6 @@ const tropicalCardProfiles = {
  
  
  
-
     days: 51.2,
  
  
@@ -3229,7 +3198,6 @@ const tropicalCardProfiles = {
  
  
  
-
  
  
  
@@ -3330,7 +3298,6 @@ function tropicalDaysToY(days) {
  
  
  
-
  
  
  
@@ -3431,7 +3398,6 @@ function tropicalDaysToY(days) {
  
  
  
-
       top
  
  
@@ -3532,7 +3498,6 @@ const floodCardProfiles = {
  
  
  
-
   },
  
  
@@ -3633,7 +3598,6 @@ const floodCardProfiles = {
  
  
  
-
     probability:
  
  
@@ -3734,7 +3698,6 @@ const floodCardProfiles = {
  
  
  
-
  
  
  
@@ -3835,7 +3798,6 @@ const airChartPoints = {
  
   2090: { x: 276, y: 62 }
  
-
 };
  
  
@@ -3936,7 +3898,6 @@ const climateRiskProfiles = {
  
  
  
-
       2050: 3,
  
  
@@ -4037,7 +3998,6 @@ const climateRiskProfiles = {
  
  
  
-
         "저지대 주거지역"
  
  
@@ -4138,7 +4098,6 @@ const climateRiskProfiles = {
  
  
  
-
     levels: {
  
  
@@ -4239,7 +4198,6 @@ const climateRiskProfiles = {
  
  
  
-
         "하천변 초지·수풀",
  
  
@@ -4340,7 +4298,6 @@ const climateRiskProfiles = {
  
  
  
-
       2090: 35
  
  
@@ -4441,7 +4398,6 @@ const climateRiskProfiles = {
  
  
  
-
         "대형도로 인접 공원",
  
  
@@ -4542,7 +4498,6 @@ const metricIcons = {
  
  
  
-
  
  
  
@@ -4643,7 +4598,6 @@ const metricIcons = {
  
  
  
-
  
  
  
@@ -4744,7 +4698,6 @@ function levelText(level) {
  
  
  
-
  
  
  
@@ -4845,7 +4798,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
   ===================================================== */
  
  
@@ -4946,7 +4898,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -5047,7 +4998,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -5148,7 +5098,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
       "offset",
  
  
@@ -5249,7 +5198,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -5350,7 +5298,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -5451,7 +5398,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
     heatwaveBaseStops[0].setAttribute(
  
  
@@ -5552,7 +5498,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
     );
  
  
@@ -5653,7 +5598,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -5754,7 +5698,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
       "58%"
  
  
@@ -5855,7 +5798,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
       "stop-opacity",
  
  
@@ -5956,7 +5898,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
  
  
  
@@ -6057,7 +5998,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
       "#8B7A82"
  
  
@@ -6158,7 +6098,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
     );
  
  
@@ -6259,7 +6198,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
       "offset",
  
  
@@ -6360,7 +6298,6 @@ function setHeatwaveDangerGradient(yearKey) {
  
  
  
-
     heatwaveDangerStops[3].setAttribute(
  
  
@@ -6461,7 +6398,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
     );
  
  
@@ -6562,7 +6498,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
     tropicalBaseStops[3].setAttribute(
  
  
@@ -6663,7 +6598,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
   else if (yearKey === "2030") {
  
  
@@ -6764,7 +6698,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
       "offset",
  
  
@@ -6865,7 +6798,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
           "stop-opacity",
  
  
@@ -6966,7 +6898,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
       "38%"
  
  
@@ -7067,7 +6998,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
     tropicalBaseStops[3].setAttribute(
  
  
@@ -7168,7 +7098,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
     );
  
  
@@ -7269,7 +7198,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
       ".95"
  
  
@@ -7370,7 +7298,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
       "offset",
  
  
@@ -7471,7 +7398,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
  
  
  
@@ -7572,7 +7498,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
       "#E85449"
  
  
@@ -7673,7 +7598,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
     tropicalDangerStops[2].setAttribute(
  
  
@@ -7774,7 +7698,6 @@ function setTropicalGradient(yearKey) {
  
  
  
-
  
  
  
@@ -7875,7 +7798,6 @@ function updateTropicalChart() {
  
  
  
-
   const points =
  
  
@@ -7976,7 +7898,6 @@ function updateTropicalChart() {
  
  
  
-
         };
  
  
@@ -8077,7 +7998,6 @@ function updateTropicalChart() {
  
  
  
-
  
  
  
@@ -8178,7 +8098,6 @@ function updateTropicalChart() {
  
  
  
-
         circle.setAttribute(
  
  
@@ -8279,7 +8198,6 @@ function updateTropicalChart() {
  
  
  
-
     "cx",
  
  
@@ -8380,7 +8298,6 @@ function updateTropicalChart() {
  
  
  
-
 }
  
  
@@ -8481,7 +8398,6 @@ function updateHeatwaveChart() {
  
  
  
-
  
  
  
@@ -8582,7 +8498,6 @@ function updateHeatwaveChart() {
  
  
  
-
     p2,
  
  
@@ -8683,7 +8598,6 @@ function updateHeatwaveChart() {
  
  
  
-
  
  
  
@@ -8784,7 +8698,6 @@ function updateHeatwaveChart() {
  
  
  
-
         );
  
  
@@ -8885,7 +8798,6 @@ function updateHeatwaveChart() {
  
  
  
-
   );
  
  
@@ -8986,7 +8898,6 @@ function updateHeatwaveChart() {
  
  
  
-
   );
  
  
@@ -9087,7 +8998,6 @@ function updateHeatwaveCard() {
  
  
  
-
     "wildfire-level-1",
  
  
@@ -9188,7 +9098,6 @@ function updateHeatwaveCard() {
  
  
  
-
     
  
  
@@ -9289,7 +9198,6 @@ function updateHeatwaveCard() {
  
  
  
-
     `heatwave-level-${data.level}`
  
  
@@ -9390,7 +9298,6 @@ function updateHeatwaveCard() {
  
  
  
-
  
  
  
@@ -9491,7 +9398,6 @@ function updateHeatwaveCard() {
  
  
  
-
     "현재 위치의 예상 최고 온도";
  
  
@@ -9592,7 +9498,6 @@ function updateHeatwaveCard() {
  
  
  
-
   );
  
  
@@ -9693,7 +9598,6 @@ function updateTropicalCard() {
  
  
  
-
   const yearLabel =
  
  
@@ -9794,7 +9698,6 @@ function updateTropicalCard() {
  
  
  
-
     "flood-level-2",
  
  
@@ -9895,7 +9798,6 @@ function updateTropicalCard() {
  
  
  
-
   floodCardSection.hidden =
  
  
@@ -9996,7 +9898,6 @@ function updateTropicalCard() {
  
  
  
-
   riskName.textContent =
  
  
@@ -10097,7 +9998,6 @@ function updateTropicalCard() {
  
  
  
-
  
  
  
@@ -10198,7 +10098,6 @@ function updateTropicalCard() {
  
  
  
-
  
  
  
@@ -10299,7 +10198,6 @@ function updateFloodCard() {
  
  
  
-
       currentYear
  
  
@@ -10400,7 +10298,6 @@ function updateFloodCard() {
  
  
  
-
     "tropical-level-4"
  
  
@@ -10501,7 +10398,6 @@ function updateFloodCard() {
  
  
  
-
   tropicalCardSection.hidden =
  
  
@@ -10602,7 +10498,6 @@ function updateFloodCard() {
  
  
  
-
       `${yearLabel} ${currentPlaceName}`;
  
  
@@ -10703,7 +10598,6 @@ function updateFloodCard() {
  
  
  
-
  
  
  
@@ -10804,7 +10698,6 @@ function updateFloodCard() {
  
  
  
-
  
  
  
@@ -10905,7 +10798,6 @@ function getClimateData(
  
  
  
-
     name:
  
  
@@ -11006,7 +10898,6 @@ function getClimateData(
  
  
  
-
     metricTwoValue:
  
  
@@ -11107,7 +10998,6 @@ const chartYears = [
  
  
  
-
  
  
  
@@ -11208,7 +11098,6 @@ function levelToY(level) {
  
  
  
-
  
  
  
@@ -11309,7 +11198,6 @@ function updateChart() {
  
  
  
-
           );
  
  
@@ -11410,7 +11298,6 @@ function updateChart() {
  
  
  
-
  
  
  
@@ -11511,7 +11398,6 @@ function updateChart() {
  
  
  
-
     path
  
  
@@ -11612,7 +11498,6 @@ function updateChart() {
  
  
  
-
  
  
  
@@ -11713,7 +11598,6 @@ function updateChart() {
  
  
  
-
  
  
  
@@ -11814,7 +11698,6 @@ function setAirGradient(year) {
  
       { offset: "0%", color: "#69a8bc" },
  
-
       { offset: "42%", color: "#879da5" },
  
       { offset: "68%", color: "#c86b62" },
@@ -11915,7 +11798,6 @@ function updateAirCard() {
  
  
  
-
   const years = ["current", "2030", "2050", "2090"];
  
   const selectedIndex = years.indexOf(currentYear);
@@ -12016,7 +11898,6 @@ function updateWildfireCard() {
  
     "tropical-level-2",
  
-
     "tropical-level-3",
  
     "tropical-level-4",
@@ -12117,7 +11998,6 @@ function updateWildfireCard() {
  
     data.dryness;
  
-
  
  
   wildfireWarningValue.textContent =
@@ -12218,7 +12098,6 @@ function updateGeneralCard() {
  
     "air-layout",
  
-
  
  
     "air-level-1",
@@ -12319,7 +12198,6 @@ function updateGeneralCard() {
  
   heatwaveCardSection.hidden =
  
-
  
  
     true;
@@ -12420,7 +12298,6 @@ function updateGeneralCard() {
  
     ].label;
  
-
  
  
  
@@ -12521,7 +12398,6 @@ function updateGeneralCard() {
  
  
  
-
  
  
  
@@ -12622,7 +12498,6 @@ function updateGeneralCard() {
  
       levelText(
  
-
  
  
         data.level
@@ -12723,7 +12598,6 @@ function updateGeneralCard() {
  
   if (icons) {
  
-
  
  
  
@@ -12824,7 +12698,6 @@ function updateGeneralCard() {
  
  
  
-
  
  
  
@@ -12925,7 +12798,6 @@ function updateClimateInterface() {
  
  
  
-
  
  
   else if (
@@ -13026,7 +12898,6 @@ function updateClimateInterface() {
  
 }
  
-
  
  
  
@@ -13127,7 +12998,6 @@ function getCurrentRiskLevel() {
  
  
  
-
  
  
     return floodCardProfiles[
@@ -13228,7 +13098,6 @@ function getCurrentRiskLevel() {
  
   ) {
  
-
  
  
     return wildfireCardProfiles[
@@ -13329,7 +13198,6 @@ function showDangerAlert(
  
  
  
-
  
  
  
@@ -13430,7 +13298,6 @@ function showDangerAlert(
  
  
  
-
  
  
   else {
@@ -13531,7 +13398,6 @@ function showDangerAlert(
  
  
  
-
  
  
   dangerAlert.setAttribute(
@@ -13632,7 +13498,6 @@ dangerAlertConfirm.addEventListener(
  
       "danger-mode"
  
-
  
  
     );
@@ -13675,45 +13540,59 @@ dangerAlertConfirm.addEventListener(
  
  
  
-/* Animate only the large primary value, never the supporting metrics. */
-let metricRollFrame = null;
-let metricRollToken = 0;
-function stopMetricRoll() {
-  metricRollToken += 1;
-  if (metricRollFrame !== null) cancelAnimationFrame(metricRollFrame);
-  metricRollFrame = null;
-  riskValue.classList.remove("rolling-flash");
-  riskUnit.classList.remove("rolling-flash");
+/* Only year-change text effects. No layout, card, or chart modifications. */
+const climateYearEffectTimers = new WeakMap();
+function climateCaptureText() {
+  const card = document.getElementById("info-card");
+  const result = new Map();
+  if (!card) return result;
+  card.querySelectorAll("span, strong, p, h1, h2, dd").forEach(el => {
+    if (el.children.length || el.closest("svg") || el.hidden || el.closest("[hidden]")) return;
+    result.set(el, el.textContent.trim());
+  });
+  return result;
 }
-function animatePrimaryMetric(previousText, nextText) {
-  stopMetricRoll();
-  if (previousText.trim() === nextText.trim()) return;
-  const from = Number(previousText.trim().replace(/,/g, ""));
-  const to = Number(nextText.trim().replace(/,/g, ""));
-  const numeric = previousText.trim() !== "" && nextText.trim() !== "" &&
-    Number.isFinite(from) && Number.isFinite(to);
-  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduced) return;
-  riskValue.classList.add("rolling-flash");
-  riskUnit.classList.add("rolling-flash");
-  if (!numeric) return; // Textual risk grades: flash only.
-  const decimals = (nextText.split(".")[1] || "").length;
-  const token = metricRollToken;
-  const duration = 850;
-  let start = null;
-  function tick(now) {
-    if (token !== metricRollToken) return;
-    if (start === null) start = now;
-    const t = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - t, 3);
-    riskValue.textContent = (from + (to - from) * eased).toFixed(decimals);
-    if (t < 1) metricRollFrame = requestAnimationFrame(tick);
-    else { riskValue.textContent = nextText; metricRollFrame = null; }
-  }
-  metricRollFrame = requestAnimationFrame(tick);
+function climateAnimateYearText(previous, year) {
+  const card = document.getElementById("info-card");
+  if (!card) return;
+  const value = document.getElementById("risk-value");
+  const shouldBlink = year !== "current";
+  previous.forEach((oldText, el) => {
+    if (!el.isConnected || el.closest("[hidden]") || oldText === el.textContent.trim()) return;
+    const newText = el.textContent.trim();
+    if (el === value) {
+      const from = Number(oldText.replace(/,/g, ""));
+      const to = Number(newText.replace(/,/g, ""));
+      if (Number.isFinite(from) && Number.isFinite(to)) {
+        const oldTimer = climateYearEffectTimers.get(el);
+        if (oldTimer) cancelAnimationFrame(oldTimer);
+        const decimals = (newText.split(".")[1] || "").length;
+        const start = performance.now();
+        const duration = 650;
+        function frame(now) {
+          if (!el.isConnected) return;
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = progress === 1 ? newText : (from + (to - from) * eased).toFixed(decimals);
+          if (progress < 1) climateYearEffectTimers.set(el, requestAnimationFrame(frame));
+        }
+        climateYearEffectTimers.set(el, requestAnimationFrame(frame));
+      }
+    }
+    if (shouldBlink && typeof el.animate === "function") {
+      el.getAnimations().forEach(animation => { if (animation.id === "climate-year-blink") animation.cancel(); });
+      const animation = el.animate(
+        [{opacity:1},{opacity:.25},{opacity:1},{opacity:.35},{opacity:1}],
+        {duration:470, easing:"ease-in-out"}
+      );
+      animation.id = "climate-year-blink";
+    }
+  });
 }
-
+ 
 function changeYear(key) {
+  const previousYearText = climateCaptureText();
+ 
  
  
  
@@ -13733,7 +13612,6 @@ function changeYear(key) {
  
  
  
-
     ]
  
  
@@ -13751,10 +13629,6 @@ function changeYear(key) {
  
  
   }
-  if (key === currentYear) return;
-  const previousMetricText = riskValue.textContent;
-  stopMetricRoll();
-
  
  
  
@@ -13834,7 +13708,6 @@ function changeYear(key) {
  
  
  
-
         "selected",
  
  
@@ -13900,10 +13773,7 @@ function changeYear(key) {
  
  
   updateClimateInterface();
-  if (key !== "current") {
-    animatePrimaryMetric(previousMetricText, riskValue.textContent);
-  }
-
+  climateAnimateYearText(previousYearText, key);
  
  
  
@@ -13935,7 +13805,6 @@ function changeYear(key) {
  
  
  
-
     riskLevel >=
  
  
@@ -14036,7 +13905,6 @@ function changeYear(key) {
  
  
  
-
         alertKey
  
  
@@ -14137,7 +14005,6 @@ function changeYear(key) {
  
  
  
-
  
  
  
@@ -14238,7 +14105,6 @@ yearButtons.forEach(
  
  
  
-
  
  
  
@@ -14339,7 +14205,6 @@ climateOptions.forEach(
  
  
  
-
           item => {
  
  
@@ -14440,7 +14305,6 @@ climateOptions.forEach(
  
  
  
-
             "danger-mode"
  
  
@@ -14541,7 +14405,6 @@ function detectEnvironment(data) {
  
  
  
-
         data?.category || ""
  
  
@@ -14642,7 +14505,6 @@ function detectEnvironment(data) {
  
  
  
-
     source.includes("mountain") ||
  
  
@@ -14743,7 +14605,6 @@ function detectEnvironment(data) {
  
  
  
-
    자동 위험 선택
  
  
@@ -14844,7 +14705,6 @@ function selectAutomaticRisk(
  
  
  
-
   return "heatwave";
  
  
@@ -14945,7 +14805,6 @@ function initializeLocationMap() {
  
  
  
-
  
  
  
@@ -15046,7 +14905,6 @@ function initializeLocationMap() {
  
  
  
-
       }
  
  
@@ -15147,7 +15005,6 @@ function initializeLocationMap() {
  
  
  
-
   )
  
  
@@ -15248,7 +15105,6 @@ function initializeLocationMap() {
  
  
  
-
         fillColor:
  
  
@@ -15349,7 +15205,6 @@ function initializeLocationMap() {
  
  
  
-
  
  
  
@@ -15450,7 +15305,6 @@ function updateMapPosition(
  
  
  
-
  
  
  
@@ -15551,7 +15405,6 @@ function updateMapPosition(
  
  
  
-
  
  
  
@@ -15652,7 +15505,6 @@ function updateMapPosition(
  
  
  
-
           fillOpacity:
  
  
@@ -15753,7 +15605,6 @@ async function reverseGeocode(
  
  
  
-
 ) {
  
  
@@ -15854,7 +15705,6 @@ async function reverseGeocode(
  
  
  
-
       );
  
  
@@ -15955,7 +15805,6 @@ async function reverseGeocode(
  
  
  
-
   }
  
  
@@ -16056,7 +15905,6 @@ function getPlaceName(data) {
  
  
  
-
     ||
  
  
@@ -16157,7 +16005,6 @@ function getPlaceName(data) {
  
  
  
-
  
  
  
@@ -16258,7 +16105,6 @@ async function updateReverseGeocode(
  
  
  
-
   if (
  
  
@@ -16359,7 +16205,6 @@ async function updateReverseGeocode(
  
  
  
-
  
  
  
@@ -16460,7 +16305,6 @@ async function updateReverseGeocode(
  
  
  
-
  
  
  
@@ -16561,7 +16405,6 @@ async function updateReverseGeocode(
  
  
  
-
  
  
  
@@ -16662,7 +16505,6 @@ function handleLocationSuccess(
  
  
  
-
  
  
  
@@ -16763,7 +16605,6 @@ function handleLocationError(
  
  
  
-
  
  
  
@@ -16864,7 +16705,6 @@ function startLocationTracking() {
  
  
  
-
     navigator.geolocation.watchPosition(
  
  
@@ -16965,7 +16805,6 @@ function startLocationTracking() {
  
  
  
-
    메뉴
  
  
@@ -17066,7 +16905,6 @@ function closeMenu(
  
  
  
-
  
  
  
@@ -17167,7 +17005,6 @@ menuButtons.forEach(
  
  
  
-
       "click",
  
  
@@ -17268,7 +17105,6 @@ menuButtons.forEach(
  
  
  
-
             )
  
  
@@ -17369,7 +17205,6 @@ menuButtons.forEach(
  
  
  
-
  
  
  
@@ -17470,7 +17305,6 @@ window.addEventListener(
  
  
  
-
     }
  
  
@@ -17571,7 +17405,6 @@ startLocationTracking();
     main.replaceChildren();infoCard.classList.remove("detail-source-hidden");
   }
   panel.addEventListener("transitionend",event=>{
-
     if(event.target===panel && event.propertyName==="opacity" && !opened)finishClose();
   });
   const chartRisks=new Set(["heatwave","tropical","air"]);
