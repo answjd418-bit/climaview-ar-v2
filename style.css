@@ -4345,3 +4345,55 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .info-card:not(.detail-car
 .air-ar-detail span { font-size:31px; vertical-align:-2px; padding-left:12px; font-weight:300; }
 .air-ar-card.is-collapsed { min-height:0; }
 .air-ar-card.is-collapsed .air-ar-content { display:none; }
+
+
+/* AR ON air card: align the compact information layout with the approved reference.
+   These selectors affect only the AR ON air-quality card; AR OFF stays unchanged. */
+.air-ar-card {
+  left: 961px;
+  width: 365px;
+  min-height: 640px;
+  padding: 26px 20px 22px;
+  border-radius: 25px;
+}
+.air-ar-header {
+  padding-bottom: 21px;
+  border-bottom-color: rgba(255,255,255,.27);
+}
+.air-ar-header h2 { font-size: 19px; font-weight: 550; }
+.air-ar-minimize { width: 50px; height: 31px; font-size: 23px; font-weight: 400; }
+.air-ar-year { font-size: 17px; margin: 15px 0 19px; }
+.air-ar-pollutant { font-size: 19px; font-weight: 550; gap: 7px; }
+.air-ar-tooltip { width: 19px; height: 19px; font-size: 13px; }
+.air-ar-measurement { margin: 9px 0 24px; min-height: 92px; }
+.air-ar-value-line { gap: 8px; }
+.air-ar-value-line strong { font-size: 78px; line-height: 1; font-weight: 720; }
+.air-ar-value-line span { font-size: 17px; }
+.air-ar-status { border-radius: 15px; padding: 11px 13px; font-size: 16px; }
+.air-ar-change {
+  min-height: 76px;
+  padding: 15px 0;
+  font-size: 18px;
+  border-top-color: rgba(255,255,255,.27);
+  border-bottom-color: rgba(255,255,255,.27);
+}
+.air-ar-change strong { font-size: 28px; font-weight: 600; }
+.air-ar-change strong span { font-size: 16px; }
+.air-ar-subtitle { margin: 17px 0 19px; font-size: 18px; font-weight: 550; }
+.air-ar-list { gap: 18px; }
+.air-ar-item { grid-template-columns: 20px minmax(0,1fr) auto; column-gap: 18px; font-size: 17px; }
+.air-ar-dot { width: 19px; height: 19px; }
+.air-ar-item span:last-child { font-size: 16px; }
+.air-ar-detail {
+  margin-top: 29px;
+  height: 70px;
+  font-size: 19px;
+  font-weight: 550;
+  border-radius: 14px;
+  cursor: default;
+}
+.air-ar-detail:disabled {
+  opacity: 1;
+  pointer-events: none;
+  cursor: default;
+}

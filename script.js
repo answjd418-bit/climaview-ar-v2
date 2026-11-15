@@ -6380,8 +6380,5 @@ function animatePrimaryRiskValue(previousText, nextText) {
     minimize.setAttribute('aria-expanded', String(!collapsed));
     minimize.setAttribute('aria-label', collapsed ? '대기질 카드 펼치기' : '대기질 카드 접기');
   });
-  detail?.addEventListener('click', () => {
-    document.getElementById('card-expand-control')?.click();
-  });
   sync();
 })();
