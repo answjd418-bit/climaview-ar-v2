@@ -254,6 +254,52 @@ const airPm25Value = document.getElementById("air-pm25-value");
  
 const airExtraRisk = document.getElementById("air-extra-risk");
 
+
+const airPointVisuals = {
+  current: {
+    fill: "#d79a4a",
+    stroke: "#fff4df",
+    glow: "rgba(215,154,74,0.32)",
+    glowStroke: "rgba(255,214,158,0.30)",
+    shadow: "drop-shadow(0 0 6px rgba(226,164,83,0.72))"
+  },
+  2030: {
+    fill: "#df9147",
+    stroke: "#fff1dc",
+    glow: "rgba(223,145,71,0.34)",
+    glowStroke: "rgba(255,203,144,0.34)",
+    shadow: "drop-shadow(0 0 6px rgba(231,140,66,0.74))"
+  },
+  2050: {
+    fill: "#e06a45",
+    stroke: "#ffe7de",
+    glow: "rgba(224,106,69,0.36)",
+    glowStroke: "rgba(255,170,140,0.34)",
+    shadow: "drop-shadow(0 0 7px rgba(232,96,62,0.82))"
+  },
+  2090: {
+    fill: "#ef4a4a",
+    stroke: "#ffe4e4",
+    glow: "rgba(239,74,74,0.40)",
+    glowStroke: "rgba(255,120,120,0.38)",
+    shadow: "drop-shadow(0 0 8px rgba(255,63,57,0.95))"
+  }
+};
+
+function applyAirSelectedPointVisual(yearKey) {
+  const visual = airPointVisuals[yearKey] || airPointVisuals.current;
+  if (airSelectedGlow) {
+    airSelectedGlow.setAttribute("fill", visual.glow);
+    airSelectedGlow.setAttribute("stroke", visual.glowStroke);
+    airSelectedGlow.setAttribute("stroke-width", "1.2");
+  }
+  if (airSelectedPoint) {
+    airSelectedPoint.setAttribute("fill", visual.fill);
+    airSelectedPoint.setAttribute("stroke", visual.stroke);
+    airSelectedPoint.style.filter = visual.shadow;
+  }
+}
+
 /* =========================================================
 
    산불 DOM
@@ -4300,6 +4346,8 @@ function updateAirCard() {
  
   airSelectedPoint.setAttribute("cy", selected.y);
 
+  applyAirSelectedPointVisual(currentYear);
+
   document.body.dataset.riskLevel = String(data.level);
  
 }
@@ -6333,15 +6381,15 @@ function animatePrimaryRiskValue(previousText, nextText) {
   }
   buttonOn.addEventListener('click', () => setArEnabled(true));
   buttonOff.addEventListener('click', () => setArEnabled(false));
-  setArEnabled(false);
+  setArEnabled(true);
 })();
 
 
-/* AR ON illustrative concentrations, with 2090 as the worst scenario. These values are design estimates only,
+/* AR ON illustrative concentrations. These values are design estimates only,
    not live measurements or validated climate forecasts. The existing PM2.5
    time-series and the reference 2050 values anchor the visual simulation. */
 function getAirArEstimatedValues(yearKey) {
-  const pm25 = yearKey === '2050' ? 42 : yearKey === '2090' ? 55 : airCardProfiles[yearKey].pm25;
+  const pm25 = yearKey === '2050' ? 42 : airCardProfiles[yearKey].pm25;
   const progress = (pm25 - 26) / (42 - 26);
   const lerp = (low, high) => low + (high - low) * progress;
   return {
@@ -6385,7 +6433,7 @@ const airParticleTypes = {
 function updateAirFloatingParticles(values) {
   const particleField = document.getElementById('air-particle-field');
   if (!particleField) return;
-  const maximum = getAirArEstimatedValues('2090');
+  const maximum = { pm25: 42, pm10: 78, no2: 0.042, co: 0.48, so2: 0.0029, o3: 0.0410 };
   const groups = { ...airParticleTypes, pm25: [...airParticleTypes.pm25, ...airParticleTypes.extra] };
   delete groups.extra;
   Object.entries(groups).forEach(([type, indices]) => {
