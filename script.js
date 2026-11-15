@@ -6337,11 +6337,11 @@ function animatePrimaryRiskValue(previousText, nextText) {
 })();
 
 
-/* AR ON illustrative concentrations. These values are design estimates only,
+/* AR ON illustrative concentrations, with 2090 as the worst scenario. These values are design estimates only,
    not live measurements or validated climate forecasts. The existing PM2.5
    time-series and the reference 2050 values anchor the visual simulation. */
 function getAirArEstimatedValues(yearKey) {
-  const pm25 = yearKey === '2050' ? 42 : airCardProfiles[yearKey].pm25;
+  const pm25 = yearKey === '2050' ? 42 : yearKey === '2090' ? 55 : airCardProfiles[yearKey].pm25;
   const progress = (pm25 - 26) / (42 - 26);
   const lerp = (low, high) => low + (high - low) * progress;
   return {
@@ -6385,7 +6385,7 @@ const airParticleTypes = {
 function updateAirFloatingParticles(values) {
   const particleField = document.getElementById('air-particle-field');
   if (!particleField) return;
-  const maximum = { pm25: 42, pm10: 78, no2: 0.042, co: 0.48, so2: 0.0029, o3: 0.0410 };
+  const maximum = getAirArEstimatedValues('2090');
   const groups = { ...airParticleTypes, pm25: [...airParticleTypes.pm25, ...airParticleTypes.extra] };
   delete groups.extra;
   Object.entries(groups).forEach(([type, indices]) => {
