@@ -4732,6 +4732,8 @@ function updateClimateInterface() {
 
   }
 
+  document.dispatchEvent(new Event('climaview:updated'));
+
 }
 
 /* =========================================================
@@ -6332,4 +6334,54 @@ function animatePrimaryRiskValue(previousText, nextText) {
   buttonOn.addEventListener('click', () => setArEnabled(true));
   buttonOff.addEventListener('click', () => setArEnabled(false));
   setArEnabled(true);
+})();
+
+
+/* AR ON air card; AR OFF continues to render the original risk card unchanged. */
+(function initializeAirArCard() {
+  const card = document.getElementById('air-ar-card');
+  const toggle = document.getElementById('ar-toggle');
+  const minimize = document.getElementById('air-ar-minimize');
+  const detail = document.getElementById('air-ar-detail');
+  if (!card || !toggle) return;
+  const number = document.getElementById('air-ar-pm25');
+  const status = document.getElementById('air-ar-status');
+  const year = document.getElementById('air-ar-year');
+  const delta = document.getElementById('air-ar-delta');
+  const row25 = document.getElementById('air-ar-pm25-row');
+  const row10 = document.getElementById('air-ar-pm10-row');
+  const rowNo2 = document.getElementById('air-ar-no2-row');
+
+  function sync() {
+    document.body.dataset.selectedRisk = selectedRisk;
+    const visible = selectedRisk === 'air' && document.body.dataset.arGraphics === 'on';
+    card.hidden = !visible;
+    if (!visible) return;
+    // 2050 values are provided by the AR ON design reference. Other years
+    // retain existing PM2.5 data; unavailable PM10/NO2 values are not invented.
+    const pm25 = currentYear === '2050' ? 42 : airCardProfiles[currentYear].pm25;
+    number.textContent = String(pm25);
+    year.textContent = currentYear === 'current' ? '2026년 (현재)' : `${currentYear}년 (예측)`;
+    const grade = pm25 <= 15 ? ['좋음','good'] : pm25 <= 35 ? ['보통','moderate'] : pm25 <= 75 ? ['나쁨','bad'] : ['매우 나쁨','very-bad'];
+    status.textContent = grade[0]; status.dataset.level = grade[1];
+    row25.textContent = `${pm25} µg/m³`;
+    row10.textContent = currentYear === '2050' ? '78 µg/m³' : '자료 없음';
+    rowNo2.textContent = currentYear === '2050' ? '0.042 ppm' : '자료 없음';
+    delta.textContent = currentYear === 'current' ? '기준 연도' : (currentYear === '2050' ? '+68% ▲' : `${Math.round((pm25 / airCardProfiles.current.pm25 - 1) * 100)}% ▲`);
+  }
+  document.addEventListener('climaview:updated', sync);
+  // Existing state changes are synchronous, so update after the original handlers.
+  document.querySelectorAll('.year[data-year], .climate-option, #ar-toggle-on, #ar-toggle-off').forEach(el => {
+    el.addEventListener('click', () => queueMicrotask(sync));
+  });
+  minimize?.addEventListener('click', () => {
+    const collapsed = card.classList.toggle('is-collapsed');
+    minimize.textContent = collapsed ? '+' : '−';
+    minimize.setAttribute('aria-expanded', String(!collapsed));
+    minimize.setAttribute('aria-label', collapsed ? '대기질 카드 펼치기' : '대기질 카드 접기');
+  });
+  detail?.addEventListener('click', () => {
+    document.getElementById('card-expand-control')?.click();
+  });
+  sync();
 })();

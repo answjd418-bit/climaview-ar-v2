@@ -2886,6 +2886,31 @@ hidden
  
  
  
+
+        <!-- AR ON / 대기질 전용 정보 카드. AR OFF의 원본 카드는 그대로 유지. -->
+        <section class="air-ar-card glass" id="air-ar-card" aria-label="AR 대기질 정보" hidden>
+          <header class="air-ar-header">
+            <h2>대기질 정보</h2>
+            <button type="button" class="air-ar-minimize" id="air-ar-minimize" aria-expanded="true" aria-label="대기질 카드 접기">−</button>
+          </header>
+          <div class="air-ar-content" id="air-ar-content">
+            <div class="air-ar-year" id="air-ar-year">2050년 (예측)</div>
+            <div class="air-ar-pollutant">PM2.5 <span class="air-ar-tooltip" title="초미세먼지(PM2.5): 지름 2.5㎛ 이하의 입자">i</span></div>
+            <div class="air-ar-measurement">
+              <div class="air-ar-value-line"><strong id="air-ar-pm25">42</strong><span>µg/m³</span></div>
+              <span class="air-ar-status" id="air-ar-status">나쁨</span>
+            </div>
+            <div class="air-ar-change"><span>현재 대비</span><strong id="air-ar-delta">+68% <span aria-hidden="true">▲</span></strong></div>
+            <div class="air-ar-subtitle">주요 물질</div>
+            <div class="air-ar-list">
+              <div class="air-ar-item"><span class="air-ar-dot"></span><span>PM2.5</span><span id="air-ar-pm25-row">42 µg/m³</span></div>
+              <div class="air-ar-item"><span class="air-ar-dot"></span><span>PM10</span><span id="air-ar-pm10-row">78 µg/m³</span></div>
+              <div class="air-ar-item"><span class="air-ar-dot"></span><span>NO₂</span><span id="air-ar-no2-row">0.042 ppm</span></div>
+            </div>
+            <button type="button" class="air-ar-detail" id="air-ar-detail">상세 보기 <span aria-hidden="true">›</span></button>
+          </div>
+        </section>
+
       <!-- 위험 경고 팝업 -->
  
       <div
