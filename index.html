@@ -2915,9 +2915,9 @@ hidden
         <section class="air-detail-card glass" id="air-detail-card" aria-label="대기질 세부정보; 수치는 시안용 추정치">
           <div class="air-detail-header">
             <h2>대기질 세부정보</h2>
-            <span class="air-detail-disclaimer">시안용 추정치</span>
+            <div class="air-detail-header-right"><span class="air-detail-disclaimer">시안용 추정치</span><span class="air-detail-scroll-hint" id="air-detail-scroll-hint" aria-hidden="true">좌우로 탐색 <span class="air-detail-hint-arrow">→</span></span></div>
           </div>
-          <div class="air-detail-scroll" tabindex="0" role="region" aria-label="오염물질별 상세정보, 좌우로 스크롤">
+          <div class="air-detail-scroll-frame"><div class="air-detail-scroll" tabindex="0" role="region" aria-label="오염물질별 상세정보, 좌우로 스크롤">
             <div class="air-detail-pollutants">
               <div class="air-detail-pollutant">
                 <img src="./air-icon-pm10.png" alt="" class="air-detail-icon">
@@ -2945,7 +2945,7 @@ hidden
                 <span class="air-detail-reading"><strong id="air-detail-o3">0.0254</strong><span>ppm</span></span>
               </div>
             </div>
-          </div>
+          </div><span class="air-detail-edge-fade" aria-hidden="true"></span></div>
         </section>
 
       <!-- 위험 경고 팝업 -->

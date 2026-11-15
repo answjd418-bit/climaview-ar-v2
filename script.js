@@ -6403,3 +6403,18 @@ function updateAirDetailValues(pm25) {
   });
   sync();
 })();
+
+/* Scrolling cue for AR ON air detail only; no changes to AR OFF cards. */
+(function initializeAirDetailScrollCue() {
+  const scroll = document.querySelector('.air-detail-scroll');
+  const hint = document.getElementById('air-detail-scroll-hint');
+  const frame = document.querySelector('.air-detail-scroll-frame');
+  if (!scroll || !frame) return;
+  function syncCue() {
+    if (scroll.scrollLeft > 4) hint?.classList.add('is-dismissed');
+    const atEnd = scroll.scrollLeft + scroll.clientWidth >= scroll.scrollWidth - 3;
+    frame.classList.toggle('at-end', atEnd);
+  }
+  scroll.addEventListener('scroll', syncCue, { passive: true });
+  syncCue();
+})();

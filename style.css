@@ -4529,3 +4529,32 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-detail-card {
 .air-detail-label { font-size: 10px; min-height: 23px; }
 .air-detail-reading { font-size: 10px; flex-wrap: nowrap; gap: 2px; }
 .air-detail-reading span { font-size: 8px; }
+
+/* AR ON air detail only: subtle peek/scroll affordance. */
+.air-detail-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+.air-detail-scroll-hint {
+  color: rgba(255, 255, 255, .68);
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: opacity .2s ease;
+}
+.air-detail-hint-arrow { font-size: 13px; margin-left: 2px; }
+.air-detail-scroll-hint.is-dismissed { opacity: 0; }
+.air-detail-scroll-frame { position: relative; min-width: 0; }
+.air-detail-edge-fade {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(42, 43, 46, .36));
+  transition: opacity .2s ease;
+}
+.air-detail-scroll-frame.at-end .air-detail-edge-fade { opacity: 0; }
