@@ -5339,3 +5339,22 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1
   transform: none !important;
   transition: opacity 650ms ease;
 }
+
+/* ClimaView particle interaction V3: motion streaks on rapid hand sweeps. */
+.air-particle-field.hand-reactive .air-hand-particle::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%; top: 50%;
+  width: 125%; height: 22%;
+  border-radius: 100%;
+  background: linear-gradient(90deg, rgba(255,222,176,0), rgba(255,214,159,.25), rgba(255,244,223,.65));
+  filter: blur(6px);
+  opacity: calc(var(--streak-scale, 0) * .8);
+  transform-origin: 0 50%;
+  transform: rotate(var(--streak-angle, 0deg)) translateX(-110%) scaleX(calc(.4 + var(--streak-scale, 0) * 2.6));
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .air-particle-field.hand-reactive .air-hand-particle::after { display: none; }
+}
