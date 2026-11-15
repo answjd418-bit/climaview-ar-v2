@@ -5327,3 +5327,15 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1
 .air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle.air-density-extra {
   filter: blur(.5px) brightness(calc(1 + var(--scatter-energy, 0) * .45));
 }
+
+
+/* Multiple independent dust clouds across the whole camera view.
+   Keep images crisp while clouds regroup and continue drifting at rest. */
+.air-particle-field.hand-reactive .air-hand-particle {
+  will-change: transform;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  animation: none !important;
+  transform: none !important;
+  transition: opacity 650ms ease;
+}
