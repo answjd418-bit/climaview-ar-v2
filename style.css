@@ -4291,7 +4291,7 @@ body.danger-mode .camera-feed {
 }
 .ar-toggle-title { font-size: 21px; font-weight: 650; pointer-events: none; }
 .ar-toggle-off { color: rgba(255,255,255,.48); }
-.ar-toggle[data-active="off"] .ar-toggle-indicator { left: 171px; width: 65px; }
+.ar-toggle[data-active="off"] .ar-toggle-indicator { left: 68px; width: 168px; }
 .ar-toggle[data-active="off"] .ar-toggle-on { color: rgba(255,255,255,.48); }
 .ar-toggle[data-active="off"] .ar-toggle-title { color: rgba(255,255,255,.60); }
 .ar-toggle[data-active="off"] .ar-toggle-off { color: #fff; }
