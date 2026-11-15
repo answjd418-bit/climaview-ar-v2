@@ -4558,3 +4558,45 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-detail-card {
   transition: opacity .2s ease;
 }
 .air-detail-scroll-frame.at-end .air-detail-edge-fade { opacity: 0; }
+
+
+/* ===== Ambient air particles: AR ON + air quality only ===== */
+.air-particle-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .35s ease, visibility .35s ease;
+  isolation: isolate;
+}
+body[data-ar-graphics="on"][data-selected-risk="air"] .air-particle-field {
+  visibility: visible;
+  opacity: 1;
+}
+.air-floating-particle {
+  position: absolute;
+  left: var(--px);
+  top: var(--py);
+  width: var(--pw);
+  height: auto;
+  max-width: none;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--particle-opacity, .82);
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center center;
+  animation: air-particle-drift var(--duration, 13s) ease-in-out var(--delay, 0s) infinite alternate;
+  will-change: transform;
+}
+@keyframes air-particle-drift {
+  0%   { transform: translate3d(-50%, -50%, 0) rotate(0deg); }
+  50%  { transform: translate3d(calc(-50% + var(--dx-half)), calc(-50% + var(--dy-half)), 0) rotate(var(--rotation-half)); }
+  100% { transform: translate3d(calc(-50% + var(--dx)), calc(-50% + var(--dy)), 0) rotate(var(--rotation)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .air-floating-particle { animation: none; will-change: auto; }
+  .air-particle-field { transition: none; }
+}
