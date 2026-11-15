@@ -313,7 +313,16 @@ function applySharedClimateMarker(type, yearKey) {
     tropical: { point: tropicalSelectedPoint, glow: tropicalSelectedGlow }
   }[type];
   if (!settings || !settings.point || !settings.glow) return;
-  const palette = airPointVisuals[yearKey] || airPointVisuals.current;
+  // Only the current-year tropical marker matches the blue of the other chart dots.
+  // Every other year and every other climate card keeps its original palette.
+  const palette = type === 'tropical' && yearKey === 'current'
+    ? {
+        colors: ['#aee3f2', '#69b5d1', '#3c8cae'],
+        glow: 'rgba(105,181,209,0.28)',
+        glowStroke: 'rgba(150,215,236,0.40)',
+        shadow: 'drop-shadow(0 0 6px rgba(105,181,209,0.70))'
+      }
+    : (airPointVisuals[yearKey] || airPointVisuals.current);
   const svg = settings.point.ownerSVGElement;
   if (!svg) return;
   const ns = 'http://www.w3.org/2000/svg';
