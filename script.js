@@ -257,45 +257,50 @@ const airExtraRisk = document.getElementById("air-extra-risk");
 
 const airPointVisuals = {
   current: {
-    fill: "#d79a4a",
-    stroke: "#fff4df",
-    glow: "rgba(215,154,74,0.32)",
-    glowStroke: "rgba(255,214,158,0.30)",
-    shadow: "drop-shadow(0 0 6px rgba(226,164,83,0.72))"
+    colors: ["#ffe0a6", "#dca155", "#ac702f"],
+    glow: "rgba(215,154,74,0.24)",
+    glowStroke: "rgba(255,214,158,0.36)",
+    shadow: "drop-shadow(0 0 5px rgba(226,164,83,0.7))"
   },
   2030: {
-    fill: "#df9147",
-    stroke: "#fff1dc",
-    glow: "rgba(223,145,71,0.34)",
-    glowStroke: "rgba(255,203,144,0.34)",
+    colors: ["#ffdc9c", "#e69b4c", "#bc6c32"],
+    glow: "rgba(223,145,71,0.28)",
+    glowStroke: "rgba(255,203,144,0.38)",
     shadow: "drop-shadow(0 0 6px rgba(231,140,66,0.74))"
   },
   2050: {
-    fill: "#e06a45",
-    stroke: "#ffe7de",
-    glow: "rgba(224,106,69,0.36)",
-    glowStroke: "rgba(255,170,140,0.34)",
+    colors: ["#ffc19c", "#ec7950", "#bd4735"],
+    glow: "rgba(224,106,69,0.31)",
+    glowStroke: "rgba(255,170,140,0.38)",
     shadow: "drop-shadow(0 0 7px rgba(232,96,62,0.82))"
   },
   2090: {
-    fill: "#ef4a4a",
-    stroke: "#ffe4e4",
-    glow: "rgba(239,74,74,0.40)",
-    glowStroke: "rgba(255,120,120,0.38)",
+    colors: ["#ff9992", "#f04d4d", "#ac2637"],
+    glow: "rgba(239,74,74,0.35)",
+    glowStroke: "rgba(255,120,120,0.42)",
     shadow: "drop-shadow(0 0 8px rgba(255,63,57,0.95))"
   }
 };
 
 function applyAirSelectedPointVisual(yearKey) {
   const visual = airPointVisuals[yearKey] || airPointVisuals.current;
+  // This existing SVG radial gradient must change with the selected year.
+  // Otherwise the fixed CSS url(#air-off-selected-gradient) stays orange.
+  const gradient = document.getElementById("air-off-selected-gradient");
+  if (gradient) {
+    const stops = gradient.querySelectorAll("stop");
+    visual.colors.forEach((color, index) => {
+      if (stops[index]) stops[index].setAttribute("stop-color", color);
+    });
+  }
   if (airSelectedGlow) {
-    airSelectedGlow.setAttribute("fill", visual.glow);
-    airSelectedGlow.setAttribute("stroke", visual.glowStroke);
-    airSelectedGlow.setAttribute("stroke-width", "1.2");
+    airSelectedGlow.style.fill = visual.glow;
+    airSelectedGlow.style.stroke = visual.glowStroke;
+    airSelectedGlow.style.strokeWidth = "1.2px";
   }
   if (airSelectedPoint) {
-    airSelectedPoint.setAttribute("fill", visual.fill);
-    airSelectedPoint.setAttribute("stroke", visual.stroke);
+    airSelectedPoint.style.fill = "url(#air-off-selected-gradient)";
+    airSelectedPoint.style.stroke = "#ffffff";
     airSelectedPoint.style.filter = visual.shadow;
   }
 }
@@ -6381,7 +6386,7 @@ function animatePrimaryRiskValue(previousText, nextText) {
   }
   buttonOn.addEventListener('click', () => setArEnabled(true));
   buttonOff.addEventListener('click', () => setArEnabled(false));
-  setArEnabled(true);
+  setArEnabled(false);
 })();
 
 
@@ -6389,7 +6394,7 @@ function animatePrimaryRiskValue(previousText, nextText) {
    not live measurements or validated climate forecasts. The existing PM2.5
    time-series and the reference 2050 values anchor the visual simulation. */
 function getAirArEstimatedValues(yearKey) {
-  const pm25 = yearKey === '2050' ? 42 : airCardProfiles[yearKey].pm25;
+  const pm25 = yearKey === '2050' ? 42 : yearKey === '2090' ? 55 : airCardProfiles[yearKey].pm25;
   const progress = (pm25 - 26) / (42 - 26);
   const lerp = (low, high) => low + (high - low) * progress;
   return {
@@ -6433,7 +6438,7 @@ const airParticleTypes = {
 function updateAirFloatingParticles(values) {
   const particleField = document.getElementById('air-particle-field');
   if (!particleField) return;
-  const maximum = { pm25: 42, pm10: 78, no2: 0.042, co: 0.48, so2: 0.0029, o3: 0.0410 };
+  const maximum = getAirArEstimatedValues('2090');
   const groups = { ...airParticleTypes, pm25: [...airParticleTypes.pm25, ...airParticleTypes.extra] };
   delete groups.extra;
   Object.entries(groups).forEach(([type, indices]) => {

@@ -4812,3 +4812,26 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy)
 .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after {
   content: "미세먼지";
 }
+
+
+/* Air-only: match the heatwave / tropical year-linked luminous typography.
+   No changes to card dimensions, graph data, or other risk cards. */
+.info-card.air-layout.air-level-2 .risk-value,
+.info-card.air-layout.air-level-2 .risk-unit {
+  text-shadow: 0 0 7px rgba(215,151,66,.90), 0 0 18px rgba(215,151,66,.38);
+}
+.info-card.air-layout.air-level-3 .risk-value,
+.info-card.air-layout.air-level-3 .risk-unit {
+  text-shadow: 0 0 7px rgba(233,101,69,.95), 0 0 18px rgba(233,101,69,.48);
+}
+.info-card.air-layout.air-level-4 .risk-value,
+.info-card.air-layout.air-level-4 .risk-unit {
+  text-shadow: 0 0 8px rgba(220,62,59,1), 0 0 20px rgba(220,62,59,.67);
+}
+/* SVG radial-gradient stops and the point's glow are updated in script.js. */
+.info-card.air-layout .air-selected-point {
+  fill: url(#air-off-selected-gradient);
+  stroke: #fff;
+  stroke-width: 2px;
+  transition: filter .35s ease;
+}
