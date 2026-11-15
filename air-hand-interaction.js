@@ -10,6 +10,11 @@
   const field = document.getElementById('air-particle-field');
   const video = document.getElementById('camera-feed');
   const scene = document.getElementById('scene');
+  const status = document.getElementById('air-hand-status');
+  let lastStatus = '';
+  function showStatus(message) {
+    if (status && lastStatus !== message) status.textContent = lastStatus = message;
+  }
   if (!field || !video || !scene) return;
 
   const nodes = [...field.querySelectorAll('.air-floating-particle')];
@@ -18,6 +23,18 @@
     wrapper.className = 'air-hand-particle';
     // Keep the exact existing layout, PNG type, brightness, and drift variables.
     wrapper.style.cssText = image.style.cssText;
+    // Wider, more noticeable travel and brisker independent movement.
+    const get = (key) => parseFloat(image.style.getPropertyValue(key)) || 0;
+    const factor = 1.9;
+    for (const [dest, source] of [['--dx','--dx'],['--dy','--dy'],['--dx-half','--dx-half'],['--dy-half','--dy-half']]) {
+      wrapper.style.setProperty(dest, `${(get(source)*factor).toFixed(2)}px`);
+    }
+    const duration = parseFloat(image.style.getPropertyValue('--duration')) || 13;
+    wrapper.style.setProperty('--duration', `${(duration*0.63).toFixed(2)}s`);
+    // CSS variables are inherited, so use wrapper variables for child drift.
+    image.style.removeProperty('--dx'); image.style.removeProperty('--dy');
+    image.style.removeProperty('--dx-half'); image.style.removeProperty('--dy-half');
+    image.style.removeProperty('--duration');
     image.before(wrapper);
     wrapper.appendChild(image);
     const x = parseFloat(image.style.getPropertyValue('--px')) / 100;
@@ -28,7 +45,9 @@
 
   let model = null;
   let modelLoading = false;
-  let modelFailed = false;
+  let retryAt = 0;
+  let loadAttempts = 0;
+  let trackedHands = 0;
   let previousHands = [];
   let lastDetect = 0;
   let lastVideoTime = -1;
@@ -42,37 +61,58 @@
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
   async function loadHandModel() {
-    if (model || modelLoading || modelFailed || !enabled()) return;
-    if (video.readyState < 2 || !video.videoWidth) return;
+    if (model || modelLoading || !enabled() || performance.now() < retryAt) return;
+    if (video.readyState < 2 || !video.videoWidth) {
+      showStatus('카메라 영상 연결을 확인해 주세요');
+      return;
+    }
     modelLoading = true;
+    showStatus('손 인식 모델 불러오는 중…');
+    const bundles = [
+      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs',
+      'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs'
+    ];
+    let failure;
     try {
-      const { FilesetResolver, HandLandmarker } = await import(
-        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs'
-      );
-      const vision = await FilesetResolver.forVisionTasks(
-        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm'
-      );
-      const options = {
-        baseOptions: {
-          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
-          delegate: 'GPU'
-        },
-        runningMode: 'VIDEO',
-        numHands: 2,
-        minHandDetectionConfidence: 0.55,
-        minHandPresenceConfidence: 0.5,
-        minTrackingConfidence: 0.5
-      };
-      try {
-        model = await HandLandmarker.createFromOptions(vision, options);
-      } catch (gpuError) {
-        options.baseOptions.delegate = 'CPU';
-        model = await HandLandmarker.createFromOptions(vision, options);
+      for (const bundleUrl of bundles) {
+        try {
+          const { FilesetResolver, HandLandmarker } = await import(bundleUrl);
+          const version = bundleUrl.match(/@([0-9.]+)\//)[1];
+          const vision = await FilesetResolver.forVisionTasks(
+            `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${version}/wasm`
+          );
+          const options = {
+            baseOptions: {
+              modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
+              delegate: 'GPU'
+            },
+            runningMode: 'VIDEO',
+            numHands: 2,
+            minHandDetectionConfidence: 0.35,
+            minHandPresenceConfidence: 0.4,
+            minTrackingConfidence: 0.4
+          };
+          try {
+            model = await HandLandmarker.createFromOptions(vision, options);
+          } catch (gpuError) {
+            options.baseOptions.delegate = 'CPU';
+            model = await HandLandmarker.createFromOptions(vision, options);
+          }
+          showStatus('손을 카메라 앞에서 움직여 보세요');
+          console.info('[ClimaView] hand tracking ready');
+          break;
+        } catch (error) {
+          failure = error;
+        }
       }
-      console.info('[ClimaView] AR air hand tracking ready');
+      if (!model) throw failure || Error('Could not load MediaPipe');
+      loadAttempts = 0;
     } catch (error) {
-      modelFailed = true;
-      console.warn('[ClimaView] 손 인식을 불러오지 못했습니다. 입자 부유 효과는 유지됩니다.', error);
+      loadAttempts++;
+      // Retry on network interruption; no permanent failure latch.
+      retryAt = performance.now() + Math.min(30000, 4000 * loadAttempts);
+      showStatus('손 인식 연결 실패 · 네트워크 확인 후 재시도');
+      console.warn('[ClimaView] Hand model loading failed', error);
     } finally {
       modelLoading = false;
     }
@@ -88,11 +128,9 @@
     const sourceHeight = vh * scale;
     let x = (point.x * sourceWidth - (sourceWidth - sw) / 2);
     let y = (point.y * sourceHeight - (sourceHeight - sh) / 2);
-    if (getComputedStyle(video).transform !== 'none') {
-      const t = getComputedStyle(video).transform;
-      // Mirror handling for common CSS scaleX(-1) front-camera filters.
-      if (/matrix\(-1(?:\.0+)?,/.test(t)) x = sw - x;
-    }
+    // Keep recognition coordinates aligned with the flipped camera preview.
+    const videoMirror = getComputedStyle(video).transform !== 'none';
+    if (videoMirror) x = sw - x;
     return { x, y };
   }
 
@@ -126,8 +164,12 @@
         });
       });
       previousHands = next;
+      trackedHands = next.length;
+      showStatus(trackedHands ? `손 ${trackedHands}개 인식 중 · 입자를 훑어보세요` : '손을 카메라 앞에서 움직여 보세요');
     } catch (error) {
-      // Transient video-frame issues should never break the existing UI.
+      // A bad video frame must not permanently disable the filter.
+      console.warn('[ClimaView] Temporary hand detection failure', error);
+      showStatus('손 인식 재시도 중…');
       handTargets.length = 0;
     }
   }
@@ -162,7 +204,7 @@
       }
       return;
     }
-    if (!model && !modelLoading && !modelFailed && video.readyState >= 2) void loadHandModel();
+    if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
     if (pointer && now - pointer.time < 135) targets.push({ ...pointer, radius: 120 });

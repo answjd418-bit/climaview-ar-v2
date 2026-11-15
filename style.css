@@ -5258,3 +5258,19 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y
     animation: none;
   }
 }
+
+/* Camera preview: compensate for the reversed front-camera feed.
+   Only the video pixels flip; GUI and particles stay in normal orientation. */
+.camera-feed { transform: scaleX(-1); }
+
+/* Increase ambient movement without changing the imagery or particle density. */
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  animation-timing-function: ease-in-out;
+}
+/* A small diagnostic only when the interactive air filter is running. */
+.air-hand-status {position:absolute;bottom:75px;left:50%;transform:translateX(-50%);z-index:9;
+  max-width:300px;min-width:160px;padding:6px 12px;border-radius:999px;
+  color:#fff;background:rgba(29,31,34,.52);backdrop-filter:blur(12px);
+  font-size:12px;line-height:1.4;text-align:center;pointer-events:none;
+  opacity:0;transition:opacity .25s ease;}
+body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1;}
