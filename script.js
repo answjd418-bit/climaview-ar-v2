@@ -6337,24 +6337,70 @@ function animatePrimaryRiskValue(previousText, nextText) {
 })();
 
 
-/* Demonstration estimates only: these are not measured values or climate projections.
-   The current PM2.5 value (26) and the 2050 reference PM2.5 value (42) are
-   used as anchors. 2050 PM10 (78) and NO2 (.042) come from the design mockup.
-   Other substances and years are interpolated illustratively for GUI prototyping. */
-function updateAirDetailValues(pm25) {
-  const t = (pm25 - 26) / (42 - 26);
-  const estimate = (start, end) => start + (end - start) * t;
-  const values = {
-    'air-detail-pm10': String(Math.round(estimate(46, 78))),
-    'air-detail-no2': estimate(0.021, 0.042).toFixed(4),
-    'air-detail-co': estimate(0.30, 0.48).toFixed(2),
-    'air-detail-so2': estimate(0.0018, 0.0029).toFixed(4),
-    'air-detail-o3': estimate(0.0254, 0.0410).toFixed(4)
+/* AR ON illustrative concentrations. These values are design estimates only,
+   not live measurements or validated climate forecasts. The existing PM2.5
+   time-series and the reference 2050 values anchor the visual simulation. */
+function getAirArEstimatedValues(yearKey) {
+  const pm25 = yearKey === '2050' ? 42 : airCardProfiles[yearKey].pm25;
+  const progress = (pm25 - 26) / (42 - 26);
+  const lerp = (low, high) => low + (high - low) * progress;
+  return {
+    pm25,
+    pm10: Math.round(lerp(46, 78)),
+    no2: Number(lerp(0.021, 0.042).toFixed(4)),
+    co: Number(lerp(0.30, 0.48).toFixed(2)),
+    so2: Number(lerp(0.0018, 0.0029).toFixed(4)),
+    o3: Number(lerp(0.0254, 0.0410).toFixed(4))
   };
-  for (const [id, text] of Object.entries(values)) {
+}
+
+function updateAirDetailValues(values) {
+  const fields = {
+    'air-detail-pm10': String(values.pm10),
+    'air-detail-no2': values.no2.toFixed(4),
+    'air-detail-co': values.co.toFixed(2),
+    'air-detail-so2': values.so2.toFixed(4),
+    'air-detail-o3': values.o3.toFixed(4)
+  };
+  for (const [id, value] of Object.entries(fields)) {
     const element = document.getElementById(id);
-    if (element) element.textContent = text;
+    if (element) element.textContent = value;
   }
+}
+
+/* Each existing PNG is assigned to its represented pollutant. The number of
+   visible sprites in each type responds to that type's displayed concentration.
+   This is a qualitative visualization, not a one-particle-per-unit conversion. */
+const airParticleTypes = {
+  pm25: [13, 15, 16, 18, 19, 20, 21, 24, 27, 29, 30, 31, 32, 33, 34],
+  pm10: [1, 7, 11, 12, 14, 17, 22],
+  no2: [2, 3, 25, 28],
+  co: [6, 10, 26],
+  so2: [5, 9, 35],
+  o3: [8, 23],
+  // Bluish free particle shapes visually accompany the fine-particle layer.
+  extra: [4]
+};
+
+function updateAirFloatingParticles(values) {
+  const particleField = document.getElementById('air-particle-field');
+  if (!particleField) return;
+  const maximum = { pm25: 42, pm10: 78, no2: 0.042, co: 0.48, so2: 0.0029, o3: 0.0410 };
+  const groups = { ...airParticleTypes, pm25: [...airParticleTypes.pm25, ...airParticleTypes.extra] };
+  delete groups.extra;
+  Object.entries(groups).forEach(([type, indices]) => {
+    const ratio = Math.max(0, Math.min(1, values[type] / maximum[type]));
+    const visibleCount = Math.max(1, Math.round(indices.length * ratio));
+    // Spread the active sprites across the scene rather than taking a single cluster.
+    indices.forEach((index, position) => {
+      const node = particleField.querySelector(`img[src="./air-float-${String(index).padStart(2, '0')}.png"]`);
+      if (!node) return;
+      node.dataset.pollutant = type;
+      const rank = (position * (indices.length % 7 === 0 ? 5 : 7)) % indices.length;
+      node.classList.toggle('air-particle-inactive', rank >= visibleCount);
+    });
+  });
+  particleField.dataset.intensity = String(Math.round(values.pm25 / maximum.pm25 * 100));
 }
 
 /* AR ON air card; AR OFF continues to render the original risk card unchanged. */
@@ -6377,18 +6423,19 @@ function updateAirDetailValues(pm25) {
     const visible = selectedRisk === 'air' && document.body.dataset.arGraphics === 'on';
     card.hidden = !visible;
     if (!visible) return;
-    // 2050 values are provided by the AR ON design reference. Other years
-    // retain existing PM2.5 data; unavailable PM10/NO2 values are not invented.
-    const pm25 = currentYear === '2050' ? 42 : airCardProfiles[currentYear].pm25;
+    const values = getAirArEstimatedValues(currentYear);
+    const pm25 = values.pm25;
     number.textContent = String(pm25);
     year.textContent = currentYear === 'current' ? '2026년 (현재)' : `${currentYear}년 (예측)`;
     const grade = pm25 <= 15 ? ['좋음','good'] : pm25 <= 35 ? ['보통','moderate'] : pm25 <= 75 ? ['나쁨','bad'] : ['매우 나쁨','very-bad'];
     status.textContent = grade[0]; status.dataset.level = grade[1];
     row25.textContent = `${pm25} µg/m³`;
-    row10.textContent = currentYear === '2050' ? '78 µg/m³' : '자료 없음';
-    rowNo2.textContent = currentYear === '2050' ? '0.042 ppm' : '자료 없음';
-    updateAirDetailValues(pm25);
-    delta.textContent = currentYear === 'current' ? '기준 연도' : (currentYear === '2050' ? '+68% ▲' : `${Math.round((pm25 / airCardProfiles.current.pm25 - 1) * 100)}% ▲`);
+    row10.textContent = `${values.pm10} µg/m³`;
+    rowNo2.textContent = `${values.no2.toFixed(4).replace(/0$/, '')} ppm`;
+    updateAirDetailValues(values);
+    updateAirFloatingParticles(values);
+    const changePercent = Math.round((pm25 / airCardProfiles.current.pm25 - 1) * 100);
+    delta.textContent = currentYear === 'current' ? '기준 연도' : `${changePercent >= 0 ? '+' : ''}${changePercent}% ${changePercent >= 0 ? '▲' : '▼'}`;
   }
   document.addEventListener('climaview:updated', sync);
   // Existing state changes are synchronous, so update after the original handlers.

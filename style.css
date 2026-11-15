@@ -4600,3 +4600,11 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-particle-field {
   .air-floating-particle { animation: none; will-change: auto; }
   .air-particle-field { transition: none; }
 }
+
+/* AR ON: selectively reveal the existing air-particle PNGs by pollutant amount.
+   No modification to the GUI, camera, or AR OFF card. */
+.air-floating-particle { transition: opacity 450ms ease; }
+.air-floating-particle.air-particle-inactive { opacity: 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .air-floating-particle { transition: none; }
+}
