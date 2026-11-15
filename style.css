@@ -4608,3 +4608,16 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-particle-field {
 @media (prefers-reduced-motion: reduce) {
   .air-floating-particle { transition: none; }
 }
+
+/* AR switch centered on the bottom edge; original size and bottom offset kept. */
+.ar-toggle {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* In AR ON mode the two left-side panels are hidden without being destroyed.
+   Switching AR OFF restores the climate menu and the location map as before. */
+body[data-ar-graphics="on"] .left-panel {
+  visibility: hidden;
+  pointer-events: none;
+}
