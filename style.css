@@ -4799,3 +4799,16 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-w
 body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-impact-tile .air-metric-label {
   color: rgba(255,255,255,.80);
 }
+
+/* 2026-11-15: AR OFF air info card - remove bottom empty space only.
+   Height follows its content instead of the previous 640px fixed box. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) {
+  height: auto;
+  min-height: 0;
+}
+
+/* Show the requested shorter label without changing numerical PM2.5 data. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy)
+.air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after {
+  content: "미세먼지";
+}
