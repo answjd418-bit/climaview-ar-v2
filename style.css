@@ -5121,3 +5121,104 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-m
   font-size:13px;
 }
 body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-value {font-size:16px;}
+
+/* ================================================================
+   AR OFF / tropical and air: align the OUTER box with heatwave.
+   Heatwave is 386px border-box including its 29px + 20px padding.
+   Earlier overrides mistakenly used content-box (435px total),
+   pushing the two cards beyond the right edge of the 1366px scene.
+   No content/data/AR ON styling is changed by this block.
+   ================================================================ */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) {
+  left: 940px;
+  width: 386px;
+  height: 578px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 24px 20px 20px 29px;
+  overflow: hidden;
+}
+
+/* Exactly the same usable header width as heatwave; reserve
+   space for the existing expansion button at the right. */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  gap: 6px;
+  padding-right: 43px;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header h1 {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-size: 20px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .scenario {
+  flex: 0 0 auto;
+  font-size: 14px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+/* Fit all three info tiles inside the same 337px content area.
+   Keep labels/data unchanged and share heatwave type hierarchy. */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metrics,.air-metric-grid) {
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  column-gap: 8px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric,.air-metric-tile,.air-warning-tile) {
+  min-width: 0;
+  padding-left: 9px;
+  padding-right: 9px;
+  gap: 6px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-label,.air-metric-label) {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: 14px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-value,.air-metric-value) {
+  flex: 0 0 auto;
+  font-size: 19px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric:last-child,.air-warning-tile) {
+  padding-left: 24px;
+  padding-right: 12px;
+}
+/* PM2.5 carries a unit, so preserve its compact treatment. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid > .air-metric-tile:nth-child(2) {
+  padding-left: 5px;
+  padding-right: 5px;
+  gap: 4px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value {
+  font-size: 16px;
+}
+
+/* Chart starts at the same horizontal edge as the chart heading;
+   preserve existing SVG paths, axes and point coordinates. */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-chart-wrap,.tropical-chart,.air-chart) {
+  max-width: 100%;
+}
+body[data-ar-graphics="off"] .info-card.tropical-layout:not(.detail-card-copy) .tropical-y-labels text {
+  text-anchor: start;
+  transform: translateX(-32px);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y-labels text {
+  text-anchor: start;
+  transform: translateX(-31px);
+}
+/* Reference heatwave does not show horizontal helper gridlines. */
+body[data-ar-graphics="off"] .info-card.tropical-layout:not(.detail-card-copy) .tropical-grid {
+  display: none;
+}
