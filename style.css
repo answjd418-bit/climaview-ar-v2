@@ -438,22 +438,6 @@ button {
 
 }
 
-.response-menu {
-
-  background:
-
-    linear-gradient(
-
-      120deg,
-
-      rgba(100, 87, 73, .58),
-
-      rgba(148, 125, 105, .43)
-
-    );
-
-}
-
 .chevron {
 
  
@@ -623,16 +607,6 @@ button {
   width: 30px;
 
   height: 30px;
-
-  object-fit: contain;
-
-}
-
-.response-menu-icon {
-
-  width: 40px;
-
-  height: 40px;
 
   object-fit: contain;
 
