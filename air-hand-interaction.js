@@ -76,7 +76,11 @@
       px: 0, py: 0, vx: 0, vy: 0,
       seed: index, windPhase: index * 2.39996,
       energy: 0, lastImpulse: 0, extra: image.classList.contains('air-density-extra'),
-      driftFactor: .72 + hash(index + 500) * .72
+      driftFactor: .72 + hash(index + 500) * .72,
+      wanderX: 0, wanderY: 0,
+      wanderTargetX: (hash(index + 900) - .5) * 24,
+      wanderTargetY: (hash(index + 940) - .5) * 24,
+      wanderUntil: 700 + hash(index + 980) * 1800
     };
   });
 
@@ -278,20 +282,35 @@
       const originY = item.y * height;
       const worldX = originX + item.px;
       const worldY = originY + item.py;
-      // The whole mass should breathe and sway, but stay more centered than before.
+      // Replace the previous circular idle orbits with layered airflow +
+      // softly changing wander targets so the motion feels freer and less regular.
       const g = item.group;
-      const groupX = Math.sin(seconds * (.35 + (g % 4) * .037) + g * 1.71) * 34
-        + Math.sin(seconds * .19 + g * .83) * 20;
-      const groupY = Math.cos(seconds * (.29 + (g % 3) * .029) + g * 1.48) * 28
-        + Math.sin(seconds * .18 + g * 1.12) * 16;
-      let targetX = groupX + (
-        Math.sin(seconds * (.95 + item.driftFactor * .18) + phase) * 21
-        + Math.cos(seconds * .54 + phase * 1.6) * 12
+      if (now >= item.wanderUntil) {
+        const wanderRange = 14 + item.driftFactor * 18;
+        item.wanderTargetX = (Math.random() - .5) * wanderRange * 2;
+        item.wanderTargetY = (Math.random() - .5) * wanderRange * 2;
+        item.wanderUntil = now + 700 + Math.random() * 1800;
+      }
+      item.wanderX += (item.wanderTargetX - item.wanderX) * (0.022 + item.driftFactor * 0.012) * dt;
+      item.wanderY += (item.wanderTargetY - item.wanderY) * (0.022 + item.driftFactor * 0.012) * dt;
+      const groupX = Math.sin(seconds * (.18 + (g % 5) * .016) + g * 1.31) * 15
+        + Math.sin(seconds * .07 + g * 2.07) * 10
+        + Math.cos(seconds * .11 + g * .83) * 6;
+      const groupY = Math.cos(seconds * (.16 + (g % 4) * .014) + g * 1.44) * 13
+        + Math.sin(seconds * .08 + g * 1.63) * 9
+        + Math.cos(seconds * .12 + g * .71) * 5;
+      const airflowX = (
+        Math.sin(seconds * (.27 + item.driftFactor * .05) + item.x * 8.7 + item.seed * .21) * 14
+        + Math.sin(seconds * .63 + item.y * 14.2 - item.seed * .13) * 9
+        + Math.cos(seconds * .19 + (item.x + item.y) * 11.4) * 7
       ) * item.driftFactor;
-      let targetY = groupY + (
-        Math.cos(seconds * (.83 + item.driftFactor * .14) + phase) * 18
-        + Math.sin(seconds * .49 + phase * 1.3) * 11
+      const airflowY = (
+        Math.cos(seconds * (.24 + item.driftFactor * .04) + item.y * 9.1 + item.seed * .18) * 13
+        + Math.sin(seconds * .57 + item.x * 12.4 + item.seed * .09) * 8
+        + Math.cos(seconds * .17 + (item.x - item.y) * 10.7) * 6
       ) * item.driftFactor;
+      let targetX = groupX + airflowX + item.wanderX;
+      let targetY = groupY + airflowY + item.wanderY;
       // A light global bias pulls far-travelled particles back into the core,
       // helping the cloud keep an oval, center-heavy silhouette when idle.
       targetX += -item.px * 0.10;
