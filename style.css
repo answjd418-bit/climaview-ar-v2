@@ -4621,3 +4621,40 @@ body[data-ar-graphics="on"] .left-panel {
   visibility: hidden;
   pointer-events: none;
 }
+
+
+/* Reference design: centered AR | ON | OFF control.
+   The existing AR-on left-panel visibility rule above remains unchanged. */
+.ar-toggle {
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: 276px;
+  height: 76px;
+  padding: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-radius: 39px;
+}
+.ar-toggle-indicator {
+  top: 8px;
+  left: calc(33.333% + 2px);
+  width: calc(33.333% - 4px);
+  height: calc(100% - 16px);
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(115,115,115,.90), rgba(92,92,92,.94));
+  transition: left .25s ease;
+}
+.ar-toggle[data-active="off"] .ar-toggle-indicator {
+  left: calc(66.666% + 1px);
+  width: calc(33.333% - 9px);
+}
+.ar-toggle-option, .ar-toggle-title {
+  font-size: 22px;
+  font-weight: 500;
+}
+.ar-toggle-title { color: #fff; }
+.ar-toggle[data-active="off"] .ar-toggle-title { color: #fff; }
+.ar-toggle-on { color: #fff; }
+.ar-toggle-off { color: rgba(255,255,255,.85); }
+.ar-toggle[data-active="off"] .ar-toggle-on { color: rgba(255,255,255,.75); }
+.ar-toggle-option { height: 58px; }
