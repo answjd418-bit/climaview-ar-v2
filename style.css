@@ -4963,3 +4963,123 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-m
   stroke-width:2px;
   transition:filter .35s ease;
 }
+
+
+/* 2026-11-15 | AR OFF typography + chart scale correction.
+   Heatwave is the reference. These selectors only affect tropical-night and
+   air-quality cards in AR OFF, never the data, point positions, or AR ON view. */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) {
+  width: 386px;
+  height: 578px;
+  min-height: 0;
+  box-sizing: content-box;
+  padding: 24px 20px 20px 29px;
+  overflow: visible;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header {
+  height: 32px;
+  padding-right: 0;
+  align-items: center;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header h1 {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: normal;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .scenario {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  padding: 5px 14px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-summary {
+  margin-top: 10px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-name { display: none; }
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-value-row {
+  margin-top: 5px;
+  gap: 4px;
+  align-items: baseline;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-value {
+  font-size: 62px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -3px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-unit {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 700;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-caption {
+  margin: 10px 0 24px;
+  font-size: 15px;
+  line-height: normal;
+  letter-spacing: normal;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-card-section,.air-card-section) {
+  border-top: 1px solid rgba(255,255,255,.30);
+  padding-top: 24px;
+  width: auto;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-section-title,.air-section-title) {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: normal;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .tropical-chart-wrap {
+  width: 336px;
+  max-width: 100%;
+  margin: 0;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-chart,.air-chart) {
+  display: block;
+  width: 336px;
+  max-width: 100%;
+  height: 165px;
+  min-height: 165px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  flex: none;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-y-labels,.air-y-labels) text {
+  font-size: 15px;
+  font-weight: 400;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-x-labels,.air-x-labels) text {
+  font-size: 14px;
+  font-weight: 400;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metrics,.air-metric-grid) {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px 8px;
+  margin-top: 4px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric,.air-metric-tile,.air-warning-tile) {
+  box-sizing: border-box;
+  min-height: 60px;
+  padding: 0 14px;
+  gap: 8px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-label,.air-metric-label) {
+  font-size: 13px;
+  line-height: normal;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-value,.air-metric-value) {
+  font-size: 17px;
+  line-height: normal;
+  font-weight: 650;
+}
+/* The PM2.5 detail is slightly denser than the heatwave temperature tile;
+   preserve its actual wording and value while fitting into the same grid. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid > .air-metric-tile:nth-child(2) {
+  padding: 0 8px;
+  gap: 5px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-label::after { font-size: 13px; }
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid > .air-metric-tile:nth-child(2) .air-metric-value { font-size: 17px; }
