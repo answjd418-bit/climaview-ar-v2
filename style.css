@@ -5316,3 +5316,14 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1
 .air-particle-field.hand-reactive .air-hand-particle {
   will-change: transform;
 }
+
+
+/* ClimaView air: energetic hand scatter, smooth cloud re-formation.
+   Only AR ON air particles are affected; leave all cards and controls intact. */
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  filter: brightness(calc(1 + var(--scatter-energy, 0) * .55))
+          saturate(calc(1 + var(--scatter-energy, 0) * .30));
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle.air-density-extra {
+  filter: blur(.5px) brightness(calc(1 + var(--scatter-energy, 0) * .45));
+}

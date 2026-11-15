@@ -67,14 +67,21 @@
     image.style.removeProperty('--duration');
     image.before(wrapper);
     wrapper.appendChild(image);
-    const x = parseFloat(wrapper.style.getPropertyValue('--px')) / 100;
-    const y = parseFloat(wrapper.style.getPropertyValue('--py')) / 100;
+    // A loose cloud at rest: bring source anchors into a shared atmospheric zone.
+    // The underlying images, pollutant counts and per-year visibility are untouched.
+    const originalX = parseFloat(wrapper.style.getPropertyValue('--px')) / 100;
+    const originalY = parseFloat(wrapper.style.getPropertyValue('--py')) / 100;
+    const x = Math.max(.12, Math.min(.88, .50 + (originalX - .50) * .72));
+    const y = Math.max(.12, Math.min(.88, .49 + (originalY - .49) * .76));
+    wrapper.style.setProperty('--px', (x * 100).toFixed(3) + '%');
+    wrapper.style.setProperty('--py', (y * 100).toFixed(3) + '%');
     const size = parseFloat(wrapper.style.getPropertyValue('--pw')) || 28;
     return {
       image, wrapper, x, y, size, px: 0, py: 0, vx: 0, vy: 0, seed: index,
       // Larger atmospheric particles feel slightly heavier; tiny particles float longer.
       gravity: 0.024 + Math.min(size, 110) / 110 * 0.038,
       windPhase: index * 2.39996,
+      energy: 0,
       extra: image.classList.contains('air-density-extra')
     };
   });
@@ -213,10 +220,10 @@
         const dy = previous ? clamp(palm.y - previous.y, -110, 110) : 0;
         const speed = Math.hypot(dx, dy);
         next.push(palm);
-        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 155 + Math.min(55, speed * 0.45) });
+        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 240 + Math.min(85, speed * 0.65), palm: true });
         [4, 8, 12, 16, 20].forEach(index => {
           const tip = toScenePoint(landmarks[index]);
-          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 73 });
+          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 102, palm: false });
         });
       });
       previousHands = next;
@@ -253,7 +260,8 @@
       pointer = null;
       for (const item of particles) {
         if (item.px || item.py) {
-          item.px = 0; item.py = 0; item.vx = 0; item.vy = 0;
+          item.px = 0; item.py = 0; item.vx = 0; item.vy = 0; item.energy = 0;
+          item.wrapper.style.removeProperty('--scatter-energy');
           item.wrapper.style.removeProperty('--push-x');
           item.wrapper.style.removeProperty('--push-y');
         }
@@ -263,49 +271,56 @@
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
-    if (pointer && now - pointer.time < 135) targets.push({ ...pointer, radius: 120 });
+    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 245, palm: true });
     const width = scene.clientWidth, height = scene.clientHeight;
     for (const item of particles) {
-      // Respect existing year-based pollutant visibility.
+      // Respect the original year-by-year pollutant visibility and density system.
       if (item.image.classList.contains('air-particle-inactive')) continue;
-      const px = item.x * width + item.px, py = item.y * height + item.py;
-      for (const hand of targets) {
-        const diffX = px - hand.x, diffY = py - hand.y;
-        const dist = Math.hypot(diffX, diffY);
-        if (dist >= hand.radius) continue;
-        // Soft, broad airflow instead of a springy collision impulse.
-        // The hand's travel direction is the main force; a slight outward
-        // movement keeps particles from passing through the palm.
-        const falloff = 1 - dist / hand.radius;
-        const power = falloff * falloff * (3 - 2 * falloff);
-        const inv = 1 / Math.max(dist, 16);
-        const movement = Math.min(55, Math.hypot(hand.dx, hand.dy));
-        const drift = Math.min(0.46, movement * 0.008) * power * dt;
-        item.vx += (hand.dx * 0.012 * power + diffX * inv * drift * 0.20) * dt;
-        item.vy += (hand.dy * 0.012 * power + diffY * inv * drift * 0.20) * dt;
-      }
-      // Slowly varying airflow: the particles glide rather than rebound.
-      // Gravity is deliberately weak (dust suspended in air), while smooth
-      // updrafts and drag prevent a pendulum or bouncy "boing" effect.
       const seconds = now / 1000;
       const phase = item.windPhase;
-      const windX = Math.sin(seconds * 0.17 + phase) * 24
-        + Math.sin(seconds * 0.085 + phase * 1.7) * 13;
-      const windY = Math.sin(seconds * 0.14 + phase) * 21
-        + Math.cos(seconds * 0.075 + phase * 1.3) * 12;
-      const updraft = Math.max(0, Math.sin(seconds * 0.31 + phase)) * item.gravity * 0.95;
-      // Low spring gain and viscous damping: no sudden return to origin.
-      const forceX = (windX - item.px) * 0.0019;
-      const forceY = (windY - item.py) * 0.0016 + item.gravity * 0.22 - updraft;
-      const drag = Math.pow(0.975, dt);
-      item.vx = clamp((item.vx + forceX * dt) * drag, -2.25, 2.25);
-      item.vy = clamp((item.vy + forceY * dt) * drag, -2.25, 2.25);
-      item.px = clamp(item.px + item.vx * dt, -175, 175);
-      item.py = clamp(item.py + item.vy * dt, -175, 175);
-      if (Math.abs(item.px) + Math.abs(item.py) > 0.04) {
-        item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
-        item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
+      const originX = item.x * width;
+      const originY = item.y * height;
+      const worldX = originX + item.px;
+      const worldY = originY + item.py;
+      let targetX = Math.sin(seconds * 0.23 + phase) * 18
+        + Math.sin(seconds * 0.11 + phase * 1.7) * 10;
+      let targetY = Math.cos(seconds * 0.19 + phase) * 13
+        + Math.sin(seconds * 0.09 + phase * 1.4) * 8;
+      let interaction = 0;
+      // Wide, soft field: open hands and rapid swipes "scatter" the cloud.
+      // Force is positional, not a one-shot explosion impulse, so gathering
+      // is smooth when the hand leaves the camera frame.
+      for (const hand of targets) {
+        const dx = worldX - hand.x;
+        const dy = worldY - hand.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance >= hand.radius) continue;
+        const falloff = 1 - distance / hand.radius;
+        const strength = falloff * falloff * (3 - 2 * falloff);
+        const velocity = Math.min(135, Math.hypot(hand.dx, hand.dy));
+        const intensity = (hand.palm ? 1 : .35) * strength;
+        const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
+        const spread = 230 + Math.min(125, velocity * 1.05);
+        targetX += Math.cos(angle) * spread * intensity + hand.dx * 1.25 * intensity;
+        targetY += Math.sin(angle) * spread * intensity + hand.dy * 1.25 * intensity;
+        interaction = Math.max(interaction, intensity);
       }
+      // Critically damped motion: very responsive when approached, smoother
+      // as the particles re-form into their loose original cluster.
+      const stiffness = interaction > .015 ? .125 : .034;
+      const damping = interaction > .015 ? .69 : .79;
+      const accelerationX = (targetX - item.px) * stiffness;
+      const accelerationY = (targetY - item.py) * stiffness;
+      item.vx = clamp((item.vx + accelerationX * dt) * Math.pow(damping, dt), -23, 23);
+      item.vy = clamp((item.vy + accelerationY * dt) * Math.pow(damping, dt), -23, 23);
+      item.px = clamp(item.px + item.vx * dt, -340, 340);
+      item.py = clamp(item.py + item.vy * dt, -290, 290);
+      // Brief visual shimmer underscores the scattering, without modifying
+      // the base PNG colors or year-related opacity.
+      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .20 : .07) * dt);
+      item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
+      item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
+      item.wrapper.style.setProperty('--scatter-energy', item.energy.toFixed(3));
     }
   }
   document.addEventListener('visibilitychange', () => {
