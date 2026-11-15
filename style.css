@@ -4481,3 +4481,51 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-detail-card {
 }
 .air-detail-reading strong { font-weight: 650; }
 .air-detail-reading span { font-size: 9px; white-space: nowrap; }
+
+
+/* 2nd development: place AR ON cards slightly higher and align their final edge
+   with the AR toggle. AR OFF information card is deliberately unaffected. */
+.left-panel { top: 174px; }
+.air-ar-card { top: 150px; }
+.air-detail-card {
+  top: auto;
+  bottom: 62px; /* exactly the same bottom edge as .ar-toggle */
+  height: 158px;
+  padding: 17px 15px 10px;
+}
+.air-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 7px;
+}
+.air-detail-header h2 { margin: 0; font-size: 17px; }
+.air-detail-disclaimer { color: rgba(255,255,255,.57); font-size: 9px; white-space: nowrap; }
+.air-detail-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  padding: 2px 0 5px;
+}
+.air-detail-scroll::-webkit-scrollbar { display: none; }
+.air-detail-scroll:focus-visible { outline: 1px solid rgba(255,255,255,.44); outline-offset: -1px; border-radius: 6px; }
+.air-detail-pollutants {
+  display: flex;
+  width: max-content;
+  gap: 6px;
+}
+.air-detail-pollutant {
+  flex: 0 0 77px;
+  width: 77px;
+  scroll-snap-align: start;
+  gap: 2px;
+}
+.air-detail-icon { width: 46px; height: 48px; }
+.air-detail-label { font-size: 10px; min-height: 23px; }
+.air-detail-reading { font-size: 10px; flex-wrap: nowrap; gap: 2px; }
+.air-detail-reading span { font-size: 8px; }

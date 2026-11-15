@@ -2911,35 +2911,40 @@ hidden
           </div>
         </section>
 
-        <!-- 대기질 + AR ON 전용 세부정보. 배경 입자 AR은 다음 단계에서 별도로 추가 -->
-        <section class="air-detail-card glass" id="air-detail-card" aria-label="대기질 세부정보 예시 수치">
-          <h2>대기질 세부정보</h2>
-          <div class="air-detail-pollutants">
+        <!-- AR ON + 대기질: 가로로 스크롤할 수 있는 대기질 세부정보 패널 -->
+        <section class="air-detail-card glass" id="air-detail-card" aria-label="대기질 세부정보; 수치는 시안용 추정치">
+          <div class="air-detail-header">
+            <h2>대기질 세부정보</h2>
+            <span class="air-detail-disclaimer">시안용 추정치</span>
+          </div>
+          <div class="air-detail-scroll" tabindex="0" role="region" aria-label="오염물질별 상세정보, 좌우로 스크롤">
+            <div class="air-detail-pollutants">
               <div class="air-detail-pollutant">
                 <img src="./air-icon-pm10.png" alt="" class="air-detail-icon">
                 <span class="air-detail-label">미세먼지</span>
-                <span class="air-detail-reading"><strong>20</strong><span>µg/m³</span></span>
+                <span class="air-detail-reading"><strong id="air-detail-pm10">46</strong><span>µg/m³</span></span>
               </div>
               <div class="air-detail-pollutant">
                 <img src="./air-icon-no2.png" alt="" class="air-detail-icon">
                 <span class="air-detail-label">이산화질소</span>
-                <span class="air-detail-reading"><strong>0.0125</strong><span>ppm</span></span>
+                <span class="air-detail-reading"><strong id="air-detail-no2">0.0210</strong><span>ppm</span></span>
               </div>
               <div class="air-detail-pollutant">
                 <img src="./air-icon-co.png" alt="" class="air-detail-icon">
                 <span class="air-detail-label">일산화탄소</span>
-                <span class="air-detail-reading"><strong>0.30</strong><span>ppm</span></span>
+                <span class="air-detail-reading"><strong id="air-detail-co">0.30</strong><span>ppm</span></span>
               </div>
               <div class="air-detail-pollutant">
                 <img src="./air-icon-so2.png" alt="" class="air-detail-icon">
                 <span class="air-detail-label">아황산가스</span>
-                <span class="air-detail-reading"><strong>0.0018</strong><span>ppm</span></span>
+                <span class="air-detail-reading"><strong id="air-detail-so2">0.0018</strong><span>ppm</span></span>
               </div>
               <div class="air-detail-pollutant">
                 <img src="./air-icon-o3.png" alt="" class="air-detail-icon">
                 <span class="air-detail-label">오존</span>
-                <span class="air-detail-reading"><strong>0.0254</strong><span>ppm</span></span>
+                <span class="air-detail-reading"><strong id="air-detail-o3">0.0254</strong><span>ppm</span></span>
               </div>
+            </div>
           </div>
         </section>
 
