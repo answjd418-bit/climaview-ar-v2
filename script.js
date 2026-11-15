@@ -6333,7 +6333,7 @@ function animatePrimaryRiskValue(previousText, nextText) {
   }
   buttonOn.addEventListener('click', () => setArEnabled(true));
   buttonOff.addEventListener('click', () => setArEnabled(false));
-  setArEnabled(true);
+  setArEnabled(false);
 })();
 
 
