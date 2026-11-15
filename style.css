@@ -5375,3 +5375,14 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1
   will-change: auto;
 }
 .air-particle-field.hand-reactive .air-hand-particle::after { display: none !important; }
+
+/* V8: single compositor transform per particle, no image filters or shadows. */
+.air-particle-field.hand-reactive .air-hand-particle {
+  transform: translate3d(0, 0, 0) translate(-50%, -50%);
+  will-change: auto;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  animation: none !important; filter: none !important;
+  transition: opacity 450ms ease;
+}
+.air-particle-field.hand-reactive .air-hand-particle::after { display: none !important; }
