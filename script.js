@@ -6411,7 +6411,6 @@ function updateAirDetailValues(pm25) {
   const frame = document.querySelector('.air-detail-scroll-frame');
   if (!scroll || !frame) return;
   function syncCue() {
-    if (scroll.scrollLeft > 4) hint?.classList.add('is-dismissed');
     const atEnd = scroll.scrollLeft + scroll.clientWidth >= scroll.scrollWidth - 3;
     frame.classList.toggle('at-end', atEnd);
   }
