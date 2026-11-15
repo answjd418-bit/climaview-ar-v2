@@ -5304,3 +5304,15 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1
 @media (prefers-reduced-motion: reduce) {
   .air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle { transition: none; }
 }
+
+
+/* Soft dust drift: JS airflow is the only positional animation.
+   Disables the old back-and-forth keyframes responsible for springy motion. */
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  animation: none !important;
+  transform: none !important;
+  will-change: opacity;
+}
+.air-particle-field.hand-reactive .air-hand-particle {
+  will-change: transform;
+}

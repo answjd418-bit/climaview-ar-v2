@@ -273,31 +273,35 @@
         const diffX = px - hand.x, diffY = py - hand.y;
         const dist = Math.hypot(diffX, diffY);
         if (dist >= hand.radius) continue;
-        const power = (1 - dist / hand.radius) ** 2;
-        const inv = 1 / Math.max(dist, 10);
-        const motion = Math.min(16, Math.hypot(hand.dx, hand.dy) * 0.22);
-        // A gentle outward push; moving hands add directional flow.
-        const strength = (2.0 + motion) * power * dt;
-        item.vx += (diffX * inv * strength + hand.dx * 0.11 * power) * dt;
-        item.vy += (diffY * inv * strength + hand.dy * 0.11 * power) * dt;
+        // Soft, broad airflow instead of a springy collision impulse.
+        // The hand's travel direction is the main force; a slight outward
+        // movement keeps particles from passing through the palm.
+        const falloff = 1 - dist / hand.radius;
+        const power = falloff * falloff * (3 - 2 * falloff);
+        const inv = 1 / Math.max(dist, 16);
+        const movement = Math.min(55, Math.hypot(hand.dx, hand.dy));
+        const drift = Math.min(0.46, movement * 0.008) * power * dt;
+        item.vx += (hand.dx * 0.012 * power + diffX * inv * drift * 0.20) * dt;
+        item.vy += (hand.dy * 0.012 * power + diffY * inv * drift * 0.20) * dt;
       }
-      // Airborne particle motion: gentle gravity + drag + slow, irregular air
-      // currents. A loose spring prevents falling indefinitely off-screen.
-      // The hand impulse above remains additive and can still scatter particles.
+      // Slowly varying airflow: the particles glide rather than rebound.
+      // Gravity is deliberately weak (dust suspended in air), while smooth
+      // updrafts and drag prevent a pendulum or bouncy "boing" effect.
       const seconds = now / 1000;
       const phase = item.windPhase;
-      const windX = Math.sin(seconds * (0.39 + item.seed % 5 * 0.035) + phase) * 21
-        + Math.sin(seconds * 0.19 + phase * 2.1) * 10;
-      const windY = Math.sin(seconds * (0.33 + item.seed % 4 * 0.025) + phase) * 18
-        + Math.sin(seconds * 0.16 + phase * 1.6) * 8;
-      // Periodic upward gusts partially counteract settling under gravity.
-      const updraft = Math.max(0, Math.sin(seconds * 0.52 + phase)) * (0.025 + item.gravity * 0.42);
-      const springX = (windX - item.px) * 0.010;
-      const springY = (windY - item.py) * 0.009;
-      item.vx = (item.vx + springX * dt) * Math.pow(0.94, dt);
-      item.vy = (item.vy + (springY + item.gravity - updraft) * dt) * Math.pow(0.94, dt);
-      item.px = clamp(item.px + item.vx * dt, -185, 185);
-      item.py = clamp(item.py + item.vy * dt, -185, 185);
+      const windX = Math.sin(seconds * 0.17 + phase) * 24
+        + Math.sin(seconds * 0.085 + phase * 1.7) * 13;
+      const windY = Math.sin(seconds * 0.14 + phase) * 21
+        + Math.cos(seconds * 0.075 + phase * 1.3) * 12;
+      const updraft = Math.max(0, Math.sin(seconds * 0.31 + phase)) * item.gravity * 0.95;
+      // Low spring gain and viscous damping: no sudden return to origin.
+      const forceX = (windX - item.px) * 0.0019;
+      const forceY = (windY - item.py) * 0.0016 + item.gravity * 0.22 - updraft;
+      const drag = Math.pow(0.975, dt);
+      item.vx = clamp((item.vx + forceX * dt) * drag, -2.25, 2.25);
+      item.vy = clamp((item.vy + forceY * dt) * drag, -2.25, 2.25);
+      item.px = clamp(item.px + item.vx * dt, -175, 175);
+      item.py = clamp(item.py + item.vy * dt, -175, 175);
       if (Math.abs(item.px) + Math.abs(item.py) > 0.04) {
         item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
         item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
