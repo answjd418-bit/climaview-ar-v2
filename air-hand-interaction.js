@@ -80,7 +80,7 @@
       wanderX: 0, wanderY: 0,
       wanderTargetX: (hash(index + 900) - .5) * 24,
       wanderTargetY: (hash(index + 940) - .5) * 24,
-      wanderUntil: 700 + hash(index + 980) * 1800
+      wanderUntil: 1800 + hash(index + 980) * 2800
     };
   });
 
@@ -218,7 +218,7 @@
         const dy = previous ? clamp(palm.y - previous.y, -160, 160) : 0;
         const speed = Math.hypot(dx, dy);
         next.push(palm);
-        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 350 + Math.min(170, speed * 1.05), palm: true });
+        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 345 + Math.min(110, speed * .7), palm: true });
         [4, 8, 12, 16, 20].forEach(index => {
           const tip = toScenePoint(landmarks[index]);
           handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 185, palm: false });
@@ -262,8 +262,6 @@
           item.wrapper.style.removeProperty('--scatter-energy');
           item.wrapper.style.removeProperty('--push-x');
           item.wrapper.style.removeProperty('--push-y');
-          item.wrapper.style.removeProperty('--streak-scale');
-          item.wrapper.style.removeProperty('--streak-angle');
         }
       }
       return;
@@ -271,7 +269,7 @@
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
-    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 400, palm: true });
+    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 365, palm: true });
     const width = scene.clientWidth, height = scene.clientHeight;
     for (const item of particles) {
       // Respect the original year-by-year pollutant visibility and density system.
@@ -282,41 +280,30 @@
       const originY = item.y * height;
       const worldX = originX + item.px;
       const worldY = originY + item.py;
-      // Replace the previous circular idle orbits with layered airflow +
-      // softly changing wander targets so the motion feels freer and less regular.
+      // Feather-light dust motion: gradual independent wandering and a very
+      // soft shared breeze, without the previous noticeable looping/orbits.
       const g = item.group;
       if (now >= item.wanderUntil) {
-        const wanderRange = 14 + item.driftFactor * 18;
-        item.wanderTargetX = (Math.random() - .5) * wanderRange * 2;
-        item.wanderTargetY = (Math.random() - .5) * wanderRange * 2;
-        item.wanderUntil = now + 700 + Math.random() * 1800;
+        const wanderRange = 13 + item.driftFactor * 12;
+        item.wanderTargetX = (Math.random() * 2 - 1) * wanderRange;
+        item.wanderTargetY = (Math.random() * 2 - 1) * wanderRange * .82;
+        item.wanderUntil = now + 2000 + Math.random() * 3200;
       }
-      item.wanderX += (item.wanderTargetX - item.wanderX) * (0.022 + item.driftFactor * 0.012) * dt;
-      item.wanderY += (item.wanderTargetY - item.wanderY) * (0.022 + item.driftFactor * 0.012) * dt;
-      const groupX = Math.sin(seconds * (.18 + (g % 5) * .016) + g * 1.31) * 15
-        + Math.sin(seconds * .07 + g * 2.07) * 10
-        + Math.cos(seconds * .11 + g * .83) * 6;
-      const groupY = Math.cos(seconds * (.16 + (g % 4) * .014) + g * 1.44) * 13
-        + Math.sin(seconds * .08 + g * 1.63) * 9
-        + Math.cos(seconds * .12 + g * .71) * 5;
-      const airflowX = (
-        Math.sin(seconds * (.27 + item.driftFactor * .05) + item.x * 8.7 + item.seed * .21) * 14
-        + Math.sin(seconds * .63 + item.y * 14.2 - item.seed * .13) * 9
-        + Math.cos(seconds * .19 + (item.x + item.y) * 11.4) * 7
-      ) * item.driftFactor;
-      const airflowY = (
-        Math.cos(seconds * (.24 + item.driftFactor * .04) + item.y * 9.1 + item.seed * .18) * 13
-        + Math.sin(seconds * .57 + item.x * 12.4 + item.seed * .09) * 8
-        + Math.cos(seconds * .17 + (item.x - item.y) * 10.7) * 6
-      ) * item.driftFactor;
-      let targetX = groupX + airflowX + item.wanderX;
-      let targetY = groupY + airflowY + item.wanderY;
-      // A light global bias pulls far-travelled particles back into the core,
-      // helping the cloud keep an oval, center-heavy silhouette when idle.
-      targetX += -item.px * 0.10;
-      targetY += -item.py * 0.12;
+      const wanderEase = Math.min(1, .010 * dt);
+      item.wanderX += (item.wanderTargetX - item.wanderX) * wanderEase;
+      item.wanderY += (item.wanderTargetY - item.wanderY) * wanderEase;
+      // Small overlapping breezes keep neighbouring particles loosely connected,
+      // but no longer make the entire cluster rotate in a visible circle.
+      const breezeX = Math.sin(seconds * .16 + g * 1.73) * 11
+        + Math.sin(seconds * .083 + item.x * 5.2) * 7;
+      const breezeY = Math.sin(seconds * .135 + g * 2.17) * 8
+        + Math.sin(seconds * .071 + item.y * 4.8) * 5;
+      let targetX = breezeX + item.wanderX;
+      let targetY = breezeY + item.wanderY;
+      // Maintain the central cloud shape and softly restore displaced dust.
+      targetX -= item.px * .075;
+      targetY -= item.py * .090;
       let interaction = 0;
-      let strongestSpeed = 0;
       // Use the particle's actual screen position for hand proximity. Large
       // smooth repulsion makes the cloudlets fan out clearly when approached.
       for (const hand of targets) {
@@ -329,26 +316,22 @@
         const velocity = Math.min(160, Math.hypot(hand.dx, hand.dy));
         const intensity = (hand.palm ? 1 : .58) * strength;
         const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
-        const spread = 530 + Math.min(310, velocity * 2.2);
-        targetX += Math.cos(angle) * spread * intensity + hand.dx * 2.8 * intensity;
-        targetY += Math.sin(angle) * spread * intensity + hand.dy * 2.8 * intensity;
+        const spread = 470 + Math.min(160, velocity * 1.2);
+        targetX += Math.cos(angle) * spread * intensity + hand.dx * 1.2 * intensity;
+        targetY += Math.sin(angle) * spread * intensity + hand.dy * 1.2 * intensity;
         interaction = Math.max(interaction, intensity);
-        strongestSpeed = Math.max(strongestSpeed, velocity);
       }
       // Smooth follow and return: fast dispersal, steady drift while idle,
       // gradual regrouping rather than a spring-like snap-back.
-      const stiffness = interaction > .012 ? .19 : .020;
-      const damping = interaction > .012 ? .84 : .85;
+      const stiffness = interaction > .012 ? .095 : .016;
+      const damping = interaction > .012 ? .79 : .80;
       item.vx = clamp((item.vx + (targetX - item.px) * stiffness * dt)
-        * Math.pow(damping, dt), -65, 65);
+        * Math.pow(damping, dt), -30, 30);
       item.vy = clamp((item.vy + (targetY - item.py) * stiffness * dt)
-        * Math.pow(damping, dt), -65, 65);
+        * Math.pow(damping, dt), -30, 30);
       item.px = clamp(item.px + item.vx * dt, -760, 760);
       item.py = clamp(item.py + item.vy * dt, -600, 600);
-      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .29 : .045) * dt);
-      const speedNow = Math.hypot(item.vx, item.vy);
-      item.wrapper.style.setProperty('--streak-scale', Math.min(1, (speedNow / 55) * item.energy * (1 + strongestSpeed / 260)).toFixed(3));
-      item.wrapper.style.setProperty('--streak-angle', (Math.atan2(item.vy, item.vx) * 180 / Math.PI).toFixed(1) + 'deg');
+      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .12 : .04) * dt);
       item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
       item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
       item.wrapper.style.setProperty('--scatter-energy', item.energy.toFixed(3));
