@@ -4658,3 +4658,144 @@ body[data-ar-graphics="on"] .left-panel {
 .ar-toggle-off { color: rgba(255,255,255,.85); }
 .ar-toggle[data-active="off"] .ar-toggle-on { color: rgba(255,255,255,.75); }
 .ar-toggle-option { height: 58px; }
+
+/* 2026-11-15: AR OFF air-quality card visual refinement.
+   Reference: light grey translucent glass, compact type hierarchy, graph and tile spacing.
+   All values, chart paths, timeline, interactions and AR ON cards remain unchanged. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) {
+  width: 386px;
+  height: 640px;
+  box-sizing: border-box;
+  padding: 23px 20px 22px;
+  border-radius: 24px;
+  background: linear-gradient(155deg, rgba(148,148,148,.70) 0%, rgba(155,155,155,.73) 58%, rgba(144,144,144,.72) 100%);
+  border: 1px solid rgba(255,255,255,.23);
+  box-shadow: 0 6px 24px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.13);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .card-header {
+  height: 25px;
+  padding-right: 44px;
+  align-items: center;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .card-header h1 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -.45px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .scenario {
+  margin-right: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,.70);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .risk-summary {
+  margin-top: 23px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .risk-value-row {
+  margin-top: 0;
+  gap: 4px;
+  align-items: baseline;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .risk-value {
+  font-size: 74px;
+  line-height: .98;
+  font-weight: 700;
+  letter-spacing: -4px;
+  text-shadow: 0 0 8px rgba(214,151,80,.85), 0 0 16px rgba(216,148,68,.40);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .risk-unit {
+  font-size: 32px;
+  font-weight: 650;
+  text-shadow: 0 0 7px rgba(214,151,80,.72);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .risk-caption {
+  margin: 11px 0 25px;
+  color: rgba(255,255,255,.67);
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -.25px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-card-section {
+  padding-top: 21px;
+  border-top: 1px solid rgba(255,255,255,.30);
+  overflow: visible;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-section-title {
+  margin: 0 0 13px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.4px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-chart {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 165px;
+  margin: 0 0 12px;
+  overflow: visible;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y-labels text,
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-x-labels text {
+  font-size: 13px;
+  font-weight: 400;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-selected-glow {
+  fill: rgba(210,134,60,.15);
+  stroke: rgba(255,222,181,.18);
+  stroke-width: 1px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-selected-point {
+  fill: url(#air-off-selected-gradient);
+  stroke: #fff;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 3px rgba(209,131,53,.40));
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-points circle:not(.air-selected-point) {
+  fill: #66b4d0;
+  stroke: rgba(255,255,255,.78);
+  stroke-width: 1.3px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid {
+  margin-top: 1px;
+  gap: 7px 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-tile,
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-warning-tile {
+  min-height: 64px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.065);
+  padding: 0 11px;
+  gap: 7px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-impact-tile.level-2 {
+  background: linear-gradient(115deg, rgba(209,151,88,.96), rgba(191,130,65,.92));
+  border-color: rgba(228,178,119,.38);
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-impact-tile.level-3 {
+  background: linear-gradient(115deg, rgba(209,124,73,.95), rgba(189,88,68,.92));
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-impact-tile.level-4 {
+  background: linear-gradient(115deg, rgba(202,83,75,.96), rgba(167,48,57,.94));
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-label {
+  color: rgba(255,255,255,.70);
+  font-size: 12px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-value {
+  font-size: 15px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-warning-tile {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  padding-left: 30px;
+}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-impact-tile .air-metric-label {
+  color: rgba(255,255,255,.80);
+}
