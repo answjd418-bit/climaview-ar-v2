@@ -34,8 +34,8 @@
     return n - Math.floor(n);
   };
   // More sprites use the SAME original PNG files; no additional images needed.
-  // 35 original sprites + 96 smaller clones = up to 131 interactive particles.
-  const repeats = Array.from({length: 205}, (_, index) => {
+  // 35 original sprites + 100 lighter clones = up to 135 interactive particles.
+  const repeats = Array.from({length: 100}, (_, index) => {
     const sourceIndex = (index * 13 + Math.floor(index / 12) * 7) % originals.length;
     const source = originals[sourceIndex];
     const image = source.cloneNode(true);
@@ -90,7 +90,7 @@
     const intensity = Math.max(0, Math.min(100, Number(field.dataset.intensity) || 0));
     const density = intensity / 100;
     // Even the present day includes visible scattered dust across the view.
-    const extraCount = Math.round(repeats.length * (.48 + .52 * density));
+    const extraCount = Math.round(repeats.length * (.60 + .40 * density));
     field.style.setProperty('--air-density-alpha', (.73 + density * .42).toFixed(3));
     field.style.setProperty('--air-haze-opacity', Math.max(0, (density - .23) * .14).toFixed(3));
     repeats.forEach((image, index) => {
@@ -113,6 +113,8 @@
   let lastDetect = 0;
   let lastVideoTime = -1;
   let lastFrame = 0;
+  let lastRenderedFrame = 0;
+  const frameInterval = 1000 / 30; // limit expensive DOM particle updates to ~30 FPS
   let running = true;
   const handTargets = [];
   let pointer = null;
@@ -197,7 +199,7 @@
 
   function detect(now) {
     if (!enabled() || !model || video.readyState < 2) { handTargets.length = 0; return; }
-    if (now - lastDetect < 85 || video.currentTime === lastVideoTime) return;
+    if (now - lastDetect < 135 || video.currentTime === lastVideoTime) return;
     lastDetect = now;
     lastVideoTime = video.currentTime;
     try {
@@ -250,16 +252,16 @@
   function tick(now) {
     if (!running) return;
     requestAnimationFrame(tick);
-    const dt = Math.min(2, (now - (lastFrame || now)) / 16.67);
-    lastFrame = now;
+    // Keep the UI/camera untouched; only throttle this particle simulation.
     if (!enabled()) {
+      lastFrame = now;
+      lastRenderedFrame = 0;
       previousHands = [];
       handTargets.length = 0;
       pointer = null;
       for (const item of particles) {
         if (item.px || item.py || item.energy) {
           item.px = 0; item.py = 0; item.vx = 0; item.vy = 0; item.energy = 0;
-          item.wrapper.style.removeProperty('--scatter-energy');
           item.wrapper.style.removeProperty('--push-x');
           item.wrapper.style.removeProperty('--push-y');
         }
@@ -267,6 +269,10 @@
       return;
     }
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
+    if (now - lastRenderedFrame < frameInterval) return;
+    const dt = Math.min(2.6, (now - (lastFrame || now)) / 16.67);
+    lastFrame = now;
+    lastRenderedFrame = now;
     detect(now);
     const targets = handTargets.slice();
     if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 365, palm: true });
@@ -331,10 +337,9 @@
         * Math.pow(damping, dt), -30, 30);
       item.px = clamp(item.px + item.vx * dt, -760, 760);
       item.py = clamp(item.py + item.vy * dt, -600, 600);
-      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .12 : .04) * dt);
       item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
       item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
-      item.wrapper.style.setProperty('--scatter-energy', item.energy.toFixed(3));
+      // No animated glow/filter: keep this motion-only for better tablet performance.
     }
   }
   document.addEventListener('visibilitychange', () => {
