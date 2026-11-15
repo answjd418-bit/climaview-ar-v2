@@ -17,30 +17,86 @@
   }
   if (!field || !video || !scene) return;
 
-  const nodes = [...field.querySelectorAll('.air-floating-particle')];
+  // Add lightweight repeats of the existing transparent PNGs. These are NOT
+  // additional data readings: their number/opacity depicts relative pollution.
+  // Every clone also participates in hand collision and gravity simulation.
+  const originals = [...field.querySelectorAll('.air-floating-particle')];
+  const repeatSources = [13, 15, 17, 19, 21, 24, 27, 29, 30, 31, 33, 34, 1, 7, 11, 14, 22, 2, 3, 25, 6, 10, 5, 9, 8, 23, 18, 20];
+  const repeats = repeatSources.map((sourceIndex, index) => {
+    const source = originals[sourceIndex % originals.length];
+    const image = source.cloneNode(true);
+    image.classList.add('air-density-extra', 'air-particle-inactive');
+    image.dataset.extraIndex = String(index);
+    image.alt = '';
+    // Golden-angle spacing distributes the copies instead of clustering them.
+    const angle = (index * 137.50776) * Math.PI / 180;
+    const ring = 0.18 + 0.28 * Math.sqrt((index + 0.5) / repeatSources.length);
+    const x = Math.max(4, Math.min(96, 50 + Math.cos(angle) * ring * 100));
+    const y = Math.max(5, Math.min(95, 50 + Math.sin(angle) * ring * 95));
+    image.style.setProperty('--px', x.toFixed(2) + '%');
+    image.style.setProperty('--py', y.toFixed(2) + '%');
+    const baseWidth = parseFloat(source.style.getPropertyValue('--pw')) || 24;
+    image.style.setProperty('--pw', Math.max(12, baseWidth * (0.43 + (index % 5) * 0.095)).toFixed(0) + 'px');
+    image.style.setProperty('--duration', (11.2 + (index % 7) * 1.3).toFixed(2) + 's');
+    image.style.setProperty('--delay', -(index * 1.8).toFixed(2) + 's');
+    image.style.setProperty('--dx', (Math.sin(angle) * 35).toFixed(1) + 'px');
+    image.style.setProperty('--dy', (-18 - (index % 6) * 7).toFixed(1) + 'px');
+    image.style.setProperty('--dx-half', (Math.sin(angle) * 16).toFixed(1) + 'px');
+    image.style.setProperty('--dy-half', (-11 - (index % 6) * 4).toFixed(1) + 'px');
+    image.style.setProperty('--rotation', ((index % 2 ? -1 : 1) * (index % 9 + 2)) + 'deg');
+    image.style.setProperty('--rotation-half', ((index % 2 ? -1 : 1) * (index % 9 + 2) / 2) + 'deg');
+    image.style.setProperty('--particle-opacity', (0.36 + (index % 6) * 0.055).toFixed(2));
+    field.appendChild(image);
+    return image;
+  });
+
+  const nodes = [...originals, ...repeats];
   const particles = nodes.map((image, index) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'air-hand-particle';
-    // Keep the exact existing layout, PNG type, brightness, and drift variables.
     wrapper.style.cssText = image.style.cssText;
-    // Wider, more noticeable travel and brisker independent movement.
     const get = (key) => parseFloat(image.style.getPropertyValue(key)) || 0;
     const factor = 1.9;
     for (const [dest, source] of [['--dx','--dx'],['--dy','--dy'],['--dx-half','--dx-half'],['--dy-half','--dy-half']]) {
       wrapper.style.setProperty(dest, `${(get(source)*factor).toFixed(2)}px`);
     }
     const duration = parseFloat(image.style.getPropertyValue('--duration')) || 13;
-    wrapper.style.setProperty('--duration', `${(duration*0.63).toFixed(2)}s`);
-    // CSS variables are inherited, so use wrapper variables for child drift.
+    wrapper.style.setProperty('--duration', `${(duration*0.78).toFixed(2)}s`);
     image.style.removeProperty('--dx'); image.style.removeProperty('--dy');
     image.style.removeProperty('--dx-half'); image.style.removeProperty('--dy-half');
     image.style.removeProperty('--duration');
     image.before(wrapper);
     wrapper.appendChild(image);
-    const x = parseFloat(image.style.getPropertyValue('--px')) / 100;
-    const y = parseFloat(image.style.getPropertyValue('--py')) / 100;
-    return { image, wrapper, x, y, px: 0, py: 0, vx: 0, vy: 0, seed: index };
+    const x = parseFloat(wrapper.style.getPropertyValue('--px')) / 100;
+    const y = parseFloat(wrapper.style.getPropertyValue('--py')) / 100;
+    const size = parseFloat(wrapper.style.getPropertyValue('--pw')) || 28;
+    return {
+      image, wrapper, x, y, size, px: 0, py: 0, vx: 0, vy: 0, seed: index,
+      // Larger atmospheric particles feel slightly heavier; tiny particles float longer.
+      gravity: 0.024 + Math.min(size, 110) / 110 * 0.038,
+      windPhase: index * 2.39996,
+      extra: image.classList.contains('air-density-extra')
+    };
   });
+
+  // The existing application updates this attribute after switching years.
+  // Keep its core pollutant mapping and data untouched; add only visual density.
+  function syncDensity() {
+    const intensity = Math.max(0, Math.min(100, Number(field.dataset.intensity) || 0));
+    const density = intensity / 100;
+    // Current -> 2030 -> 2050 -> 2090: stronger haze and more small particles.
+    field.style.setProperty('--air-density-alpha', (0.68 + density * 0.40).toFixed(3));
+    field.style.setProperty('--air-haze-opacity', Math.max(0, (density - 0.38) * 0.21).toFixed(3));
+    const extraCount = Math.round(repeats.length * Math.max(0, (density - 0.46) / 0.54));
+    repeats.forEach((image, index) => {
+      // Spread extras evenly through the scene at each intermediate step.
+      const rank = (index * 11) % repeats.length;
+      image.classList.toggle('air-particle-inactive', rank >= extraCount);
+    });
+  }
+  const densityObserver = new MutationObserver(syncDensity);
+  densityObserver.observe(field, { attributes: true, attributeFilter: ['data-intensity'] });
+  syncDensity();
   field.classList.add('hand-reactive');
 
   let model = null;
@@ -225,11 +281,23 @@
         item.vx += (diffX * inv * strength + hand.dx * 0.11 * power) * dt;
         item.vy += (diffY * inv * strength + hand.dy * 0.11 * power) * dt;
       }
-      // Spring-back with damping: particles drift back toward their AR positions.
-      item.vx = (item.vx - item.px * 0.012 * dt) * Math.pow(0.91, dt);
-      item.vy = (item.vy - item.py * 0.012 * dt) * Math.pow(0.91, dt);
-      item.px = clamp(item.px + item.vx * dt, -175, 175);
-      item.py = clamp(item.py + item.vy * dt, -175, 175);
+      // Airborne particle motion: gentle gravity + drag + slow, irregular air
+      // currents. A loose spring prevents falling indefinitely off-screen.
+      // The hand impulse above remains additive and can still scatter particles.
+      const seconds = now / 1000;
+      const phase = item.windPhase;
+      const windX = Math.sin(seconds * (0.39 + item.seed % 5 * 0.035) + phase) * 21
+        + Math.sin(seconds * 0.19 + phase * 2.1) * 10;
+      const windY = Math.sin(seconds * (0.33 + item.seed % 4 * 0.025) + phase) * 18
+        + Math.sin(seconds * 0.16 + phase * 1.6) * 8;
+      // Periodic upward gusts partially counteract settling under gravity.
+      const updraft = Math.max(0, Math.sin(seconds * 0.52 + phase)) * (0.025 + item.gravity * 0.42);
+      const springX = (windX - item.px) * 0.010;
+      const springY = (windY - item.py) * 0.009;
+      item.vx = (item.vx + springX * dt) * Math.pow(0.94, dt);
+      item.vy = (item.vy + (springY + item.gravity - updraft) * dt) * Math.pow(0.94, dt);
+      item.px = clamp(item.px + item.vx * dt, -185, 185);
+      item.py = clamp(item.py + item.vy * dt, -185, 185);
       if (Math.abs(item.px) + Math.abs(item.py) > 0.04) {
         item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
         item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');

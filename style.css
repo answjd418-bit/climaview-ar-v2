@@ -5274,3 +5274,33 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y
   font-size:12px;line-height:1.4;text-align:center;pointer-events:none;
   opacity:0;transition:opacity .25s ease;}
 body[data-ar-graphics="on"][data-selected-risk="air"] .air-hand-status{opacity:1;}
+
+
+/* Air AR atmospheric depth + year-sensitive density (the rest of the UI is unchanged). */
+.air-particle-field.hand-reactive {
+  --air-density-alpha: .85;
+  --air-haze-opacity: .035;
+}
+.air-particle-field.hand-reactive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--air-haze-opacity, .035);
+  background: radial-gradient(ellipse 60% 55% at 36% 48%, rgba(176,157,190,.34), transparent 85%),
+              radial-gradient(ellipse 52% 50% at 72% 62%, rgba(177,190,215,.28), transparent 87%);
+  transition: opacity 950ms ease;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  opacity: clamp(0, calc(var(--particle-opacity, .82) * var(--air-density-alpha, .85)), 1);
+  transition: opacity 900ms ease;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle.air-particle-inactive {
+  opacity: 0 !important;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle.air-density-extra {
+  filter: blur(.5px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle { transition: none; }
+}
