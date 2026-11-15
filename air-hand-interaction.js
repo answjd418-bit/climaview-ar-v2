@@ -301,8 +301,8 @@
         Math.cos(seconds * 0.14 + item.group * 0.8 + phase * 0.06) * 0.18 +
         Math.sin(seconds * 0.08 + item.x * 9.5) * 0.10
       ) * item.driftFactor;
-      item.vx += (item.driftX + breezeX) * dt * 0.35;
-      item.vy += (item.driftY + breezeY) * dt * 0.35;
+      item.vx += (item.driftX + breezeX) * dt * 0.14;
+      item.vy += (item.driftY + breezeY) * dt * 0.14;
 
       let interaction = 0;
       for (const hand of targets) {
@@ -315,15 +315,15 @@
         const velocity = Math.min(140, Math.hypot(hand.dx, hand.dy));
         const intensity = (hand.palm ? 1 : .62) * strength;
         const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
-        const push = 0.72 + velocity * 0.008;
-        item.vx += (Math.cos(angle) * push + hand.dx * 0.006) * intensity * dt * 2.2;
-        item.vy += (Math.sin(angle) * push + hand.dy * 0.006) * intensity * dt * 2.2;
+        const push = 0.42 + velocity * 0.0045;
+        item.vx += (Math.cos(angle) * push + hand.dx * 0.003) * intensity * dt * 0.90;
+        item.vy += (Math.sin(angle) * push + hand.dy * 0.003) * intensity * dt * 0.90;
         interaction = Math.max(interaction, intensity);
       }
 
       // Gentle air resistance keeps motion soft without pulling particles back.
-      item.vx = clamp(item.vx * Math.pow(0.965, dt), -8, 8);
-      item.vy = clamp(item.vy * Math.pow(0.965, dt), -8, 8);
+      item.vx = clamp(item.vx * Math.pow(0.91, dt), -3.2, 3.2);
+      item.vy = clamp(item.vy * Math.pow(0.91, dt), -3.2, 3.2);
       item.px += item.vx * dt;
       item.py += item.vy * dt;
       worldX = originX + item.px;
