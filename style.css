@@ -4404,3 +4404,80 @@ body[data-ar-graphics="on"][data-selected-risk="air"] .info-card:not(.detail-car
   pointer-events: none;
   cursor: default;
 }
+
+
+/* AR ON / air quality: compact secondary card directly beneath the primary card.
+   The AR OFF card and other risk categories remain unchanged. */
+.air-detail-card {
+  position: absolute;
+  z-index: 8;
+  left: 961px;
+  top: 841px;
+  width: 365px;
+  height: 171px;
+  box-sizing: border-box;
+  padding: 20px 16px 13px;
+  border: 1px solid rgba(255,255,255,.17);
+  border-radius: 24px;
+  background: linear-gradient(145deg,rgba(36,40,44,.78),rgba(42,43,46,.75));
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
+  backdrop-filter: blur(24px) saturate(125%);
+  color: #fff;
+  display: none;
+  overflow: hidden;
+}
+body[data-ar-graphics="on"][data-selected-risk="air"] .air-detail-card {
+  display: block;
+}
+.air-detail-card h2 {
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+.air-detail-pollutants {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+}
+.air-detail-pollutant {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+}
+.air-detail-icon {
+  width: 42px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(180,165,230,.15));
+}
+.air-detail-label {
+  width: 100%;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  line-height: 1.15;
+  font-weight: 550;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.air-detail-reading {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px 2px;
+  font-size: 10px;
+  line-height: 1.15;
+  color: rgba(255,255,255,.86);
+  font-variant-numeric: tabular-nums;
+}
+.air-detail-reading strong { font-weight: 650; }
+.air-detail-reading span { font-size: 9px; white-space: nowrap; }
