@@ -4835,3 +4835,131 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy)
   stroke-width: 2px;
   transition: filter .35s ease;
 }
+
+
+/* 2026-11-15: One AR OFF grid across heatwave / tropical / air.
+   Heatwave remains the source of truth; risk-specific text, values and SVG paths remain intact. */
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) {
+  width: 386px;
+  height: 578px;
+  min-height: 0;
+  box-sizing: content-box;
+  padding: 24px 20px 20px 29px;
+  border-radius: 25px;
+  background: linear-gradient(145deg,rgba(42,45,48,.93),rgba(48,48,48,.91));
+  border: 1px solid rgba(255,255,255,.13);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header {
+  height:32px;
+  padding-right:0;
+  align-items:center;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .card-header h1 {
+  font-size:17px;
+  font-weight:500;
+  letter-spacing:normal;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .scenario {
+  padding:5px 14px;
+  margin-right:0;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(220,232,255,.12);
+  color:inherit;
+  font-size:16px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-summary { margin-top:10px; }
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-value-row {
+  margin-top:5px;
+  gap:4px;
+  align-items:baseline;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-value {
+  font-size:62px;
+  font-weight:700;
+  letter-spacing:-3px;
+  line-height:1;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-unit { font-size:30px; font-weight:700; }
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) .risk-caption {
+  margin:10px 0 24px;
+  color:rgba(225,229,232,.60);
+  font-size:15px;
+  line-height:1.4;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-card-section,.air-card-section) {
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.30);
+  overflow:visible;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-section-title,.air-section-title) {
+  margin:0 0 14px;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:normal;
+}
+body[data-ar-graphics="off"] .info-card.tropical-layout:not(.detail-card-copy) .tropical-chart-wrap { margin-top:0; }
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-chart,.air-chart) {
+  display:block;
+  width:100%;
+  max-width:336px;
+  height:165px;
+  margin:0;
+  overflow:visible;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-y-labels,.tropical-x-labels,.air-y-labels,.air-x-labels) text {
+  fill:#fff;
+  font-size:14px;
+  font-weight:400;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metrics,.air-metric-grid) {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px 8px;
+  margin-top:4px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric,.air-metric-tile,.air-warning-tile) {
+  min-width:0;
+  min-height:60px;
+  box-sizing:border-box;
+  padding:0 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(113,113,113,.26);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-impact-tile.level-1,.air-impact-tile.level-1) {background:linear-gradient(120deg,rgba(55,157,198,.96),rgba(46,137,174,.92));}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-impact-tile.level-2,.air-impact-tile.level-2) {background:linear-gradient(120deg,rgba(194,132,61,.96),rgba(163,105,42,.92));}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-impact-tile.level-3,.air-impact-tile.level-3) {background:linear-gradient(120deg,rgba(204,109,49,.97),rgba(193,62,49,.94));}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-impact-tile.level-4,.air-impact-tile.level-4) {background:linear-gradient(120deg,rgba(198,55,52,.98),rgba(166,39,39,.95));}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric:last-child,.air-warning-tile) {
+  grid-column:1/-1;
+  justify-content:flex-start;
+  padding-left:38px;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-label,.air-metric-label) {
+  font-size:13px;
+  color:rgba(255,255,255,.62);
+  white-space:nowrap;
+}
+body[data-ar-graphics="off"] .info-card:is(.tropical-layout,.air-layout):not(.detail-card-copy) :is(.tropical-metric-value,.air-metric-value) {
+  font-size:17px;
+  color:#fff;
+  font-weight:650;
+  white-space:nowrap;
+}
+/* Air PM2.5-specific size safeguard; label requested in the prior iteration remains '미세먼지'. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid>.air-metric-tile:nth-child(2) {padding:0 7px; gap:5px;}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-label::after {content:"미세먼지";font-size:12px;}
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-metric-grid>.air-metric-tile:nth-child(2) .air-metric-value {font-size:15px;}
+/* Air's selected point remains the reference; same radial gradient and animated glow in all three charts. */
+.info-card:is(.heatwave-layout,.tropical-layout,.air-layout) :is(.heatwave-selected-point,.tropical-selected-point,.air-selected-point) {
+  stroke:#fff;
+  stroke-width:2px;
+  transition:filter .35s ease;
+}

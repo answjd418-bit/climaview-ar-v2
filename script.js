@@ -305,6 +305,54 @@ function applyAirSelectedPointVisual(yearKey) {
   }
 }
 
+/* Share the air-quality radial marker treatment with heatwave and tropical.
+   This changes marker artwork only; all chart coordinates/data remain untouched. */
+function applySharedClimateMarker(type, yearKey) {
+  const settings = {
+    heatwave: { point: heatwaveSelectedPoint, glow: heatwaveSelectedGlow },
+    tropical: { point: tropicalSelectedPoint, glow: tropicalSelectedGlow }
+  }[type];
+  if (!settings || !settings.point || !settings.glow) return;
+  const palette = airPointVisuals[yearKey] || airPointVisuals.current;
+  const svg = settings.point.ownerSVGElement;
+  if (!svg) return;
+  const ns = 'http://www.w3.org/2000/svg';
+  let defs = svg.querySelector('defs');
+  if (!defs) {
+    defs = document.createElementNS(ns, 'defs');
+    svg.insertBefore(defs, svg.firstChild);
+  }
+  const gradientId = `${type}-shared-selected-gradient`;
+  let gradient = svg.querySelector(`[id="${gradientId}"]`);
+  if (!gradient) {
+    gradient = document.createElementNS(ns, 'radialGradient');
+    gradient.id = gradientId;
+    gradient.setAttribute('cx', '35%');
+    gradient.setAttribute('cy', '28%');
+    gradient.setAttribute('r', '80%');
+    for (let i = 0; i < 3; i += 1) {
+      const stop = document.createElementNS(ns, 'stop');
+      stop.setAttribute('offset', ['0%', '50%', '100%'][i]);
+      gradient.appendChild(stop);
+    }
+    defs.appendChild(gradient);
+  }
+  gradient.querySelectorAll('stop').forEach((stop, i) => {
+    stop.setAttribute('stop-color', palette.colors[i]);
+  });
+  settings.point.style.fill = `url(#${gradientId})`;
+  settings.point.style.stroke = '#fff';
+  settings.point.style.strokeWidth = '2px';
+  settings.point.style.filter = palette.shadow;
+  settings.point.setAttribute('r', '8');
+  settings.glow.style.fill = palette.glow;
+  settings.glow.style.stroke = palette.glowStroke;
+  settings.glow.style.strokeWidth = '1.2px';
+  settings.glow.style.opacity = '1';
+  settings.glow.style.filter = 'none';
+  settings.glow.setAttribute('r', '14');
+}
+
 /* =========================================================
 
    산불 DOM
@@ -3049,6 +3097,8 @@ function updateTropicalChart() {
 
   );
 
+  applySharedClimateMarker("tropical", currentYear);
+
 }
 
 /* =========================================================
@@ -3254,6 +3304,8 @@ function updateHeatwaveChart() {
     currentYear
 
   );
+
+  applySharedClimateMarker("heatwave", currentYear);
 
 }
 
