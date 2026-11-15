@@ -24,10 +24,12 @@
   // Twelve atmospheric cloudlets cover the entire camera canvas rather than
   // concentrating everything in the centre. Each cloudlet is compact, but it
   // moves independently even when there is no hand in view.
+  // Slightly center-weighted layout; edges remain populated, not a tight ball.
+  // This only affects initial/spawn positions, never pulls flying dust back.
   const clouds = [
-    [.12,.16], [.34,.14], [.58,.15], [.84,.17],
-    [.14,.40], [.36,.38], [.60,.39], [.86,.41],
-    [.12,.66], [.34,.70], [.58,.69], [.84,.67]
+    [.19,.21], [.37,.19], [.57,.20], [.78,.22],
+    [.20,.42], [.38,.41], [.58,.42], [.80,.43],
+    [.18,.64], [.37,.66], [.57,.65], [.78,.64]
   ];
   const hash = value => {
     const n = Math.sin(value * 127.1 + 79.7) * 43758.5453;
@@ -219,10 +221,10 @@
         const dy = previous ? clamp(palm.y - previous.y, -110, 110) : 0;
         const speed = Math.hypot(dx, dy);
         next.push(palm);
-        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 310 + Math.min(115, speed * 0.85), palm: true });
+        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 450 + Math.min(75, speed * 0.65), palm: true });
         [4, 8, 12, 16, 20].forEach(index => {
           const tip = toScenePoint(landmarks[index]);
-          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 140, palm: false });
+          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 225, palm: false });
         });
       });
       previousHands = next;
@@ -271,7 +273,7 @@
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
-    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 360, palm: true });
+    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 475, palm: true });
     const width = scene.clientWidth, height = scene.clientHeight;
     const recycleMargin = 80;
     for (const item of particles) {
@@ -311,13 +313,13 @@
         const distance = Math.hypot(dx, dy);
         if (distance >= hand.radius) continue;
         const falloff = 1 - distance / hand.radius;
-        const strength = falloff * falloff;
+        const strength = falloff * 0.72 + falloff * falloff * 0.28;
         const velocity = Math.min(140, Math.hypot(hand.dx, hand.dy));
-        const intensity = (hand.palm ? 1 : .62) * strength;
+        const intensity = (hand.palm ? 1 : .78) * strength;
         const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
-        const push = 0.42 + velocity * 0.0045;
-        item.vx += (Math.cos(angle) * push + hand.dx * 0.003) * intensity * dt * 0.90;
-        item.vy += (Math.sin(angle) * push + hand.dy * 0.003) * intensity * dt * 0.90;
+        const push = 0.67 + velocity * 0.0055;
+        item.vx += (Math.cos(angle) * push + hand.dx * 0.003) * intensity * dt * 1.10;
+        item.vy += (Math.sin(angle) * push + hand.dy * 0.003) * intensity * dt * 1.10;
         interaction = Math.max(interaction, intensity);
       }
 
