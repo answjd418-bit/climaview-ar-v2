@@ -5222,3 +5222,9 @@ body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y
 body[data-ar-graphics="off"] .info-card.tropical-layout:not(.detail-card-copy) .tropical-grid {
   display: none;
 }
+
+/* Air-quality AR OFF chart: align the Y-axis label starts with the
+   section-heading left edge. No chart geometry or other cards change. */
+body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y-labels text {
+  translate: -13px 0;
+}
