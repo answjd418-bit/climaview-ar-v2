@@ -21,13 +21,13 @@
   // additional data readings: their number/opacity depicts relative pollution.
   // Every clone also participates in hand collision and gravity simulation.
   const originals = [...field.querySelectorAll('.air-floating-particle')];
-  // Twelve atmospheric cloudlets cover the entire camera canvas rather than
-  // concentrating everything in the centre. Each cloudlet is compact, but it
-  // moves independently even when there is no hand in view.
+  // Keep the particle mass visually more concentrated toward the centre.
+  // The cloudlets still form several clusters, but most of them sit inside a
+  // central oval so the overall silhouette feels denser and more cohesive.
   const clouds = [
-    [.11,.17], [.37,.16], [.64,.16], [.88,.18],
-    [.15,.47], [.39,.45], [.64,.46], [.87,.47],
-    [.12,.77], [.38,.78], [.64,.78], [.88,.77]
+    [.28,.33], [.42,.30], [.56,.30], [.70,.33],
+    [.22,.49], [.36,.48], [.50,.49], [.64,.48], [.78,.49],
+    [.30,.65], [.46,.68], [.62,.66]
   ];
   const hash = value => {
     const n = Math.sin(value * 127.1 + 79.7) * 43758.5453;
@@ -56,11 +56,12 @@
     wrapper.className = 'air-hand-particle';
     wrapper.style.cssText = image.style.cssText;
     const group = (index * 7 + Math.floor(index / clouds.length)) % clouds.length;
-    // Each cloud is tight (±3–5% of screen), while 12 clouds fill the view.
+    // Tighter local spread makes the particles feel more gathered in the middle,
+    // while still preserving a soft, organic boundary around each cluster.
     const theta = hash(index + 200) * Math.PI * 2;
     const radius = Math.sqrt(hash(index + 333));
-    const x = Math.max(.04, Math.min(.96, clouds[group][0] + Math.cos(theta) * radius * .072));
-    const y = Math.max(.04, Math.min(.96, clouds[group][1] + Math.sin(theta) * radius * .080));
+    const x = Math.max(.08, Math.min(.92, clouds[group][0] + Math.cos(theta) * radius * .056));
+    const y = Math.max(.08, Math.min(.92, clouds[group][1] + Math.sin(theta) * radius * .062));
     wrapper.style.setProperty('--px', (x * 100).toFixed(3) + '%');
     wrapper.style.setProperty('--py', (y * 100).toFixed(3) + '%');
     // Position is driven entirely by smooth per-frame airflow, not keyframes.
@@ -277,21 +278,24 @@
       const originY = item.y * height;
       const worldX = originX + item.px;
       const worldY = originY + item.py;
-      // Entire cloudlets drift around naturally on their own, even without a
-      // hand. Slow changes in direction feel like air turbulence, not bouncing.
+      // The whole mass should breathe and sway, but stay more centered than before.
       const g = item.group;
-      const groupX = Math.sin(seconds * (.35 + (g % 4) * .037) + g * 1.71) * 58
-        + Math.sin(seconds * .19 + g * .83) * 36;
-      const groupY = Math.cos(seconds * (.29 + (g % 3) * .029) + g * 1.48) * 46
-        + Math.sin(seconds * .18 + g * 1.12) * 27;
+      const groupX = Math.sin(seconds * (.35 + (g % 4) * .037) + g * 1.71) * 34
+        + Math.sin(seconds * .19 + g * .83) * 20;
+      const groupY = Math.cos(seconds * (.29 + (g % 3) * .029) + g * 1.48) * 28
+        + Math.sin(seconds * .18 + g * 1.12) * 16;
       let targetX = groupX + (
-        Math.sin(seconds * (.95 + item.driftFactor * .18) + phase) * 29
-        + Math.cos(seconds * .54 + phase * 1.6) * 17
+        Math.sin(seconds * (.95 + item.driftFactor * .18) + phase) * 21
+        + Math.cos(seconds * .54 + phase * 1.6) * 12
       ) * item.driftFactor;
       let targetY = groupY + (
-        Math.cos(seconds * (.83 + item.driftFactor * .14) + phase) * 25
-        + Math.sin(seconds * .49 + phase * 1.3) * 15
+        Math.cos(seconds * (.83 + item.driftFactor * .14) + phase) * 18
+        + Math.sin(seconds * .49 + phase * 1.3) * 11
       ) * item.driftFactor;
+      // A light global bias pulls far-travelled particles back into the core,
+      // helping the cloud keep an oval, center-heavy silhouette when idle.
+      targetX += -item.px * 0.10;
+      targetY += -item.py * 0.12;
       let interaction = 0;
       let strongestSpeed = 0;
       // Use the particle's actual screen position for hand proximity. Large
