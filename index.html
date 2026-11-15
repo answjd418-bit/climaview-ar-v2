@@ -159,6 +159,9 @@
  
  
  
+      <!-- 카메라 화면 위 AR 그래픽 전용 레이어 (GUI와 분리) -->
+      <div class="ar-graphics-layer" id="ar-graphics-layer" aria-hidden="true"></div>
+
       <!-- GUI -->
  
       <div class="gui-layer">
@@ -167,6 +170,14 @@
  
  
  
+        <!-- AR 그래픽 표시 전환: 카메라와 GUI는 계속 표시 -->
+        <div class="ar-toggle" id="ar-toggle" role="group" aria-label="AR 그래픽 표시 설정">
+          <span class="ar-toggle-indicator" aria-hidden="true"></span>
+          <button type="button" class="ar-toggle-option ar-toggle-on" id="ar-toggle-on" aria-pressed="true" aria-label="AR 그래픽 켜기">ON</button>
+          <span class="ar-toggle-title" aria-hidden="true">AR</span>
+          <button type="button" class="ar-toggle-option ar-toggle-off" id="ar-toggle-off" aria-pressed="false" aria-label="AR 그래픽 끄기">OFF</button>
+        </div>
+
         <!-- 상단 연도 -->
  
         <nav

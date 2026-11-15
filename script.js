@@ -6316,3 +6316,20 @@ function animatePrimaryRiskValue(previousText, nextText) {
   };
   primaryValueAnimation = requestAnimationFrame(render);
 }
+
+/* AR graphics visibility control: camera video and information panels unaffected. */
+(function initializeArGraphicsToggle() {
+  const toggle = document.getElementById('ar-toggle');
+  const buttonOn = document.getElementById('ar-toggle-on');
+  const buttonOff = document.getElementById('ar-toggle-off');
+  if (!toggle || !buttonOn || !buttonOff) return;
+  function setArEnabled(enabled) {
+    toggle.dataset.active = enabled ? 'on' : 'off';
+    document.body.dataset.arGraphics = enabled ? 'on' : 'off';
+    buttonOn.setAttribute('aria-pressed', String(enabled));
+    buttonOff.setAttribute('aria-pressed', String(!enabled));
+  }
+  buttonOn.addEventListener('click', () => setArEnabled(true));
+  buttonOff.addEventListener('click', () => setArEnabled(false));
+  setArEnabled(true);
+})();

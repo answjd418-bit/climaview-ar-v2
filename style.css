@@ -4241,3 +4241,69 @@ body.danger-mode .camera-feed {
 }
 
 .tropical-selected-glow { opacity: .55; filter: none; }
+
+/* AR GRAPHICS ON/OFF — screenshot-matched compact glass toggle */
+.ar-toggle {
+  position: absolute;
+  left: 30px;
+  bottom: 62px;
+  z-index: 12;
+  width: 245px;
+  height: 67px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 60px 82px 1fr;
+  align-items: center;
+  border-radius: 36px;
+  border: 1px solid rgba(255,255,255,.19);
+  background: rgba(63,63,63,.94);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.10), 0 4px 9px rgba(0,0,0,.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.ar-toggle-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 8px;
+  left: 8px;
+  width: 152px;
+  height: 49px;
+  border-radius: 27px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(121,121,121,.80), rgba(97,97,97,.91));
+  transition: left .25s ease, width .25s ease;
+}
+.ar-toggle-option, .ar-toggle-title {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  user-select: none;
+}
+.ar-toggle-option {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  height: 48px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.ar-toggle-title { font-size: 21px; font-weight: 650; pointer-events: none; }
+.ar-toggle-off { color: rgba(255,255,255,.48); }
+.ar-toggle[data-active="off"] .ar-toggle-indicator { left: 171px; width: 65px; }
+.ar-toggle[data-active="off"] .ar-toggle-on { color: rgba(255,255,255,.48); }
+.ar-toggle[data-active="off"] .ar-toggle-title { color: rgba(255,255,255,.60); }
+.ar-toggle[data-active="off"] .ar-toggle-off { color: #fff; }
+.ar-toggle-option:focus-visible { outline: 2px solid #b0d5ed; outline-offset: -4px; border-radius: 25px; }
+.ar-graphics-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+body[data-ar-graphics="off"] .ar-graphics-layer,
+body[data-ar-graphics="off"] [data-ar-graphic] { visibility: hidden !important; }
+/* Existing vignette is the only current scene-wide graphic effect. */
+body[data-ar-graphics="off"] .scene::after { opacity: 0 !important; box-shadow: none !important; background: none !important; }
+@media (prefers-reduced-motion: reduce) { .ar-toggle-indicator { transition: none; } }
