@@ -5228,3 +5228,33 @@ body[data-ar-graphics="off"] .info-card.tropical-layout:not(.detail-card-copy) .
 body[data-ar-graphics="off"] .info-card.air-layout:not(.detail-card-copy) .air-y-labels text {
   translate: -13px 0;
 }
+
+
+/* AR ON + 대기질: 각 PNG의 부유 모션을 유지하며, 손의 힘은 바깥 래퍼에만 적용 */
+.air-particle-field.hand-reactive .air-hand-particle {
+  position: absolute;
+  left: var(--px); top: var(--py);
+  width: var(--pw);
+  transform: translate3d(calc(-50% + var(--push-x, 0px)), calc(-50% + var(--push-y, 0px)), 0);
+  pointer-events: none;
+  will-change: transform;
+}
+.air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+  position: relative;
+  left: auto; top: auto;
+  width: 100%; height: auto;
+  transform: none;
+  animation-name: air-hand-particle-drift;
+}
+@keyframes air-hand-particle-drift {
+  0%   { transform: translate3d(0,0,0) rotate(0deg); }
+  50%  { transform: translate3d(var(--dx-half),var(--dy-half),0) rotate(var(--rotation-half)); }
+  100% { transform: translate3d(var(--dx),var(--dy),0) rotate(var(--rotation)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .air-particle-field.hand-reactive .air-hand-particle,
+  .air-particle-field.hand-reactive .air-hand-particle > .air-floating-particle {
+    will-change: auto;
+    animation: none;
+  }
+}
