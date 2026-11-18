@@ -46,7 +46,7 @@
     image.dataset.extraIndex = String(index);
     image.alt = '';
     const width = parseFloat(source.style.getPropertyValue('--pw')) || 24;
-    const scale = .60 + hash(index + 20) * .625;
+    const scale = .48 + hash(index + 20) * .50;
     image.style.setProperty('--pw', Math.max(10, width * scale).toFixed(1) + 'px');
     image.style.setProperty('--particle-opacity', (.47 + hash(index + 40) * .30).toFixed(3));
     field.appendChild(image);
@@ -200,7 +200,7 @@
 
   function detect(now) {
     if (!enabled() || !model || video.readyState < 2) { handTargets.length = 0; return; }
-    if (now - lastDetect < 95 || video.currentTime === lastVideoTime) return;
+    if (now - lastDetect < 140 || video.currentTime === lastVideoTime) return;
     lastDetect = now;
     lastVideoTime = video.currentTime;
     try {
@@ -221,10 +221,10 @@
         const dy = previous ? clamp(palm.y - previous.y, -110, 110) : 0;
         const speed = Math.hypot(dx, dy);
         next.push(palm);
-        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 510 + Math.min(65, speed * 0.65), palm: true });
+        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 450 + Math.min(75, speed * 0.65), palm: true });
         [4, 8, 12, 16, 20].forEach(index => {
           const tip = toScenePoint(landmarks[index]);
-          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 260, palm: false });
+          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 225, palm: false });
         });
       });
       previousHands = next;
@@ -273,7 +273,7 @@
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
-    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 530, palm: true });
+    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 475, palm: true });
     const width = scene.clientWidth, height = scene.clientHeight;
     const recycleMargin = 80;
     for (const item of particles) {
@@ -306,41 +306,26 @@
       item.vx += (item.driftX + breezeX) * dt * 0.14;
       item.vy += (item.driftY + breezeY) * dt * 0.14;
 
-      // Reference-inspired hand response: nearby dust reacts immediately to a
-      // palm/finger sweep. Cap the combined force to prevent explosive movement
-      // when several landmarks overlap the same particle.
       let interaction = 0;
-      let pushX = 0;
-      let pushY = 0;
       for (const hand of targets) {
         const dx = worldX - hand.x;
         const dy = worldY - hand.y;
         const distance = Math.hypot(dx, dy);
         if (distance >= hand.radius) continue;
         const falloff = 1 - distance / hand.radius;
-        const strength = falloff * 0.78 + falloff * falloff * 0.22;
+        const strength = falloff * 0.72 + falloff * falloff * 0.28;
         const velocity = Math.min(140, Math.hypot(hand.dx, hand.dy));
-        const intensity = (hand.palm ? 1 : .65) * strength;
+        const intensity = (hand.palm ? 1 : .78) * strength;
         const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
-        // A light constant breeze plus a stronger sweep wake; more sensitive
-        // than V12, but substantially gentler than the reference demo.
-        const push = 0.92 + velocity * 0.010;
-        const fx = (Math.cos(angle) * push + hand.dx * 0.006) * intensity;
-        const fy = (Math.sin(angle) * push + hand.dy * 0.006) * intensity;
-        // The strongest landmark dominates rather than stacking 6 impulses.
-        if (fx * fx + fy * fy > pushX * pushX + pushY * pushY) {
-          pushX = fx;
-          pushY = fy;
-        }
+        const push = 0.67 + velocity * 0.0055;
+        item.vx += (Math.cos(angle) * push + hand.dx * 0.003) * intensity * dt * 1.10;
+        item.vy += (Math.sin(angle) * push + hand.dy * 0.003) * intensity * dt * 1.10;
         interaction = Math.max(interaction, intensity);
       }
-      // Keep V12's slow idle airflow; only the hand-triggered motion gains range.
-      item.vx += pushX * dt * 1.65;
-      item.vy += pushY * dt * 1.65;
-      const speedLimit = interaction > 0.02 ? 5.1 : 3.2;
-      // Gentle air resistance; no positional spring or return-to-origin.
-      item.vx = clamp(item.vx * Math.pow(0.91, dt), -speedLimit, speedLimit);
-      item.vy = clamp(item.vy * Math.pow(0.91, dt), -speedLimit, speedLimit);
+
+      // Gentle air resistance keeps motion soft without pulling particles back.
+      item.vx = clamp(item.vx * Math.pow(0.91, dt), -3.2, 3.2);
+      item.vy = clamp(item.vy * Math.pow(0.91, dt), -3.2, 3.2);
       item.px += item.vx * dt;
       item.py += item.vy * dt;
       worldX = originX + item.px;
