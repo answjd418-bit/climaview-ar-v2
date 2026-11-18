@@ -46,8 +46,8 @@
     image.dataset.extraIndex = String(index);
     image.alt = '';
     const width = parseFloat(source.style.getPropertyValue('--pw')) || 24;
-    const scale = .48 + hash(index + 20) * .50;
-    image.style.setProperty('--pw', Math.max(10, width * scale).toFixed(1) + 'px');
+    const scale = .62 + hash(index + 20) * .54;
+    image.style.setProperty('--pw', Math.max(14, width * scale).toFixed(1) + 'px');
     image.style.setProperty('--particle-opacity', (.47 + hash(index + 40) * .30).toFixed(3));
     field.appendChild(image);
     return image;
