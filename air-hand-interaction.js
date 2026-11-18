@@ -21,15 +21,14 @@
   // additional data readings: their number/opacity depicts relative pollution.
   // Every clone also participates in hand collision and gravity simulation.
   const originals = [...field.querySelectorAll('.air-floating-particle')];
-  // Twelve atmospheric cloudlets cover the entire camera canvas rather than
-  // concentrating everything in the centre. Each cloudlet is compact, but it
-  // moves independently even when there is no hand in view.
-  // Slightly center-weighted layout; edges remain populated, not a tight ball.
-  // This only affects initial/spawn positions, never pulls flying dust back.
+  // Twenty soft cloudlets spread particles across the full camera canvas,
+  // including corners and edges so the field does not feel centre-heavy.
+  // This only affects initial/spawn positions and never pulls dust inward.
   const clouds = [
-    [.19,.21], [.37,.19], [.57,.20], [.78,.22],
-    [.20,.42], [.38,.41], [.58,.42], [.80,.43],
-    [.18,.64], [.37,.66], [.57,.65], [.78,.64]
+    [.07,.09], [.28,.08], [.50,.07], [.72,.08], [.93,.10],
+    [.07,.29], [.28,.30], [.50,.30], [.72,.31], [.93,.29],
+    [.07,.54], [.28,.55], [.50,.56], [.72,.55], [.93,.54],
+    [.08,.80], [.30,.82], [.52,.83], [.75,.82], [.93,.80]
   ];
   const hash = value => {
     const n = Math.sin(value * 127.1 + 79.7) * 43758.5453;
@@ -46,8 +45,8 @@
     image.dataset.extraIndex = String(index);
     image.alt = '';
     const width = parseFloat(source.style.getPropertyValue('--pw')) || 24;
-    const scale = .62 + hash(index + 20) * .54;
-    image.style.setProperty('--pw', Math.max(14, width * scale).toFixed(1) + 'px');
+    const scale = .48 + hash(index + 20) * .50;
+    image.style.setProperty('--pw', Math.max(10, width * scale).toFixed(1) + 'px');
     image.style.setProperty('--particle-opacity', (.47 + hash(index + 40) * .30).toFixed(3));
     field.appendChild(image);
     return image;
@@ -62,8 +61,8 @@
     // Spread particles across the whole screen, but keep each cluster soft.
     const theta = hash(index + 200) * Math.PI * 2;
     const radius = Math.sqrt(hash(index + 333));
-    const x = Math.max(.03, Math.min(.97, clouds[group][0] + Math.cos(theta) * radius * .085));
-    const y = Math.max(.03, Math.min(.97, clouds[group][1] + Math.sin(theta) * radius * .095));
+    const x = Math.max(.015, Math.min(.985, clouds[group][0] + Math.cos(theta) * radius * .062));
+    const y = Math.max(.015, Math.min(.985, clouds[group][1] + Math.sin(theta) * radius * .072));
     wrapper.style.setProperty('--px', (x * 100).toFixed(3) + '%');
     wrapper.style.setProperty('--py', (y * 100).toFixed(3) + '%');
     // Position is driven entirely by smooth per-frame airflow, not keyframes.
