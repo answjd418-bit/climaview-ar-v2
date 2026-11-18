@@ -24,21 +24,18 @@
   // Twelve atmospheric cloudlets cover the entire camera canvas rather than
   // concentrating everything in the centre. Each cloudlet is compact, but it
   // moves independently even when there is no hand in view.
-  // Slightly center-weighted layout; edges remain populated, not a tight ball.
-  // This only affects initial/spawn positions, never pulls flying dust back.
   const clouds = [
-    [.19,.21], [.37,.19], [.57,.20], [.78,.22],
-    [.20,.42], [.38,.41], [.58,.42], [.80,.43],
-    [.18,.64], [.37,.66], [.57,.65], [.78,.64]
+    [.11,.17], [.37,.16], [.64,.16], [.88,.18],
+    [.15,.47], [.39,.45], [.64,.46], [.87,.47],
+    [.12,.77], [.38,.78], [.64,.78], [.88,.77]
   ];
   const hash = value => {
     const n = Math.sin(value * 127.1 + 79.7) * 43758.5453;
     return n - Math.floor(n);
   };
   // More sprites use the SAME original PNG files; no additional images needed.
-  // Keep total particle count moderate for better performance.
-  // 35 original sprites + 72 clones = up to 107 particles.
-  const repeats = Array.from({length: 72}, (_, index) => {
+  // 35 original sprites + 96 smaller clones = up to 131 interactive particles.
+  const repeats = Array.from({length: 96}, (_, index) => {
     const sourceIndex = (index * 13 + Math.floor(index / 12) * 7) % originals.length;
     const source = originals[sourceIndex];
     const image = source.cloneNode(true);
@@ -46,8 +43,8 @@
     image.dataset.extraIndex = String(index);
     image.alt = '';
     const width = parseFloat(source.style.getPropertyValue('--pw')) || 24;
-    const scale = .48 + hash(index + 20) * .50;
-    image.style.setProperty('--pw', Math.max(10, width * scale).toFixed(1) + 'px');
+    const scale = .50 + hash(index + 20) * .45;
+    image.style.setProperty('--pw', Math.max(14, width * scale).toFixed(1) + 'px');
     image.style.setProperty('--particle-opacity', (.47 + hash(index + 40) * .30).toFixed(3));
     field.appendChild(image);
     return image;
@@ -59,11 +56,11 @@
     wrapper.className = 'air-hand-particle';
     wrapper.style.cssText = image.style.cssText;
     const group = index % clouds.length;
-    // Spread particles across the whole screen, but keep each cluster soft.
+    // Each cloud is tight (±3–5% of screen), while 12 clouds fill the view.
     const theta = hash(index + 200) * Math.PI * 2;
     const radius = Math.sqrt(hash(index + 333));
-    const x = Math.max(.03, Math.min(.97, clouds[group][0] + Math.cos(theta) * radius * .085));
-    const y = Math.max(.03, Math.min(.97, clouds[group][1] + Math.sin(theta) * radius * .095));
+    const x = Math.max(.04, Math.min(.96, clouds[group][0] + Math.cos(theta) * radius * .050));
+    const y = Math.max(.04, Math.min(.96, clouds[group][1] + Math.sin(theta) * radius * .065));
     wrapper.style.setProperty('--px', (x * 100).toFixed(3) + '%');
     wrapper.style.setProperty('--py', (y * 100).toFixed(3) + '%');
     // Position is driven entirely by smooth per-frame airflow, not keyframes.
@@ -78,12 +75,7 @@
       px: 0, py: 0, vx: 0, vy: 0,
       seed: index, windPhase: index * 2.39996,
       energy: 0, extra: image.classList.contains('air-density-extra'),
-      driftFactor: .72 + hash(index + 500) * .72,
-      driftX: (hash(index + 610) - .5) * .70,
-      driftY: (hash(index + 710) - .5) * .70,
-      driftTargetX: (hash(index + 810) - .5) * .70,
-      driftTargetY: (hash(index + 910) - .5) * .70,
-      driftChangeAt: 800 + hash(index + 1010) * 2200
+      driftFactor: .72 + hash(index + 500) * .72
     };
   });
 
@@ -200,7 +192,7 @@
 
   function detect(now) {
     if (!enabled() || !model || video.readyState < 2) { handTargets.length = 0; return; }
-    if (now - lastDetect < 95 || video.currentTime === lastVideoTime) return;
+    if (now - lastDetect < 85 || video.currentTime === lastVideoTime) return;
     lastDetect = now;
     lastVideoTime = video.currentTime;
     try {
@@ -221,10 +213,10 @@
         const dy = previous ? clamp(palm.y - previous.y, -110, 110) : 0;
         const speed = Math.hypot(dx, dy);
         next.push(palm);
-        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 510 + Math.min(65, speed * 0.65), palm: true });
+        handTargets.push({ x: palm.x, y: palm.y, dx, dy, radius: 310 + Math.min(115, speed * 0.85), palm: true });
         [4, 8, 12, 16, 20].forEach(index => {
           const tip = toScenePoint(landmarks[index]);
-          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 260, palm: false });
+          handTargets.push({ x: tip.x, y: tip.y, dx: dx * 0.65, dy: dy * 0.65, radius: 140, palm: false });
         });
       });
       previousHands = next;
@@ -253,8 +245,7 @@
   function tick(now) {
     if (!running) return;
     requestAnimationFrame(tick);
-    if (lastFrame && now - lastFrame < 41) return;
-    const dt = Math.min(2.2, (now - (lastFrame || now)) / 16.67);
+    const dt = Math.min(2, (now - (lastFrame || now)) / 16.67);
     lastFrame = now;
     if (!enabled()) {
       previousHands = [];
@@ -273,102 +264,61 @@
     if (!model && !modelLoading && video.readyState >= 2) void loadHandModel();
     detect(now);
     const targets = handTargets.slice();
-    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 530, palm: true });
+    if (pointer && now - pointer.time < 220) targets.push({ ...pointer, radius: 320, palm: true });
     const width = scene.clientWidth, height = scene.clientHeight;
-    const recycleMargin = 80;
     for (const item of particles) {
+      // Respect the original year-by-year pollutant visibility and density system.
       if (item.image.classList.contains('air-particle-inactive')) continue;
       const seconds = now / 1000;
       const phase = item.windPhase;
-      let originX = item.x * width;
-      let originY = item.y * height;
-      let worldX = originX + item.px;
-      let worldY = originY + item.py;
-
-      // Soft ambient drift: particles float freely instead of trying to return
-      // to their origin. Drift targets change slowly so the motion feels light.
-      if (now >= item.driftChangeAt) {
-        const spread = 0.28 + item.driftFactor * 0.46;
-        item.driftTargetX = (Math.random() - .5) * spread * 2;
-        item.driftTargetY = (Math.random() - .5) * spread * 2;
-        item.driftChangeAt = now + 1200 + Math.random() * 2400;
-      }
-      item.driftX += (item.driftTargetX - item.driftX) * (0.018 * dt);
-      item.driftY += (item.driftTargetY - item.driftY) * (0.018 * dt);
-      const breezeX = (
-        Math.sin(seconds * 0.16 + item.group * 0.9 + phase * 0.07) * 0.22 +
-        Math.cos(seconds * 0.09 + item.y * 11.0) * 0.12
+      const originX = item.x * width;
+      const originY = item.y * height;
+      const worldX = originX + item.px;
+      const worldY = originY + item.py;
+      // Entire cloudlets drift around naturally on their own, even without a
+      // hand. Slow changes in direction feel like air turbulence, not bouncing.
+      const g = item.group;
+      const groupX = Math.sin(seconds * (.26 + (g % 4) * .027) + g * 1.71) * 44
+        + Math.sin(seconds * .115 + g * .83) * 27;
+      const groupY = Math.cos(seconds * (.20 + (g % 3) * .023) + g * 1.48) * 35
+        + Math.sin(seconds * .13 + g * 1.12) * 22;
+      let targetX = groupX + (
+        Math.sin(seconds * (.72 + item.driftFactor * .13) + phase) * 19
+        + Math.cos(seconds * .39 + phase * 1.6) * 10
       ) * item.driftFactor;
-      const breezeY = (
-        Math.cos(seconds * 0.14 + item.group * 0.8 + phase * 0.06) * 0.18 +
-        Math.sin(seconds * 0.08 + item.x * 9.5) * 0.10
+      let targetY = groupY + (
+        Math.cos(seconds * (.58 + item.driftFactor * .11) + phase) * 17
+        + Math.sin(seconds * .31 + phase * 1.3) * 9
       ) * item.driftFactor;
-      item.vx += (item.driftX + breezeX) * dt * 0.14;
-      item.vy += (item.driftY + breezeY) * dt * 0.14;
-
-      // Reference-inspired hand response: nearby dust reacts immediately to a
-      // palm/finger sweep. Cap the combined force to prevent explosive movement
-      // when several landmarks overlap the same particle.
       let interaction = 0;
-      let pushX = 0;
-      let pushY = 0;
+      // Use the particle's actual screen position for hand proximity. Large
+      // smooth repulsion makes the cloudlets fan out clearly when approached.
       for (const hand of targets) {
         const dx = worldX - hand.x;
         const dy = worldY - hand.y;
         const distance = Math.hypot(dx, dy);
         if (distance >= hand.radius) continue;
         const falloff = 1 - distance / hand.radius;
-        const strength = falloff * 0.78 + falloff * falloff * 0.22;
-        const velocity = Math.min(140, Math.hypot(hand.dx, hand.dy));
-        const intensity = (hand.palm ? 1 : .65) * strength;
+        const strength = falloff * falloff * (3 - 2 * falloff);
+        const velocity = Math.min(160, Math.hypot(hand.dx, hand.dy));
+        const intensity = (hand.palm ? 1 : .48) * strength;
         const angle = distance > 2 ? Math.atan2(dy, dx) : phase;
-        // A light constant breeze plus a stronger sweep wake; more sensitive
-        // than V12, but substantially gentler than the reference demo.
-        const push = 0.92 + velocity * 0.010;
-        const fx = (Math.cos(angle) * push + hand.dx * 0.006) * intensity;
-        const fy = (Math.sin(angle) * push + hand.dy * 0.006) * intensity;
-        // The strongest landmark dominates rather than stacking 6 impulses.
-        if (fx * fx + fy * fy > pushX * pushX + pushY * pushY) {
-          pushX = fx;
-          pushY = fy;
-        }
+        const spread = 390 + Math.min(170, velocity * 1.2);
+        targetX += Math.cos(angle) * spread * intensity + hand.dx * 1.7 * intensity;
+        targetY += Math.sin(angle) * spread * intensity + hand.dy * 1.7 * intensity;
         interaction = Math.max(interaction, intensity);
       }
-      // Keep V12's slow idle airflow; only the hand-triggered motion gains range.
-      item.vx += pushX * dt * 1.65;
-      item.vy += pushY * dt * 1.65;
-      const speedLimit = interaction > 0.02 ? 5.1 : 3.2;
-      // Gentle air resistance; no positional spring or return-to-origin.
-      item.vx = clamp(item.vx * Math.pow(0.91, dt), -speedLimit, speedLimit);
-      item.vy = clamp(item.vy * Math.pow(0.91, dt), -speedLimit, speedLimit);
-      item.px += item.vx * dt;
-      item.py += item.vy * dt;
-      worldX = originX + item.px;
-      worldY = originY + item.py;
-
-      // Let particles drift out of frame, then quietly re-enter from the opposite
-      // side so the screen stays populated like floating dust in air.
-      if (worldX < -recycleMargin) {
-        item.x = 1 + recycleMargin / Math.max(1, width);
-        item.y = clamp((worldY / Math.max(1, height)) + (Math.random() - .5) * 0.10, -.05, 1.05);
-        item.px = 0; item.py = 0;
-      } else if (worldX > width + recycleMargin) {
-        item.x = -recycleMargin / Math.max(1, width);
-        item.y = clamp((worldY / Math.max(1, height)) + (Math.random() - .5) * 0.10, -.05, 1.05);
-        item.px = 0; item.py = 0;
-      } else if (worldY < -recycleMargin) {
-        item.y = 1 + recycleMargin / Math.max(1, height);
-        item.x = clamp((worldX / Math.max(1, width)) + (Math.random() - .5) * 0.10, -.05, 1.05);
-        item.px = 0; item.py = 0;
-      } else if (worldY > height + recycleMargin) {
-        item.y = -recycleMargin / Math.max(1, height);
-        item.x = clamp((worldX / Math.max(1, width)) + (Math.random() - .5) * 0.10, -.05, 1.05);
-        item.px = 0; item.py = 0;
-      }
-
-      item.wrapper.style.setProperty('--px', (item.x * 100).toFixed(3) + '%');
-      item.wrapper.style.setProperty('--py', (item.y * 100).toFixed(3) + '%');
-      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .24 : .05) * dt);
+      // Smooth follow and return: fast dispersal, steady drift while idle,
+      // gradual regrouping rather than a spring-like snap-back.
+      const stiffness = interaction > .012 ? .105 : .024;
+      const damping = interaction > .012 ? .77 : .83;
+      item.vx = clamp((item.vx + (targetX - item.px) * stiffness * dt)
+        * Math.pow(damping, dt), -34, 34);
+      item.vy = clamp((item.vy + (targetY - item.py) * stiffness * dt)
+        * Math.pow(damping, dt), -34, 34);
+      item.px = clamp(item.px + item.vx * dt, -520, 520);
+      item.py = clamp(item.py + item.vy * dt, -430, 430);
+      item.energy += (interaction - item.energy) * Math.min(1, (interaction ? .20 : .07) * dt);
       item.wrapper.style.setProperty('--push-x', item.px.toFixed(1) + 'px');
       item.wrapper.style.setProperty('--push-y', item.py.toFixed(1) + 'px');
       item.wrapper.style.setProperty('--scatter-energy', item.energy.toFixed(3));
